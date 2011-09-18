@@ -14,13 +14,25 @@
 @synthesize window=_window;
 
 @synthesize tabBarController=_tabBarController;
-
+@synthesize url;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     // Add the tab bar controller's current view as a subview of the window
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"savedata.plist"];
+    BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:path];
+    if (!fileExists) {
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"savedata.plist"];
+        NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"savedata.plist"];
+        
+        [[NSFileManager defaultManager] copyItemAtPath:path toPath:documentsDirectory error:nil];
+    }
     return YES;
 }
 

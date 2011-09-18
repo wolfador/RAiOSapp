@@ -11,6 +11,7 @@
 #import "ASIHTTPRequest.h"
 #import "RA_ParamObject.h"
 #import "RA_WifiController.h"
+#import "ReefAngel_Mobile_ClientAppDelegate.h"
 
 @interface FirstViewController : UIViewController<UIApplicationDelegate,UITabBarDelegate>{
 
@@ -24,6 +25,7 @@
     RA *raParam;
     RA_WifiController *controller;
     IBOutlet UIScrollView *scrollView;
+    ReefAngel_Mobile_ClientAppDelegate *appDelegate;
 }
 @property (readwrite, copy) NSString *wifiUrl;
 @property (readwrite, copy) NSString *fullUrl;
@@ -49,6 +51,8 @@
 @property (nonatomic, retain) IBOutlet UIButton *b1R6Indicator;
 @property (nonatomic, retain) IBOutlet UIButton *b1R7Indicator;
 @property (nonatomic, retain) IBOutlet UIButton *b1R8Indicator;
+@property (nonatomic, retain) ReefAngel_Mobile_ClientAppDelegate *appDelegate;
+
 
 
 
@@ -56,4 +60,5 @@
 -(IBAction) toggleRelay:(id)sender;
 -(void)SendRequest:(NSString *)url;
 -(void)UpdateUI:(RA*)ra;
+-(void) loadData;
 @end

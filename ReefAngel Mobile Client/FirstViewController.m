@@ -9,29 +9,26 @@
 #import "FirstViewController.h"
 
 
-
 @implementation FirstViewController
 @synthesize temp1Label, temp2Label, temp3Label, pHLabel, scrollView;
 @synthesize box1Relay1, box1Relay2, box1Relay3, box1Relay4, box1Relay5, box1Relay6, box1Relay7, box1Relay8;
 @synthesize b1R1Indicator, b1R2Indicator, b1R3Indicator,  b1R4Indicator, b1R5Indicator, b1R6Indicator, b1R7Indicator, b1R8Indicator;
 @synthesize wifiUrl,fullUrl,lastUpdatedLabel;
+@synthesize appDelegate;
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
         
-    [super viewDidLoad];        
+    [super viewDidLoad];
+    [self loadData];
     [scrollView setScrollEnabled:YES];
-    [scrollView setContentSize:CGSizeMake(320, 515)];   
-    UIImage *img = [UIImage imageNamed:@"bground.png"];
-    [scrollView setBackgroundColor:[UIColor colorWithPatternImage:img]];   
+    [scrollView setContentSize:CGSizeMake(320, 515)];     
+    
+    appDelegate = (ReefAngel_Mobile_ClientAppDelegate *)[[UIApplication sharedApplication] delegate];
     
     //TODO: The below URL needs to be populated from the settings file
     //Should look something like "http://192.168.1.110:2000" or "http://sometestdns.dyndns.com:2000"
-    self.wifiUrl = @"http://192.168.1.110:2000"; 
-    
-    self.fullUrl = [NSString stringWithFormat:@"%@/r99 ",wifiUrl];
-    [self SendRequest:self.fullUrl];
-    
+    //self.wifiUrl = @"http://192.168.1.110:2000"; 
         
 }
 -(void)UpdateUI:(RA*)ra
@@ -95,9 +92,6 @@
     controller = [[[RA_WifiController alloc]init] autorelease];
     raParam = [controller sendRequest:url];
     [self UpdateUI:raParam];
-     
-    controller = nil;
-    [controller release];
     
 }
 
@@ -136,8 +130,34 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
-
-
+-(void) loadData
+{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"savedata.plist"];
+	
+	NSDictionary  *restored = [NSDictionary dictionaryWithContentsOfFile: path];
+	//NSArray *myKeys = [restored allKeys];
+	self.wifiUrl = [restored objectForKey:@"URL"];
+    
+}
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+    //NSString *url = [self appDelegate].url;
+    if ([self appDelegate].url != nil)
+    {
+        self.wifiUrl = [self appDelegate].url;
+    }
+    if ([self.wifiUrl length] == 0) {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"URL Not Entered" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
+    }
+    
+    self.fullUrl = [NSString stringWithFormat:@"%@/r99 ",self.wifiUrl];
+    [self SendRequest:self.fullUrl];
+    NSLog(@"%@", self.fullUrl);
+}
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
