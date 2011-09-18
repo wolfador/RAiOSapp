@@ -56,6 +56,7 @@
 		8049D1A9142584DC0051D834 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 8049D1A4142584DC0051D834 /* User.m */; };
 		8049D1AA142584DC0051D834 /* WonderXMLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8049D1A6142584DC0051D834 /* WonderXMLAppDelegate.m */; };
 		8049D1AB142584DC0051D834 /* WonderXMLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8049D1A8142584DC0051D834 /* WonderXMLViewController.m */; };
+		8049D1B714269F500051D834 /* savedata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8049D1B614269F500051D834 /* savedata.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,6 +150,7 @@
 		8049D1A6142584DC0051D834 /* WonderXMLAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WonderXMLAppDelegate.m; sourceTree = "<group>"; };
 		8049D1A7142584DC0051D834 /* WonderXMLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WonderXMLViewController.h; sourceTree = "<group>"; };
 		8049D1A8142584DC0051D834 /* WonderXMLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WonderXMLViewController.m; sourceTree = "<group>"; };
+		8049D1B614269F500051D834 /* savedata.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = savedata.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -309,6 +311,7 @@
 		55DF42941359DA3900C45B47 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8049D1B614269F500051D834 /* savedata.plist */,
 				55DF42951359DA3900C45B47 /* ReefAngel Mobile Client-Info.plist */,
 				55DF42961359DA3900C45B47 /* InfoPlist.strings */,
 				55DF42991359DA3900C45B47 /* ReefAngel Mobile Client-Prefix.pch */,
@@ -416,6 +419,7 @@
 				559DB80414257084004EC75A /* tankicon.png in Resources */,
 				559DB80714257178004EC75A /* RAicon.png in Resources */,
 				8049D19F142584BF0051D834 /* WonderXML-Info.plist in Resources */,
+				8049D1B714269F500051D834 /* savedata.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
