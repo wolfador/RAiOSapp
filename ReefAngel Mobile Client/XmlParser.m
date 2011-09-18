@@ -106,6 +106,7 @@ static const char* getPropertyType(objc_property_t property) {
 	NSLog(@"stringValue :: %@", anElement.stringValue);
 	
 	if (anElement) {
+        [doc release];
 		return anElement.stringValue;
 	}
 	else {
@@ -127,7 +128,7 @@ static const char* getPropertyType(objc_property_t property) {
 	xmlStr = [xmlStr stringByReplacingOccurrencesOfString:@"ns1:" withString:@""];
 	NSError *error;
 	
-    GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr options:0 error:&error];
+    GDataXMLDocument *doc = [[[GDataXMLDocument alloc] initWithXMLString:xmlStr options:0 error:&error] autorelease];
     if (doc == nil) { 
 		NSLog(@"doc doesn't exist");
 		return nil; 
@@ -174,7 +175,7 @@ static const char* getPropertyType(objc_property_t property) {
 	NSLog(@"objects :: %@", objects);
 	
 	//NSMutableArray *returnArray = [NSMutableArray arrayWithCapacity:[objects count]]; 
-	NSMutableArray *returnArray = [[NSMutableArray alloc] init]; 
+	NSMutableArray *returnArray = [[[NSMutableArray alloc] init] autorelease]; 
 	
     for (GDataXMLElement *thisObeject in objects) {
 		
@@ -237,12 +238,12 @@ static const char* getPropertyType(objc_property_t property) {
 	
     NSMutableDictionary * propertyDic = [XmlParser propertDictionary:object];
 	
-    NSString *nodeValue = [NSString stringWithFormat:@"%@",@""];
+    
 	
 	for (NSString *key in propertyDic) {
 
 		if ([object valueForKey:key]!=nil){
-			
+			NSString *nodeValue;
 			
 			if ([[propertyDic objectForKey:key] isEqualToString:@"l"]) {
 				nodeValue = [NSString stringWithFormat:@"%llu",[[object valueForKey:key] unsignedLongLongValue]];
@@ -263,7 +264,7 @@ static const char* getPropertyType(objc_property_t property) {
 	
 	NSData *xmlData = document.XMLData;
 	
-	NSString *xmlString = [[NSString alloc] initWithData:xmlData encoding:NSUTF8StringEncoding];
+	NSString *xmlString = [[[NSString alloc] initWithData:xmlData encoding:NSUTF8StringEncoding] autorelease];
 	
 	NSString *bodyString = [xmlString substringFromIndex:21];
 	

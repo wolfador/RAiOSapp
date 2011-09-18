@@ -70,15 +70,21 @@
         if([tempString length] >= 3)
         {
 
-            retString = [[[tempString substringToIndex:[tempString length]-2] stringByAppendingString:@"."] stringByAppendingString:[tempString substringFromIndex:[tempString length]-2]];            
+            retString = [[[tempString substringToIndex:[tempString length]-2] stringByAppendingString:@"."] stringByAppendingString:[tempString substringFromIndex:[tempString length]-2]];  
+            return retString;
         }
         else if([tempString length] == 1)
         {
 
-            retString = [tempString stringByAppendingString:@".00"];         
+            retString = [tempString stringByAppendingString:@".00"]; 
+            return retString;
+        }
+        else
+        {
+            retString = [tempString stringByAppendingString:@".00"];
+            return retString;    
         }
 
-        return retString;
     }
 
     -(void)updateRelayBoxes : (RA *) ra

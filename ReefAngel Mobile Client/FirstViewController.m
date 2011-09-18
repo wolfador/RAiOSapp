@@ -14,7 +14,7 @@
 @synthesize temp1Label, temp2Label, temp3Label, pHLabel, scrollView;
 @synthesize box1Relay1, box1Relay2, box1Relay3, box1Relay4, box1Relay5, box1Relay6, box1Relay7, box1Relay8;
 @synthesize b1R1Indicator, b1R2Indicator, b1R3Indicator,  b1R4Indicator, b1R5Indicator, b1R6Indicator, b1R7Indicator, b1R8Indicator;
-@synthesize wifiUrl,fullUrl;
+@synthesize wifiUrl,fullUrl,lastUpdatedLabel;
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
@@ -36,7 +36,7 @@
 }
 -(void)UpdateUI:(RA*)ra
 {
-    if(!raParam == nil)
+    if(!raParam)
     {
         
         temp1Label.text = raParam.formattedTemp1;
