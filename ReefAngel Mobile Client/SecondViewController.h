@@ -15,7 +15,7 @@
 @end
 @interface SecondViewController : UIViewController <UITextFieldDelegate, UIScrollViewDelegate>{
     IBOutlet UIScrollView *scrollView;
-    NSString *enteredURL;
+    NSMutableString *enteredURL;
     IBOutlet UITextField *url, *relay1, *relay2, *relay3, *relay4, *relay5, *relay6, *relay7, *relay8;
     IBOutlet UITextField *exprelay1, *exprelay2, *exprelay3, *exprelay4, *exprelay5, *exprelay6, *exprelay7, *exprelay8;
     IBOutlet UILabel *exprelay1Label, *exprelay2Label, *exprelay3Label, *exprelay4Label, *exprelay5Label, *exprelay6Label, *exprelay7Label, *exprelay8Label;
@@ -24,9 +24,10 @@
     ReefAngel_Mobile_ClientAppDelegate *appDelegate;
 }
 
-@property (nonatomic, retain) NSString *enteredURL;
+@property (nonatomic, retain) NSMutableString *enteredURL;
 @property (nonatomic, retain) IBOutlet UITextField *url, *relay1, *relay2, *relay3, *relay4, *relay5, *relay6, *relay7, *relay8;
 @property (nonatomic, retain) IBOutlet UIButton *save;
+@property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) ReefAngel_Mobile_ClientAppDelegate *appDelegate;
 @property (nonatomic, retain) IBOutlet UISwitch *relayExp;
 @property (nonatomic, retain) IBOutlet UITextField *exprelay1, *exprelay2, *exprelay3, *exprelay4, *exprelay5, *exprelay6, *exprelay7, *exprelay8;

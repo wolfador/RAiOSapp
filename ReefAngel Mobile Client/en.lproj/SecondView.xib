@@ -882,6 +882,12 @@
 							<object class="IBUINavigationItem" id="288082410">
 								<reference key="IBUINavigationBar" ref="101177840"/>
 								<string key="IBUITitle">Settings</string>
+								<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="767087662">
+									<string key="IBUITitle">FeedBack</string>
+									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+									<int key="IBUIStyle">1</int>
+									<reference key="IBUINavigationItem" ref="288082410"/>
+								</object>
 								<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="6375493">
 									<string key="IBUITitle">Save</string>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -1302,6 +1308,14 @@
 					</object>
 					<int key="connectionID">174</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">launchFeedback</string>
+						<reference key="source" ref="767087662"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">176</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1392,6 +1406,7 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="6375493"/>
+							<reference ref="767087662"/>
 						</object>
 						<reference key="parent" ref="101177840"/>
 					</object>
@@ -1580,6 +1595,11 @@
 						<reference key="object" ref="338915709"/>
 						<reference key="parent" ref="703078981"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">175</int>
+						<reference key="object" ref="767087662"/>
+						<reference key="parent" ref="288082410"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1620,6 +1640,7 @@
 					<string>147.IBPluginDependency</string>
 					<string>148.IBPluginDependency</string>
 					<string>149.IBPluginDependency</string>
+					<string>175.IBPluginDependency</string>
 					<string>73.IBPluginDependency</string>
 					<string>74.IBPluginDependency</string>
 					<string>75.IBPluginDependency</string>
@@ -1679,6 +1700,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="unlocalizedProperties">
@@ -1693,7 +1715,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">174</int>
+			<int key="maxID">176</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

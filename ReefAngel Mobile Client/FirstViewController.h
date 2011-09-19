@@ -13,7 +13,7 @@
 #import "RA_WifiController.h"
 #import "ReefAngel_Mobile_ClientAppDelegate.h"
 
-@interface FirstViewController : UIViewController<UIApplicationDelegate,UITabBarDelegate>{
+@interface FirstViewController : UIViewController<UIApplicationDelegate, UITabBarDelegate, UIScrollViewDelegate>{
 
     UILabel *temp1Label, *temp2Label, *temp3Label, *pHLabel, *lastUpdatedLabel, *relay1, *relay2, *relay3, *relay4, *relay5, *relay6, *relay7, *relay8;
     UIButton *b1R1Indicator, *b1R2Indicator, *b1R3Indicator, *b1R4Indicator, *b1R5Indicator, *b1R6Indicator, *b1R7Indicator,

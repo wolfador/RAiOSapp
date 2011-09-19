@@ -21,9 +21,14 @@
         
     [super viewDidLoad];
     [self loadData];
+    
+    NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
+    [formatter setDateFormat:@"MMM dd yyyy : HH:mm:ss"];
+    NSDate *date = [NSDate date];
+    lastUpdatedLabel.text = [formatter stringFromDate:date];  
     [scrollView setScrollEnabled:YES];
     [scrollView setContentSize:CGSizeMake(320, 515)];     
-    
+    self.scrollView.delegate = self;
     appDelegate = (ReefAngel_Mobile_ClientAppDelegate *)[[UIApplication sharedApplication] delegate];
         
 }
@@ -39,10 +44,6 @@
         pHLabel.text    = raParam.formattedpH;
         
         
-        NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
-        [formatter setDateFormat:@"MMM dd yyyy : HH:mm:ss"];
-        NSDate *date = [NSDate date];
-        lastUpdatedLabel.text = [formatter stringFromDate:date];        
         
         if(!raParam.isRelay1OFFMask && !raParam.isRelay1ONMask)
         {box1Relay1.on = raParam.isRelay1Active;b1R1Indicator.hidden = YES;}
@@ -94,8 +95,9 @@
 
 -(IBAction)refreshParams
 {
-    self.fullUrl = [NSString stringWithFormat:@"%@/r99 ",self.wifiUrl];
+    self.fullUrl = [NSString stringWithFormat:@"%@r99 ",self.wifiUrl];
     [self SendRequest:self.fullUrl];
+    [TestFlight passCheckpoint:@"Connected"];
 
     
 }
@@ -104,7 +106,7 @@
     if([sender class] == [UISwitch class])
     {
         UISwitch *swit = (UISwitch*)sender;        
-        self.fullUrl = [NSString stringWithFormat:@"%@/r%@%@",self.wifiUrl,[NSString stringWithFormat:@"%d",swit.tag],
+        self.fullUrl = [NSString stringWithFormat:@"%@r%@%@",self.wifiUrl,[NSString stringWithFormat:@"%d",swit.tag],
                         swit.on ? @"1" : @"0"];
         [self SendRequest:fullUrl];
         [swit release];
@@ -114,7 +116,7 @@
         
         UIButton *but = (UIButton*)sender;
         NSString *tag = [NSString stringWithFormat:@"%d",but.tag];    
-        self.fullUrl = [NSString stringWithFormat:@"%@/r%@%@",self.wifiUrl,tag,@"2"];
+        self.fullUrl = [NSString stringWithFormat:@"%@r%@%@",self.wifiUrl,tag,@"2"];
        [self SendRequest:fullUrl];
         [but release];
     }    
@@ -143,19 +145,11 @@
     self.relay6.text = [restored objectForKey:@"Relay6"];
     self.relay7.text = [restored objectForKey:@"Relay7"];
     self.relay8.text = [restored objectForKey:@"Relay8"];
-    if([restored objectForKey:@"ExpansionON"] != nil)
+    
+    if([[restored objectForKey:@"ExpansionON"] isEqualToString: @"ON"])
        {
-           NSLog(@"Relay Expansion ON");
-           NSLog(@"Relay Expansion ON");
-           NSLog(@"Relay Expansion ON");
-           NSLog(@"Relay Expansion ON");
-           NSLog(@"Relay Expansion ON");
-           NSLog(@"Relay Expansion ON");
-           NSLog(@"Relay Expansion ON");
-           NSLog(@"Relay Expansion ON");
-           NSLog(@"Relay Expansion ON");
-           NSLog(@"Relay Expansion ON");
-           NSLog(@"Relay Expansion ON");
+           //implement expanded relay options here for labels / switches
+           
        }
     [self refreshParams];
     

@@ -12,7 +12,7 @@
 @implementation SecondViewController
 
 @synthesize url;
-@synthesize enteredURL, save;
+@synthesize enteredURL, save, scrollView;
 @synthesize appDelegate, relayExp, relay1, relay2, relay3, relay4, relay5, relay6, relay7, relay8;
 @synthesize exprelay1, exprelay2, exprelay3, exprelay4, exprelay5, exprelay6, exprelay7, exprelay8;
 @synthesize exprelay1Label, exprelay2Label, exprelay3Label, exprelay4Label, exprelay5Label, exprelay6Label, exprelay7Label, exprelay8Label;
@@ -23,9 +23,17 @@
     [super viewDidLoad];   
     [self loadData];
     [scrollView setScrollEnabled:YES];
-    [scrollView setContentSize:CGSizeMake(320, 850)];
+    if(relayExp.on)    
+    {
+        [scrollView setContentSize:CGSizeMake(320, 850)];
+    }
+    else
+    {
+      [scrollView setContentSize:CGSizeMake(320, 600)];  
+    }
+    
     url.delegate = self;
-
+    self.scrollView.delegate = self;
     appDelegate = (ReefAngel_Mobile_ClientAppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
@@ -39,6 +47,17 @@
     [self.relay6 resignFirstResponder];
     [self.relay7 resignFirstResponder];
     [self.relay8 resignFirstResponder];
+    if(relayExp.on)    
+    {
+        [self.exprelay1 resignFirstResponder];
+        [self.exprelay2 resignFirstResponder];
+        [self.exprelay3 resignFirstResponder];
+        [self.exprelay4 resignFirstResponder];
+        [self.exprelay5 resignFirstResponder];
+        [self.exprelay6 resignFirstResponder];
+        [self.exprelay7 resignFirstResponder];
+        [self.exprelay8 resignFirstResponder];
+    }
     return YES;
 }
 - (void)scrollViewWillBeginDragging:(UIScrollView *)activeScrollView {
@@ -53,6 +72,26 @@
 -(IBAction) hideKeyboard
 {
     [self.url resignFirstResponder];
+    [self.relay1 resignFirstResponder];
+    [self.relay2 resignFirstResponder];
+    [self.relay3 resignFirstResponder];
+    [self.relay4 resignFirstResponder];
+    [self.relay5 resignFirstResponder];
+    [self.relay6 resignFirstResponder];
+    [self.relay7 resignFirstResponder];
+    [self.relay8 resignFirstResponder];
+    if(relayExp.on)    
+    {
+        [self.exprelay1 resignFirstResponder];
+        [self.exprelay2 resignFirstResponder];
+        [self.exprelay3 resignFirstResponder];
+        [self.exprelay4 resignFirstResponder];
+        [self.exprelay5 resignFirstResponder];
+        [self.exprelay6 resignFirstResponder];
+        [self.exprelay7 resignFirstResponder];
+        [self.exprelay8 resignFirstResponder];
+    }
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -63,7 +102,6 @@
 -(IBAction) saveData
 {
     [self hideKeyboard];
-    [self appDelegate].url = url.text;
     if ([self.url.text length] == 0) {
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please Enter a URL" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
 		[alertView show];
@@ -84,7 +122,18 @@
 		NSMutableDictionary *Dictionary = [NSMutableDictionary dictionary];
 		NSDictionary  *restored = [NSDictionary dictionaryWithContentsOfFile: path];
 		[Dictionary addEntriesFromDictionary:restored];
-		[Dictionary setObject: self.url.text forKey: @"URL"];
+       self.enteredURL = [NSMutableString stringWithString:self.url.text];
+        
+        BOOL endingslash;
+        
+        endingslash = [self.enteredURL hasSuffix:@"/"];
+        
+        if (!endingslash)
+        {
+                    [self.enteredURL appendString:@"/"];
+            }
+
+		[Dictionary setObject: self.enteredURL forKey: @"URL"];
         [Dictionary setObject: self.relay1.text forKey: @"Relay1"];
         [Dictionary setObject: self.relay2.text forKey: @"Relay2"];
         [Dictionary setObject: self.relay3.text forKey: @"Relay3"];
@@ -112,7 +161,12 @@
         }
         [Dictionary writeToFile:path atomically:YES];
     }    
+    [TestFlight passCheckpoint:@"DataSaved"];
 }
+-(IBAction)launchFeedback {
+    [TestFlight openFeedbackView];
+}
+
 -(void) loadData
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -129,9 +183,10 @@
     self.relay6.text = [restored objectForKey:@"Relay6"];
     self.relay7.text = [restored objectForKey:@"Relay7"];
     self.relay8.text = [restored objectForKey:@"Relay8"];
-    if([restored objectForKey:@"ExpansionON"])   
+    if([[restored objectForKey:@"ExpansionON"] isEqualToString: @"ON"])
     {
         [relayExp setOn:YES];
+        [self turnOnRelayExp];
         self.exprelay1.text = [restored objectForKey:@"ExpRelay1"];
         self.exprelay2.text = [restored objectForKey:@"ExpRelay2"];
         self.exprelay3.text = [restored objectForKey:@"ExpRelay3"];
@@ -147,7 +202,7 @@
 {
     if(relayExp.on)    
     {
-
+        [scrollView setContentSize:CGSizeMake(320, 850)];
     self.exprelay1Label.hidden = NO;
         self.exprelay2Label.hidden = NO;
         self.exprelay3Label.hidden = NO;
@@ -167,7 +222,7 @@
 }
 else
 {
-
+    [scrollView setContentSize:CGSizeMake(320, 600)];
     self.exprelay1Label.hidden = YES;
     self.exprelay2Label.hidden = YES;
     self.exprelay3Label.hidden = YES;
@@ -191,17 +246,69 @@ else
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc. that aren't in use.
+    self.exprelay1Label = nil;
+    self.exprelay2Label = nil;
+    self.exprelay3Label = nil;
+    self.exprelay4Label = nil;
+    self.exprelay5Label = nil;
+    self.exprelay6Label = nil;
+    self.exprelay7Label = nil;
+    self.exprelay8Label = nil;
+    self.exprelay1 = nil;
+    self.exprelay2 = nil;
+    self.exprelay3 = nil;
+    self.exprelay4 = nil;
+    self.exprelay5 = nil;
+    self.exprelay6 = nil;
+    self.exprelay7 = nil;
+    self.exprelay8 = nil;
+    self.relay1 = nil;
+    self.relay2 = nil;
+    self.relay3 = nil;
+    self.relay4 = nil;
+    self.relay5 = nil;
+    self.relay6 = nil;
+    self.relay7 = nil;
+    self.relay8 = nil;
+
 }
 
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    //[self saveData];
     
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+    self.exprelay1Label = nil;
+    self.exprelay2Label = nil;
+    self.exprelay3Label = nil;
+    self.exprelay4Label = nil;
+    self.exprelay5Label = nil;
+    self.exprelay6Label = nil;
+    self.exprelay7Label = nil;
+    self.exprelay8Label = nil;
+    self.exprelay1 = nil;
+    self.exprelay2 = nil;
+    self.exprelay3 = nil;
+    self.exprelay4 = nil;
+    self.exprelay5 = nil;
+    self.exprelay6 = nil;
+    self.exprelay7 = nil;
+    self.exprelay8 = nil;
+    self.scrollView = nil;
+    self.relay1 = nil;
+    self.relay2 = nil;
+    self.relay3 = nil;
+    self.relay4 = nil;
+    self.relay5 = nil;
+    self.relay6 = nil;
+    self.relay7 = nil;
+    self.relay8 = nil;
+    self.url = nil;
+    self.enteredURL = nil;
+
 }
 
 
