@@ -93,9 +93,10 @@
         [Dictionary setObject: self.relay6.text forKey: @"Relay6"];
         [Dictionary setObject: self.relay7.text forKey: @"Relay7"];
         [Dictionary setObject: self.relay8.text forKey: @"Relay8"];
-		[Dictionary writeToFile:path atomically:YES];
+		
         if(relayExp.on)    
         {
+            [Dictionary setObject: @"ON" forKey: @"ExpansionON"];
             [Dictionary setObject: self.exprelay1.text forKey: @"ExpRelay1"];
             [Dictionary setObject: self.exprelay2.text forKey: @"ExpRelay2"];
             [Dictionary setObject: self.exprelay3.text forKey: @"ExpRelay3"];
@@ -105,6 +106,11 @@
             [Dictionary setObject: self.exprelay7.text forKey: @"ExpRelay7"];
             [Dictionary setObject: self.exprelay8.text forKey: @"ExpRelay8"];
         }
+        else
+        {
+          [Dictionary setObject: @"OFF" forKey: @"ExpansionON"];  
+        }
+        [Dictionary writeToFile:path atomically:YES];
     }    
 }
 -(void) loadData
@@ -123,8 +129,9 @@
     self.relay6.text = [restored objectForKey:@"Relay6"];
     self.relay7.text = [restored objectForKey:@"Relay7"];
     self.relay8.text = [restored objectForKey:@"Relay8"];
-    if(relayExp.on)    
+    if([restored objectForKey:@"ExpansionON"])   
     {
+        [relayExp setOn:YES];
         self.exprelay1.text = [restored objectForKey:@"ExpRelay1"];
         self.exprelay2.text = [restored objectForKey:@"ExpRelay2"];
         self.exprelay3.text = [restored objectForKey:@"ExpRelay3"];
@@ -140,6 +147,7 @@
 {
     if(relayExp.on)    
     {
+
     self.exprelay1Label.hidden = NO;
         self.exprelay2Label.hidden = NO;
         self.exprelay3Label.hidden = NO;
@@ -159,6 +167,7 @@
 }
 else
 {
+
     self.exprelay1Label.hidden = YES;
     self.exprelay2Label.hidden = YES;
     self.exprelay3Label.hidden = YES;

@@ -25,15 +25,12 @@
     [scrollView setContentSize:CGSizeMake(320, 515)];     
     
     appDelegate = (ReefAngel_Mobile_ClientAppDelegate *)[[UIApplication sharedApplication] delegate];
-    
-    //TODO: The below URL needs to be populated from the settings file
-    //Should look something like "http://192.168.1.110:2000" or "http://sometestdns.dyndns.com:2000"
-    //self.wifiUrl = @"http://192.168.1.110:2000"; 
         
 }
+                    
 -(void)UpdateUI:(RA*)ra
 {
-    if(!raParam)
+    if(raParam)
     {
         
         temp1Label.text = raParam.formattedTemp1;
@@ -137,7 +134,6 @@
 	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"savedata.plist"];
 	
 	NSDictionary  *restored = [NSDictionary dictionaryWithContentsOfFile: path];
-	//NSArray *myKeys = [restored allKeys];
 	self.wifiUrl = [restored objectForKey:@"URL"];
     self.relay1.text = [restored objectForKey:@"Relay1"];
     self.relay2.text = [restored objectForKey:@"Relay2"];
@@ -147,6 +143,21 @@
     self.relay6.text = [restored objectForKey:@"Relay6"];
     self.relay7.text = [restored objectForKey:@"Relay7"];
     self.relay8.text = [restored objectForKey:@"Relay8"];
+    if([restored objectForKey:@"ExpansionON"] != nil)
+       {
+           NSLog(@"Relay Expansion ON");
+           NSLog(@"Relay Expansion ON");
+           NSLog(@"Relay Expansion ON");
+           NSLog(@"Relay Expansion ON");
+           NSLog(@"Relay Expansion ON");
+           NSLog(@"Relay Expansion ON");
+           NSLog(@"Relay Expansion ON");
+           NSLog(@"Relay Expansion ON");
+           NSLog(@"Relay Expansion ON");
+           NSLog(@"Relay Expansion ON");
+           NSLog(@"Relay Expansion ON");
+       }
+    [self refreshParams];
     
     
 }
@@ -165,7 +176,6 @@
     
     self.fullUrl = [NSString stringWithFormat:@"%@/r99 ",self.wifiUrl];
     [self SendRequest:self.fullUrl];
-    NSLog(@"%@", self.fullUrl);
 }
 - (void)didReceiveMemoryWarning
 {
