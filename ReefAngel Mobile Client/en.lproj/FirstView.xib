@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1024</int>
-		<string key="IBDocument.SystemVersion">10J869</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1306</string>
-		<string key="IBDocument.AppKitVersion">1038.35</string>
-		<string key="IBDocument.HIToolboxVersion">461.00</string>
+		<string key="IBDocument.SystemVersion">11C48</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1617</string>
+		<string key="IBDocument.AppKitVersion">1138.18</string>
+		<string key="IBDocument.HIToolboxVersion">567.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">301</string>
+			<string key="NS.object.0">534</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -62,7 +62,7 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Temp3:</string>
+								<string key="IBUIText"/>
 								<object class="NSFont" key="IBUIFont" id="346139526">
 									<string key="NSName">Helvetica</string>
 									<double key="NSSize">22</double>
@@ -88,7 +88,7 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Temp3:</string>
+								<string key="IBUIText"/>
 								<reference key="IBUIFont" ref="346139526"/>
 								<reference key="IBUITextColor" ref="18491349"/>
 								<nil key="IBUIHighlightedColor"/>
@@ -251,7 +251,7 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Temp3:</string>
+								<string key="IBUIText"/>
 								<reference key="IBUIFont" ref="346139526"/>
 								<reference key="IBUITextColor" ref="18491349"/>
 								<nil key="IBUIHighlightedColor"/>
@@ -352,7 +352,7 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">Temp3:</string>
+								<string key="IBUIText"/>
 								<reference key="IBUIFont" ref="346139526"/>
 								<reference key="IBUITextColor" ref="18491349"/>
 								<nil key="IBUIHighlightedColor"/>
@@ -1125,6 +1125,70 @@
 					</object>
 					<int key="connectionID">359</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">relay1</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="446553096"/>
+					</object>
+					<int key="connectionID">360</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">relay2</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="924774268"/>
+					</object>
+					<int key="connectionID">361</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">relay3</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="87743164"/>
+					</object>
+					<int key="connectionID">362</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">relay4</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="682304592"/>
+					</object>
+					<int key="connectionID">363</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">relay5</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="13142039"/>
+					</object>
+					<int key="connectionID">364</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">relay6</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="1021459504"/>
+					</object>
+					<int key="connectionID">365</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">relay7</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="480032607"/>
+					</object>
+					<int key="connectionID">366</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">relay8</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="121204098"/>
+					</object>
+					<int key="connectionID">367</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1194,8 +1258,8 @@
 							<reference ref="272020004"/>
 							<reference ref="281855748"/>
 							<reference ref="440809998"/>
-							<reference ref="226278390"/>
 							<reference ref="1065067678"/>
+							<reference ref="226278390"/>
 						</object>
 						<reference key="parent" ref="456029200"/>
 					</object>
@@ -1381,7 +1445,9 @@
 				<object class="NSArray" key="dict.sortedKeys">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>-1.CustomClassName</string>
+					<string>-1.IBPluginDependency</string>
 					<string>-2.CustomClassName</string>
+					<string>-2.IBPluginDependency</string>
 					<string>274.IBPluginDependency</string>
 					<string>275.IBPluginDependency</string>
 					<string>276.IBPluginDependency</string>
@@ -1423,7 +1489,9 @@
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>FirstViewController</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1475,7 +1543,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">359</int>
+			<int key="maxID">367</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1537,6 +1605,14 @@
 							<string>box1Relay8</string>
 							<string>lastUpdatedLabel</string>
 							<string>pHLabel</string>
+							<string>relay1</string>
+							<string>relay2</string>
+							<string>relay3</string>
+							<string>relay4</string>
+							<string>relay5</string>
+							<string>relay6</string>
+							<string>relay7</string>
+							<string>relay8</string>
 							<string>scrollView</string>
 							<string>temp1Label</string>
 							<string>temp2Label</string>
@@ -1560,6 +1636,14 @@
 							<string>UISwitch</string>
 							<string>UISwitch</string>
 							<string>UISwitch</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UIScrollView</string>
@@ -1590,6 +1674,14 @@
 							<string>box1Relay8</string>
 							<string>lastUpdatedLabel</string>
 							<string>pHLabel</string>
+							<string>relay1</string>
+							<string>relay2</string>
+							<string>relay3</string>
+							<string>relay4</string>
+							<string>relay5</string>
+							<string>relay6</string>
+							<string>relay7</string>
+							<string>relay8</string>
 							<string>scrollView</string>
 							<string>temp1Label</string>
 							<string>temp2Label</string>
@@ -1670,6 +1762,38 @@
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">relay1</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">relay2</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">relay3</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">relay4</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">relay5</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">relay6</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">relay7</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">relay8</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">scrollView</string>
 								<string key="candidateClassName">UIScrollView</string>
 							</object>
@@ -1719,6 +1843,6 @@
 				<string>{46, 46}</string>
 			</object>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">301</string>
+		<string key="IBCocoaTouchPluginVersion">534</string>
 	</data>
 </archive>

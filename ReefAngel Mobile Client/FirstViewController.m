@@ -10,7 +10,7 @@
 
 
 @implementation FirstViewController
-@synthesize temp1Label, temp2Label, temp3Label, pHLabel, scrollView;
+@synthesize temp1Label, temp2Label, temp3Label, pHLabel, scrollView, relay1, relay2, relay3, relay4, relay5, relay6, relay7, relay8;
 @synthesize box1Relay1, box1Relay2, box1Relay3, box1Relay4, box1Relay5, box1Relay6, box1Relay7, box1Relay8;
 @synthesize b1R1Indicator, b1R2Indicator, b1R3Indicator,  b1R4Indicator, b1R5Indicator, b1R6Indicator, b1R7Indicator, b1R8Indicator;
 @synthesize wifiUrl,fullUrl,lastUpdatedLabel;
@@ -139,11 +139,20 @@
 	NSDictionary  *restored = [NSDictionary dictionaryWithContentsOfFile: path];
 	//NSArray *myKeys = [restored allKeys];
 	self.wifiUrl = [restored objectForKey:@"URL"];
+    self.relay1.text = [restored objectForKey:@"Relay1"];
+    self.relay2.text = [restored objectForKey:@"Relay2"];
+    self.relay3.text = [restored objectForKey:@"Relay3"];
+    self.relay4.text = [restored objectForKey:@"Relay4"];
+    self.relay5.text = [restored objectForKey:@"Relay5"];
+    self.relay6.text = [restored objectForKey:@"Relay6"];
+    self.relay7.text = [restored objectForKey:@"Relay7"];
+    self.relay8.text = [restored objectForKey:@"Relay8"];
+    
     
 }
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
-    //NSString *url = [self appDelegate].url;
+    [self loadData];
     if ([self appDelegate].url != nil)
     {
         self.wifiUrl = [self appDelegate].url;
