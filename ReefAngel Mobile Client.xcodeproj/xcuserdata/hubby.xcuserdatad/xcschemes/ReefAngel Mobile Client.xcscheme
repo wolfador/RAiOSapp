@@ -14,8 +14,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "55DF42881359DA3900C45B47"
-               BuildableName = "ReefAngel Mobile Client.app"
-               BlueprintName = "ReefAngel Mobile Client"
+               BuildableName = "ReefAngel.app"
+               BlueprintName = "ReefAngel"
                ReferencedContainer = "container:ReefAngel Mobile Client.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -38,19 +38,30 @@
             </BuildableReference>
          </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "55DF42881359DA3900C45B47"
+            BuildableName = "ReefAngel.app"
+            BlueprintName = "ReefAngel"
+            ReferencedContainer = "container:ReefAngel Mobile Client.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.GDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.GDB"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Debug">
+      buildConfiguration = "Debug"
+      debugDocumentVersioning = "YES"
+      allowLocationSimulation = "YES">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "55DF42881359DA3900C45B47"
-            BuildableName = "ReefAngel Mobile Client.app"
-            BlueprintName = "ReefAngel Mobile Client"
+            BuildableName = "ReefAngel.app"
+            BlueprintName = "ReefAngel"
             ReferencedContainer = "container:ReefAngel Mobile Client.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -61,13 +72,14 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Release">
+      buildConfiguration = "Release"
+      debugDocumentVersioning = "YES">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "55DF42881359DA3900C45B47"
-            BuildableName = "ReefAngel Mobile Client.app"
-            BlueprintName = "ReefAngel Mobile Client"
+            BuildableName = "ReefAngel.app"
+            BlueprintName = "ReefAngel"
             ReferencedContainer = "container:ReefAngel Mobile Client.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
