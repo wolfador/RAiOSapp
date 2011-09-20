@@ -18,6 +18,10 @@
     BOOL isRelay1Active, isRelay2Active, isRelay3Active, isRelay4Active, isRelay5Active, isRelay6Active, isRelay7Active, isRelay8Active,
          isRelay1ONMask, isRelay2ONMask, isRelay3ONMask, isRelay4ONMask, isRelay5ONMask, isRelay6ONMask, isRelay7ONMask, isRelay8ONMask,
          isRelay1OFFMask, isRelay2OFFMask, isRelay3OFFMask, isRelay4OFFMask, isRelay5OFFMask, isRelay6OFFMask, isRelay7OFFMask, isRelay8OFFMask;
+    
+    BOOL isRelay01Active, isRelay02Active, isRelay03Active, isRelay04Active, isRelay05Active, isRelay06Active, isRelay07Active, isRelay08Active,
+    isRelay01ONMask, isRelay02ONMask, isRelay03ONMask, isRelay04ONMask, isRelay05ONMask, isRelay06ONMask, isRelay07ONMask, isRelay08ONMask,
+    isRelay01OFFMask, isRelay02OFFMask, isRelay03OFFMask, isRelay04OFFMask, isRelay05OFFMask, isRelay06OFFMask, isRelay07OFFMask, isRelay08OFFMask;
 }
 
 @property (nonatomic, assign) NSNumber *T1;
@@ -85,6 +89,35 @@
 @property (nonatomic, assign) BOOL isRelay6OFFMask;
 @property (nonatomic, assign) BOOL isRelay7OFFMask;
 @property (nonatomic, assign) BOOL isRelay8OFFMask;
+
+//for 2nd box
+
+@property (nonatomic, assign) BOOL isRelay01Active;
+@property (nonatomic, assign) BOOL isRelay02Active;
+@property (nonatomic, assign) BOOL isRelay03Active;
+@property (nonatomic, assign) BOOL isRelay04Active;
+@property (nonatomic, assign) BOOL isRelay05Active;
+@property (nonatomic, assign) BOOL isRelay06Active;
+@property (nonatomic, assign) BOOL isRelay07Active;
+@property (nonatomic, assign) BOOL isRelay08Active;
+
+@property (nonatomic, assign) BOOL isRelay01ONMask;
+@property (nonatomic, assign) BOOL isRelay02ONMask;
+@property (nonatomic, assign) BOOL isRelay03ONMask;
+@property (nonatomic, assign) BOOL isRelay04ONMask;
+@property (nonatomic, assign) BOOL isRelay05ONMask;
+@property (nonatomic, assign) BOOL isRelay06ONMask;
+@property (nonatomic, assign) BOOL isRelay07ONMask;
+@property (nonatomic, assign) BOOL isRelay08ONMask;
+
+@property (nonatomic, assign) BOOL isRelay01OFFMask;
+@property (nonatomic, assign) BOOL isRelay02OFFMask;
+@property (nonatomic, assign) BOOL isRelay03OFFMask;
+@property (nonatomic, assign) BOOL isRelay04OFFMask;
+@property (nonatomic, assign) BOOL isRelay05OFFMask;
+@property (nonatomic, assign) BOOL isRelay06OFFMask;
+@property (nonatomic, assign) BOOL isRelay07OFFMask;
+@property (nonatomic, assign) BOOL isRelay08OFFMask;
 
 @end
 

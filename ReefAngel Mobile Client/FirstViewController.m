@@ -10,11 +10,15 @@
 
 
 @implementation FirstViewController
-@synthesize temp1Label, temp2Label, temp3Label, pHLabel, scrollView, relay1, relay2, relay3, relay4, relay5, relay6, relay7, relay8;
+@synthesize temp1Label, temp2Label, temp3Label, pHLabel, scrollView, relay1, relay2, relay3, relay4, relay5, relay6, relay7, relay8, relay21, relay22, relay23, relay24, relay25, relay26, relay27, relay28;
 @synthesize box1Relay1, box1Relay2, box1Relay3, box1Relay4, box1Relay5, box1Relay6, box1Relay7, box1Relay8;
 @synthesize b1R1Indicator, b1R2Indicator, b1R3Indicator,  b1R4Indicator, b1R5Indicator, b1R6Indicator, b1R7Indicator, b1R8Indicator;
+
+@synthesize b2R1Indicator, b2R2Indicator, b2R3Indicator,  b2R4Indicator, b2R5Indicator, b2R6Indicator, b2R7Indicator, b2R8Indicator;
+@synthesize box2Relay1, box2Relay2, box2Relay3, box2Relay4, box2Relay5, box2Relay6, box2Relay7, box2Relay8;
+
 @synthesize wifiUrl,fullUrl,lastUpdatedLabel;
-@synthesize appDelegate;
+@synthesize appDelegate, box2;
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
@@ -79,6 +83,39 @@
         {box1Relay8.on = raParam.isRelay8ONMask;b1R8Indicator.hidden = NO;}
         
         
+         if(!raParam.isRelay01OFFMask && !raParam.isRelay01ONMask)
+         {box2Relay1.on = raParam.isRelay01Active;b2R1Indicator.hidden = YES;}
+         else
+         {box2Relay1.on = raParam.isRelay01ONMask;b2R1Indicator.hidden = NO;}
+         if(!raParam.isRelay02OFFMask && !raParam.isRelay02ONMask)
+         {box2Relay2.on = raParam.isRelay02Active;b2R2Indicator.hidden = YES;}
+         else
+         {box2Relay2.on = raParam.isRelay2ONMask;b2R2Indicator.hidden= NO;}
+         if(!raParam.isRelay03OFFMask && !raParam.isRelay03ONMask)
+         {box2Relay3.on = raParam.isRelay03Active;b2R3Indicator.hidden = YES;}
+         else
+         {box2Relay3.on = raParam.isRelay03ONMask;b2R3Indicator.hidden = NO;}
+         if(!raParam.isRelay04OFFMask && !raParam.isRelay04ONMask)
+         {box2Relay4.on = raParam.isRelay04Active;b2R4Indicator.hidden = YES;}
+         else
+         {box2Relay4.on = raParam.isRelay04ONMask;b2R4Indicator.hidden = NO;}
+         if(!raParam.isRelay05OFFMask && !raParam.isRelay05ONMask)
+         {box2Relay5.on = raParam.isRelay05Active;b2R5Indicator.hidden = YES;}
+         else
+         {box2Relay5.on = raParam.isRelay05ONMask;b2R5Indicator.hidden = NO;}
+         if(!raParam.isRelay06OFFMask && !raParam.isRelay06ONMask)
+         {box2Relay6.on = raParam.isRelay06Active;b2R6Indicator.hidden = YES;}
+         else
+         {box2Relay6.on = raParam.isRelay06ONMask;b2R6Indicator.hidden = NO;}
+         if(!raParam.isRelay07OFFMask && !raParam.isRelay07ONMask)
+         {box2Relay7.on = raParam.isRelay07Active;b2R7Indicator.hidden = YES;}
+         else
+         {box2Relay7.on = raParam.isRelay07ONMask;b2R7Indicator.hidden = NO;}
+         if(!raParam.isRelay08OFFMask && !raParam.isRelay08ONMask)
+         {box2Relay8.on = raParam.isRelay08Active;b2R8Indicator.hidden = YES;}
+         else
+         {box2Relay8.on = raParam.isRelay08ONMask;b2R8Indicator.hidden = NO;}
+         
         
         raParam = nil;
         [raParam release];
@@ -97,7 +134,6 @@
 {
     self.fullUrl = [NSString stringWithFormat:@"%@r99 ",self.wifiUrl];
     [self SendRequest:self.fullUrl];
-    [TestFlight passCheckpoint:@"Connected"];
 
     
 }
@@ -148,9 +184,55 @@
     
     if([[restored objectForKey:@"ExpansionON"] isEqualToString: @"ON"])
        {
-           //implement expanded relay options here for labels / switches
+           [scrollView setContentSize:CGSizeMake(320, 900)]; 
+           self.box2.hidden = NO;
+           self.relay21.hidden = NO;
+           self.relay22.hidden = NO;
+           self.relay23.hidden = NO;
+           self.relay24.hidden = NO;
+           self.relay25.hidden = NO;
+           self.relay26.hidden = NO;
+           self.relay27.hidden = NO;
+           self.relay28.hidden = NO;
            
+           self.relay21.text = [restored objectForKey:@"ExpRelay1"];
+           self.relay22.text = [restored objectForKey:@"ExpRelay2"];
+           self.relay23.text = [restored objectForKey:@"ExpRelay3"];
+           self.relay24.text = [restored objectForKey:@"ExpRelay4"];
+           self.relay25.text = [restored objectForKey:@"ExpRelay5"];
+           self.relay26.text = [restored objectForKey:@"ExpRelay6"];
+           self.relay27.text = [restored objectForKey:@"ExpRelay7"];
+           self.relay28.text = [restored objectForKey:@"ExpRelay8"];
+           self.box2Relay1.hidden = NO;
+           self.box2Relay2.hidden = NO;
+           self.box2Relay3.hidden = NO;
+           self.box2Relay4.hidden = NO;
+           self.box2Relay5.hidden = NO;
+           self.box2Relay6.hidden = NO;
+           self.box2Relay7.hidden = NO;
+           self.box2Relay8.hidden = NO;
        }
+    else
+    {
+        [scrollView setContentSize:CGSizeMake(320, 515)]; 
+        self.box2.hidden = YES;
+        self.relay21.hidden = YES;
+        self.relay22.hidden = YES;
+        self.relay23.hidden = YES;
+        self.relay24.hidden = YES;
+        self.relay25.hidden = YES;
+        self.relay26.hidden = YES;
+        self.relay27.hidden = YES;
+        self.relay28.hidden = YES;
+        self.box2Relay1.hidden = YES;
+        self.box2Relay2.hidden = YES;
+        self.box2Relay3.hidden = YES;
+        self.box2Relay4.hidden = YES;
+        self.box2Relay5.hidden = YES;
+        self.box2Relay6.hidden = YES;
+        self.box2Relay7.hidden = YES;
+        self.box2Relay8.hidden = YES;
+    }
     [self refreshParams];
     
     
@@ -158,10 +240,6 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
     [self loadData];
-    if ([self appDelegate].url != nil)
-    {
-        self.wifiUrl = [self appDelegate].url;
-    }
     if ([self.wifiUrl length] == 0) {
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"URL Not Entered" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
 		[alertView show];
