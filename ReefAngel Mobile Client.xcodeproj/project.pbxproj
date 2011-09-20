@@ -29,7 +29,7 @@
 		55C7395E135A4BB9007AE60B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C7395D135A4BB9007AE60B /* CFNetwork.framework */; };
 		55C73960135A4BCE007AE60B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C7395F135A4BCE007AE60B /* SystemConfiguration.framework */; };
 		55C73962135A4BD9007AE60B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C73961135A4BD9007AE60B /* MobileCoreServices.framework */; };
-		55C73964135A4C1F007AE60B /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C73963135A4C1F007AE60B /* libz.1.2.3.dylib */; };
+		55C73964135A4C1F007AE60B /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C73963135A4C1F007AE60B /* libz.1.2.3.dylib */; settings = {ATTRIBUTES = (Required, ); }; };
 		55C73981135BDA9A007AE60B /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C73980135BDA9A007AE60B /* SecondViewController.m */; };
 		55DF428E1359DA3900C45B47 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DF428D1359DA3900C45B47 /* UIKit.framework */; };
 		55DF42901359DA3900C45B47 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DF428F1359DA3900C45B47 /* Foundation.framework */; };
@@ -54,6 +54,8 @@
 		8049D1CA142807980051D834 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8049D1C6142807980051D834 /* libTestFlight.a */; };
 		8049D1CB142807980051D834 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8049D1C7142807980051D834 /* README.txt */; };
 		8049D1CC142807980051D834 /* release_notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8049D1C8142807980051D834 /* release_notes.txt */; };
+		80DF04AE14282C3400A45FFA /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 80DF04AD14282C3400A45FFA /* Default@2x.png */; };
+		80DF04B014282C5C00A45FFA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 80DF04AF14282C5C00A45FFA /* Default.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,7 +100,7 @@
 		55C73963135A4C1F007AE60B /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		55C7397F135BDA9A007AE60B /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		55C73980135BDA9A007AE60B /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
-		55DF42891359DA3900C45B47 /* ReefAngel Mobile Client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ReefAngel Mobile Client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		55DF42891359DA3900C45B47 /* ReefAngel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReefAngel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55DF428D1359DA3900C45B47 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		55DF428F1359DA3900C45B47 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		55DF42911359DA3900C45B47 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -136,6 +138,8 @@
 		8049D1C7142807980051D834 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		8049D1C8142807980051D834 /* release_notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.txt; sourceTree = "<group>"; };
 		8049D1C9142807980051D834 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		80DF04AD14282C3400A45FFA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		80DF04AF14282C5C00A45FFA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +164,8 @@
 		55C73904135A3257007AE60B /* images */ = {
 			isa = PBXGroup;
 			children = (
+				80DF04AD14282C3400A45FFA /* Default@2x.png */,
+				80DF04AF14282C5C00A45FFA /* Default.png */,
 				559DB80614257178004EC75A /* RAicon.png */,
 				559DB7FB14257084004EC75A /* bluebutton1.png */,
 				559DB7FC14257084004EC75A /* labelBG.png */,
@@ -187,6 +193,7 @@
 		55C73917135A4865007AE60B /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
+				8049D1C5142807980051D834 /* TestFlightSDK */,
 				55C73963135A4C1F007AE60B /* libz.1.2.3.dylib */,
 				8049D1A3142584DC0051D834 /* User.h */,
 				8049D1A4142584DC0051D834 /* User.m */,
@@ -244,7 +251,7 @@
 		55DF428A1359DA3900C45B47 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				55DF42891359DA3900C45B47 /* ReefAngel Mobile Client.app */,
+				55DF42891359DA3900C45B47 /* ReefAngel.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -273,7 +280,6 @@
 				55DF429F1359DA3900C45B47 /* MainWindow.xib */,
 				55DF42A21359DA3900C45B47 /* FirstViewController.h */,
 				55DF42A31359DA3900C45B47 /* FirstViewController.m */,
-				8049D1C5142807980051D834 /* TestFlightSDK */,
 				55DF42A81359DA3900C45B47 /* FirstView.xib */,
 				55DF42AB1359DA3900C45B47 /* SecondView.xib */,
 				55DF42941359DA3900C45B47 /* Supporting Files */,
@@ -309,9 +315,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		55DF42881359DA3900C45B47 /* ReefAngel Mobile Client */ = {
+		55DF42881359DA3900C45B47 /* ReefAngel */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 55DF42C61359DA3900C45B47 /* Build configuration list for PBXNativeTarget "ReefAngel Mobile Client" */;
+			buildConfigurationList = 55DF42C61359DA3900C45B47 /* Build configuration list for PBXNativeTarget "ReefAngel" */;
 			buildPhases = (
 				55DF42851359DA3900C45B47 /* Sources */,
 				55DF42861359DA3900C45B47 /* Frameworks */,
@@ -321,9 +327,9 @@
 			);
 			dependencies = (
 			);
-			name = "ReefAngel Mobile Client";
+			name = ReefAngel;
 			productName = "ReefAngel Mobile Client";
-			productReference = 55DF42891359DA3900C45B47 /* ReefAngel Mobile Client.app */;
+			productReference = 55DF42891359DA3900C45B47 /* ReefAngel.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -331,6 +337,9 @@
 /* Begin PBXProject section */
 		55DF42801359DA3900C45B47 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = 55DF42831359DA3900C45B47 /* Build configuration list for PBXProject "ReefAngel Mobile Client" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -343,7 +352,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				55DF42881359DA3900C45B47 /* ReefAngel Mobile Client */,
+				55DF42881359DA3900C45B47 /* ReefAngel */,
 			);
 		};
 /* End PBXProject section */
@@ -368,6 +377,8 @@
 				8049D1B714269F500051D834 /* savedata.plist in Resources */,
 				8049D1CB142807980051D834 /* README.txt in Resources */,
 				8049D1CC142807980051D834 /* release_notes.txt in Resources */,
+				80DF04AE14282C3400A45FFA /* Default@2x.png in Resources */,
+				80DF04B014282C5C00A45FFA /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,7 +474,7 @@
 				OTHER_LDFLAGS = "-lxml2";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos4.3;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug;
@@ -486,7 +497,7 @@
 				OTHER_LDFLAGS = "-lxml2";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos;
+				SDKROOT = iphoneos4.3;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Release;
@@ -495,19 +506,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer: John Wiebalk (92HEE83TZH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ReefAngel Mobile Client/ReefAngel Mobile Client-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "ReefAngel Mobile Client/ReefAngel Mobile Client-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ReefAngel Mobile Client/TestFlightSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "3A963270-5B9A-453C-88A2-CB96C04ADD6E";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -518,18 +530,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer: John Wiebalk (92HEE83TZH)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: John Wiebalk (92HEE83TZH)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ReefAngel Mobile Client/ReefAngel Mobile Client-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "ReefAngel Mobile Client/ReefAngel Mobile Client-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ReefAngel Mobile Client/TestFlightSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "3A963270-5B9A-453C-88A2-CB96C04ADD6E";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "3A963270-5B9A-453C-88A2-CB96C04ADD6E";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
@@ -549,7 +562,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		55DF42C61359DA3900C45B47 /* Build configuration list for PBXNativeTarget "ReefAngel Mobile Client" */ = {
+		55DF42C61359DA3900C45B47 /* Build configuration list for PBXNativeTarget "ReefAngel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55DF42C71359DA3900C45B47 /* Debug */,

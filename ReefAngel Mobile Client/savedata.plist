@@ -3,6 +3,22 @@
 <plist version="1.0">
 <dict>
 	<key>URL</key>
-	<string>test</string>
+	<string></string>
+	<key>Relay1</key>
+	<string>ATO</string>
+	<key>Relay2</key>
+	<string>Daylights</string>
+	<key>Relay3</key>
+	<string>Actinics</string>
+	<key>Relay4</key>
+	<string>WM1</string>
+	<key>Relay5</key>
+	<string>WM2</string>
+	<key>Relay6</key>
+	<string>Central Pump</string>
+	<key>Relay7</key>
+	<string>Heater</string>
+	<key>Relay8</key>
+	<string>Skimmer</string>
 </dict>
 </plist>

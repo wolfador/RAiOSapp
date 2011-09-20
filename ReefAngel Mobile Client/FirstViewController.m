@@ -2,8 +2,8 @@
 //  FirstViewController.m
 //  ReefAngel Mobile Client
 //
-//  Created by Dave on 4/16/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created by Dave on 4/17/11 updated by John on 9/29/11.
+//  Copyright 2011 Wolfador. All rights reserved.
 //
 
 #import "FirstViewController.h"
@@ -18,22 +18,17 @@
 @synthesize box2Relay1, box2Relay2, box2Relay3, box2Relay4, box2Relay5, box2Relay6, box2Relay7, box2Relay8;
 
 @synthesize wifiUrl,fullUrl,lastUpdatedLabel;
-@synthesize appDelegate, box2;
+@synthesize box2;
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
         
     [super viewDidLoad];
-    [self loadData];
     
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
-    [formatter setDateFormat:@"MMM dd yyyy : HH:mm:ss"];
-    NSDate *date = [NSDate date];
-    lastUpdatedLabel.text = [formatter stringFromDate:date];  
     [scrollView setScrollEnabled:YES];
     [scrollView setContentSize:CGSizeMake(320, 515)];     
     self.scrollView.delegate = self;
-    appDelegate = (ReefAngel_Mobile_ClientAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
         
 }
                     
@@ -133,7 +128,9 @@
 -(IBAction)refreshParams
 {
     self.fullUrl = [NSString stringWithFormat:@"%@r99 ",self.wifiUrl];
-    [self SendRequest:self.fullUrl];
+    if ([self.wifiUrl length] > 0) {
+        [self SendRequest:fullUrl];
+    }
 
     
 }
@@ -144,7 +141,9 @@
         UISwitch *swit = (UISwitch*)sender;        
         self.fullUrl = [NSString stringWithFormat:@"%@r%@%@",self.wifiUrl,[NSString stringWithFormat:@"%d",swit.tag],
                         swit.on ? @"1" : @"0"];
-        [self SendRequest:fullUrl];
+        if ([self.wifiUrl length] > 0) {
+            [self SendRequest:fullUrl];
+        }
         [swit release];
     }
     else //if([sender class] == [UIButton class])
@@ -153,17 +152,19 @@
         UIButton *but = (UIButton*)sender;
         NSString *tag = [NSString stringWithFormat:@"%d",but.tag];    
         self.fullUrl = [NSString stringWithFormat:@"%@r%@%@",self.wifiUrl,tag,@"2"];
+        if ([self.wifiUrl length] > 0) {
        [self SendRequest:fullUrl];
+        }
         [but release];
     }    
     
 
   }
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	
+	return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+	
 }
 -(void) loadData
 {
@@ -239,15 +240,23 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
+    
+    NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
+    [formatter setDateFormat:@"MMM dd yyyy : HH:mm:ss"];
+    NSDate *date = [NSDate date];
+    lastUpdatedLabel.text = [formatter stringFromDate:date]; 
     [self loadData];
     if ([self.wifiUrl length] == 0) {
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"URL Not Entered" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Settings" message:@"Enter Server Address in Settings" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
 		[alertView show];
 		[alertView release];
     }
     
+    
+    if ([self.wifiUrl length] > 0) {
     self.fullUrl = [NSString stringWithFormat:@"%@/r99 ",self.wifiUrl];
     [self SendRequest:self.fullUrl];
+    }
 }
 - (void)didReceiveMemoryWarning
 {

@@ -2,16 +2,16 @@
 //  FirstViewController.h
 //  ReefAngel Mobile Client
 //
-//  Created by Dave on 4/16/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created by Dave on 4/17/11 updated by John on 9/29/11.
+//  Copyright 2011 Wolfador. All rights reserved.
 //
+
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "ASIHTTPRequest.h"
 #import "RA_ParamObject.h"
 #import "RA_WifiController.h"
-#import "ReefAngel_Mobile_ClientAppDelegate.h"
 
 @interface FirstViewController : UIViewController<UIApplicationDelegate, UITabBarDelegate, UIScrollViewDelegate>{
 
@@ -24,7 +24,7 @@
     RA *raParam;
     RA_WifiController *controller;
     IBOutlet UIScrollView *scrollView;
-    ReefAngel_Mobile_ClientAppDelegate *appDelegate;
+
 }
 @property (readwrite, copy) NSString *wifiUrl;
 @property (readwrite, copy) NSString *fullUrl;
@@ -67,7 +67,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *b1R6Indicator;
 @property (nonatomic, retain) IBOutlet UIButton *b1R7Indicator;
 @property (nonatomic, retain) IBOutlet UIButton *b1R8Indicator;
-@property (nonatomic, retain) ReefAngel_Mobile_ClientAppDelegate *appDelegate;
+
 
 
 

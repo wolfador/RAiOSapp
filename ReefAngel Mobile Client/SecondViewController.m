@@ -2,8 +2,8 @@
 //  SecondViewController.m
 //  ReefAngel Mobile Client
 //
-//  Created by Dave on 4/17/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created by Dave on 4/17/11 updated by John on 9/29/11.
+//  Copyright 2011 Wolfador. All rights reserved.
 //
 
 #import "SecondViewController.h"
@@ -11,9 +11,9 @@
 
 @implementation SecondViewController
 
-@synthesize url;
-@synthesize enteredURL, save, scrollView;
-@synthesize appDelegate, relayExp, relay1, relay2, relay3, relay4, relay5, relay6, relay7, relay8;
+
+@synthesize enteredURL, save, scrollView, url;
+@synthesize relayExp, relay1, relay2, relay3, relay4, relay5, relay6, relay7, relay8;
 @synthesize exprelay1, exprelay2, exprelay3, exprelay4, exprelay5, exprelay6, exprelay7, exprelay8;
 @synthesize exprelay1Label, exprelay2Label, exprelay3Label, exprelay4Label, exprelay5Label, exprelay6Label, exprelay7Label, exprelay8Label;
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -34,7 +34,6 @@
     
     url.delegate = self;
     self.scrollView.delegate = self;
-    appDelegate = (ReefAngel_Mobile_ClientAppDelegate *)[[UIApplication sharedApplication] delegate];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -94,10 +93,11 @@
 
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+	
+	return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+	
 }
 -(IBAction) saveData
 {
