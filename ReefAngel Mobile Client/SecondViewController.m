@@ -198,7 +198,7 @@
 {
     if(relayExp.on)    
     {
-        
+        [TestFlight passCheckpoint:@"Exp Box turned on"];
         //Loads saved names for exp module
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
