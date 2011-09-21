@@ -239,6 +239,14 @@
         self.box2Relay6.hidden = YES;
         self.box2Relay7.hidden = YES;
         self.box2Relay8.hidden = YES;
+        self.b2R1Indicator.hidden = YES;
+        self.b2R2Indicator.hidden = YES;
+        self.b2R3Indicator.hidden = YES;
+        self.b2R4Indicator.hidden = YES;
+        self.b2R5Indicator.hidden = YES;
+        self.b2R6Indicator.hidden = YES;
+        self.b2R7Indicator.hidden = YES;
+        self.b2R8Indicator.hidden = YES;
     }
     [self refreshParams];
     
