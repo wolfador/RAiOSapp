@@ -275,16 +275,16 @@
 				55C73917135A4865007AE60B /* 3rdParty */,
 				55C73908135A4004007AE60B /* model */,
 				55C73904135A3257007AE60B /* images */,
-				55DF429C1359DA3900C45B47 /* ReefAngel_Mobile_ClientAppDelegate.h */,
+				55DF42941359DA3900C45B47 /* Supporting Files */,
 				55DF429D1359DA3900C45B47 /* ReefAngel_Mobile_ClientAppDelegate.m */,
-				55DF429F1359DA3900C45B47 /* MainWindow.xib */,
+				55DF429C1359DA3900C45B47 /* ReefAngel_Mobile_ClientAppDelegate.h */,
 				55DF42A21359DA3900C45B47 /* FirstViewController.h */,
 				55DF42A31359DA3900C45B47 /* FirstViewController.m */,
-				55DF42A81359DA3900C45B47 /* FirstView.xib */,
-				55DF42AB1359DA3900C45B47 /* SecondView.xib */,
-				55DF42941359DA3900C45B47 /* Supporting Files */,
 				55C7397F135BDA9A007AE60B /* SecondViewController.h */,
 				55C73980135BDA9A007AE60B /* SecondViewController.m */,
+				55DF429F1359DA3900C45B47 /* MainWindow.xib */,
+				55DF42A81359DA3900C45B47 /* FirstView.xib */,
+				55DF42AB1359DA3900C45B47 /* SecondView.xib */,
 			);
 			path = "ReefAngel Mobile Client";
 			sourceTree = "<group>";
