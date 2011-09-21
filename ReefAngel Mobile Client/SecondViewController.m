@@ -12,7 +12,7 @@
 @implementation SecondViewController
 
 
-@synthesize enteredURL, save, scrollView, url;
+@synthesize enteredURL, scrollView, url;
 @synthesize relayExp, relay1, relay2, relay3, relay4, relay5, relay6, relay7, relay8;
 @synthesize exprelay1, exprelay2, exprelay3, exprelay4, exprelay5, exprelay6, exprelay7, exprelay8;
 @synthesize exprelay1Label, exprelay2Label, exprelay3Label, exprelay4Label, exprelay5Label, exprelay6Label, exprelay7Label, exprelay8Label;
@@ -115,10 +115,6 @@
         NSString *documentsDirectory = [paths objectAtIndex:0];
         NSString *path = [documentsDirectory stringByAppendingPathComponent:@"savedata.plist"];
         
-        UIAlertView* savedAlertView = [[UIAlertView alloc] initWithTitle:@"Saved" message:@"Data Saved" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
-		[savedAlertView show];
-		[savedAlertView release];
-		
 		NSMutableDictionary *Dictionary = [NSMutableDictionary dictionary];
 		NSDictionary  *restored = [NSDictionary dictionaryWithContentsOfFile: path];
 		[Dictionary addEntriesFromDictionary:restored];
@@ -242,6 +238,12 @@ else
 }
 
 }
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [self saveData];
+}
+
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -314,6 +316,34 @@ else
 
 - (void)dealloc
 {
-    [super dealloc];
+   
+    [exprelay1Label release];
+    [exprelay2Label release];
+    [exprelay3Label release];
+    [exprelay4Label release];
+    [exprelay5Label release];
+    [exprelay6Label release];
+    [exprelay7Label release];
+    [exprelay8Label release];
+    [exprelay1 release];
+    [exprelay2 release];
+    [exprelay3 release];
+    [exprelay4 release];
+    [exprelay5 release];
+    [exprelay6 release];
+    [exprelay7 release];
+    [exprelay8 release];
+    [scrollView release];
+    [relay1 release];
+    [relay2 release];
+    [relay3 release];
+    [relay4 release];
+    [relay5 release];
+    [relay6 release];
+    [relay7 release];
+    [relay8 release];
+    [url release];
+    [enteredURL release];
+     [super dealloc];
 }
 @end
