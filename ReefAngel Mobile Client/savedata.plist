@@ -20,5 +20,21 @@
 	<string>Heater</string>
 	<key>Relay8</key>
 	<string>Skimmer</string>
+	<key>ExpRelay1</key>
+	<string>ExpRelay1</string>
+	<key>ExpRelay2</key>
+	<string>ExpRelay2</string>
+	<key>ExpRelay3</key>
+	<string>ExpRelay3</string>
+	<key>ExpRelay4</key>
+	<string>ExpRelay4</string>
+	<key>ExpRelay5</key>
+	<string>ExpRelay5</string>
+	<key>ExpRelay6</key>
+	<string>ExpRelay6</string>
+	<key>ExpRelay7</key>
+	<string>ExpRelay7</string>
+	<key>ExpRelay8</key>
+	<string>ExpRelay8</string>
 </dict>
 </plist>

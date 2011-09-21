@@ -198,7 +198,27 @@
 {
     if(relayExp.on)    
     {
+        
+        //Loads saved names for exp module
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSString *path = [documentsDirectory stringByAppendingPathComponent:@"savedata.plist"];
+        
+        NSDictionary  *restored = [NSDictionary dictionaryWithContentsOfFile: path];
+        
+        self.exprelay1.text = [restored objectForKey:@"ExpRelay1"];
+        self.exprelay2.text = [restored objectForKey:@"ExpRelay2"];
+        self.exprelay3.text = [restored objectForKey:@"ExpRelay3"];
+        self.exprelay4.text = [restored objectForKey:@"ExpRelay4"];
+        self.exprelay5.text = [restored objectForKey:@"ExpRelay5"];
+        self.exprelay6.text = [restored objectForKey:@"ExpRelay6"];
+        self.exprelay7.text = [restored objectForKey:@"ExpRelay7"];
+        self.exprelay8.text = [restored objectForKey:@"ExpRelay8"];
+        
+        //resize scroll length for longer screen
         [scrollView setContentSize:CGSizeMake(320, 850)];
+        
+    
     self.exprelay1Label.hidden = NO;
         self.exprelay2Label.hidden = NO;
         self.exprelay3Label.hidden = NO;
@@ -219,6 +239,7 @@
 else
 {
     [scrollView setContentSize:CGSizeMake(320, 600)];
+    [self saveData];
     self.exprelay1Label.hidden = YES;
     self.exprelay2Label.hidden = YES;
     self.exprelay3Label.hidden = YES;
