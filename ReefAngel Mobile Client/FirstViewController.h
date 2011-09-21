@@ -26,6 +26,7 @@
     IBOutlet UIScrollView *scrollView;
 
 }
+
 @property (readwrite, copy) NSString *wifiUrl;
 @property (readwrite, copy) NSString *fullUrl;
 @property (nonatomic, retain) IBOutlet UILabel *temp1Label, *relay1, *relay2, *relay3, *relay4, *relay5, *relay6, *relay7, *relay8, *relay21, *relay22, *relay23, *relay24, *relay25, *relay26, *relay27, *relay28;
@@ -68,13 +69,10 @@
 @property (nonatomic, retain) IBOutlet UIButton *b1R7Indicator;
 @property (nonatomic, retain) IBOutlet UIButton *b1R8Indicator;
 
-
-
-
-
 -(IBAction) refreshParams;
 -(IBAction) toggleRelay:(id)sender;
 -(void)SendRequest:(NSString *)url;
 -(void)UpdateUI:(RA*)ra;
 -(void) loadData;
 @end
+

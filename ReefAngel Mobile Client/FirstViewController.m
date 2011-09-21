@@ -150,7 +150,7 @@
         if ([self.wifiUrl length] > 0) {
             [self SendRequest:fullUrl];
         }
-        [swit release];
+       // [swit release];
     }
     else //if([sender class] == [UIButton class])
     {
@@ -161,7 +161,7 @@
         if ([self.wifiUrl length] > 0) {
        [self SendRequest:fullUrl];
         }
-        [but release];
+       // [but release];
     }    
     
 
