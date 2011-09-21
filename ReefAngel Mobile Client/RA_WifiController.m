@@ -31,7 +31,12 @@
             [self updateRelayBoxes:latestParams];
             [TestFlight passCheckpoint:@"Params Downloaded"];
         }
-        
+        else
+        {
+            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+            [alertView show];
+            [alertView release];
+        }
         return latestParams;
         
     }
@@ -122,7 +127,7 @@
         ra.isRelay8OFFMask = [[binaryOFFMask substringWithRange:NSMakeRange(7,1)] isEqualToString:@"0"] ? YES : NO;  
         
         
-         //2nd Relay Box needs if exist statement?
+         //2nd Relay Box
          
          NSString *binary0String = [self buildRelayBinary:ra.R0];
          NSString *binary0ONMask = [self buildRelayBinary:ra.RON0];
