@@ -13,7 +13,6 @@
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<string>IBProxyObject</string>
-			<string>IBUIBarButtonItem</string>
 			<string>IBUILabel</string>
 			<string>IBUISwitch</string>
 			<string>IBUITextField</string>
@@ -962,12 +961,6 @@
 							<object class="IBUINavigationItem" id="288082410">
 								<reference key="IBUINavigationBar" ref="101177840"/>
 								<string key="IBUITitle">Settings</string>
-								<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="767087662">
-									<string key="IBUITitle">FeedBack</string>
-									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-									<int key="IBUIStyle">1</int>
-									<reference key="IBUINavigationItem" ref="288082410"/>
-								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
 						</object>
@@ -1374,14 +1367,6 @@
 					</object>
 					<int key="connectionID">152</int>
 				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">launchFeedback</string>
-						<reference key="source" ref="767087662"/>
-						<reference key="destination" ref="372490531"/>
-					</object>
-					<int key="connectionID">176</int>
-				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1473,7 +1458,6 @@
 						<reference key="object" ref="288082410"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="767087662"/>
 						</object>
 						<reference key="parent" ref="101177840"/>
 					</object>
@@ -1657,11 +1641,6 @@
 						<reference key="object" ref="338915709"/>
 						<reference key="parent" ref="703078981"/>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">175</int>
-						<reference key="object" ref="767087662"/>
-						<reference key="parent" ref="288082410"/>
-					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1702,7 +1681,6 @@
 					<string>147.IBPluginDependency</string>
 					<string>148.IBPluginDependency</string>
 					<string>149.IBPluginDependency</string>
-					<string>175.IBPluginDependency</string>
 					<string>73.IBPluginDependency</string>
 					<string>74.IBPluginDependency</string>
 					<string>75.IBPluginDependency</string>
@@ -1719,7 +1697,6 @@
 					<string>SecondViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1858,7 +1835,6 @@
 							<string>relay7</string>
 							<string>relay8</string>
 							<string>relayExp</string>
-							<string>save</string>
 							<string>scrollView</string>
 							<string>url</string>
 						</object>
@@ -1889,7 +1865,6 @@
 							<string>UITextField</string>
 							<string>UITextField</string>
 							<string>UISwitch</string>
-							<string>UIButton</string>
 							<string>UIScrollView</string>
 							<string>UITextField</string>
 						</object>
@@ -1923,7 +1898,6 @@
 							<string>relay7</string>
 							<string>relay8</string>
 							<string>relayExp</string>
-							<string>save</string>
 							<string>scrollView</string>
 							<string>url</string>
 						</object>
@@ -2028,10 +2002,6 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">relayExp</string>
 								<string key="candidateClassName">UISwitch</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">save</string>
-								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">scrollView</string>

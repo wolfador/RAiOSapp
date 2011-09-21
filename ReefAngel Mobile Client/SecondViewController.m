@@ -159,9 +159,6 @@
     }    
     [TestFlight passCheckpoint:@"DataSaved"];
 }
--(IBAction)launchFeedback {
-    [TestFlight openFeedbackView];
-}
 
 -(void) loadData
 {
