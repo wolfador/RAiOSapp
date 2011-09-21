@@ -15,8 +15,7 @@
 
 #import "TypeMapping.h"
 #import "XmlHeaderHelper.h"
-
-
+#import "TestFlight.h"
 
 static const char* getPropertyType(objc_property_t property) {
 	
@@ -96,11 +95,14 @@ static const char* getPropertyType(objc_property_t property) {
     GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr options:0 error:&error];
 	
     if (doc == nil) { 
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to download" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
 		NSLog(@"doc doesn't exist");
 		return nil; 
 	}
-	
-	
+	 [TestFlight passCheckpoint:@"XML Not "];	
+    
 	GDataXMLElement *anElement = [doc rootElement];
 	
 	NSLog(@"stringValue :: %@", anElement.stringValue);
@@ -131,6 +133,10 @@ static const char* getPropertyType(objc_property_t property) {
     GDataXMLDocument *doc = [[[GDataXMLDocument alloc] initWithXMLString:xmlStr options:0 error:&error] autorelease];
     if (doc == nil) { 
 		NSLog(@"doc doesn't exist");
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to download" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
+       
 		return nil; 
 	}
     
