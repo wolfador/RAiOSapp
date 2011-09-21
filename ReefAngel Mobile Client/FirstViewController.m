@@ -119,6 +119,10 @@
 }
 -(void)SendRequest:(NSString *)url
 {
+    NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
+    [formatter setDateFormat:@"MMM dd yyyy : hh:mm:ss a"];
+    NSDate *date = [NSDate date];
+    lastUpdatedLabel.text = [formatter stringFromDate:date];
     controller = [[[RA_WifiController alloc]init] autorelease];
     raParam = [controller sendRequest:url];
     [self UpdateUI:raParam];
@@ -127,10 +131,7 @@
 
 -(IBAction)refreshParams
 {
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
-    [formatter setDateFormat:@"MMM dd yyyy : HH:mm:ss"];
-    NSDate *date = [NSDate date];
-    lastUpdatedLabel.text = [formatter stringFromDate:date];
+    
     self.fullUrl = [NSString stringWithFormat:@"%@r99 ",self.wifiUrl];
     if ([self.wifiUrl length] > 0) {
         [self SendRequest:fullUrl];
@@ -246,10 +247,6 @@
 - (void)viewWillAppear:(BOOL)animated {
 	[super viewWillAppear:animated];
     
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
-    [formatter setDateFormat:@"MMM dd yyyy : HH:mm:ss"];
-    NSDate *date = [NSDate date];
-    lastUpdatedLabel.text = [formatter stringFromDate:date]; 
     [self loadData];
     if ([self.wifiUrl length] == 0) {
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Settings" message:@"Enter Server Address in Settings" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
@@ -257,11 +254,11 @@
 		[alertView release];
     }
     
-    
+    /*
     if ([self.wifiUrl length] > 0) {
     self.fullUrl = [NSString stringWithFormat:@"%@/r99 ",self.wifiUrl];
     [self SendRequest:self.fullUrl];
-    }
+    }*/
 }
 - (void)didReceiveMemoryWarning
 {
