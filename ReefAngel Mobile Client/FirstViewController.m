@@ -29,7 +29,6 @@
     [scrollView setContentSize:CGSizeMake(320, 515)];     
     self.scrollView.delegate = self;
     
-        
 }
                     
 -(void)UpdateUI:(RA*)ra
@@ -77,7 +76,8 @@
         else
         {box1Relay8.on = raParam.isRelay8ONMask;b1R8Indicator.hidden = NO;}
         
-        
+        if(self.box2.hidden == NO)
+        {
          if(!raParam.isRelay01OFFMask && !raParam.isRelay01ONMask)
          {box2Relay1.on = raParam.isRelay01Active;b2R1Indicator.hidden = YES;}
          else
@@ -110,7 +110,7 @@
          {box2Relay8.on = raParam.isRelay08Active;b2R8Indicator.hidden = YES;}
          else
          {box2Relay8.on = raParam.isRelay08ONMask;b2R8Indicator.hidden = NO;}
-         
+        }
         
         raParam = nil;
         [raParam release];
@@ -127,10 +127,15 @@
 
 -(IBAction)refreshParams
 {
+    NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
+    [formatter setDateFormat:@"MMM dd yyyy : HH:mm:ss"];
+    NSDate *date = [NSDate date];
+    lastUpdatedLabel.text = [formatter stringFromDate:date];
     self.fullUrl = [NSString stringWithFormat:@"%@r99 ",self.wifiUrl];
     if ([self.wifiUrl length] > 0) {
         [self SendRequest:fullUrl];
     }
+    [TestFlight passCheckpoint:@"Data Refreshed"];
 
     
 }
@@ -262,17 +267,56 @@
 {
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc. that aren't in use.
-}
+
+    self.temp1Label = nil;
+    self.relay1 = nil;
+    self.relay2 = nil;
+    self.relay3 = nil;
+    self.relay4 = nil;
+    self.relay5 = nil;
+    self.relay6 = nil;
+    self.relay7 = nil;
+    self.relay8 = nil;
+    self.relay21 = nil;
+    self.relay22 = nil;
+    self.relay23 = nil;
+    self.relay24 = nil;
+    self.relay25 = nil;
+    self.relay26 = nil;
+    self.relay27 = nil;
+    self.relay28 = nil;
+    self.temp2Label = nil;
+    self.temp3Label = nil;
+    self.pHLabel = nil;
+    self.lastUpdatedLabel = nil;
+    }
 
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
 
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    self.temp1Label = nil;
+    self.relay1 = nil;
+    self.relay2 = nil;
+    self.relay3 = nil;
+    self.relay4 = nil;
+    self.relay5 = nil;
+    self.relay6 = nil;
+    self.relay7 = nil;
+    self.relay8 = nil;
+    self.relay21 = nil;
+    self.relay22 = nil;
+    self.relay23 = nil;
+    self.relay24 = nil;
+    self.relay25 = nil;
+    self.relay26 = nil;
+    self.relay27 = nil;
+    self.relay28 = nil;
+    self.temp2Label = nil;
+    self.temp3Label = nil;
+    self.pHLabel = nil;
+    self.lastUpdatedLabel = nil;
 }
 
 
