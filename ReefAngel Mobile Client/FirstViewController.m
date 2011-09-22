@@ -262,11 +262,6 @@
 		[alertView release];
     }
     
-    /*
-    if ([self.wifiUrl length] > 0) {
-    self.fullUrl = [NSString stringWithFormat:@"%@/r99 ",self.wifiUrl];
-    [self SendRequest:self.fullUrl];
-    }*/
 }
 - (void)didReceiveMemoryWarning
 {
