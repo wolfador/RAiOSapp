@@ -119,13 +119,22 @@
 }
 -(void)SendRequest:(NSString *)url
 {
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
-    [formatter setDateFormat:@"MMM dd yyyy : hh:mm:ss a"];
-    NSDate *date = [NSDate date];
-    lastUpdatedLabel.text = [formatter stringFromDate:date];
+    
     controller = [[[RA_WifiController alloc]init] autorelease];
     raParam = [controller sendRequest:url];
     [self UpdateUI:raParam];
+    NSLog(@"%@", raParam);
+    if (raParam != NULL) {
+        NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
+        [formatter setDateFormat:@"MMM dd yyyy : hh:mm:ss a"];
+        NSDate *date = [NSDate date];
+        lastUpdatedLabel.text = [formatter stringFromDate:date];
+    }
+    else
+    {
+        lastUpdatedLabel.text = @"No Data";
+        lastUpdatedLabel.textColor = [UIColor redColor];;
+    }
     
 }
 
