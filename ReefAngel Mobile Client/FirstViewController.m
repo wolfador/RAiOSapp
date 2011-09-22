@@ -132,7 +132,9 @@
     }
     else
     {
-        lastUpdatedLabel.text = @"No Data";
+        if (lastUpdatedLabel.text.length == 0) {
+            lastUpdatedLabel.text = @"No Data";
+        }
         lastUpdatedLabel.textColor = [UIColor redColor];;
     }
     
