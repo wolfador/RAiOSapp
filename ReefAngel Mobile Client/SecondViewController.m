@@ -232,6 +232,7 @@
         self.exprelay6.hidden = NO;
         self.exprelay7.hidden = NO;
         self.exprelay8.hidden = NO;
+        [self saveData];
 }
 else
 {
