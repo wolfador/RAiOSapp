@@ -12,10 +12,12 @@
 #import "ASIHTTPRequest.h"
 #import "TestFlight.h"
 
+
 @interface RA_WifiController : NSObject {
     
     NSString *urlLocation;
     RA *latestParams;
+
     
 }
 

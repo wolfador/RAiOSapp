@@ -8,9 +8,43 @@
 
 #import "RA_WifiController.h"
 
-
 @implementation RA_WifiController
 
+
+-(RA *)sendRequest:(NSString *)controllerUrl
+{
+    NSURL *url = [NSURL URLWithString: controllerUrl];
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];        
+  latestParams = [[[RA alloc] init] autorelease];
+    
+    [request setCompletionBlock:^{
+        NSMutableArray *paramArray;
+        [TestFlight passCheckpoint:@"Connected"];
+        
+        NSString *response = [request responseString];
+        
+        XmlParser *xmlParser = [[[XmlParser alloc] init] autorelease];
+        paramArray = [xmlParser fromXml:response withObject:latestParams];
+        
+        latestParams = [paramArray lastObject];
+        [self formatRA:latestParams];
+        [self updateRelayBoxes:latestParams];
+        [TestFlight passCheckpoint:@"Params Downloaded"];
+
+    }];
+    [request setFailedBlock:^{
+        
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        [alertView show];
+        [alertView release];
+    }];
+    
+    
+    [request startAsynchronous];
+    return latestParams;
+    
+}
+/*
     -(RA *)sendRequest:(NSString *)controllerUrl
     {
         NSURL *url = [NSURL URLWithString: controllerUrl];
@@ -40,6 +74,7 @@
         return latestParams;
         
     }
+*/
 
     -(void)formatRA : (RA *)params
     {
