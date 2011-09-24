@@ -122,8 +122,7 @@
     
     controller = [[[RA_WifiController alloc]init] autorelease];
     raParam = [controller sendRequest:url];
-    [self UpdateUI:raParam];
-    NSLog(@"%@", raParam);
+    
     if (raParam != NULL) {
         NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
         [formatter setDateFormat:@"MMM dd yyyy : hh:mm:ss a"];
@@ -137,7 +136,30 @@
         }
         lastUpdatedLabel.textColor = [UIColor redColor];;
     }
+    [self UpdateUI:raParam];
+}
+
+-(void)SendUpdate:(NSString *)url
+{
     
+    controller = [[RA_WifiController alloc]init];
+    [controller sendUpdate:url];
+    raParam = [controller requestFinished:controller.requestUpdate];
+    if (raParam != NULL) {
+        NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
+        [formatter setDateFormat:@"MMM dd yyyy : hh:mm:ss a"];
+        NSDate *date = [NSDate date];
+        lastUpdatedLabel.text = [formatter stringFromDate:date];
+    }
+    else
+    {
+        if (lastUpdatedLabel.text.length == 0) {
+            lastUpdatedLabel.text = @"No Data";
+        }
+        lastUpdatedLabel.textColor = [UIColor redColor];;
+    }
+    [self UpdateUI:raParam];
+    [controller release];
 }
 
 -(IBAction)refreshParams
@@ -145,7 +167,8 @@
     
     self.fullUrl = [NSString stringWithFormat:@"%@r99 ",self.wifiUrl];
     if ([self.wifiUrl length] > 0) {
-        [self SendRequest:fullUrl];
+        //[self SendRequest:fullUrl];
+        [self SendUpdate:fullUrl];
     }
     [TestFlight passCheckpoint:@"Data Refreshed"];
 
@@ -259,7 +282,7 @@
         self.b2R7Indicator.hidden = YES;
         self.b2R8Indicator.hidden = YES;
     }
-    [self refreshParams];
+    
     
     
 }
