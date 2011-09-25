@@ -7,14 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		55236719135F4DD00067FFD9 /* tableViewCellInput.m in Sources */ = {isa = PBXBuildFile; fileRef = 55236718135F4DD00067FFD9 /* tableViewCellInput.m */; };
-		5523671B135F4E830067FFD9 /* tableViewCellInput.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5523671A135F4E830067FFD9 /* tableViewCellInput.xib */; };
 		559DB80014257084004EC75A /* bluebutton1.png in Resources */ = {isa = PBXBuildFile; fileRef = 559DB7FB14257084004EC75A /* bluebutton1.png */; };
 		559DB80114257084004EC75A /* labelBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 559DB7FC14257084004EC75A /* labelBG.png */; };
 		559DB80214257084004EC75A /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 559DB7FD14257084004EC75A /* refresh.png */; };
 		559DB80314257084004EC75A /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 559DB7FE14257084004EC75A /* settings.png */; };
 		559DB80414257084004EC75A /* tankicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 559DB7FF14257084004EC75A /* tankicon.png */; };
-		559DB80714257178004EC75A /* RAicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 559DB80614257178004EC75A /* RAicon.png */; };
 		55C7390B135A4038007AE60B /* RA_WifiController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C7390A135A4038007AE60B /* RA_WifiController.m */; };
 		55C7390E135A40CD007AE60B /* RA_ParamObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C7390D135A40CD007AE60B /* RA_ParamObject.m */; };
 		55C7392C135A4936007AE60B /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C73919135A4936007AE60B /* ASIAuthenticationDialog.m */; };
@@ -54,20 +51,23 @@
 		8049D1CA142807980051D834 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8049D1C6142807980051D834 /* libTestFlight.a */; };
 		8049D1CB142807980051D834 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8049D1C7142807980051D834 /* README.txt */; };
 		8049D1CC142807980051D834 /* release_notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8049D1C8142807980051D834 /* release_notes.txt */; };
+		8060DE8A142D756600248B60 /* icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE83142D756600248B60 /* icon-72.png */; };
+		8060DE8B142D756600248B60 /* icon-small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE84142D756600248B60 /* icon-small-50.png */; };
+		8060DE8C142D756600248B60 /* icon-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE85142D756600248B60 /* icon-small.png */; };
+		8060DE8D142D756600248B60 /* icon-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE86142D756600248B60 /* icon-small@2x.png */; };
+		8060DE8E142D756600248B60 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE87142D756600248B60 /* icon.png */; };
+		8060DE8F142D756600248B60 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE88142D756600248B60 /* icon@2x.png */; };
+		8060DE90142D756600248B60 /* ReefAngel-Logo-512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE89142D756600248B60 /* ReefAngel-Logo-512x512.png */; };
 		80DF04AE14282C3400A45FFA /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 80DF04AD14282C3400A45FFA /* Default@2x.png */; };
 		80DF04B014282C5C00A45FFA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 80DF04AF14282C5C00A45FFA /* Default.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		55236717135F4DD00067FFD9 /* tableViewCellInput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tableViewCellInput.h; sourceTree = "<group>"; };
-		55236718135F4DD00067FFD9 /* tableViewCellInput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tableViewCellInput.m; sourceTree = "<group>"; };
-		5523671A135F4E830067FFD9 /* tableViewCellInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = tableViewCellInput.xib; sourceTree = "<group>"; };
 		559DB7FB14257084004EC75A /* bluebutton1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bluebutton1.png; path = images/bluebutton1.png; sourceTree = SOURCE_ROOT; };
 		559DB7FC14257084004EC75A /* labelBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = labelBG.png; path = images/labelBG.png; sourceTree = SOURCE_ROOT; };
 		559DB7FD14257084004EC75A /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = refresh.png; path = images/refresh.png; sourceTree = SOURCE_ROOT; };
 		559DB7FE14257084004EC75A /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = images/settings.png; sourceTree = SOURCE_ROOT; };
 		559DB7FF14257084004EC75A /* tankicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tankicon.png; path = images/tankicon.png; sourceTree = SOURCE_ROOT; };
-		559DB80614257178004EC75A /* RAicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = RAicon.png; path = images/RAicon.png; sourceTree = SOURCE_ROOT; };
 		55C73909135A4038007AE60B /* RA_WifiController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RA_WifiController.h; sourceTree = "<group>"; };
 		55C7390A135A4038007AE60B /* RA_WifiController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RA_WifiController.m; sourceTree = "<group>"; };
 		55C7390C135A40CD007AE60B /* RA_ParamObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RA_ParamObject.h; sourceTree = "<group>"; };
@@ -138,6 +138,13 @@
 		8049D1C7142807980051D834 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		8049D1C8142807980051D834 /* release_notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.txt; sourceTree = "<group>"; };
 		8049D1C9142807980051D834 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		8060DE83142D756600248B60 /* icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-72.png"; sourceTree = "<group>"; };
+		8060DE84142D756600248B60 /* icon-small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-small-50.png"; sourceTree = "<group>"; };
+		8060DE85142D756600248B60 /* icon-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-small.png"; sourceTree = "<group>"; };
+		8060DE86142D756600248B60 /* icon-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-small@2x.png"; sourceTree = "<group>"; };
+		8060DE87142D756600248B60 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		8060DE88142D756600248B60 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		8060DE89142D756600248B60 /* ReefAngel-Logo-512x512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReefAngel-Logo-512x512.png"; sourceTree = "<group>"; };
 		80DF04AD14282C3400A45FFA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		80DF04AF14282C5C00A45FFA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -164,9 +171,15 @@
 		55C73904135A3257007AE60B /* images */ = {
 			isa = PBXGroup;
 			children = (
+				8060DE83142D756600248B60 /* icon-72.png */,
+				8060DE84142D756600248B60 /* icon-small-50.png */,
+				8060DE85142D756600248B60 /* icon-small.png */,
+				8060DE86142D756600248B60 /* icon-small@2x.png */,
+				8060DE87142D756600248B60 /* icon.png */,
+				8060DE88142D756600248B60 /* icon@2x.png */,
+				8060DE89142D756600248B60 /* ReefAngel-Logo-512x512.png */,
 				80DF04AD14282C3400A45FFA /* Default@2x.png */,
 				80DF04AF14282C5C00A45FFA /* Default.png */,
-				559DB80614257178004EC75A /* RAicon.png */,
 				559DB7FB14257084004EC75A /* bluebutton1.png */,
 				559DB7FC14257084004EC75A /* labelBG.png */,
 				559DB7FD14257084004EC75A /* refresh.png */,
@@ -183,9 +196,6 @@
 				55C7390A135A4038007AE60B /* RA_WifiController.m */,
 				55C7390C135A40CD007AE60B /* RA_ParamObject.h */,
 				55C7390D135A40CD007AE60B /* RA_ParamObject.m */,
-				55236717135F4DD00067FFD9 /* tableViewCellInput.h */,
-				55236718135F4DD00067FFD9 /* tableViewCellInput.m */,
-				5523671A135F4E830067FFD9 /* tableViewCellInput.xib */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -366,19 +376,24 @@
 				55DF42A11359DA3900C45B47 /* MainWindow.xib in Resources */,
 				55DF42AA1359DA3900C45B47 /* FirstView.xib in Resources */,
 				55DF42AD1359DA3900C45B47 /* SecondView.xib in Resources */,
-				5523671B135F4E830067FFD9 /* tableViewCellInput.xib in Resources */,
 				559DB80014257084004EC75A /* bluebutton1.png in Resources */,
 				559DB80114257084004EC75A /* labelBG.png in Resources */,
 				559DB80214257084004EC75A /* refresh.png in Resources */,
 				559DB80314257084004EC75A /* settings.png in Resources */,
 				559DB80414257084004EC75A /* tankicon.png in Resources */,
-				559DB80714257178004EC75A /* RAicon.png in Resources */,
 				8049D19F142584BF0051D834 /* WonderXML-Info.plist in Resources */,
 				8049D1B714269F500051D834 /* savedata.plist in Resources */,
 				8049D1CB142807980051D834 /* README.txt in Resources */,
 				8049D1CC142807980051D834 /* release_notes.txt in Resources */,
 				80DF04AE14282C3400A45FFA /* Default@2x.png in Resources */,
 				80DF04B014282C5C00A45FFA /* Default.png in Resources */,
+				8060DE8A142D756600248B60 /* icon-72.png in Resources */,
+				8060DE8B142D756600248B60 /* icon-small-50.png in Resources */,
+				8060DE8C142D756600248B60 /* icon-small.png in Resources */,
+				8060DE8D142D756600248B60 /* icon-small@2x.png in Resources */,
+				8060DE8E142D756600248B60 /* icon.png in Resources */,
+				8060DE8F142D756600248B60 /* icon@2x.png in Resources */,
+				8060DE90142D756600248B60 /* ReefAngel-Logo-512x512.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,7 +419,6 @@
 				55C73933135A4936007AE60B /* ASINetworkQueue.m in Sources */,
 				55C73936135A4941007AE60B /* Reachability.m in Sources */,
 				55C73981135BDA9A007AE60B /* SecondViewController.m in Sources */,
-				55236719135F4DD00067FFD9 /* tableViewCellInput.m in Sources */,
 				8049D19C142584BF0051D834 /* GDataXMLNode.m in Sources */,
 				8049D19D142584BF0051D834 /* TypeMapping.m in Sources */,
 				8049D19E142584BF0051D834 /* Util.m in Sources */,
@@ -532,7 +546,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: John Wiebalk";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: John Wiebalk";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ReefAngel Mobile Client/ReefAngel Mobile Client-Prefix.pch";
@@ -544,8 +558,8 @@
 					"\"$(SRCROOT)/ReefAngel Mobile Client/TestFlightSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "AE0FE4AB-4133-4776-A3A5-3558505993F1";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "AE0FE4AB-4133-4776-A3A5-3558505993F1";
+				PROVISIONING_PROFILE = "7A34D9A4-5E61-46A6-B15C-CCC56E342891";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
