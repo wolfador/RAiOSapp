@@ -162,6 +162,7 @@
             lastUpdatedLabel.text = @"No Data";
         }
         lastUpdatedLabel.textColor = [UIColor redColor];
+        [self refreshParams];
     }
     [self UpdateUI:raParam];
     
@@ -187,10 +188,8 @@
         self.fullUrl = [NSString stringWithFormat:@"%@r%@%@",self.wifiUrl,[NSString stringWithFormat:@"%d",swit.tag],
                         swit.on ? @"1" : @"0"];
         if ([self.wifiUrl length] > 0) {
-            [self SendRequest:fullUrl];
-           //[self SendUpdate:fullUrl];
+        [self SendRequest:fullUrl];
         }
-       // [swit release];
     }
     else //if([sender class] == [UIButton class])
     {
@@ -200,11 +199,8 @@
         self.fullUrl = [NSString stringWithFormat:@"%@r%@%@",self.wifiUrl,tag,@"2"];
         if ([self.wifiUrl length] > 0) {
        [self SendRequest:fullUrl];
-            //[self SendUpdate:fullUrl];
         }
-       // [but release];
     }    
-    //[self refreshParams];
 
   }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

@@ -23,6 +23,7 @@
     IBOutlet UILabel *exprelay1Label, *exprelay2Label, *exprelay3Label, *exprelay4Label, *exprelay5Label, *exprelay6Label, *exprelay7Label, *exprelay8Label;
     IBOutlet UISwitch *relayExp;
 
+
 }
 
 @property (nonatomic, retain) NSMutableString *enteredURL;
