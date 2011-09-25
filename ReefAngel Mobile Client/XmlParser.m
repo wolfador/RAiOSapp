@@ -95,9 +95,9 @@ static const char* getPropertyType(objc_property_t property) {
     GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr options:0 error:&error];
 	
     if (doc == nil) { 
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to download" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        /*UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to download" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
 		[alertView show];
-		[alertView release];
+		[alertView release];*/
 		NSLog(@"doc doesn't exist");
 		return nil; 
 	}
