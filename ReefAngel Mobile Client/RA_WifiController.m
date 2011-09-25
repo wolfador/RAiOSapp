@@ -247,4 +247,10 @@
          */
         
     }
+-(void) dealloc
+{
+    [queue release];
+    [self.request release];
+    [super dealloc];
+}
 @end
