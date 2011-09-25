@@ -120,7 +120,7 @@
 -(void)SendRequest:(NSString *)url
 {
     
-    controller = [[[RA_WifiController alloc]init] autorelease];
+    controller = [[[RA_WifiController alloc]init]autorelease];
     raParam = [controller sendRequest:url];
     
     if (raParam != NULL) {
@@ -128,13 +128,15 @@
         [formatter setDateFormat:@"MMM dd yyyy : hh:mm:ss a"];
         NSDate *date = [NSDate date];
         lastUpdatedLabel.text = [formatter stringFromDate:date];
+        lastUpdatedLabel.textColor = [UIColor greenColor];
+        
     }
     else
     {
         if (lastUpdatedLabel.text.length == 0) {
             lastUpdatedLabel.text = @"No Data";
         }
-        lastUpdatedLabel.textColor = [UIColor redColor];;
+        lastUpdatedLabel.textColor = [UIColor redColor];
     }
     [self UpdateUI:raParam];
 }
@@ -143,23 +145,25 @@
 {
     
     controller = [[RA_WifiController alloc]init];
+    [controller.request clearDelegatesAndCancel];
     [controller sendUpdate:url];
-    raParam = [controller requestFinished:controller.requestUpdate];
+    raParam = [controller requestFinished:controller.request];
     if (raParam != NULL) {
         NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
         [formatter setDateFormat:@"MMM dd yyyy : hh:mm:ss a"];
         NSDate *date = [NSDate date];
         lastUpdatedLabel.text = [formatter stringFromDate:date];
+        lastUpdatedLabel.textColor = [UIColor greenColor];
     }
     else
     {
         if (lastUpdatedLabel.text.length == 0) {
             lastUpdatedLabel.text = @"No Data";
         }
-        lastUpdatedLabel.textColor = [UIColor redColor];;
+        lastUpdatedLabel.textColor = [UIColor redColor];
     }
     [self UpdateUI:raParam];
-    [controller release];
+    
 }
 
 -(IBAction)refreshParams
@@ -183,6 +187,7 @@
                         swit.on ? @"1" : @"0"];
         if ([self.wifiUrl length] > 0) {
             [self SendRequest:fullUrl];
+           //[self SendUpdate:fullUrl];
         }
        // [swit release];
     }
@@ -194,10 +199,11 @@
         self.fullUrl = [NSString stringWithFormat:@"%@r%@%@",self.wifiUrl,tag,@"2"];
         if ([self.wifiUrl length] > 0) {
        [self SendRequest:fullUrl];
+            //[self SendUpdate:fullUrl];
         }
        // [but release];
     }    
-    
+    //[self refreshParams];
 
   }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -282,7 +288,7 @@
         self.b2R7Indicator.hidden = YES;
         self.b2R8Indicator.hidden = YES;
     }
-    
+    [self refreshParams];
     
     
 }
@@ -356,7 +362,9 @@
 
 - (void)dealloc
 {
+    [controller release];
     [super dealloc];
+    
 }
 
 @end

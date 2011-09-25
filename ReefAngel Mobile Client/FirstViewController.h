@@ -74,5 +74,6 @@
 -(void)SendRequest:(NSString *)url;
 -(void)UpdateUI:(RA*)ra;
 -(void) loadData;
+-(void)SendUpdate:(NSString *)url;
 @end
 
