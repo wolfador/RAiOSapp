@@ -70,6 +70,7 @@
     }
 -(IBAction) hideKeyboard
 {
+    
     [self.url resignFirstResponder];
     [self.relay1 resignFirstResponder];
     [self.relay2 resignFirstResponder];
@@ -298,7 +299,7 @@ else
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    //[self saveData];
+    [self saveData];
     
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

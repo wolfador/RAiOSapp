@@ -68,7 +68,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *b1R6Indicator;
 @property (nonatomic, retain) IBOutlet UIButton *b1R7Indicator;
 @property (nonatomic, retain) IBOutlet UIButton *b1R8Indicator;
-
+@property (nonatomic, retain) RA_WifiController *controller;
 -(IBAction) refreshParams;
 -(IBAction) toggleRelay:(id)sender;
 -(void)SendRequest:(NSString *)url;

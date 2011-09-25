@@ -18,7 +18,7 @@
 @synthesize box2Relay1, box2Relay2, box2Relay3, box2Relay4, box2Relay5, box2Relay6, box2Relay7, box2Relay8;
 
 @synthesize wifiUrl,fullUrl,lastUpdatedLabel;
-@synthesize box2;
+@synthesize box2, controller;
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
@@ -28,6 +28,7 @@
     [scrollView setScrollEnabled:YES];
     [scrollView setContentSize:CGSizeMake(320, 515)];     
     self.scrollView.delegate = self;
+    [self loadData];
     
 }
                     
