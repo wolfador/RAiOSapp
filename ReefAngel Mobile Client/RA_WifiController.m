@@ -9,20 +9,24 @@
 #import "RA_WifiController.h"
 
 @implementation RA_WifiController
+@synthesize request,queue;
+
 
 
 -(RA *)sendRequest:(NSString *)controllerUrl
 {
     NSURL *url = [NSURL URLWithString: controllerUrl];
-    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];        
-  latestParams = [[[RA alloc] init] autorelease];
-    
-    [request setCompletionBlock:^{
-        NSMutableArray *paramArray;
-        [TestFlight passCheckpoint:@"Connected"];
-        
-        NSString *response = [request responseString];
-        
+    ASIHTTPRequest *request2 = [ASIHTTPRequest requestWithURL:url];   
+    [request2 setShouldAttemptPersistentConnection:NO];
+     [request2 setUseHTTPVersionOne:YES];
+    [request2 startSynchronous];
+    NSError *error = [request2 error];
+    NSMutableArray *paramArray;
+    [TestFlight passCheckpoint:@"Connected"];
+    if(!error)
+    {
+        NSString *response = [request2 responseString];
+        latestParams = [[[RA alloc] init] autorelease];
         XmlParser *xmlParser = [[[XmlParser alloc] init] autorelease];
         paramArray = [xmlParser fromXml:response withObject:latestParams];
         
@@ -30,51 +34,77 @@
         [self formatRA:latestParams];
         [self updateRelayBoxes:latestParams];
         [TestFlight passCheckpoint:@"Params Downloaded"];
-
-    }];
-    [request setFailedBlock:^{
-        
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
-        [alertView show];
-        [alertView release];
-    }];
-    
-    
-    [request startAsynchronous];
+    }
+    else
+    {
+        NSLog(@"%@", error);
+    }
     return latestParams;
     
 }
 /*
-    -(RA *)sendRequest:(NSString *)controllerUrl
-    {
-        NSURL *url = [NSURL URLWithString: controllerUrl];
-        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];        
-        [request startSynchronous];
-        NSError *error = [request error];
-        NSMutableArray *paramArray;
-        [TestFlight passCheckpoint:@"Connected"];
-        if(!error)
-        {
-            NSString *response = [request responseString];
-            latestParams = [[[RA alloc] init] autorelease];
-            XmlParser *xmlParser = [[[XmlParser alloc] init] autorelease];
-            paramArray = [xmlParser fromXml:response withObject:latestParams];
-            
-            latestParams = [paramArray lastObject];
-            [self formatRA:latestParams];
-            [self updateRelayBoxes:latestParams];
-            [TestFlight passCheckpoint:@"Params Downloaded"];
-        }
-        else
-        {
-            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
-            [alertView show];
-            [alertView release];
-        }
-        return latestParams;
-        
+ - (IBAction)grabURLInBackground:(id)sender
+ {
+ NSURL *url = [NSURL URLWithString:@"http://allseeing-i.com"];
+ ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+ [request setDelegate:self];
+ [request startAsynchronous];
+ }
+  */
+-(void)sendUpdate:(NSString *) controllerUrl
+{
+    [self.request clearDelegatesAndCancel];
+    if (![self queue]) {
+        [self setQueue:[[[NSOperationQueue alloc] init] autorelease]];
     }
-*/
+    
+    NSURL *url = [NSURL URLWithString: controllerUrl];
+    self.request = [ASIHTTPRequest requestWithURL:url]; 
+    [self.request setShouldAttemptPersistentConnection:NO];
+    [self.request setRequestMethod:@"GET"];
+    [self.request setNumberOfTimesToRetryOnTimeout:2];
+    [self.request setUseHTTPVersionOne:YES];
+
+     [self.request setDelegate:self];
+   // [self.request startAsynchronous];
+    [[self queue] addOperation:self.request];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"params.xml"];
+    [self.request setDownloadDestinationPath:path];
+     [TestFlight passCheckpoint:@"startAsynchronous"];
+    
+}
+
+ - (RA *)requestFinished:(ASIHTTPRequest *)request
+ {
+     NSMutableArray *paramArray;
+    // NSString *response = [self.requestUpdate responseString];
+     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+     NSString *documentsDirectory = [paths objectAtIndex:0];
+     NSString *path = [documentsDirectory stringByAppendingPathComponent:@"params.xml"];
+     [[self.request responseString] writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:NULL];   
+     NSString *response = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+
+     latestParams = [[[RA alloc] init] autorelease];
+    XmlParser *xmlParser = [[[XmlParser alloc] init] autorelease];
+     paramArray = [xmlParser fromXml:response withObject:latestParams];
+     
+     latestParams = [paramArray lastObject];
+     [self formatRA:latestParams];
+     [self updateRelayBoxes:latestParams];
+     [TestFlight passCheckpoint:@"aParams Downloaded"];
+     
+      return latestParams;
+ }
+ 
+ - (void)requestFailed:(ASIHTTPRequest *)request
+ {
+ 
+     NSError *error = [self.request error];
+     NSLog(@"%@", error);
+ }
+
 
     -(void)formatRA : (RA *)params
     {
