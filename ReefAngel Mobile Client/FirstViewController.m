@@ -25,8 +25,8 @@
         
     [super viewDidLoad];
     
-    [scrollView setScrollEnabled:YES];
-    [scrollView setContentSize:CGSizeMake(320, 515)];     
+    [self.scrollView setScrollEnabled:YES];
+    [self.scrollView setContentSize:CGSizeMake(320, 515)];     
     self.scrollView.delegate = self;
     
     
@@ -154,7 +154,7 @@
     else
     {
         if (lastUpdatedLabel.text.length == 0) {
-            lastUpdatedLabel.text = @"No Data";
+            lastUpdatedLabel.text = @"Please Refresh";
         }
         lastUpdatedLabel.textColor = [UIColor redColor];
     }
@@ -191,7 +191,6 @@
 {
     if ([self reachable]) {
         self.fullUrl = [NSString stringWithFormat:@"%@r99 ",self.wifiUrl];
-            //[self SendRequest:fullUrl];
             [self SendUpdate:fullUrl];
     }
     else
@@ -259,7 +258,7 @@
     
     if([[restored objectForKey:@"ExpansionON"] isEqualToString: @"ON"])
        {
-           [scrollView setContentSize:CGSizeMake(320, 900)]; 
+           [self.scrollView setContentSize:CGSizeMake(320, 900)]; 
            self.box2.hidden = NO;
            self.relay21.hidden = NO;
            self.relay22.hidden = NO;
@@ -289,7 +288,7 @@
        }
     else
     {
-        [scrollView setContentSize:CGSizeMake(320, 515)]; 
+        [self.scrollView setContentSize:CGSizeMake(320, 515)]; 
         self.box2.hidden = YES;
         self.relay21.hidden = YES;
         self.relay22.hidden = YES;
@@ -318,7 +317,6 @@
     }
     if ([self reachable]) {
         self.fullUrl = [NSString stringWithFormat:@"%@r99 ",self.wifiUrl];
-            //[self SendRequest:fullUrl];
             [self SendUpdate:fullUrl];
     }
     else {
@@ -367,7 +365,7 @@
 
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
+    
 
     self.temp1Label = nil;
     self.relay1 = nil;
@@ -390,12 +388,103 @@
     self.temp3Label = nil;
     self.pHLabel = nil;
     self.lastUpdatedLabel = nil;
+    self.scrollView = nil;
+    self.box1Relay1 = nil;
+    self.box1Relay2 = nil;
+    self.box1Relay3 = nil;
+    self.box1Relay4 = nil;
+    self.box1Relay5 = nil;
+    self.box1Relay6 = nil;
+    self.box1Relay7 = nil;
+    self.box1Relay8 = nil;
+    self.box2 = nil;
+    self.b2R1Indicator = nil;
+    self.b2R2Indicator = nil;
+    self.b2R3Indicator = nil;
+    self.b2R4Indicator = nil;
+    self.b2R5Indicator = nil;
+    self.b2R6Indicator = nil;
+    self.b2R7Indicator = nil;
+    self.b2R8Indicator = nil;
+    self.box2Relay1 = nil;
+    self.box2Relay2 = nil;
+    self.box2Relay3 = nil;
+    self.box2Relay4 = nil;
+    self.box2Relay5 = nil;
+    self.box2Relay6 = nil;
+    self.box2Relay7 = nil;
+    self.box2Relay8 = nil;
+    self.b1R1Indicator = nil;
+    self.b1R2Indicator = nil;
+    self.b1R3Indicator = nil;
+    self.b1R4Indicator = nil;
+    self.b1R5Indicator = nil;
+    self.b1R6Indicator = nil;
+    self.b1R7Indicator = nil;
+    self.b1R8Indicator = nil;
+    self.controller = nil;
+    [super viewDidUnload];
 }
 
 
 - (void)dealloc
 {
     [controller release];
+    [temp1Label release];
+    [relay1 release];
+    [relay2 release];
+    [relay3 release];
+    [relay4 release];
+    [relay5 release];
+    [relay6 release];
+    [relay7 release];
+    [relay8 release];
+    [relay21 release];
+    [relay22 release];
+    [relay23 release];
+    [relay24 release];
+    [relay25 release];
+    [relay26 release];
+    [relay27 release];
+    [relay28 release];
+    [temp2Label release];
+    [temp3Label release];
+    [pHLabel release];
+    [lastUpdatedLabel release];
+    [scrollView release];
+    [box1Relay1 release];
+    [box1Relay2 release];
+    [box1Relay3 release];
+    [box1Relay4 release];
+    [box1Relay5 release];
+    [box1Relay6 release];
+    [box1Relay7 release];
+    [box1Relay8 release];
+    [box2 release];
+    [b2R1Indicator release];
+    [b2R2Indicator release];
+    [b2R3Indicator release];
+    [b2R4Indicator release];
+    [b2R5Indicator release];
+    [b2R6Indicator release];
+    [b2R7Indicator release];
+    [b2R8Indicator release];
+    [box2Relay1 release];
+    [box2Relay2 release];
+    [box2Relay3 release];
+    [box2Relay4 release];
+    [box2Relay5 release];
+    [box2Relay6 release];
+    [box2Relay7 release];
+    [box2Relay8 release];
+    [b1R1Indicator release];
+    [b1R2Indicator release];
+    [b1R3Indicator release];
+    [b1R4Indicator release];
+    [b1R5Indicator release];
+    [b1R6Indicator release];
+    [b1R7Indicator release];
+    [b1R8Indicator release];
     [super dealloc];
     
 }

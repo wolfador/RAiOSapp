@@ -20,4 +20,39 @@
 isRelay01ONMask, isRelay02ONMask, isRelay03ONMask, isRelay04ONMask, isRelay05ONMask, isRelay06ONMask, isRelay07ONMask, isRelay08ONMask,
 isRelay01OFFMask, isRelay02OFFMask, isRelay03OFFMask, isRelay04OFFMask, isRelay05OFFMask, isRelay06OFFMask, isRelay07OFFMask, isRelay08OFFMask;;
 
+-(void) dealloc
+{
+
+    [R release];
+    [RON release];
+    [ROFF release];
+    [R0 release];
+    [RON0 release];
+    [ROFF0 release];
+    [R1 release];
+    [RON1 release];
+    [ROFF1 release];
+    [R2 release];
+    [RON2 release];
+    [ROFF2 release];
+    [R3 release];
+    [RON3 release];
+    [ROFF3 release];
+    [R4 release];
+    [RON4 release];
+    [ROFF4 release];
+    [R5 release];
+    [RON5 release];
+    [ROFF5 release];
+    [R6 release];
+    [RON6 release];
+    [ROFF6 release];
+    [R7 release];
+    [RON7 release];
+    [ROFF7 release];
+    [ATOLOW release];
+    [ATOHIGH release];
+    [super dealloc];
+}
+ 
 @end

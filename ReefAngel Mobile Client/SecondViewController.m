@@ -22,17 +22,17 @@
     
     [super viewDidLoad];   
     [self loadData];
-    [scrollView setScrollEnabled:YES];
+    [self.scrollView setScrollEnabled:YES];
     if(relayExp.on)    
     {
-        [scrollView setContentSize:CGSizeMake(320, 850)];
+        [self.scrollView setContentSize:CGSizeMake(320, 850)];
     }
     else
     {
-      [scrollView setContentSize:CGSizeMake(320, 600)];  
+      [self.scrollView setContentSize:CGSizeMake(320, 600)];  
     }
     
-    url.delegate = self;
+    self.url.delegate = self;
     self.scrollView.delegate = self;
 }
 
@@ -46,6 +46,7 @@
     [self.relay6 resignFirstResponder];
     [self.relay7 resignFirstResponder];
     [self.relay8 resignFirstResponder];
+    [self.port resignFirstResponder];
     if(relayExp.on)    
     {
         [self.exprelay1 resignFirstResponder];
@@ -233,7 +234,7 @@
         self.exprelay8.text = [restored objectForKey:@"ExpRelay8"];
         
         //resize scroll length for longer screen
-        [scrollView setContentSize:CGSizeMake(320, 850)];
+        [self.scrollView setContentSize:CGSizeMake(320, 850)];
         
     
     self.exprelay1Label.hidden = NO;
@@ -256,7 +257,7 @@
 }
 else
 {
-    [scrollView setContentSize:CGSizeMake(320, 600)];
+    [self.scrollView setContentSize:CGSizeMake(320, 600)];
     [self saveData];
     self.exprelay1Label.hidden = YES;
     self.exprelay2Label.hidden = YES;
@@ -317,8 +318,6 @@ else
 
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
-    [self saveData];
     
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -349,6 +348,7 @@ else
     self.relay8 = nil;
     self.url = nil;
     self.enteredURL = nil;
+     [super viewDidUnload];
 
 }
 

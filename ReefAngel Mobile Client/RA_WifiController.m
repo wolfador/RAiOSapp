@@ -260,6 +260,8 @@
 -(void) dealloc
 {
     [queue release];
+    [request release];
+
     [super dealloc];
 }
 @end
