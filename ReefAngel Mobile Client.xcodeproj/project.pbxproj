@@ -38,6 +38,7 @@
 		55DF42A41359DA3900C45B47 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DF42A31359DA3900C45B47 /* FirstViewController.m */; };
 		55DF42AA1359DA3900C45B47 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55DF42A81359DA3900C45B47 /* FirstView.xib */; };
 		55DF42AD1359DA3900C45B47 /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55DF42AB1359DA3900C45B47 /* SecondView.xib */; };
+		80020DD8142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80020DD7142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.m */; };
 		8049D19C142584BF0051D834 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8049D191142584BF0051D834 /* GDataXMLNode.m */; };
 		8049D19D142584BF0051D834 /* TypeMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 8049D193142584BF0051D834 /* TypeMapping.m */; };
 		8049D19E142584BF0051D834 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 8049D195142584BF0051D834 /* Util.m */; };
@@ -48,9 +49,6 @@
 		8049D1AA142584DC0051D834 /* WonderXMLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8049D1A6142584DC0051D834 /* WonderXMLAppDelegate.m */; };
 		8049D1AB142584DC0051D834 /* WonderXMLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8049D1A8142584DC0051D834 /* WonderXMLViewController.m */; };
 		8049D1B714269F500051D834 /* savedata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8049D1B614269F500051D834 /* savedata.plist */; };
-		8049D1CA142807980051D834 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8049D1C6142807980051D834 /* libTestFlight.a */; };
-		8049D1CB142807980051D834 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8049D1C7142807980051D834 /* README.txt */; };
-		8049D1CC142807980051D834 /* release_notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8049D1C8142807980051D834 /* release_notes.txt */; };
 		8060DE8A142D756600248B60 /* icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE83142D756600248B60 /* icon-72.png */; };
 		8060DE8B142D756600248B60 /* icon-small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE84142D756600248B60 /* icon-small-50.png */; };
 		8060DE8C142D756600248B60 /* icon-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE85142D756600248B60 /* icon-small.png */; };
@@ -115,6 +113,8 @@
 		55DF42A31359DA3900C45B47 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		55DF42A91359DA3900C45B47 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstView.xib; sourceTree = "<group>"; };
 		55DF42AC1359DA3900C45B47 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondView.xib; sourceTree = "<group>"; };
+		80020DD6142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
+		80020DD7142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		8049D190142584BF0051D834 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		8049D191142584BF0051D834 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		8049D192142584BF0051D834 /* TypeMapping.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeMapping.h; sourceTree = "<group>"; };
@@ -134,10 +134,6 @@
 		8049D1A7142584DC0051D834 /* WonderXMLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WonderXMLViewController.h; sourceTree = "<group>"; };
 		8049D1A8142584DC0051D834 /* WonderXMLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WonderXMLViewController.m; sourceTree = "<group>"; };
 		8049D1B614269F500051D834 /* savedata.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = savedata.plist; sourceTree = "<group>"; };
-		8049D1C6142807980051D834 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		8049D1C7142807980051D834 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
-		8049D1C8142807980051D834 /* release_notes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.txt; sourceTree = "<group>"; };
-		8049D1C9142807980051D834 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		8060DE83142D756600248B60 /* icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-72.png"; sourceTree = "<group>"; };
 		8060DE84142D756600248B60 /* icon-small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-small-50.png"; sourceTree = "<group>"; };
 		8060DE85142D756600248B60 /* icon-small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-small.png"; sourceTree = "<group>"; };
@@ -161,7 +157,6 @@
 				55DF428E1359DA3900C45B47 /* UIKit.framework in Frameworks */,
 				55DF42901359DA3900C45B47 /* Foundation.framework in Frameworks */,
 				55DF42921359DA3900C45B47 /* CoreGraphics.framework in Frameworks */,
-				8049D1CA142807980051D834 /* libTestFlight.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,7 +198,8 @@
 		55C73917135A4865007AE60B /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
-				8049D1C5142807980051D834 /* TestFlightSDK */,
+				80020DD6142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.h */,
+				80020DD7142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.m */,
 				55C73963135A4C1F007AE60B /* libz.1.2.3.dylib */,
 				8049D1A3142584DC0051D834 /* User.h */,
 				8049D1A4142584DC0051D834 /* User.m */,
@@ -311,17 +307,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		8049D1C5142807980051D834 /* TestFlightSDK */ = {
-			isa = PBXGroup;
-			children = (
-				8049D1C6142807980051D834 /* libTestFlight.a */,
-				8049D1C7142807980051D834 /* README.txt */,
-				8049D1C8142807980051D834 /* release_notes.txt */,
-				8049D1C9142807980051D834 /* TestFlight.h */,
-			);
-			path = TestFlightSDK;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -383,8 +368,6 @@
 				559DB80414257084004EC75A /* tankicon.png in Resources */,
 				8049D19F142584BF0051D834 /* WonderXML-Info.plist in Resources */,
 				8049D1B714269F500051D834 /* savedata.plist in Resources */,
-				8049D1CB142807980051D834 /* README.txt in Resources */,
-				8049D1CC142807980051D834 /* release_notes.txt in Resources */,
 				80DF04AE14282C3400A45FFA /* Default@2x.png in Resources */,
 				80DF04B014282C5C00A45FFA /* Default.png in Resources */,
 				8060DE8A142D756600248B60 /* icon-72.png in Resources */,
@@ -427,6 +410,7 @@
 				8049D1A9142584DC0051D834 /* User.m in Sources */,
 				8049D1AA142584DC0051D834 /* WonderXMLAppDelegate.m in Sources */,
 				8049D1AB142584DC0051D834 /* WonderXMLViewController.m in Sources */,
+				80020DD8142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
