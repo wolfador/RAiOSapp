@@ -36,5 +36,9 @@
 	<string>ExpRelay7</string>
 	<key>ExpRelay8</key>
 	<string>ExpRelay8</string>
+	<key>Port</key>
+	<string>2000</string>
+	<key>EnteredURL</key>
+	<string></string>
 </dict>
 </plist>

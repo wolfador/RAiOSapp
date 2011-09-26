@@ -38,7 +38,6 @@
         [[NSFileManager defaultManager] copyItemAtPath:path toPath:documentsDirectory error:nil];
     }
     
-    [TestFlight takeOff:@"50b207921796f9921c5ace102264ee75_Mjk5NDUyMDExLTA5LTE5IDA4OjIzOjUxLjcxMTAzNg"];
     
     return YES;
 }

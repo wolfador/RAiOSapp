@@ -18,7 +18,7 @@
 @synthesize box2Relay1, box2Relay2, box2Relay3, box2Relay4, box2Relay5, box2Relay6, box2Relay7, box2Relay8;
 
 @synthesize wifiUrl,fullUrl,lastUpdatedLabel;
-@synthesize box2, controller;
+@synthesize box2, controller, enteredURL;
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
@@ -28,8 +28,27 @@
     [scrollView setScrollEnabled:YES];
     [scrollView setContentSize:CGSizeMake(320, 515)];     
     self.scrollView.delegate = self;
-    [self loadData];
     
+    
+}
+
+-(BOOL)reachable{
+    if ([self.enteredURL length] > 0) {
+        
+        NSString *testURL = [self.enteredURL substringFromIndex:7];
+        Reachability *r = [Reachability reachabilityWithHostName:testURL];
+        NetworkStatus internetStatus = [r currentReachabilityStatus];
+        if(internetStatus == NotReachable) {
+            return NO;
+        }
+    else
+    {
+         return YES;
+    }
+       
+    }
+     return NO;
+       
 }
                     
 -(void)UpdateUI:(RA*)ra
@@ -159,10 +178,10 @@
     else
     {
         if (lastUpdatedLabel.text.length == 0) {
-            lastUpdatedLabel.text = @"No Data";
+            lastUpdatedLabel.text = @"Please Refresh";
         }
         lastUpdatedLabel.textColor = [UIColor redColor];
-        [self refreshParams];
+        
     }
     [self UpdateUI:raParam];
     
@@ -170,13 +189,19 @@
 
 -(IBAction)refreshParams
 {
-    
-    self.fullUrl = [NSString stringWithFormat:@"%@r99 ",self.wifiUrl];
-    if ([self.wifiUrl length] > 0) {
-        //[self SendRequest:fullUrl];
-        [self SendUpdate:fullUrl];
+    if ([self reachable]) {
+        self.fullUrl = [NSString stringWithFormat:@"%@r99 ",self.wifiUrl];
+            //[self SendRequest:fullUrl];
+            [self SendUpdate:fullUrl];
     }
-    [TestFlight passCheckpoint:@"Data Refreshed"];
+    else
+    {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
+    }
+    
+   
 
     
 }
@@ -187,9 +212,7 @@
         UISwitch *swit = (UISwitch*)sender;        
         self.fullUrl = [NSString stringWithFormat:@"%@r%@%@",self.wifiUrl,[NSString stringWithFormat:@"%d",swit.tag],
                         swit.on ? @"1" : @"0"];
-        if ([self.wifiUrl length] > 0) {
-        [self SendRequest:fullUrl];
-        }
+        //[self SendRequest:fullUrl];
     }
     else //if([sender class] == [UIButton class])
     {
@@ -197,10 +220,17 @@
         UIButton *but = (UIButton*)sender;
         NSString *tag = [NSString stringWithFormat:@"%d",but.tag];    
         self.fullUrl = [NSString stringWithFormat:@"%@r%@%@",self.wifiUrl,tag,@"2"];
-        if ([self.wifiUrl length] > 0) {
-       [self SendRequest:fullUrl];
-        }
+      // [self SendRequest:fullUrl];
     }    
+    if ([self reachable]) {
+        [self SendRequest:fullUrl];
+    }
+    else {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
+    }
+
 
   }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -217,6 +247,7 @@
 	
 	NSDictionary  *restored = [NSDictionary dictionaryWithContentsOfFile: path];
 	self.wifiUrl = [restored objectForKey:@"URL"];
+    self.enteredURL = [restored objectForKey:@"EnteredURL"];
     self.relay1.text = [restored objectForKey:@"Relay1"];
     self.relay2.text = [restored objectForKey:@"Relay2"];
     self.relay3.text = [restored objectForKey:@"Relay3"];
@@ -285,20 +316,25 @@
         self.b2R7Indicator.hidden = YES;
         self.b2R8Indicator.hidden = YES;
     }
-    [self refreshParams];
-    
-    
-}
-- (void)viewWillAppear:(BOOL)animated {
-	[super viewWillAppear:animated];
-    
-    [self loadData];
-    if ([self.wifiUrl length] == 0) {
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Settings" message:@"Enter Server Address in Settings" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+    if ([self reachable]) {
+        self.fullUrl = [NSString stringWithFormat:@"%@r99 ",self.wifiUrl];
+            //[self SendRequest:fullUrl];
+            [self SendUpdate:fullUrl];
+    }
+    else {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
 		[alertView show];
 		[alertView release];
     }
     
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self loadData];
+
+
 }
 - (void)didReceiveMemoryWarning
 {

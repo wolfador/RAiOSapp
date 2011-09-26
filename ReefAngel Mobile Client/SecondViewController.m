@@ -12,7 +12,7 @@
 @implementation SecondViewController
 
 
-@synthesize enteredURL, scrollView, url;
+@synthesize enteredURL, scrollView, url, port, updatedURL;
 @synthesize relayExp, relay1, relay2, relay3, relay4, relay5, relay6, relay7, relay8;
 @synthesize exprelay1, exprelay2, exprelay3, exprelay4, exprelay5, exprelay6, exprelay7, exprelay8;
 @synthesize exprelay1Label, exprelay2Label, exprelay3Label, exprelay4Label, exprelay5Label, exprelay6Label, exprelay7Label, exprelay8Label;
@@ -120,17 +120,37 @@
 		NSDictionary  *restored = [NSDictionary dictionaryWithContentsOfFile: path];
 		[Dictionary addEntriesFromDictionary:restored];
        self.enteredURL = [NSMutableString stringWithString:self.url.text];
-        
-        BOOL endingslash;
-        
-        endingslash = [self.enteredURL hasSuffix:@"/"];
-        
-        if (!endingslash)
+        NSString *http = @"http://";
+        NSRange range = [self.enteredURL rangeOfString : http];
+        if (range.location == NSNotFound) {
+            self.updatedURL = [NSMutableString stringWithFormat:@"%@%@", http,self.enteredURL];
+        }
+        else
         {
-                    [self.enteredURL appendString:@"/"];
+            self.updatedURL = [NSMutableString stringWithString:self.enteredURL];
+        }
+        BOOL portColon;
+        
+        portColon = [self.updatedURL hasSuffix:@":"];
+        
+        if (!portColon)
+        {
+                    [self.updatedURL appendString:@":"];
             }
+        [self.updatedURL appendString:self.port.text];
+        BOOL endingSlash;
+        
+        endingSlash = [self.updatedURL hasSuffix:@"/"];
+        
+        if (!endingSlash)
+        {
+            [self.updatedURL appendString:@"/"];
+        }
+        NSLog(@"%@", self.updatedURL);
 
-		[Dictionary setObject: self.enteredURL forKey: @"URL"];
+		[Dictionary setObject: self.enteredURL forKey: @"EnteredURL"];
+        [Dictionary setObject: self.updatedURL forKey: @"URL"];
+        [Dictionary setObject: self.port.text forKey: @"Port"];
         [Dictionary setObject: self.relay1.text forKey: @"Relay1"];
         [Dictionary setObject: self.relay2.text forKey: @"Relay2"];
         [Dictionary setObject: self.relay3.text forKey: @"Relay3"];
@@ -158,7 +178,6 @@
         }
         [Dictionary writeToFile:path atomically:YES];
     }    
-    [TestFlight passCheckpoint:@"DataSaved"];
 }
 
 -(void) loadData
@@ -168,7 +187,8 @@
 	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"savedata.plist"];
 	
 	NSDictionary  *restored = [NSDictionary dictionaryWithContentsOfFile: path];
-	self.url.text = [restored objectForKey:@"URL"];
+	self.url.text = [restored objectForKey:@"EnteredURL"];
+    self.port.text = [restored objectForKey:@"Port"];
     self.relay1.text = [restored objectForKey:@"Relay1"];
     self.relay2.text = [restored objectForKey:@"Relay2"];
     self.relay3.text = [restored objectForKey:@"Relay3"];
@@ -196,7 +216,6 @@
 {
     if(relayExp.on)    
     {
-        [TestFlight passCheckpoint:@"Exp Box turned on"];
         //Loads saved names for exp module
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];

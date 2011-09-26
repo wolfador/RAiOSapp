@@ -15,16 +15,22 @@
 
 -(RA *)sendRequest:(NSString *)controllerUrl
 {
+    [self.request clearDelegatesAndCancel];
     NSURL *url = [NSURL URLWithString: controllerUrl];
     ASIHTTPRequest *request2 = [ASIHTTPRequest requestWithURL:url];   
     [request2 setShouldAttemptPersistentConnection:NO];
+    [request2 setRequestMethod:@"GET"];
+    request2.timeOutSeconds = 20;
+
+    [request2 setNumberOfTimesToRetryOnTimeout:2];
+    
      [request2 setUseHTTPVersionOne:YES];
     [request2 startSynchronous];
     NSError *error = [request2 error];
     NSMutableArray *paramArray;
-    [TestFlight passCheckpoint:@"Connected"];
     if(!error)
     {
+        [NSThread sleepForTimeInterval:.5];
         NSString *response = [request2 responseString];
         latestParams = [[[RA alloc] init] autorelease];
         XmlParser *xmlParser = [[[XmlParser alloc] init] autorelease];
@@ -33,11 +39,10 @@
         latestParams = [paramArray lastObject];
         [self formatRA:latestParams];
         [self updateRelayBoxes:latestParams];
-        [TestFlight passCheckpoint:@"Params Downloaded"];
     }
     else
     {
-        NSLog(@"%@", error);
+        NSLog(@"%@", [error localizedDescription]);
     }
     return latestParams;
     
@@ -63,16 +68,18 @@
     [self.request setShouldAttemptPersistentConnection:NO];
     [self.request setRequestMethod:@"GET"];
     [self.request setNumberOfTimesToRetryOnTimeout:2];
+    [ASIHTTPRequest setDefaultTimeOutSeconds:20];
     [self.request setUseHTTPVersionOne:YES];
-
      [self.request setDelegate:self];
    // [self.request startAsynchronous];
+    
     [[self queue] addOperation:self.request];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *path = [documentsDirectory stringByAppendingPathComponent:@"params.xml"];
+    
     [self.request setDownloadDestinationPath:path];
-     [TestFlight passCheckpoint:@"startAsynchronous"];
+
     
 }
 
@@ -83,18 +90,20 @@
      NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
      NSString *documentsDirectory = [paths objectAtIndex:0];
      NSString *path = [documentsDirectory stringByAppendingPathComponent:@"params.xml"];
-     [[self.request responseString] writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:NULL];   
+    // [[self.request responseString] writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:NULL];  
+     
+     BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:path];
+     if (fileExists) {
      NSString *response = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
-
      latestParams = [[[RA alloc] init] autorelease];
     XmlParser *xmlParser = [[[XmlParser alloc] init] autorelease];
      paramArray = [xmlParser fromXml:response withObject:latestParams];
      
      latestParams = [paramArray lastObject];
+     
      [self formatRA:latestParams];
      [self updateRelayBoxes:latestParams];
-     [TestFlight passCheckpoint:@"aParams Downloaded"];
-     
+     }
       return latestParams;
  }
  
@@ -103,6 +112,7 @@
  
      NSError *error = [self.request error];
      NSLog(@"%@", error);
+
  }
 
 
@@ -250,7 +260,6 @@
 -(void) dealloc
 {
     [queue release];
-    [self.request release];
     [super dealloc];
 }
 @end
