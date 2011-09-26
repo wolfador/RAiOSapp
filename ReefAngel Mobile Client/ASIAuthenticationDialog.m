@@ -133,7 +133,7 @@ static const NSUInteger kDomainSection = 1;
 {
 	[self showTitle];
 	
-	UIInterfaceOrientation o = (UIInterfaceOrientation)[[UIApplication sharedApplication] statusBarOrientation];
+/*	UIInterfaceOrientation o = (UIInterfaceOrientation)[[UIApplication sharedApplication] statusBarOrientation];
 	CGFloat angle = 0;
 	switch (o) {
 		case UIDeviceOrientationLandscapeLeft: angle = 90; break;
@@ -172,7 +172,8 @@ static const NSUInteger kDomainSection = 1;
 	self.view.frame = (CGRect){ { f.origin.x, f.origin.y },self.view.frame.size};
     [UIView commitAnimations];
 }
-		 
+	*/	 
+}
 #pragma mark utilities
 
 - (UIViewController *)presentingController
