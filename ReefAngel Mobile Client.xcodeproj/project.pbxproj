@@ -12,7 +12,6 @@
 		559DB80214257084004EC75A /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 559DB7FD14257084004EC75A /* refresh.png */; };
 		559DB80314257084004EC75A /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 559DB7FE14257084004EC75A /* settings.png */; };
 		559DB80414257084004EC75A /* tankicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 559DB7FF14257084004EC75A /* tankicon.png */; };
-		55C7390B135A4038007AE60B /* RA_WifiController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C7390A135A4038007AE60B /* RA_WifiController.m */; };
 		55C7390E135A40CD007AE60B /* RA_ParamObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C7390D135A40CD007AE60B /* RA_ParamObject.m */; };
 		55C7392C135A4936007AE60B /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C73919135A4936007AE60B /* ASIAuthenticationDialog.m */; };
 		55C7392D135A4936007AE60B /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C7391C135A4936007AE60B /* ASIDataCompressor.m */; };
@@ -66,8 +65,6 @@
 		559DB7FD14257084004EC75A /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = refresh.png; path = images/refresh.png; sourceTree = SOURCE_ROOT; };
 		559DB7FE14257084004EC75A /* settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = settings.png; path = images/settings.png; sourceTree = SOURCE_ROOT; };
 		559DB7FF14257084004EC75A /* tankicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = tankicon.png; path = images/tankicon.png; sourceTree = SOURCE_ROOT; };
-		55C73909135A4038007AE60B /* RA_WifiController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RA_WifiController.h; sourceTree = "<group>"; };
-		55C7390A135A4038007AE60B /* RA_WifiController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RA_WifiController.m; sourceTree = "<group>"; };
 		55C7390C135A40CD007AE60B /* RA_ParamObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RA_ParamObject.h; sourceTree = "<group>"; };
 		55C7390D135A40CD007AE60B /* RA_ParamObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RA_ParamObject.m; sourceTree = "<group>"; };
 		55C73918135A4936007AE60B /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
@@ -187,8 +184,6 @@
 		55C73908135A4004007AE60B /* model */ = {
 			isa = PBXGroup;
 			children = (
-				55C73909135A4038007AE60B /* RA_WifiController.h */,
-				55C7390A135A4038007AE60B /* RA_WifiController.m */,
 				55C7390C135A40CD007AE60B /* RA_ParamObject.h */,
 				55C7390D135A40CD007AE60B /* RA_ParamObject.m */,
 			);
@@ -390,7 +385,6 @@
 				55DF429B1359DA3900C45B47 /* main.m in Sources */,
 				55DF429E1359DA3900C45B47 /* ReefAngel_Mobile_ClientAppDelegate.m in Sources */,
 				55DF42A41359DA3900C45B47 /* FirstViewController.m in Sources */,
-				55C7390B135A4038007AE60B /* RA_WifiController.m in Sources */,
 				55C7390E135A40CD007AE60B /* RA_ParamObject.m in Sources */,
 				55C7392C135A4936007AE60B /* ASIAuthenticationDialog.m in Sources */,
 				55C7392D135A4936007AE60B /* ASIDataCompressor.m in Sources */,
@@ -512,7 +506,7 @@
 				GCC_PREFIX_HEADER = "ReefAngel Mobile Client/ReefAngel Mobile Client-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "ReefAngel Mobile Client/ReefAngel Mobile Client-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ReefAngel Mobile Client/TestFlightSDK\"",
@@ -536,13 +530,13 @@
 				GCC_PREFIX_HEADER = "ReefAngel Mobile Client/ReefAngel Mobile Client-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "ReefAngel Mobile Client/ReefAngel Mobile Client-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ReefAngel Mobile Client/TestFlightSDK\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7A34D9A4-5E61-46A6-B15C-CCC56E342891";
+				PROVISIONING_PROFILE = "B40DB360-F9A6-40B9-A65A-9054980B7B3F";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
