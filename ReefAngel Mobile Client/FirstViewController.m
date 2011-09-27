@@ -18,8 +18,9 @@
 @synthesize box2Relay1, box2Relay2, box2Relay3, box2Relay4, box2Relay5, box2Relay6, box2Relay7, box2Relay8;
 
 @synthesize wifiUrl,fullUrl,lastUpdatedLabel;
-@synthesize box2, controller, enteredURL;
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+@synthesize box2, enteredURL, response, request;
+
+
 - (void)viewDidLoad
 {
         
@@ -53,6 +54,7 @@
                     
 -(void)UpdateUI:(RA*)ra
 {
+
     if(raParam)
     {
         
@@ -137,11 +139,12 @@
     }
 
 }
+/*
 -(void)SendRequest:(NSString *)url
 {
     
-    controller = [[[RA_WifiController alloc]init]autorelease];
-    raParam = [controller sendRequest:url];
+    raParam = [self sendRequest:url];
+    //NSLog(@"%@", raParam);
     
     if (raParam != NULL) {
         NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
@@ -160,29 +163,13 @@
     }
     [self UpdateUI:raParam];
 }
-
+*/
 -(void)SendUpdate:(NSString *)url
 {
     
-    controller = [[RA_WifiController alloc]init];
-    [controller.request clearDelegatesAndCancel];
-    [controller sendUpdate:url];
-    raParam = [controller requestFinished:controller.request];
-    if (raParam != NULL) {
-        NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
-        [formatter setDateFormat:@"MMM dd yyyy : hh:mm:ss a"];
-        NSDate *date = [NSDate date];
-        lastUpdatedLabel.text = [formatter stringFromDate:date];
-        lastUpdatedLabel.textColor = [UIColor greenColor];
-    }
-    else
-    {
-        if (lastUpdatedLabel.text.length == 0) {
-            lastUpdatedLabel.text = @"Please Refresh";
-        }
-        lastUpdatedLabel.textColor = [UIColor redColor];
-        
-    }
+
+    [self sendUpdate:url];
+
     [self UpdateUI:raParam];
     
 }
@@ -222,7 +209,8 @@
       // [self SendRequest:fullUrl];
     }    
     if ([self reachable]) {
-        [self SendRequest:fullUrl];
+       // [self SendRequest:fullUrl];
+        [self SendUpdate:fullUrl];
     }
     else {
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
@@ -331,9 +319,266 @@
 {
     [super viewDidAppear:animated];
     [self loadData];
-
-
 }
+
+/*
+-(RA *)sendRequest:(NSString *)controllerUrl
+{
+    [self.request clearDelegatesAndCancel];
+    NSURL *url = [NSURL URLWithString: controllerUrl];
+    ASIHTTPRequest *request2 = [ASIHTTPRequest requestWithURL:url];   
+    [request2 setShouldAttemptPersistentConnection:NO];
+    [request2 setRequestMethod:@"GET"];
+    request2.timeOutSeconds = 20;
+    
+    [request2 setNumberOfTimesToRetryOnTimeout:2];
+    [request2 startSynchronous];
+    NSError *error = [request2 error];
+    NSMutableArray *paramArray;
+    if(!error)
+    {
+        NSString *response2 = [request2 responseString];
+      latestParams = [[[RA alloc] init] autorelease];
+        xmlParser = [[[XmlParser alloc] init]retain];
+        paramArray = [xmlParser fromXml:response2 withObject:latestParams];
+        
+        latestParams = [paramArray lastObject];
+        [self formatRA:latestParams];
+        [self updateRelayBoxes:latestParams];
+    }
+    else
+    {
+        
+    }
+    return latestParams;
+    
+}
+*/
+-(void)sendUpdate:(NSString *) controllerUrl
+{
+    [self.request clearDelegatesAndCancel];
+    
+    
+    NSURL *url = [NSURL URLWithString: controllerUrl];
+    self.request = [ASIHTTPRequest requestWithURL:url]; 
+    [self.request setShouldAttemptPersistentConnection:NO];
+    [self.request setRequestMethod:@"GET"];
+    [self.request setNumberOfTimesToRetryOnTimeout:2];
+    [ASIHTTPRequest setDefaultTimeOutSeconds:5];
+    [self.request setDelegate:self];
+   [self.request setDidReceiveDataSelector:@selector(request:didReceiveData:)];
+    
+    [self.request startAsynchronous];
+        
+}
+
+- (void)request:(ASIHTTPRequest *)request didReceiveData:(NSData *)data
+{
+    NSMutableArray *paramArray;
+    raParam = [[RA alloc] init] ;
+    xmlParser = [[XmlParser alloc] init] ;
+    self.response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
+    paramArray = [xmlParser fromXml:self.response withObject:raParam];
+    
+    raParam = [paramArray lastObject];
+    
+    [self formatRA:raParam];
+    [self updateRelayBoxes:raParam];
+    [self UpdateUI:raParam];
+    if (self.response != NULL) {
+        NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
+        [formatter setDateFormat:@"MMM dd yyyy : hh:mm:ss a"];
+        NSDate *date = [NSDate date];
+        lastUpdatedLabel.text = [formatter stringFromDate:date];
+        lastUpdatedLabel.textColor = [UIColor greenColor];
+    }
+    else
+    {
+        if (lastUpdatedLabel.text.length == 0) {
+            lastUpdatedLabel.text = @"Please Refresh";
+        }
+        lastUpdatedLabel.textColor = [UIColor redColor];
+        
+    }
+    [self UpdateUI:raParam];
+    
+}
+
+/*
+- (RA *)requestFinished:(ASIHTTPRequest *)request
+{
+    NSMutableArray *paramArray;
+     NSString *response2 = [self.request responseString];
+    NSLog(@"%@", [self.request responseString]);
+   // NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    //NSString *documentsDirectory = [paths objectAtIndex:0];
+   // NSString *path = [documentsDirectory stringByAppendingPathComponent:@"params.xml"];
+    // [[self.request responseString] writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:NULL];  
+    
+   // BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:path];
+    //if (fileExists) {
+        //NSString *response2 = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
+        latestParams = [[[RA alloc] init] autorelease];
+        xmlParser = [[[XmlParser alloc] init] autorelease];
+        paramArray = [xmlParser fromXml:response2 withObject:latestParams];
+        
+        latestParams = [paramArray lastObject];
+        
+        [self formatRA:latestParams];
+        [self updateRelayBoxes:latestParams];
+   // }
+    return latestParams;
+}
+*/
+- (void)requestFailed:(ASIHTTPRequest *)request
+{
+    
+}
+
+
+-(void)formatRA : (RA *)params
+{
+    params.formattedTemp1 = [self formatTemp:params.T1];
+    params.formattedTemp2 = [self formatTemp:params.T2];
+    params.formattedTemp3 = [self formatTemp:params.T3];
+    params.formattedpH = [self formatPh:params.PH];
+}
+
+-(NSString *) formatTemp : (NSNumber *)temp
+{   
+    NSString *tempString = [temp stringValue];
+    NSString *retString;
+    if([tempString length] >= 3)
+    {
+        retString = [[[tempString substringToIndex:[tempString length]-1] stringByAppendingString:@"."] stringByAppendingString:[tempString substringFromIndex:[tempString length]-1]];          
+    }
+    else
+    {
+        retString = [tempString stringByAppendingString:@".0"];
+    }
+    
+    
+    return retString;
+    
+    
+}
+
+-(NSString *) formatPh : (NSNumber *)pH
+{
+    NSString *tempString = [pH stringValue];
+    NSString *retString;
+    
+    if([tempString length] >= 3)
+    {
+        
+        retString = [[[tempString substringToIndex:[tempString length]-2] stringByAppendingString:@"."] stringByAppendingString:[tempString substringFromIndex:[tempString length]-2]];  
+        return retString;
+    }
+    else if([tempString length] == 1)
+    {
+        
+        retString = [tempString stringByAppendingString:@".00"]; 
+        return retString;
+    }
+    else
+    {
+        retString = [tempString stringByAppendingString:@".00"];
+        return retString;    
+    }
+    
+}
+
+-(void)updateRelayBoxes : (RA *) ra
+{
+    NSString *binaryString = [self buildRelayBinary:ra.R];
+    NSString *binaryONMask = [self buildRelayBinary:ra.RON];
+    NSString *binaryOFFMask = [self buildRelayBinary:ra.ROFF];
+    
+    ra.isRelay1Active = [[binaryString substringWithRange:NSMakeRange(0,1)] isEqualToString:@"1"] ? YES : NO;
+    ra.isRelay2Active = [[binaryString substringWithRange:NSMakeRange(1,1)] isEqualToString:@"1"] ? YES : NO;
+    ra.isRelay3Active = [[binaryString substringWithRange:NSMakeRange(2,1)] isEqualToString:@"1"] ? YES : NO;
+    ra.isRelay4Active = [[binaryString substringWithRange:NSMakeRange(3,1)] isEqualToString:@"1"] ? YES : NO;
+    ra.isRelay5Active = [[binaryString substringWithRange:NSMakeRange(4,1)] isEqualToString:@"1"] ? YES : NO;
+    ra.isRelay6Active = [[binaryString substringWithRange:NSMakeRange(5,1)] isEqualToString:@"1"] ? YES : NO;
+    ra.isRelay7Active = [[binaryString substringWithRange:NSMakeRange(6,1)] isEqualToString:@"1"] ? YES : NO;
+    ra.isRelay8Active = [[binaryString substringWithRange:NSMakeRange(7,1)] isEqualToString:@"1"] ? YES : NO;
+    
+    ra.isRelay1ONMask = [[binaryONMask substringWithRange:NSMakeRange(0,1)] isEqualToString:@"0"] ? NO : YES;
+    ra.isRelay2ONMask = [[binaryONMask substringWithRange:NSMakeRange(1,1)] isEqualToString:@"0"] ? NO : YES;
+    ra.isRelay3ONMask = [[binaryONMask substringWithRange:NSMakeRange(2,1)] isEqualToString:@"0"] ? NO : YES;
+    ra.isRelay4ONMask = [[binaryONMask substringWithRange:NSMakeRange(3,1)] isEqualToString:@"0"] ? NO : YES;
+    ra.isRelay5ONMask = [[binaryONMask substringWithRange:NSMakeRange(4,1)] isEqualToString:@"0"] ? NO : YES;
+    ra.isRelay6ONMask = [[binaryONMask substringWithRange:NSMakeRange(5,1)] isEqualToString:@"0"] ? NO : YES;
+    ra.isRelay7ONMask = [[binaryONMask substringWithRange:NSMakeRange(6,1)] isEqualToString:@"0"] ? NO : YES;
+    ra.isRelay8ONMask = [[binaryONMask substringWithRange:NSMakeRange(7,1)] isEqualToString:@"0"] ? NO : YES;
+    
+    ra.isRelay1OFFMask = [[binaryOFFMask substringWithRange:NSMakeRange(0,1)] isEqualToString:@"0"] ? YES : NO;
+    ra.isRelay2OFFMask = [[binaryOFFMask substringWithRange:NSMakeRange(1,1)] isEqualToString:@"0"] ? YES : NO;
+    ra.isRelay3OFFMask = [[binaryOFFMask substringWithRange:NSMakeRange(2,1)] isEqualToString:@"0"] ? YES : NO;
+    ra.isRelay4OFFMask = [[binaryOFFMask substringWithRange:NSMakeRange(3,1)] isEqualToString:@"0"] ? YES : NO;
+    ra.isRelay5OFFMask = [[binaryOFFMask substringWithRange:NSMakeRange(4,1)] isEqualToString:@"0"] ? YES : NO;
+    ra.isRelay6OFFMask = [[binaryOFFMask substringWithRange:NSMakeRange(5,1)] isEqualToString:@"0"] ? YES : NO;
+    ra.isRelay7OFFMask = [[binaryOFFMask substringWithRange:NSMakeRange(6,1)] isEqualToString:@"0"] ? YES : NO;
+    ra.isRelay8OFFMask = [[binaryOFFMask substringWithRange:NSMakeRange(7,1)] isEqualToString:@"0"] ? YES : NO;  
+    
+    
+    //2nd Relay Box
+    
+    NSString *binary0String = [self buildRelayBinary:ra.R0];
+    NSString *binary0ONMask = [self buildRelayBinary:ra.RON0];
+    NSString *binary0OFFMask = [self buildRelayBinary:ra.ROFF0];
+    ra.isRelay01Active = [[binary0String substringWithRange:NSMakeRange(0,1)] isEqualToString:@"1"] ? YES : NO;
+    ra.isRelay02Active = [[binary0String substringWithRange:NSMakeRange(1,1)] isEqualToString:@"1"] ? YES : NO;
+    ra.isRelay03Active = [[binary0String substringWithRange:NSMakeRange(2,1)] isEqualToString:@"1"] ? YES : NO;
+    ra.isRelay04Active = [[binary0String substringWithRange:NSMakeRange(3,1)] isEqualToString:@"1"] ? YES : NO;
+    ra.isRelay05Active = [[binary0String substringWithRange:NSMakeRange(4,1)] isEqualToString:@"1"] ? YES : NO;
+    ra.isRelay06Active = [[binary0String substringWithRange:NSMakeRange(5,1)] isEqualToString:@"1"] ? YES : NO;
+    ra.isRelay07Active = [[binary0String substringWithRange:NSMakeRange(6,1)] isEqualToString:@"1"] ? YES : NO;
+    ra.isRelay08Active = [[binary0String substringWithRange:NSMakeRange(7,1)] isEqualToString:@"1"] ? YES : NO;
+    
+    ra.isRelay01ONMask = [[binary0ONMask substringWithRange:NSMakeRange(0,1)] isEqualToString:@"0"] ? NO : YES;
+    ra.isRelay02ONMask = [[binary0ONMask substringWithRange:NSMakeRange(1,1)] isEqualToString:@"0"] ? NO : YES;
+    ra.isRelay03ONMask = [[binary0ONMask substringWithRange:NSMakeRange(2,1)] isEqualToString:@"0"] ? NO : YES;
+    ra.isRelay04ONMask = [[binary0ONMask substringWithRange:NSMakeRange(3,1)] isEqualToString:@"0"] ? NO : YES;
+    ra.isRelay05ONMask = [[binary0ONMask substringWithRange:NSMakeRange(4,1)] isEqualToString:@"0"] ? NO : YES;
+    ra.isRelay06ONMask = [[binary0ONMask substringWithRange:NSMakeRange(5,1)] isEqualToString:@"0"] ? NO : YES;
+    ra.isRelay07ONMask = [[binary0ONMask substringWithRange:NSMakeRange(6,1)] isEqualToString:@"0"] ? NO : YES;
+    ra.isRelay08ONMask = [[binary0ONMask substringWithRange:NSMakeRange(7,1)] isEqualToString:@"0"] ? NO : YES;
+    
+    ra.isRelay01OFFMask = [[binary0OFFMask substringWithRange:NSMakeRange(0,1)] isEqualToString:@"0"] ? YES : NO;
+    ra.isRelay02OFFMask = [[binary0OFFMask substringWithRange:NSMakeRange(1,1)] isEqualToString:@"0"] ? YES : NO;
+    ra.isRelay03OFFMask = [[binary0OFFMask substringWithRange:NSMakeRange(2,1)] isEqualToString:@"0"] ? YES : NO;
+    ra.isRelay04OFFMask = [[binary0OFFMask substringWithRange:NSMakeRange(3,1)] isEqualToString:@"0"] ? YES : NO;
+    ra.isRelay05OFFMask = [[binary0OFFMask substringWithRange:NSMakeRange(4,1)] isEqualToString:@"0"] ? YES : NO;
+    ra.isRelay06OFFMask = [[binary0OFFMask substringWithRange:NSMakeRange(5,1)] isEqualToString:@"0"] ? YES : NO;
+    ra.isRelay07OFFMask = [[binary0OFFMask substringWithRange:NSMakeRange(6,1)] isEqualToString:@"0"] ? YES : NO;
+    ra.isRelay08OFFMask = [[binary0OFFMask substringWithRange:NSMakeRange(7,1)] isEqualToString:@"0"] ? YES : NO;    
+    
+    
+}
+
+-(NSString *)buildRelayBinary : (NSNumber *)relayByte
+{
+    NSMutableString *str = [NSMutableString string];
+    int numCopy = [relayByte intValue];
+    for(NSInteger i = 0; i<8; i++)
+    {
+        [str insertString:((numCopy & 1) ? @"1" : @"0") atIndex:i];
+        numCopy >>=1;
+    }
+    return str;
+    /*NSMutableString* tempStr = [[NSMutableString string]retain];
+     NSUInteger bit = ~(NSUIntegerMax >> 1);
+     do {
+     [tempStr appendString:(((NSUInteger)relayByte & bit) ? @"1" : @"0")];
+     } while (bit >>= 1);
+     
+     return [tempStr substringFromIndex:[tempStr length]-8];        
+     */
+    
+}
+
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -422,14 +667,15 @@
     self.b1R6Indicator = nil;
     self.b1R7Indicator = nil;
     self.b1R8Indicator = nil;
-    self.controller = nil;
+    self.request = nil;
+    self.response = nil;
     [super viewDidUnload];
 }
 
 
 - (void)dealloc
 {
-    [controller release];
+   // [controller release];
     [temp1Label release];
     [relay1 release];
     [relay2 release];
@@ -485,6 +731,10 @@
     [b1R6Indicator release];
     [b1R7Indicator release];
     [b1R8Indicator release];
+    [request release];
+    [response release];
+    [raParam release];
+    [xmlParser release];
     [super dealloc];
     
 }

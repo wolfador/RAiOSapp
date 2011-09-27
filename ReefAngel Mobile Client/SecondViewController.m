@@ -147,7 +147,6 @@
         {
             [self.updatedURL appendString:@"/"];
         }
-        NSLog(@"%@", self.updatedURL);
 
 		[Dictionary setObject: self.enteredURL forKey: @"EnteredURL"];
         [Dictionary setObject: self.updatedURL forKey: @"URL"];
@@ -253,12 +252,10 @@
         self.exprelay6.hidden = NO;
         self.exprelay7.hidden = NO;
         self.exprelay8.hidden = NO;
-        [self saveData];
 }
 else
 {
     [self.scrollView setContentSize:CGSizeMake(320, 600)];
-    [self saveData];
     self.exprelay1Label.hidden = YES;
     self.exprelay2Label.hidden = YES;
     self.exprelay3Label.hidden = YES;
@@ -281,7 +278,7 @@ else
 
 -(void)viewWillDisappear:(BOOL)animated
 {
-    [self saveData];
+   // [self saveData];
 }
 
 - (void)didReceiveMemoryWarning
