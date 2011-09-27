@@ -32,7 +32,6 @@
       [self.scrollView setContentSize:CGSizeMake(320, 600)];  
     }
     
-    self.url.delegate = self;
     self.scrollView.delegate = self;
 }
 
@@ -73,6 +72,7 @@
 {
     
     [self.url resignFirstResponder];
+    [self.port resignFirstResponder];
     [self.relay1 resignFirstResponder];
     [self.relay2 resignFirstResponder];
     [self.relay3 resignFirstResponder];
@@ -92,6 +92,7 @@
         [self.exprelay7 resignFirstResponder];
         [self.exprelay8 resignFirstResponder];
     }
+     
 
 }
 
