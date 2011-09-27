@@ -361,14 +361,18 @@
     
     NSURL *url = [NSURL URLWithString: controllerUrl];
     self.request = [ASIHTTPRequest requestWithURL:url]; 
-    [self.request setShouldAttemptPersistentConnection:NO];
-    [self.request setRequestMethod:@"GET"];
-    [self.request setNumberOfTimesToRetryOnTimeout:2];
-    [ASIHTTPRequest setDefaultTimeOutSeconds:5];
+    //[self.request setShouldAttemptPersistentConnection:NO];
+    //[self.request setRequestMethod:@"GET"];
+    //[self.request setNumberOfTimesToRetryOnTimeout:2];
+    //[ASIHTTPRequest setDefaultTimeOutSeconds:15];
     [self.request setDelegate:self];
    [self.request setDidReceiveDataSelector:@selector(request:didReceiveData:)];
+   // [self.request setDidFailSelector:@selector(requestFailed:)];
+
     
     [self.request startAsynchronous];
+    lastUpdatedLabel.text = @"Updating";
+    lastUpdatedLabel.textColor = [UIColor greenColor];
         
 }
 
@@ -433,7 +437,14 @@
 */
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
-    
+    NSError *error;
+    NSLog(@"%@", error);
+    if(error == NULL)
+    {
+        lastUpdatedLabel.text = @"Error";
+        lastUpdatedLabel.textColor = [UIColor redColor];
+    }
+        
 }
 
 
