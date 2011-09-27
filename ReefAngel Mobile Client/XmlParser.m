@@ -95,16 +95,14 @@ static const char* getPropertyType(objc_property_t property) {
     GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithXMLString:xmlStr options:0 error:&error];
 	
     if (doc == nil) { 
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to download" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
-		[alertView show];
-		[alertView release];
-		NSLog(@"doc doesn't exist");
+    
+		//NSLog(@"doc doesn't exist");
 		return nil; 
 	}
     
 	GDataXMLElement *anElement = [doc rootElement];
 	
-	NSLog(@"stringValue :: %@", anElement.stringValue);
+	//NSLog(@"stringValue :: %@", anElement.stringValue);
 	
 	if (anElement) {
         [doc release];
@@ -131,7 +129,7 @@ static const char* getPropertyType(objc_property_t property) {
 	
     GDataXMLDocument *doc = [[[GDataXMLDocument alloc] initWithXMLString:xmlStr options:0 error:&error] autorelease];
     if (doc == nil) { 
-		NSLog(@"doc doesn't exist");
+		//NSLog(@"doc doesn't exist");
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to download" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
 		[alertView show];
 		[alertView release];
@@ -140,23 +138,20 @@ static const char* getPropertyType(objc_property_t property) {
 	}
     
 	
-	NSLog(@"xmlString :: %@", xmlString);
+	//NSLog(@"xmlString :: %@", xmlString);
 	
     
     NSMutableDictionary *propertyDic = [XmlParser propertDictionary:obj];
 	
 	
-    NSLog(@"propertyDic :: %@", propertyDic);
+    //NSLog(@"propertyDic :: %@", propertyDic);
 	
 	const char *objectName = class_getName([obj class]);
 	NSString *objectNameStr = [NSString stringWithCString:objectName encoding:NSASCIIStringEncoding];
 	
-	NSLog(@"objectNameStr :: %@", objectNameStr);
+	//NSLog(@"objectNameStr :: %@", objectNameStr);
 	
-	GDataXMLElement *anElement = [doc rootElement];
-	
-	NSLog(@"stringValue :: %@", anElement.name);
-	
+
 	
 	NSArray *objects;
 	
@@ -170,14 +165,14 @@ static const char* getPropertyType(objc_property_t property) {
 	}
 	
 	if (![objects count]) {
-		NSLog(@"no given object");
+		//NSLog(@"no given object");
 		return nil;
 	}
 	
 	
 	NSObject * createdObject;
 	
-	NSLog(@"objects :: %@", objects);
+	//NSLog(@"objects :: %@", objects);
 	
 	//NSMutableArray *returnArray = [NSMutableArray arrayWithCapacity:[objects count]]; 
 	NSMutableArray *returnArray = [[[NSMutableArray alloc] init] autorelease]; 
@@ -186,17 +181,17 @@ static const char* getPropertyType(objc_property_t property) {
 		
 		createdObject = [[[NSClassFromString(objectNameStr) alloc] init] autorelease];
 		
-        NSLog(@"thisObeject is %@",thisObeject);
+        //NSLog(@"thisObeject is %@",thisObeject);
 		for (NSString *key in propertyDic) {
-			NSLog(@"key: %@, value: %@", key, [propertyDic objectForKey:key]);
+			//NSLog(@"key: %@, value: %@", key, [propertyDic objectForKey:key]);
 			
 			NSArray *anArray = [thisObeject elementsForName:key];
-			NSLog(@"anArray :: %@",  anArray);
+			//NSLog(@"anArray :: %@",  anArray);
 			
 			if (anArray.count > 0) {
 				GDataXMLElement *anElement = (GDataXMLElement *) [anArray objectAtIndex:0];
 				
-				NSLog(@"anElement :: %@",anElement.stringValue);
+				//NSLog(@"anElement :: %@",anElement.stringValue);
 				
 				if ([[propertyDic objectForKey:key] isEqualToString:nsNumberType]) {
 					
@@ -222,7 +217,7 @@ static const char* getPropertyType(objc_property_t property) {
 		
 	}
 	
-	NSLog(@"return array has %d objects",[returnArray count]);	
+	//NSLog(@"return array has %d objects",[returnArray count]);	
 	return returnArray;
 	
 }
@@ -277,7 +272,7 @@ static const char* getPropertyType(objc_property_t property) {
 	
 	xmlString = [NSString stringWithFormat:@"%@%@",headerString,bodyString];
 	
-	NSLog(@"xml string is :: %@",xmlString);
+	//NSLog(@"xml string is :: %@",xmlString);
 	
 	[objectNameStr release];
 	[document release];
