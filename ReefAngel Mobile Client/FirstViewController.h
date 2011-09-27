@@ -11,7 +11,9 @@
 #import <Foundation/Foundation.h>
 #import "ASIHTTPRequest.h"
 #import "RA_ParamObject.h"
-#import "RA_WifiController.h"
+#import "XmlParser.h"
+#import "ASIHTTPRequest.h"
+//#import "RA_WifiController.h"
 #import "Reachability.h"
 
 @interface FirstViewController : UIViewController<UIApplicationDelegate, UITabBarDelegate, UIScrollViewDelegate>{
@@ -23,8 +25,14 @@
     NSString *fullUrl;
     NSString *wifiUrl, *enteredURL;
     RA *raParam;
-    RA_WifiController *controller;
+    //RA_WifiController *controller;
     IBOutlet UIScrollView *scrollView;
+    NSString *urlLocation;
+    //RA *latestParams;
+    ASIHTTPRequest *request;
+    NSString *response;
+    XmlParser *xmlParser;
+    
 
 }
 
@@ -69,11 +77,22 @@
 @property (nonatomic, retain) IBOutlet UIButton *b1R6Indicator;
 @property (nonatomic, retain) IBOutlet UIButton *b1R7Indicator;
 @property (nonatomic, retain) IBOutlet UIButton *b1R8Indicator;
-@property (nonatomic, retain) RA_WifiController *controller;
+@property (nonatomic, retain) NSString *response;
+@property (nonatomic, retain) ASIHTTPRequest *request;
+//-(RA *)sendRequest : (NSString *) controllerUrl;
+-(void)formatRA : (RA *) params;
+-(NSString *)formatTemp : (NSNumber *) temp;
+-(NSString *) formatPh : (NSNumber *) pH;
+-(void)updateRelayBoxes : (RA *) ra;
+-(NSString *)buildRelayBinary : (NSNumber *)relayByte;
+
+-(void)sendUpdate:(NSString *) controllerUrl;
+- (void)request:(ASIHTTPRequest *)request didReceiveData:(NSData *)data;
+
 -(IBAction) refreshParams;
 -(IBAction) toggleRelay:(id)sender;
 -(BOOL) reachable;
--(void)SendRequest:(NSString *)url;
+//-(void)SendRequest:(NSString *)url;
 -(void)UpdateUI:(RA*)ra;
 -(void) loadData;
 -(void)SendUpdate:(NSString *)url;
