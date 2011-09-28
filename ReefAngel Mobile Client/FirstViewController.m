@@ -321,39 +321,7 @@
     [self loadData];
 }
 
-/*
--(RA *)sendRequest:(NSString *)controllerUrl
-{
-    [self.request clearDelegatesAndCancel];
-    NSURL *url = [NSURL URLWithString: controllerUrl];
-    ASIHTTPRequest *request2 = [ASIHTTPRequest requestWithURL:url];   
-    [request2 setShouldAttemptPersistentConnection:NO];
-    [request2 setRequestMethod:@"GET"];
-    request2.timeOutSeconds = 20;
-    
-    [request2 setNumberOfTimesToRetryOnTimeout:2];
-    [request2 startSynchronous];
-    NSError *error = [request2 error];
-    NSMutableArray *paramArray;
-    if(!error)
-    {
-        NSString *response2 = [request2 responseString];
-      latestParams = [[[RA alloc] init] autorelease];
-        xmlParser = [[[XmlParser alloc] init]retain];
-        paramArray = [xmlParser fromXml:response2 withObject:latestParams];
-        
-        latestParams = [paramArray lastObject];
-        [self formatRA:latestParams];
-        [self updateRelayBoxes:latestParams];
-    }
-    else
-    {
-        
-    }
-    return latestParams;
-    
-}
-*/
+
 -(void)sendUpdate:(NSString *) controllerUrl
 {
     [self.request clearDelegatesAndCancel];
@@ -367,8 +335,8 @@
     //[ASIHTTPRequest setDefaultTimeOutSeconds:15];
     [self.request setDelegate:self];
    [self.request setDidReceiveDataSelector:@selector(request:didReceiveData:)];
-   // [self.request setDidFailSelector:@selector(requestFailed:)];
 
+    [self.request setShouldPresentAuthenticationDialog: YES];
     
     [self.request startAsynchronous];
     lastUpdatedLabel.text = @"Updating";
@@ -438,8 +406,8 @@
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
     NSError *error;
-    NSLog(@"%@", error);
-    if(error == NULL)
+    //NSLog(@"%@", error);
+    if(error)
     {
         lastUpdatedLabel.text = @"Error";
         lastUpdatedLabel.textColor = [UIColor redColor];
@@ -454,6 +422,7 @@
     params.formattedTemp2 = [self formatTemp:params.T2];
     params.formattedTemp3 = [self formatTemp:params.T3];
     params.formattedpH = [self formatPh:params.PH];
+    //NSLog(@"%@", params.ATOHIGH);
 }
 
 -(NSString *) formatTemp : (NSNumber *)temp

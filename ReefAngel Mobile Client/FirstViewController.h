@@ -13,7 +13,6 @@
 #import "RA_ParamObject.h"
 #import "XmlParser.h"
 #import "ASIHTTPRequest.h"
-//#import "RA_WifiController.h"
 #import "Reachability.h"
 
 @interface FirstViewController : UIViewController<UIApplicationDelegate, UITabBarDelegate, UIScrollViewDelegate>{
@@ -25,10 +24,9 @@
     NSString *fullUrl;
     NSString *wifiUrl, *enteredURL;
     RA *raParam;
-    //RA_WifiController *controller;
     IBOutlet UIScrollView *scrollView;
     NSString *urlLocation;
-    //RA *latestParams;
+
     ASIHTTPRequest *request;
     NSString *response;
     XmlParser *xmlParser;
@@ -79,7 +77,6 @@
 @property (nonatomic, retain) IBOutlet UIButton *b1R8Indicator;
 @property (nonatomic, retain) NSString *response;
 @property (nonatomic, retain) ASIHTTPRequest *request;
-//-(RA *)sendRequest : (NSString *) controllerUrl;
 -(void)formatRA : (RA *) params;
 -(NSString *)formatTemp : (NSNumber *) temp;
 -(NSString *) formatPh : (NSNumber *) pH;
@@ -92,7 +89,6 @@
 -(IBAction) refreshParams;
 -(IBAction) toggleRelay:(id)sender;
 -(BOOL) reachable;
-//-(void)SendRequest:(NSString *)url;
 -(void)UpdateUI:(RA*)ra;
 -(void) loadData;
 -(void)SendUpdate:(NSString *)url;
