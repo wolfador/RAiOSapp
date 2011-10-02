@@ -18,7 +18,7 @@
             isRelay7Active, isRelay8Active, isRelay1ONMask, isRelay2ONMask, isRelay3ONMask, isRelay4ONMask, isRelay5ONMask,
             isRelay6ONMask, isRelay7ONMask, isRelay8ONMask, isRelay1OFFMask, isRelay2OFFMask, isRelay3OFFMask, isRelay4OFFMask, isRelay5OFFMask, isRelay6OFFMask, isRelay7OFFMask, isRelay8OFFMask,isRelay01Active, isRelay02Active, isRelay03Active, isRelay04Active, isRelay05Active, isRelay06Active, isRelay07Active, isRelay08Active,
 isRelay01ONMask, isRelay02ONMask, isRelay03ONMask, isRelay04ONMask, isRelay05ONMask, isRelay06ONMask, isRelay07ONMask, isRelay08ONMask,
-isRelay01OFFMask, isRelay02OFFMask, isRelay03OFFMask, isRelay04OFFMask, isRelay05OFFMask, isRelay06OFFMask, isRelay07OFFMask, isRelay08OFFMask;;
+isRelay01OFFMask, isRelay02OFFMask, isRelay03OFFMask, isRelay04OFFMask, isRelay05OFFMask, isRelay06OFFMask, isRelay07OFFMask, isRelay08OFFMask, PWMA, PWMD;
 
 -(void) dealloc
 {
@@ -52,6 +52,8 @@ isRelay01OFFMask, isRelay02OFFMask, isRelay03OFFMask, isRelay04OFFMask, isRelay0
     [ROFF7 release];
     [ATOLOW release];
     [ATOHIGH release];
+    [PWMD release];
+    [PWMA release];
     [super dealloc];
 }
  

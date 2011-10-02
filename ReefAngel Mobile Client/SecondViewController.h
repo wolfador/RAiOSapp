@@ -11,11 +11,13 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "ReefAngel_Mobile_ClientAppDelegate.h"
+#import "MemoryViewController.h"
 
 @protocol PassURL <NSObject>
 -(void) setURL: (NSString *) enteredURL;
 @end
-@interface SecondViewController : UIViewController <UITextFieldDelegate, UIScrollViewDelegate>{
+
+@interface SecondViewController : UIViewController <UITextFieldDelegate, UIScrollViewDelegate, MemoryViewControllerDelegate>{
     IBOutlet UIScrollView *scrollView;
     NSMutableString *enteredURL, *updatedURL;
     IBOutlet UITextField *url, *relay1, *relay2, *relay3, *relay4, *relay5, *relay6, *relay7, *relay8, *port;
@@ -36,5 +38,6 @@
 -(IBAction)saveData;
 -(IBAction)hideKeyboard;
 -(IBAction)turnOnRelayExp;
+-(IBAction)flipMemory;
 -(void) loadData;
 @end

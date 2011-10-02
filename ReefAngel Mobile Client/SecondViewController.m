@@ -102,6 +102,19 @@
 	return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 	
 }
+
+- (IBAction)flipMemory
+{    
+    MemoryViewController *memcontroller = [[[MemoryViewController alloc] initWithNibName:@"MemoryViewController" bundle:nil] autorelease];
+    memcontroller.delegate = self;
+    memcontroller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentModalViewController:memcontroller animated:YES];
+}
+- (void)memoryViewControllerDidFinish:(MemoryViewController *)controller
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 -(IBAction) saveData
 {
     [self hideKeyboard];

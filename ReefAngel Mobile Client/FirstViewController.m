@@ -62,7 +62,8 @@
         temp2Label.text = raParam.formattedTemp2;
         temp3Label.text = raParam.formattedTemp3;
         pHLabel.text    = raParam.formattedpH;
-        
+        //NSLog(@"%@", params.ATOHIGH);
+        //NSLog(@"%@", params.PWMD);d
         
         
         if(!raParam.isRelay1OFFMask && !raParam.isRelay1ONMask)
@@ -139,31 +140,7 @@
     }
 
 }
-/*
--(void)SendRequest:(NSString *)url
-{
-    
-    raParam = [self sendRequest:url];
-    //NSLog(@"%@", raParam);
-    
-    if (raParam != NULL) {
-        NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
-        [formatter setDateFormat:@"MMM dd yyyy : hh:mm:ss a"];
-        NSDate *date = [NSDate date];
-        lastUpdatedLabel.text = [formatter stringFromDate:date];
-        lastUpdatedLabel.textColor = [UIColor greenColor];
-        
-    }
-    else
-    {
-        if (lastUpdatedLabel.text.length == 0) {
-            lastUpdatedLabel.text = @"Please Refresh";
-        }
-        lastUpdatedLabel.textColor = [UIColor redColor];
-    }
-    [self UpdateUI:raParam];
-}
-*/
+
 -(void)SendUpdate:(NSString *)url
 {
     
@@ -377,32 +354,6 @@
     
 }
 
-/*
-- (RA *)requestFinished:(ASIHTTPRequest *)request
-{
-    NSMutableArray *paramArray;
-     NSString *response2 = [self.request responseString];
-    NSLog(@"%@", [self.request responseString]);
-   // NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    //NSString *documentsDirectory = [paths objectAtIndex:0];
-   // NSString *path = [documentsDirectory stringByAppendingPathComponent:@"params.xml"];
-    // [[self.request responseString] writeToFile:path atomically:YES encoding:NSUTF8StringEncoding error:NULL];  
-    
-   // BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:path];
-    //if (fileExists) {
-        //NSString *response2 = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:NULL];
-        latestParams = [[[RA alloc] init] autorelease];
-        xmlParser = [[[XmlParser alloc] init] autorelease];
-        paramArray = [xmlParser fromXml:response2 withObject:latestParams];
-        
-        latestParams = [paramArray lastObject];
-        
-        [self formatRA:latestParams];
-        [self updateRelayBoxes:latestParams];
-   // }
-    return latestParams;
-}
-*/
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
     NSError *error;
@@ -422,7 +373,7 @@
     params.formattedTemp2 = [self formatTemp:params.T2];
     params.formattedTemp3 = [self formatTemp:params.T3];
     params.formattedpH = [self formatPh:params.PH];
-    //NSLog(@"%@", params.ATOHIGH);
+
 }
 
 -(NSString *) formatTemp : (NSNumber *)temp
@@ -655,7 +606,6 @@
 
 - (void)dealloc
 {
-   // [controller release];
     [temp1Label release];
     [relay1 release];
     [relay2 release];

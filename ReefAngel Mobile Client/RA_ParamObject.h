@@ -14,6 +14,7 @@
     NSNumber *R,*RON, *ROFF, *R0, *RON0, *ROFF0,*R1, *RON1, *ROFF1,*R2, *RON2, 
              *ROFF2,*R3, *RON3, *ROFF3,*R4, *RON4, *ROFF4,*R5, *RON5, *ROFF5,*R6, *RON6, *ROFF6,
              *R7, *RON7, *ROFF7,*ATOLOW, *ATOHIGH;
+    NSNumber *PWMA, *PWMD;
     NSString *formattedTemp1, *formattedTemp2, *formattedTemp3, *formattedpH;
     BOOL isRelay1Active, isRelay2Active, isRelay3Active, isRelay4Active, isRelay5Active, isRelay6Active, isRelay7Active, isRelay8Active,
          isRelay1ONMask, isRelay2ONMask, isRelay3ONMask, isRelay4ONMask, isRelay5ONMask, isRelay6ONMask, isRelay7ONMask, isRelay8ONMask,
@@ -57,6 +58,9 @@
 @property (nonatomic, retain) NSNumber *ROFF7;
 @property (nonatomic, retain) NSNumber *ATOLOW;
 @property (nonatomic, retain) NSNumber *ATOHIGH;
+
+@property (nonatomic, retain) NSNumber *PWMA;
+@property (nonatomic, retain) NSNumber *PWMD;
 
 @property (nonatomic, assign) NSString *formattedTemp1;
 @property (nonatomic, assign) NSString *formattedTemp2;

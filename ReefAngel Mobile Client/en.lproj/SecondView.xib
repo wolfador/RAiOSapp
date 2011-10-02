@@ -87,7 +87,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{101, 36}, {188, 31}}</string>
 								<reference key="NSSuperview" ref="703078981"/>
-								<reference key="NSNextKeyView" ref="1010809221"/>
+								<reference key="NSNextKeyView" ref="271874126"/>
 								<string key="NSReuseIdentifierKey">_NS:294</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -722,6 +722,7 @@
 								<int key="NSvFlags">-2147483356</int>
 								<string key="NSFrame">{{145, 779}, {101, 31}}</string>
 								<reference key="NSSuperview" ref="703078981"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:294</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -928,6 +929,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{107, 73}, {58, 31}}</string>
 								<reference key="NSSuperview" ref="703078981"/>
+								<reference key="NSNextKeyView" ref="1010809221"/>
 								<string key="NSReuseIdentifierKey">_NS:294</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -968,6 +970,12 @@
 							<object class="IBUINavigationItem" id="288082410">
 								<reference key="IBUINavigationBar" ref="101177840"/>
 								<string key="IBUITitle">Settings</string>
+								<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="647428610">
+									<string key="IBUITitle">Memory</string>
+									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+									<int key="IBUIStyle">1</int>
+									<reference key="IBUINavigationItem" ref="288082410"/>
+								</object>
 								<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="323223206">
 									<string key="IBUITitle">Save</string>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -1403,6 +1411,14 @@
 					</object>
 					<int key="connectionID">182</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">flipMemory</string>
+						<reference key="source" ref="647428610"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">188</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -1497,6 +1513,7 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="323223206"/>
+							<reference ref="647428610"/>
 						</object>
 						<reference key="parent" ref="101177840"/>
 					</object>
@@ -1695,6 +1712,11 @@
 						<reference key="object" ref="492065315"/>
 						<reference key="parent" ref="703078981"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">187</int>
+						<reference key="object" ref="647428610"/>
+						<reference key="parent" ref="288082410"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -1738,6 +1760,7 @@
 					<string>177.IBPluginDependency</string>
 					<string>179.IBPluginDependency</string>
 					<string>180.IBPluginDependency</string>
+					<string>187.IBPluginDependency</string>
 					<string>73.IBPluginDependency</string>
 					<string>74.CustomClassName</string>
 					<string>74.IBPluginDependency</string>
@@ -1755,6 +1778,7 @@
 					<string>SecondViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -1814,7 +1838,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">186</int>
+			<int key="maxID">188</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>

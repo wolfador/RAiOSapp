@@ -12,7 +12,6 @@
 #import "ASIHTTPRequest.h"
 #import "RA_ParamObject.h"
 #import "XmlParser.h"
-#import "ASIHTTPRequest.h"
 #import "Reachability.h"
 
 @interface FirstViewController : UIViewController<UIApplicationDelegate, UITabBarDelegate, UIScrollViewDelegate>{
