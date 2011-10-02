@@ -55,6 +55,9 @@
 		8060DE8E142D756600248B60 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE87142D756600248B60 /* icon.png */; };
 		8060DE8F142D756600248B60 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE88142D756600248B60 /* icon@2x.png */; };
 		8060DE90142D756600248B60 /* ReefAngel-Logo-512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE89142D756600248B60 /* ReefAngel-Logo-512x512.png */; };
+		80A77CD31437B81B00861996 /* MemoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A77CD11437B81B00861996 /* MemoryViewController.m */; };
+		80A77CD41437B81B00861996 /* MemoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80A77CD21437B81B00861996 /* MemoryViewController.xib */; };
+		80B5F9CE1437BC910084685C /* MemValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 80B5F9CD1437BC910084685C /* MemValues.m */; };
 		80DF04AE14282C3400A45FFA /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 80DF04AD14282C3400A45FFA /* Default@2x.png */; };
 		80DF04B014282C5C00A45FFA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 80DF04AF14282C5C00A45FFA /* Default.png */; };
 /* End PBXBuildFile section */
@@ -138,6 +141,11 @@
 		8060DE87142D756600248B60 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		8060DE88142D756600248B60 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
 		8060DE89142D756600248B60 /* ReefAngel-Logo-512x512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReefAngel-Logo-512x512.png"; sourceTree = "<group>"; };
+		80A77CD01437B81B00861996 /* MemoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryViewController.h; sourceTree = "<group>"; };
+		80A77CD11437B81B00861996 /* MemoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoryViewController.m; sourceTree = "<group>"; };
+		80A77CD21437B81B00861996 /* MemoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MemoryViewController.xib; sourceTree = "<group>"; };
+		80B5F9CC1437BC910084685C /* MemValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemValues.h; sourceTree = "<group>"; };
+		80B5F9CD1437BC910084685C /* MemValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemValues.m; sourceTree = "<group>"; };
 		80DF04AD14282C3400A45FFA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		80DF04AF14282C5C00A45FFA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -186,6 +194,8 @@
 			children = (
 				55C7390C135A40CD007AE60B /* RA_ParamObject.h */,
 				55C7390D135A40CD007AE60B /* RA_ParamObject.m */,
+				80B5F9CC1437BC910084685C /* MemValues.h */,
+				80B5F9CD1437BC910084685C /* MemValues.m */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -283,6 +293,9 @@
 				55DF42A31359DA3900C45B47 /* FirstViewController.m */,
 				55C7397F135BDA9A007AE60B /* SecondViewController.h */,
 				55C73980135BDA9A007AE60B /* SecondViewController.m */,
+				80A77CD01437B81B00861996 /* MemoryViewController.h */,
+				80A77CD11437B81B00861996 /* MemoryViewController.m */,
+				80A77CD21437B81B00861996 /* MemoryViewController.xib */,
 				55DF429F1359DA3900C45B47 /* MainWindow.xib */,
 				55DF42A81359DA3900C45B47 /* FirstView.xib */,
 				55DF42AB1359DA3900C45B47 /* SecondView.xib */,
@@ -372,6 +385,7 @@
 				8060DE8E142D756600248B60 /* icon.png in Resources */,
 				8060DE8F142D756600248B60 /* icon@2x.png in Resources */,
 				8060DE90142D756600248B60 /* ReefAngel-Logo-512x512.png in Resources */,
+				80A77CD41437B81B00861996 /* MemoryViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +419,8 @@
 				8049D1AA142584DC0051D834 /* WonderXMLAppDelegate.m in Sources */,
 				8049D1AB142584DC0051D834 /* WonderXMLViewController.m in Sources */,
 				80020DD8142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.m in Sources */,
+				80A77CD31437B81B00861996 /* MemoryViewController.m in Sources */,
+				80B5F9CE1437BC910084685C /* MemValues.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
