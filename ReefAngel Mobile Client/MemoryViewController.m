@@ -52,13 +52,12 @@
     if(sender.tag == 820)
     {
          self.sendUpdateMem = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.PWMD.tag,self.PWMD.text];
-         NSLog(@"%@", self.sendUpdateMem);
+
          [self updateValue:self.sendUpdateMem];
          
     }
     if (sender.tag == 821) {
         self.sendUpdateMem = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.PWMA.tag,self.PWMA.text];
-         NSLog(@"%@", self.sendUpdateMem);
          [self updateValue:self.sendUpdateMem];
                  
     }
@@ -106,14 +105,30 @@
         }
     else
     {
-            NSString *updateMemory = [NSString stringWithFormat:@"%@mi%i,%@ ",self.wifiURL,self.HeaterOn.tag,self.HeaterOn.text];
+        NSString *replaceDecimal = [self.HeaterOn.text stringByReplacingOccurrencesOfString:@"." withString:@""];
+        NSMutableString *updatedValue = [NSMutableString stringWithString:replaceDecimal];
+        if ([replaceDecimal length] <= 2) {
+            
+            self.HeaterOn.text = [updatedValue stringByAppendingString:@".0"];
+            [updatedValue appendString:@"0"];
+            
+        }
+        NSString *updateMemory = [NSString stringWithFormat:@"%@mi%i,%@ ",self.wifiURL,self.HeaterOn.tag,updatedValue];
             [self updateValue:updateMemory];
     }
     if ([self.heaterOffValue isEqualToString: self.HeaterOff.text]) {
     }
     else
     {
-            NSString *updateMemory = [NSString stringWithFormat:@"%@mi%i,%@ ",self.wifiURL,self.HeaterOff.tag,self.HeaterOff.text];
+        NSString *replaceDecimal = [self.HeaterOff.text stringByReplacingOccurrencesOfString:@"." withString:@""];
+        NSMutableString *updatedValue = [NSMutableString stringWithString:replaceDecimal];
+        if ([replaceDecimal length] <= 2) {
+            
+            self.HeaterOff.text = [updatedValue stringByAppendingString:@".0"];
+            [updatedValue appendString:@"0"];
+            
+        }
+            NSString *updateMemory = [NSString stringWithFormat:@"%@mi%i,%@ ",self.wifiURL,self.HeaterOff.tag,updatedValue];
             [self updateValue:updateMemory];
     }
 
@@ -128,7 +143,16 @@
            }
     else
     {
-            NSString *updateMemory = [NSString stringWithFormat:@"%@mi%i,%@ ",self.wifiURL,self.Overheat.tag,self.Overheat.text];
+
+        NSString *replaceDecimal = [self.Overheat.text stringByReplacingOccurrencesOfString:@"." withString:@""];
+        NSMutableString *updatedValue = [NSMutableString stringWithString:replaceDecimal];
+        if ([replaceDecimal length] <= 3) {
+
+                self.Overheat.text = [updatedValue stringByAppendingString:@".0"];
+            [updatedValue appendString:@"0"];
+            
+        }
+            NSString *updateMemory = [NSString stringWithFormat:@"%@mi%i,%@ ",self.wifiURL,self.Overheat.tag,updatedValue];
             [self updateValue:updateMemory];
     }
     if ([self.daylightValue isEqualToString:self.PWMD.text]) {
@@ -155,7 +179,7 @@
     }
      }
     
-    
+  
 }
 -(void)UpdateUI:(MEM*)mem
 {
@@ -169,21 +193,22 @@
 		NSDictionary  *restored = [NSDictionary dictionaryWithContentsOfFile: path];
 		[Dictionary addEntriesFromDictionary:restored];
         
-        [Dictionary setObject: [memValues.M822 stringValue] forKey: @"HeaterOn"];
+        
+        [Dictionary setObject: self.HeaterOn.text forKey: @"HeaterOn"];
         [Dictionary setObject: [memValues.M821 stringValue] forKey: @"Actinic"];
         [Dictionary setObject: [memValues.M820 stringValue] forKey: @"Daylight"];
-        [Dictionary setObject: [memValues.M824 stringValue] forKey: @"HeaterOff"];
+        [Dictionary setObject: self.HeaterOff.text forKey: @"HeaterOff"];
         [Dictionary setObject: [memValues.M814 stringValue] forKey: @"FeedTimer"];
         [Dictionary setObject: [memValues.M816 stringValue] forKey: @"LCDTimer"];
-        [Dictionary setObject: [memValues.M818 stringValue] forKey: @"Overheat"];
+        [Dictionary setObject: self.Overheat.text forKey: @"Overheat"];
         [Dictionary writeToFile:path atomically:YES];
         
-        self.HeaterOn.text = [memValues.M822 stringValue];
+        //self.HeaterOn.text = [memValues.M822 stringValue];
         self.Actinic.value = [memValues.M821 integerValue];
         self.Daylight.value = [memValues.M820 integerValue];
-        self.HeaterOff.text = [memValues.M824 stringValue];
+        //self.HeaterOff.text = [memValues.M824 stringValue];
         self.FeedTimer.text = [memValues.M814 stringValue];
-        self.Overheat.text = [memValues.M818 stringValue];
+        //self.Overheat.text = [memValues.M818 stringValue];
         self.PWMD.text = [memValues.M820 stringValue];
         self.PWMA.text = [memValues.M821 stringValue];
         self.LCDTimer.text = [memValues.M816 stringValue];
@@ -196,6 +221,33 @@
     
 }
 
+
+-(void)formatRA : (MEM *)params
+{
+    self.HeaterOn.text = [self formatTemp:memValues.M822];
+    self.HeaterOff.text = [self formatTemp:memValues.M824];
+    self.Overheat.text = [self formatTemp:memValues.M818];
+    
+}
+
+-(NSString *) formatTemp : (NSNumber *)temp
+{   
+    NSString *tempString = [temp stringValue];
+    NSString *retString;
+    if([tempString length] >= 3)
+    {
+        retString = [[[tempString substringToIndex:[tempString length]-1] stringByAppendingString:@"."] stringByAppendingString:[tempString substringFromIndex:[tempString length]-1]];          
+    }
+    else
+    {
+        retString = [tempString stringByAppendingString:@".0"];
+    }
+    
+    
+    return retString;
+    
+    
+}
 -(void)updateValue:(NSString *) controllerUrl
 {
     //[self.request clearDelegatesAndCancel];
@@ -205,7 +257,6 @@
     [pushUpdate setShouldPresentAuthenticationDialog: YES];
     
     [pushUpdate startAsynchronous];
-    NSLog(@"updating");
     
     
     
@@ -238,7 +289,9 @@
 
     memValues = [paramArray lastObject];
 
+    [self formatRA:memValues];
     [self UpdateUI:memValues];
+    
    
     
 }

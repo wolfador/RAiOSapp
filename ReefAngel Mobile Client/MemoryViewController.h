@@ -42,4 +42,5 @@
 -(void)updateValue:(NSString *) controllerUrl;
 - (IBAction) sliderValueChanged:(UISlider *)sender;
 -(IBAction)slideDoneChanging:(UISlider *)sender;
+-(NSString *) formatTemp : (NSNumber *)temp;
 @end
