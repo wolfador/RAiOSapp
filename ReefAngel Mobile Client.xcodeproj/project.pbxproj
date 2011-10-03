@@ -95,7 +95,6 @@
 		55C7395D135A4BB9007AE60B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		55C7395F135A4BCE007AE60B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		55C73961135A4BD9007AE60B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
-		55C73963135A4C1F007AE60B /* libz.1.2.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.3.dylib; path = usr/lib/libz.1.2.3.dylib; sourceTree = SDKROOT; };
 		55C7397F135BDA9A007AE60B /* SecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		55C73980135BDA9A007AE60B /* SecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		55DF42891359DA3900C45B47 /* ReefAngel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReefAngel.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,7 +205,6 @@
 			children = (
 				80020DD6142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.h */,
 				80020DD7142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.m */,
-				55C73963135A4C1F007AE60B /* libz.1.2.3.dylib */,
 				8049D1A3142584DC0051D834 /* User.h */,
 				8049D1A4142584DC0051D834 /* User.m */,
 				8049D1A5142584DC0051D834 /* WonderXMLAppDelegate.h */,

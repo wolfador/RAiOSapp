@@ -306,10 +306,6 @@
     
     NSURL *url = [NSURL URLWithString: controllerUrl];
     self.request = [ASIHTTPRequest requestWithURL:url]; 
-    //[self.request setShouldAttemptPersistentConnection:NO];
-    //[self.request setRequestMethod:@"GET"];
-    //[self.request setNumberOfTimesToRetryOnTimeout:2];
-    //[ASIHTTPRequest setDefaultTimeOutSeconds:15];
     [self.request setDelegate:self];
    [self.request setDidReceiveDataSelector:@selector(request:didReceiveData:)];
 
