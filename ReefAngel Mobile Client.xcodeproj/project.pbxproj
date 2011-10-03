@@ -25,7 +25,6 @@
 		55C7395E135A4BB9007AE60B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C7395D135A4BB9007AE60B /* CFNetwork.framework */; };
 		55C73960135A4BCE007AE60B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C7395F135A4BCE007AE60B /* SystemConfiguration.framework */; };
 		55C73962135A4BD9007AE60B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C73961135A4BD9007AE60B /* MobileCoreServices.framework */; };
-		55C73964135A4C1F007AE60B /* libz.1.2.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C73963135A4C1F007AE60B /* libz.1.2.3.dylib */; settings = {ATTRIBUTES = (Required, ); }; };
 		55C73981135BDA9A007AE60B /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C73980135BDA9A007AE60B /* SecondViewController.m */; };
 		55DF428E1359DA3900C45B47 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DF428D1359DA3900C45B47 /* UIKit.framework */; };
 		55DF42901359DA3900C45B47 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DF428F1359DA3900C45B47 /* Foundation.framework */; };
@@ -37,6 +36,7 @@
 		55DF42A41359DA3900C45B47 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DF42A31359DA3900C45B47 /* FirstViewController.m */; };
 		55DF42AA1359DA3900C45B47 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55DF42A81359DA3900C45B47 /* FirstView.xib */; };
 		55DF42AD1359DA3900C45B47 /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55DF42AB1359DA3900C45B47 /* SecondView.xib */; };
+		74D0FAF0143945DB00FD2118 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 74D0FAEF143945DB00FD2118 /* libz.1.2.5.dylib */; };
 		80020DD8142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80020DD7142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.m */; };
 		8049D19C142584BF0051D834 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8049D191142584BF0051D834 /* GDataXMLNode.m */; };
 		8049D19D142584BF0051D834 /* TypeMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 8049D193142584BF0051D834 /* TypeMapping.m */; };
@@ -113,6 +113,7 @@
 		55DF42A31359DA3900C45B47 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		55DF42A91359DA3900C45B47 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstView.xib; sourceTree = "<group>"; };
 		55DF42AC1359DA3900C45B47 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondView.xib; sourceTree = "<group>"; };
+		74D0FAEF143945DB00FD2118 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
 		80020DD6142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
 		80020DD7142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		8049D190142584BF0051D834 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
@@ -155,9 +156,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				55C73964135A4C1F007AE60B /* libz.1.2.3.dylib in Frameworks */,
 				55C73962135A4BD9007AE60B /* MobileCoreServices.framework in Frameworks */,
 				55C73960135A4BCE007AE60B /* SystemConfiguration.framework in Frameworks */,
+				74D0FAF0143945DB00FD2118 /* libz.1.2.5.dylib in Frameworks */,
 				55C7395E135A4BB9007AE60B /* CFNetwork.framework in Frameworks */,
 				55DF428E1359DA3900C45B47 /* UIKit.framework in Frameworks */,
 				55DF42901359DA3900C45B47 /* Foundation.framework in Frameworks */,
@@ -270,6 +271,7 @@
 		55DF428C1359DA3900C45B47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				74D0FAEF143945DB00FD2118 /* libz.1.2.5.dylib */,
 				55C73961135A4BD9007AE60B /* MobileCoreServices.framework */,
 				55C7395F135A4BCE007AE60B /* SystemConfiguration.framework */,
 				55C7395D135A4BB9007AE60B /* CFNetwork.framework */,
@@ -523,13 +525,11 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "ReefAngel Mobile Client/ReefAngel Mobile Client-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/ReefAngel Mobile Client/TestFlightSDK\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "3A963270-5B9A-453C-88A2-CB96C04ADD6E";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -547,13 +547,11 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "ReefAngel Mobile Client/ReefAngel Mobile Client-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/ReefAngel Mobile Client/TestFlightSDK\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "B40DB360-F9A6-40B9-A65A-9054980B7B3F";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B40DB360-F9A6-40B9-A65A-9054980B7B3F";
+				SDKROOT = iphoneos5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

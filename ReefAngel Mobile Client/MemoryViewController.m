@@ -23,6 +23,19 @@
     }
     return self;
 }
+-(IBAction) textFieldDoneEditing : (id) sender{
+    [sender resignFirstResponder];
+}
+-(IBAction)hideKeyboard
+{
+    [self.HeaterOn resignFirstResponder];
+    [self.HeaterOff resignFirstResponder];
+    [self.FeedTimer resignFirstResponder];
+    [self.Overheat resignFirstResponder];
+    [self.PWMD resignFirstResponder];
+    [self.PWMA resignFirstResponder];
+    [self.LCDTimer resignFirstResponder];
+}
 - (IBAction) sliderValueChanged:(UISlider *)sender
 {
     if(sender.tag == 820)
@@ -74,6 +87,7 @@
 }
 -(IBAction) save
 {
+    [self hideKeyboard];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
 	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"Memdata.plist"];
