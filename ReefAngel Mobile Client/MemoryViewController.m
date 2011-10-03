@@ -10,7 +10,7 @@
 
 @implementation MemoryViewController
 @synthesize delegate = _delegate, request, response;
-@synthesize HeaterOn, HeaterOff, FeedTimer, Overheat, PWMD, PWMA, LCDTimer, wifiURL, enteredURL, fullURL, Actinic, Daylight; 
+@synthesize HeaterOn, HeaterOff, FeedTimer, Overheat, PWMD, PWMA, LCDTimer, wifiURL, enteredURL, fullURL, Actinic, Daylight, daylightValue, actinicValue, heaterOnValue, heaterOffValue, feedTimerValue, overheatValue, LCDTimerValue, sendUpdateMem;
 - (IBAction)done
 {
     [self.delegate memoryViewControllerDidFinish:self];
@@ -22,6 +22,33 @@
         // Custom initialization
     }
     return self;
+}
+- (IBAction) sliderValueChanged:(UISlider *)sender
+{
+    if(sender.tag == 820)
+    {
+        self.PWMD.text = [NSString stringWithFormat:@"%.0f", [self.Daylight value]];
+    }
+    if (sender.tag == 821) {
+        self.PWMA.text = [NSString stringWithFormat:@"%.0f", [self.Actinic value]];
+      
+        }
+}
+-(IBAction)slideDoneChanging:(UISlider *)sender
+{
+    if(sender.tag == 820)
+    {
+         self.sendUpdateMem = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.PWMD.tag,self.PWMD.text];
+         NSLog(@"%@", self.sendUpdateMem);
+         [self updateValue:self.sendUpdateMem];
+         
+    }
+    if (sender.tag == 821) {
+        self.sendUpdateMem = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.PWMA.tag,self.PWMA.text];
+         NSLog(@"%@", self.sendUpdateMem);
+         [self updateValue:self.sendUpdateMem];
+                 
+    }
 }
 -(void) loadData
 {
@@ -35,7 +62,7 @@
     
     if ([self reachable]) {
         self.fullURL = [NSString stringWithFormat:@"%@ma ",self.wifiURL];
-        [self sendUpdate:fullURL];
+        [self sendUpdate:self.fullURL];
     }
     else
     {
@@ -52,85 +79,66 @@
 	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"Memdata.plist"];
 	
 	NSDictionary  *restored = [NSDictionary dictionaryWithContentsOfFile: path];
-	NSString *Heaton = [restored objectForKey:@"HeaterOn"];
-    NSString *Heatoff = [restored objectForKey:@"HeaterOff"];
-    NSString *ActinicLED = [restored objectForKey:@"Actinic"];
-    NSString *DayLight = [restored objectForKey:@"DayLight"];
-     NSString *FeedTime = [restored objectForKey:@"FeedTimer"];
-     NSString *LCDTime = [restored objectForKey:@"LCDTimer"];
-    NSString *Overhot = [restored objectForKey:@"Overheat"];
+	self.heaterOnValue = [restored objectForKey:@"HeaterOn"];
+   self.heaterOffValue = [restored objectForKey:@"HeaterOff"];
+    self.actinicValue = [restored objectForKey:@"Actinic"];
+    self.daylightValue = [restored objectForKey:@"Daylight"];
+     self.feedTimerValue = [restored objectForKey:@"FeedTimer"];
+     self.LCDTimerValue = [restored objectForKey:@"LCDTimer"];
+    self.overheatValue = [restored objectForKey:@"Overheat"];
+    
      if ([self reachable]) {
-    if ([Heaton isEqualToString:HeaterOn.text]) {
-        NSLog(@"HeaterOn equal");
-                    
+    if ([self.heaterOnValue isEqualToString:self.HeaterOn.text]) {
         }
     else
     {
-            NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,HeaterOn.tag,HeaterOn.text];
-            NSLog(@"%@", updateMemory);
+            NSString *updateMemory = [NSString stringWithFormat:@"%@mi%i,%@ ",self.wifiURL,self.HeaterOn.tag,self.HeaterOn.text];
             [self updateValue:updateMemory];
-
-
     }
-    if ([Heatoff isEqualToString: HeaterOff.text]) {
-               NSLog(@"Heatoff equal");  
+    if ([self.heaterOffValue isEqualToString: self.HeaterOff.text]) {
     }
     else
     {
-            NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,HeaterOff.tag,HeaterOff.text];
-            NSLog(@"%@", updateMemory);
+            NSString *updateMemory = [NSString stringWithFormat:@"%@mi%i,%@ ",self.wifiURL,self.HeaterOff.tag,self.HeaterOff.text];
             [self updateValue:updateMemory];
     }
 
-    if ([FeedTime isEqualToString: FeedTimer.text]) {
-   NSLog(@"FeedTime equal"); 
-        
+    if ([self.feedTimerValue isEqualToString: self.FeedTimer.text]) {
     }
     else
     {
-            NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,FeedTimer.tag,FeedTimer.text];
-            NSLog(@"%@", updateMemory);
+            NSString *updateMemory = [NSString stringWithFormat:@"%@mi%i,%@ ",self.wifiURL,self.FeedTimer.tag,self.FeedTimer.text];
             [self updateValue:updateMemory];
     }
-    if ([Overhot isEqualToString:Overheat.text]) {
-        NSLog(@"Overhot equal"); 
+    if ([self.overheatValue isEqualToString:self.Overheat.text]) {
            }
     else
     {
-            NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,Overheat.tag,Overheat.text];
-            NSLog(@"%@", updateMemory);
+            NSString *updateMemory = [NSString stringWithFormat:@"%@mi%i,%@ ",self.wifiURL,self.Overheat.tag,self.Overheat.text];
             [self updateValue:updateMemory];
     }
-    if ([DayLight isEqualToString:PWMD.text]) {
-    NSLog(@"DayLight equal"); 
+    if ([self.daylightValue isEqualToString:self.PWMD.text]) {
 }
     else
     {
-        NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,PWMD.tag,PWMD.text];
-        NSLog(@"%@", updateMemory);
+        NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.PWMD.tag,self.PWMD.text];
         [self updateValue:updateMemory];
 
     }
-if ([LCDTime isEqualToString:LCDTimer.text]) {
-NSLog(@"LCDTime equal"); 
+         if ([self.LCDTimerValue isEqualToString:self.LCDTimer.text]) {
 }
     else
     {
-        NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,LCDTimer.tag,LCDTimer.text];
-        NSLog(@"%@", updateMemory);
+        NSString *updateMemory = [NSString stringWithFormat:@"%@mi%i,%@ ",self.wifiURL,self.LCDTimer.tag,self.LCDTimer.text];
         [self updateValue:updateMemory];
     }
-    if ([ActinicLED isEqualToString:PWMA.text]) {
-        NSLog(@"ActinicLED equal"); 
+    if ([self.actinicValue isEqualToString:self.PWMA.text]) {
     }
     else
     {
-        NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,PWMA.tag,PWMA.text];
-        NSLog(@"%@", updateMemory);
+        NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.PWMA.tag,self.PWMA.text];
         [self updateValue:updateMemory];
     }
- 
-   // [self sendUpdate:fullURL]; updating values before parser is finished with new data. :(
      }
     
     
@@ -156,15 +164,15 @@ NSLog(@"LCDTime equal");
         [Dictionary setObject: [memValues.M818 stringValue] forKey: @"Overheat"];
         [Dictionary writeToFile:path atomically:YES];
         
-        HeaterOn.text = [memValues.M822 stringValue];
-        Actinic.value = [memValues.M821 integerValue];
-        Daylight.value = [memValues.M820 integerValue];
-        HeaterOff.text = [memValues.M824 stringValue];
-        FeedTimer.text = [memValues.M814 stringValue];
-        Overheat.text = [memValues.M818 stringValue];
-        PWMD.text = [memValues.M820 stringValue];
-        PWMA.text = [memValues.M821 stringValue];
-        LCDTimer.text = [memValues.M816 stringValue];
+        self.HeaterOn.text = [memValues.M822 stringValue];
+        self.Actinic.value = [memValues.M821 integerValue];
+        self.Daylight.value = [memValues.M820 integerValue];
+        self.HeaterOff.text = [memValues.M824 stringValue];
+        self.FeedTimer.text = [memValues.M814 stringValue];
+        self.Overheat.text = [memValues.M818 stringValue];
+        self.PWMD.text = [memValues.M820 stringValue];
+        self.PWMA.text = [memValues.M821 stringValue];
+        self.LCDTimer.text = [memValues.M816 stringValue];
 
         
 
@@ -180,8 +188,6 @@ NSLog(@"LCDTime equal");
 
     NSURL *url = [NSURL URLWithString: controllerUrl];
     ASIHTTPRequest *pushUpdate = [ASIHTTPRequest requestWithURL:url]; 
-  //  [pushUpdate setDelegate:self];
-    
     [pushUpdate setShouldPresentAuthenticationDialog: YES];
     
     [pushUpdate startAsynchronous];
@@ -190,7 +196,6 @@ NSLog(@"LCDTime equal");
     
     
 }
-
 -(void)sendUpdate:(NSString *) controllerUrl
 {
     //[self.request clearDelegatesAndCancel];
@@ -214,15 +219,11 @@ NSLog(@"LCDTime equal");
     memValues = [[MEM alloc] init] ;
     xmlParser = [[XmlParser alloc] init] ;
     self.response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"%@", self.response);
     
     paramArray = [xmlParser fromXml:self.response withObject:memValues];
-     NSLog(@"%@", paramArray);
+
     memValues = [paramArray lastObject];
-    NSLog(@"%@", memValues);
-    
-    //[self formatRA:mem];
-   // [self updateRelayBoxes:mem];
+
     [self UpdateUI:memValues];
    
     
@@ -231,11 +232,9 @@ NSLog(@"LCDTime equal");
 - (void)requestFailed:(ASIHTTPRequest *)request
 {
     NSError *error;
-    //NSLog(@"%@", error);
     if(error)
     {
-      //  lastUpdatedLabel.text = @"Error";
-       // lastUpdatedLabel.textColor = [UIColor redColor];
+     
     }
     
 }
@@ -280,8 +279,29 @@ NSLog(@"LCDTime equal");
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    self.request = nil;
+    self.response = nil;
+    self.HeaterOn = nil;
+    self.HeaterOff = nil;
+    self.FeedTimer = nil;
+    self.Overheat = nil;
+    self.PWMD = nil;
+    self.PWMA = nil;
+    self.LCDTimer = nil;
+    self.wifiURL = nil;
+    self.enteredURL = nil;
+    self.fullURL = nil;
+    self.Actinic = nil;
+    self.Daylight = nil;
+    self.daylightValue = nil;
+    self.actinicValue = nil;
+    self.heaterOnValue = nil;
+    self.heaterOffValue = nil;
+    self.feedTimerValue = nil;
+    self.overheatValue = nil;
+    self.LCDTimerValue = nil;
+    self.sendUpdateMem = nil;
+
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -289,5 +309,31 @@ NSLog(@"LCDTime equal");
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+-(void) dealloc
+{
+    [request release];
+    [response release];
+    [HeaterOn release];
+    [HeaterOff release];
+    [FeedTimer release];
+    [Overheat release];
+    [PWMD release];
+    [PWMA release];
+    [LCDTimer release];
+    [wifiURL release];
+    [enteredURL release];
+    [fullURL release];
+    [Actinic release];
+    [Daylight release];
+    [daylightValue release];
+    [actinicValue release];
+    [heaterOnValue release];
+    [heaterOffValue release];
+    [feedTimerValue release];
+    [overheatValue release];
+    [LCDTimerValue release];
+    [sendUpdateMem release];
+    [super dealloc];
 
+}
 @end
