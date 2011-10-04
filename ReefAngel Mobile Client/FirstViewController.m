@@ -59,8 +59,10 @@
     {
         temp1Label.text = [raParam.formattedTemp1 stringByAppendingString:self.tempScale];
         //temp1Label.text = raParam.formattedTemp1;
-        temp2Label.text = raParam.formattedTemp2;
-        temp3Label.text = raParam.formattedTemp3;
+        //temp2Label.text = raParam.formattedTemp2;
+        temp2Label.text = [raParam.formattedTemp2 stringByAppendingString:self.tempScale];
+        //temp3Label.text = raParam.formattedTemp3;
+        temp3Label.text = [raParam.formattedTemp3 stringByAppendingString:self.tempScale];
         pHLabel.text    = raParam.formattedpH;
         //NSLog(@"%@", params.ATOHIGH);
         //NSLog(@"%@", params.PWMD);d
