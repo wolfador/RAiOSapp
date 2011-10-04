@@ -17,7 +17,7 @@
 - (void)memoryViewControllerDidFinish:(MemoryViewController *)controller;
 @end
 
-@interface MemoryViewController : UIViewController{
+@interface MemoryViewController : UIViewController <UITextFieldDelegate, UIScrollViewDelegate>{
     ASIHTTPRequest *request;
     NSString *response;
     XmlParser *xmlParser;
