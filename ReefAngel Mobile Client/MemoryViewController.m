@@ -26,6 +26,18 @@
 -(IBAction) textFieldDoneEditing : (id) sender{
     [sender resignFirstResponder];
 }
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.HeaterOn resignFirstResponder];
+    [self.HeaterOff resignFirstResponder];
+    [self.FeedTimer resignFirstResponder];
+    [self.Overheat resignFirstResponder];
+    [self.PWMD resignFirstResponder];
+    [self.PWMA resignFirstResponder];
+    [self.LCDTimer resignFirstResponder];
+	return YES;
+}
 -(IBAction)hideKeyboard
 {
     [self.HeaterOn resignFirstResponder];
@@ -203,12 +215,9 @@
         [Dictionary setObject: self.Overheat.text forKey: @"Overheat"];
         [Dictionary writeToFile:path atomically:YES];
         
-        //self.HeaterOn.text = [memValues.M822 stringValue];
         self.Actinic.value = [memValues.M821 integerValue];
         self.Daylight.value = [memValues.M820 integerValue];
-        //self.HeaterOff.text = [memValues.M824 stringValue];
         self.FeedTimer.text = [memValues.M814 stringValue];
-        //self.Overheat.text = [memValues.M818 stringValue];
         self.PWMD.text = [memValues.M820 stringValue];
         self.PWMA.text = [memValues.M821 stringValue];
         self.LCDTimer.text = [memValues.M816 stringValue];
@@ -400,6 +409,8 @@
     [overheatValue release];
     [LCDTimerValue release];
     [sendUpdateMem release];
+    [memValues release];
+    [xmlParser release];
     [super dealloc];
 
 }
