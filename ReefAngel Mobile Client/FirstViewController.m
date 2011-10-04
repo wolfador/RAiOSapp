@@ -18,7 +18,7 @@
 @synthesize box2Relay1, box2Relay2, box2Relay3, box2Relay4, box2Relay5, box2Relay6, box2Relay7, box2Relay8;
 
 @synthesize wifiUrl,fullUrl,lastUpdatedLabel;
-@synthesize box2, enteredURL, response, request;
+@synthesize box2, enteredURL, response, request, tempScale;
 
 
 - (void)viewDidLoad
@@ -57,8 +57,8 @@
 
     if(raParam)
     {
-        
-        temp1Label.text = raParam.formattedTemp1;
+        temp1Label.text = [raParam.formattedTemp1 stringByAppendingString:self.tempScale];
+        //temp1Label.text = raParam.formattedTemp1;
         temp2Label.text = raParam.formattedTemp2;
         temp3Label.text = raParam.formattedTemp3;
         pHLabel.text    = raParam.formattedpH;
@@ -366,6 +366,16 @@
 -(void)formatRA : (RA *)params
 {
     params.formattedTemp1 = [self formatTemp:params.T1];
+    if ([params.T1 intValue] <= 45 && [params.T1 intValue] > 0) {
+        self.tempScale = @" *C";
+    }
+    else if([params.T1 intValue] >= 46 && [params.T1 intValue] > 0)
+    {
+        self.tempScale = @" *F";
+    }
+    else {
+        self.tempScale = @"";
+    }
     params.formattedTemp2 = [self formatTemp:params.T2];
     params.formattedTemp3 = [self formatTemp:params.T3];
     params.formattedpH = [self formatPh:params.PH];
@@ -495,14 +505,6 @@
         numCopy >>=1;
     }
     return str;
-    /*NSMutableString* tempStr = [[NSMutableString string]retain];
-     NSUInteger bit = ~(NSUIntegerMax >> 1);
-     do {
-     [tempStr appendString:(((NSUInteger)relayByte & bit) ? @"1" : @"0")];
-     } while (bit >>= 1);
-     
-     return [tempStr substringFromIndex:[tempStr length]-8];        
-     */
     
 }
 
@@ -596,6 +598,7 @@
     self.b1R8Indicator = nil;
     self.request = nil;
     self.response = nil;
+    self.tempScale = nil;
     [super viewDidUnload];
 }
 
@@ -661,6 +664,7 @@
     [response release];
     [raParam release];
     [xmlParser release];
+    [tempScale release];
     [super dealloc];
     
 }

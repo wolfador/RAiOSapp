@@ -21,7 +21,7 @@
             
     IBOutlet UISwitch *box1Relay1, *box1Relay2, *box1Relay3, *box1Relay4, *box1Relay5, *box1Relay6, *box1Relay7, *box1Relay8, *box2Relay1, *box2Relay2, *box2Relay3, *box2Relay4, *box2Relay5, *box2Relay6, *box2Relay7, *box2Relay8;
     NSString *fullUrl;
-    NSString *wifiUrl, *enteredURL;
+    NSString *wifiUrl, *enteredURL, *tempScale;
     RA *raParam;
     IBOutlet UIScrollView *scrollView;
     NSString *urlLocation;
@@ -33,7 +33,7 @@
 
 }
 
-@property (readwrite, copy) NSString *wifiUrl, *enteredURL;
+@property (readwrite, copy) NSString *wifiUrl, *enteredURL, *tempScale;
 @property (readwrite, copy) NSString *fullUrl;
 @property (nonatomic, retain) IBOutlet UILabel *temp1Label, *relay1, *relay2, *relay3, *relay4, *relay5, *relay6, *relay7, *relay8, *relay21, *relay22, *relay23, *relay24, *relay25, *relay26, *relay27, *relay28;
 @property (nonatomic, retain) IBOutlet UILabel *temp2Label;

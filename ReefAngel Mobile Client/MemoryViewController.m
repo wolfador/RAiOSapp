@@ -10,7 +10,7 @@
 
 @implementation MemoryViewController
 @synthesize delegate = _delegate, request, response;
-@synthesize HeaterOn, HeaterOff, FeedTimer, Overheat, PWMD, PWMA, LCDTimer, wifiURL, enteredURL, fullURL, Actinic, Daylight, daylightValue, actinicValue, heaterOnValue, heaterOffValue, feedTimerValue, overheatValue, LCDTimerValue, sendUpdateMem;
+@synthesize HeaterOn, HeaterOff, FeedTimer, Overheat, PWMD, PWMA, LCDTimer, wifiURL, enteredURL, fullURL, Actinic, Daylight, daylightValue, actinicValue, heaterOnValue, heaterOffValue, feedTimerValue, overheatValue, LCDTimerValue, sendUpdateMem, ForC, ForC2, ForC3;
 - (IBAction)done
 {
     [self.delegate memoryViewControllerDidFinish:self];
@@ -234,6 +234,18 @@
 -(void)formatRA : (MEM *)params
 {
     self.HeaterOn.text = [self formatTemp:memValues.M822];
+    if([memValues.M822 intValue] <= 45)
+    {
+        ForC.text = @"*C";
+        ForC2.text = @"*C";
+        ForC3.text = @"*C";
+    }
+    else
+    {
+        ForC.text = @"*F";
+        ForC2.text = @"*F";
+        ForC3.text = @"*F";
+    }
     self.HeaterOff.text = [self formatTemp:memValues.M824];
     self.Overheat.text = [self formatTemp:memValues.M818];
     
