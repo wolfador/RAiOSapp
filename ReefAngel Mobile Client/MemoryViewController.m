@@ -9,7 +9,7 @@
 #import "MemoryViewController.h"
 
 @implementation MemoryViewController
-@synthesize delegate = _delegate, request, response;
+@synthesize delegate = _delegate, request;
 @synthesize HeaterOn, HeaterOff, FeedTimer, Overheat, PWMD, PWMA, LCDTimer, wifiURL, enteredURL, fullURL, Actinic, Daylight, daylightValue, actinicValue, heaterOnValue, heaterOffValue, feedTimerValue, overheatValue, LCDTimerValue, sendUpdateMem, ForC, ForC2, ForC3;
 - (IBAction)done
 {
@@ -301,13 +301,14 @@
 
 - (void)request:(ASIHTTPRequest *)request didReceiveData:(NSData *)data
 {
-    NSMutableArray *paramArray;
+    
     memValues = [[MEM alloc] init] ;
     xmlParser = [[XmlParser alloc] init] ;
-    self.response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
-    paramArray = [xmlParser fromXml:self.response withObject:memValues];
-
+    
+    NSString *memData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    paramArray = [xmlParser fromXml:memData withObject:memValues];
+    [memData release];
     memValues = [paramArray lastObject];
 
     [self formatRA:memValues];
@@ -317,15 +318,6 @@
     
 }
 
-- (void)requestFailed:(ASIHTTPRequest *)request
-{
-    NSError *error;
-    if(error)
-    {
-     
-    }
-    
-}
 
 -(BOOL)reachable{
     if ([self.enteredURL length] > 0) {
@@ -368,7 +360,6 @@
 {
     [super viewDidUnload];
     self.request = nil;
-    self.response = nil;
     self.HeaterOn = nil;
     self.HeaterOff = nil;
     self.FeedTimer = nil;
@@ -400,7 +391,6 @@
 -(void) dealloc
 {
     [request release];
-    [response release];
     [HeaterOn release];
     [HeaterOff release];
     [FeedTimer release];
@@ -421,8 +411,9 @@
     [overheatValue release];
     [LCDTimerValue release];
     [sendUpdateMem release];
-    [memValues release];
-    [xmlParser release];
+   // [memValues release];
+   // [xmlParser release];
+   // [paramArray release];
     [super dealloc];
 
 }

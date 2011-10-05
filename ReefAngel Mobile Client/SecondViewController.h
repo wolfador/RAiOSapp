@@ -24,6 +24,8 @@
     IBOutlet UITextField *exprelay1, *exprelay2, *exprelay3, *exprelay4, *exprelay5, *exprelay6, *exprelay7, *exprelay8;
     IBOutlet UILabel *exprelay1Label, *exprelay2Label, *exprelay3Label, *exprelay4Label, *exprelay5Label, *exprelay6Label, *exprelay7Label, *exprelay8Label;
     IBOutlet UISwitch *relayExp;
+    MemoryViewController *memcontroller;
+    
 
 
 }

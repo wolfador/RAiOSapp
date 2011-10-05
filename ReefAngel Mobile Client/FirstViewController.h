@@ -29,6 +29,7 @@
     ASIHTTPRequest *request;
     NSString *response;
     XmlParser *xmlParser;
+     NSMutableArray *paramArray;
     
 
 }

@@ -105,7 +105,7 @@
 
 - (IBAction)flipMemory
 {    
-    MemoryViewController *memcontroller = [[[MemoryViewController alloc] initWithNibName:@"MemoryViewController" bundle:nil] autorelease];
+    memcontroller = [[MemoryViewController alloc] initWithNibName:@"MemoryViewController" bundle:nil] ;
     memcontroller.delegate = self;
     memcontroller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self presentModalViewController:memcontroller animated:YES];
@@ -290,11 +290,6 @@ else
 
 }
 
--(void)viewWillDisappear:(BOOL)animated
-{
-   // [self saveData];
-}
-
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -394,6 +389,7 @@ else
     [relay8 release];
     [url release];
     [enteredURL release];
+    [memcontroller release];
      [super dealloc];
 }
 @end

@@ -58,14 +58,10 @@
     if(raParam)
     {
         temp1Label.text = [raParam.formattedTemp1 stringByAppendingString:self.tempScale];
-        //temp1Label.text = raParam.formattedTemp1;
-        //temp2Label.text = raParam.formattedTemp2;
         temp2Label.text = [raParam.formattedTemp2 stringByAppendingString:self.tempScale];
-        //temp3Label.text = raParam.formattedTemp3;
         temp3Label.text = [raParam.formattedTemp3 stringByAppendingString:self.tempScale];
         pHLabel.text    = raParam.formattedpH;
-        //NSLog(@"%@", params.ATOHIGH);
-        //NSLog(@"%@", params.PWMD);d
+
         
         
         if(!raParam.isRelay1OFFMask && !raParam.isRelay1ONMask)
@@ -321,8 +317,8 @@
 
 - (void)request:(ASIHTTPRequest *)request didReceiveData:(NSData *)data
 {
-    NSMutableArray *paramArray;
-    raParam = [[RA alloc] init] ;
+    
+   raParam = [[RA alloc] init] ;
     xmlParser = [[XmlParser alloc] init] ;
     self.response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
@@ -350,20 +346,10 @@
     }
     [self UpdateUI:raParam];
     
+    [raParam release];
+    [xmlParser release];
+    
 }
-
-- (void)requestFailed:(ASIHTTPRequest *)request
-{
-    NSError *error;
-    //NSLog(@"%@", error);
-    if(error)
-    {
-        lastUpdatedLabel.text = @"Error";
-        lastUpdatedLabel.textColor = [UIColor redColor];
-    }
-        
-}
-
 
 -(void)formatRA : (RA *)params
 {
@@ -664,9 +650,9 @@
     [b1R8Indicator release];
     [request release];
     [response release];
-    [raParam release];
-    [xmlParser release];
+
     [tempScale release];
+    [paramArray release];
     [super dealloc];
     
 }
