@@ -275,7 +275,7 @@
 
     NSURL *url = [NSURL URLWithString: controllerUrl];
     ASIHTTPRequest *pushUpdate = [ASIHTTPRequest requestWithURL:url]; 
-    [pushUpdate setShouldPresentAuthenticationDialog: YES];
+    //[pushUpdate setShouldPresentAuthenticationDialog: YES];
     
     [pushUpdate startAsynchronous];
     
@@ -291,8 +291,8 @@
     self.request = [ASIHTTPRequest requestWithURL:url]; 
     [self.request setDelegate:self];
     [self.request setDidReceiveDataSelector:@selector(request:didReceiveData:)];
-    
-    [self.request setShouldPresentAuthenticationDialog: YES];
+    //not working with iOS5
+    //[self.request setShouldPresentAuthenticationDialog: YES];
     
     [self.request startAsynchronous];
 

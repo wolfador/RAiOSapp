@@ -306,8 +306,8 @@
     self.request = [ASIHTTPRequest requestWithURL:url]; 
     [self.request setDelegate:self];
    [self.request setDidReceiveDataSelector:@selector(request:didReceiveData:)];
-
-    [self.request setShouldPresentAuthenticationDialog: YES];
+//currently not working with iOS5
+//    [self.request setShouldPresentAuthenticationDialog: YES];
     
     [self.request startAsynchronous];
     lastUpdatedLabel.text = @"Updating";
