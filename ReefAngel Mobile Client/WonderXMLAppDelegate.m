@@ -28,7 +28,7 @@
 	NSString *testUserString = @"<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><User xmlns:=\"http://bluepinme.com\"><billingSchedule>00 00 08 * * *</billingSchedule><brandID>9908315</brandID><changePassword>false</changePassword><expiration>1970-01-01T00:00:00Z</expiration><lastLogIn>1970-01-01T00:00:00Z</lastLogIn><password>bbbb</password><profileID>1968515</profileID><userID>1831917</userID><username>fffffff</username></User>";
 	
 	NSMutableArray *userArray = [parser fromXml:testUserString withObject:user];
-	NSLog(@"userArray :: %@", [userArray objectAtIndex:0]);
+	//NSLog(@"userArray :: %@", [userArray objectAtIndex:0]);
 	
 	//object to xml string
 	
@@ -43,10 +43,10 @@
 	user.username = @"test";
 	
 	
-	NSString *userString = [parser toXml:user andTag:@"User" inNameSpace:@"http://bluepinme.com"];
+	//NSString *userString = [parser toXml:user andTag:@"User" inNameSpace:@"http://bluepinme.com"];
 
 	
-	NSLog(@"userString :: %@", userString);
+	//NSLog(@"userString :: %@", userString);
 	
     // Override point for customization after app launch    
     [window addSubview:viewController.view];
