@@ -34,22 +34,34 @@
 }
 
 -(BOOL)reachable{
-    if ([self.enteredURL length] > 0) {
+    NSString *http = @"http://";
+    NSRange range = [self.enteredURL rangeOfString : http];
+    if (range.location == NSNotFound) {
         
+        NSString *testURL = [NSString stringWithString:self.enteredURL];
+        Reachability *r = [Reachability reachabilityWithHostName:testURL];
+        NetworkStatus internetStatus = [r currentReachabilityStatus];
+        if(internetStatus == NotReachable) {
+            return NO;
+        }
+        else
+        {
+            return YES;
+        }
+    }
+    else
+    {
         NSString *testURL = [self.enteredURL substringFromIndex:7];
         Reachability *r = [Reachability reachabilityWithHostName:testURL];
         NetworkStatus internetStatus = [r currentReachabilityStatus];
         if(internetStatus == NotReachable) {
             return NO;
         }
-    else
-    {
-         return YES;
+        else
+        {
+            return YES;
+        }
     }
-       
-    }
-     return NO;
-       
 }
                     
 -(void)UpdateUI:(RA*)ra
@@ -281,6 +293,12 @@
     if ([self reachable]) {
         self.fullUrl = [NSString stringWithFormat:@"%@r99 ",self.wifiUrl];
             [self SendUpdate:fullUrl];
+    }
+    else if ([self.enteredURL length] == 0)
+    {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Settings" message:@"Enter RA URL in settings." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
     }
     else {
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
@@ -650,7 +668,6 @@
     [b1R8Indicator release];
     [request release];
     [response release];
-
     [tempScale release];
     [paramArray release];
     [super dealloc];

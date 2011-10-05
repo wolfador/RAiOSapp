@@ -136,9 +136,9 @@
 		[Dictionary addEntriesFromDictionary:restored];
        self.enteredURL = [NSMutableString stringWithString:self.url.text];
         NSString *http = @"http://";
-        NSRange range = [self.enteredURL rangeOfString : http];
+        NSRange range = [self.url.text rangeOfString : http];
         if (range.location == NSNotFound) {
-            self.updatedURL = [NSMutableString stringWithFormat:@"%@%@", http,self.enteredURL];
+            self.updatedURL = [NSMutableString stringWithFormat:@"%@%@",http,self.enteredURL];
         }
         else
         {
