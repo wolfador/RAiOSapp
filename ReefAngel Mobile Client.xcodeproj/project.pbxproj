@@ -36,6 +36,7 @@
 		55DF42A41359DA3900C45B47 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DF42A31359DA3900C45B47 /* FirstViewController.m */; };
 		55DF42AA1359DA3900C45B47 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55DF42A81359DA3900C45B47 /* FirstView.xib */; };
 		55DF42AD1359DA3900C45B47 /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55DF42AB1359DA3900C45B47 /* SecondView.xib */; };
+		7497B71C143B8FBA002752D4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7497B71B143B8FBA002752D4 /* libz.dylib */; };
 		80020DD8142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80020DD7142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.m */; };
 		8049D19C142584BF0051D834 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8049D191142584BF0051D834 /* GDataXMLNode.m */; };
 		8049D19D142584BF0051D834 /* TypeMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 8049D193142584BF0051D834 /* TypeMapping.m */; };
@@ -56,7 +57,6 @@
 		8060DE90142D756600248B60 /* ReefAngel-Logo-512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE89142D756600248B60 /* ReefAngel-Logo-512x512.png */; };
 		80A77CD31437B81B00861996 /* MemoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A77CD11437B81B00861996 /* MemoryViewController.m */; };
 		80A77CD41437B81B00861996 /* MemoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80A77CD21437B81B00861996 /* MemoryViewController.xib */; };
-		80AC9962143AA5C300140AD5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 80AC9960143AA59500140AD5 /* libz.dylib */; };
 		80B5F9CE1437BC910084685C /* MemValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 80B5F9CD1437BC910084685C /* MemValues.m */; };
 		80DF04AE14282C3400A45FFA /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 80DF04AD14282C3400A45FFA /* Default@2x.png */; };
 		80DF04B014282C5C00A45FFA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 80DF04AF14282C5C00A45FFA /* Default.png */; };
@@ -112,6 +112,7 @@
 		55DF42A31359DA3900C45B47 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		55DF42A91359DA3900C45B47 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstView.xib; sourceTree = "<group>"; };
 		55DF42AC1359DA3900C45B47 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondView.xib; sourceTree = "<group>"; };
+		7497B71B143B8FBA002752D4 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		80020DD6142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
 		80020DD7142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		8049D190142584BF0051D834 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
@@ -143,7 +144,6 @@
 		80A77CD01437B81B00861996 /* MemoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryViewController.h; sourceTree = "<group>"; };
 		80A77CD11437B81B00861996 /* MemoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoryViewController.m; sourceTree = "<group>"; };
 		80A77CD21437B81B00861996 /* MemoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MemoryViewController.xib; sourceTree = "<group>"; };
-		80AC9960143AA59500140AD5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
 		80B5F9CC1437BC910084685C /* MemValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemValues.h; sourceTree = "<group>"; };
 		80B5F9CD1437BC910084685C /* MemValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemValues.m; sourceTree = "<group>"; };
 		80DF04AD14282C3400A45FFA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
@@ -155,7 +155,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80AC9962143AA5C300140AD5 /* libz.dylib in Frameworks */,
+				7497B71C143B8FBA002752D4 /* libz.dylib in Frameworks */,
 				55C73962135A4BD9007AE60B /* MobileCoreServices.framework in Frameworks */,
 				55C73960135A4BCE007AE60B /* SystemConfiguration.framework in Frameworks */,
 				55C7395E135A4BB9007AE60B /* CFNetwork.framework in Frameworks */,
@@ -269,7 +269,7 @@
 		55DF428C1359DA3900C45B47 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				80AC9960143AA59500140AD5 /* libz.dylib */,
+				7497B71B143B8FBA002752D4 /* libz.dylib */,
 				55C73961135A4BD9007AE60B /* MobileCoreServices.framework */,
 				55C7395F135A4BCE007AE60B /* SystemConfiguration.framework */,
 				55C7395D135A4BB9007AE60B /* CFNetwork.framework */,
@@ -482,7 +482,7 @@
 				OTHER_LDFLAGS = "-lxml2";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos4.3;
+				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Debug;
@@ -505,7 +505,7 @@
 				OTHER_LDFLAGS = "-lxml2";
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
-				SDKROOT = iphoneos4.3;
+				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
 			};
 			name = Release;
