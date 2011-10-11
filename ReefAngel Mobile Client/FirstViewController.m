@@ -18,7 +18,7 @@
 @synthesize box2Relay1, box2Relay2, box2Relay3, box2Relay4, box2Relay5, box2Relay6, box2Relay7, box2Relay8;
 
 @synthesize wifiUrl,fullUrl,lastUpdatedLabel;
-@synthesize box2, enteredURL, response, request, tempScale;
+@synthesize box2, enteredURL, response, request, tempScale, salinityLabel, salinityValue;
 
 
 - (void)viewDidLoad
@@ -27,7 +27,7 @@
     [super viewDidLoad];
     
     [self.scrollView setScrollEnabled:YES];
-    [self.scrollView setContentSize:CGSizeMake(320, 515)];     
+    [self.scrollView setContentSize:CGSizeMake(320, 570)];     
     self.scrollView.delegate = self;
     
     
@@ -73,7 +73,8 @@
         temp2Label.text = [raParam.formattedTemp2 stringByAppendingString:self.tempScale];
         temp3Label.text = [raParam.formattedTemp3 stringByAppendingString:self.tempScale];
         pHLabel.text    = raParam.formattedpH;
-
+        //salinityLabel.text = [raParam.SAL stringValue];
+        salinityValue.text = raParam.formattedSal;
         
         
         if(!raParam.isRelay1OFFMask && !raParam.isRelay1ONMask)
@@ -185,7 +186,7 @@
         UISwitch *swit = (UISwitch*)sender;        
         self.fullUrl = [NSString stringWithFormat:@"%@r%@%@",self.wifiUrl,[NSString stringWithFormat:@"%d",swit.tag],
                         swit.on ? @"1" : @"0"];
-        //[self SendRequest:fullUrl];
+        
     }
     else //if([sender class] == [UIButton class])
     {
@@ -193,10 +194,9 @@
         UIButton *but = (UIButton*)sender;
         NSString *tag = [NSString stringWithFormat:@"%d",but.tag];    
         self.fullUrl = [NSString stringWithFormat:@"%@r%@%@",self.wifiUrl,tag,@"2"];
-      // [self SendRequest:fullUrl];
+
     }    
     if ([self reachable]) {
-       // [self SendRequest:fullUrl];
         [self SendUpdate:fullUrl];
     }
     else {
@@ -233,7 +233,7 @@
     
     if([[restored objectForKey:@"ExpansionON"] isEqualToString: @"ON"])
        {
-           [self.scrollView setContentSize:CGSizeMake(320, 900)]; 
+           [self.scrollView setContentSize:CGSizeMake(320, 970)]; 
            self.box2.hidden = NO;
            self.relay21.hidden = NO;
            self.relay22.hidden = NO;
@@ -263,7 +263,7 @@
        }
     else
     {
-        [self.scrollView setContentSize:CGSizeMake(320, 515)]; 
+        [self.scrollView setContentSize:CGSizeMake(320, 570)]; 
         self.box2.hidden = YES;
         self.relay21.hidden = YES;
         self.relay22.hidden = YES;
@@ -373,11 +373,11 @@
 {
     params.formattedTemp1 = [self formatTemp:params.T1];
     if ([params.T1 intValue] <= 45 && [params.T1 intValue] > 0) {
-        self.tempScale = @" *C";
+        self.tempScale = @"*C";
     }
     else if([params.T1 intValue] >= 46 && [params.T1 intValue] > 0)
     {
-        self.tempScale = @" *F";
+        self.tempScale = @"*F";
     }
     else {
         self.tempScale = @"";
@@ -385,6 +385,16 @@
     params.formattedTemp2 = [self formatTemp:params.T2];
     params.formattedTemp3 = [self formatTemp:params.T3];
     params.formattedpH = [self formatPh:params.PH];
+    if (params.SAL == NULL) {
+        self.salinityLabel.hidden = YES;
+        self.salinityValue.hidden = YES;
+    }
+    else
+    {
+        self.salinityLabel.hidden = NO;
+        self.salinityValue.hidden = NO;
+       params.formattedSal = [self formatSal:params.SAL]; 
+    }
 
 }
 
@@ -403,6 +413,31 @@
     
     
     return retString;
+    
+    
+}
+-(NSString *) formatSal : (NSNumber *)sal
+{   
+    NSString *tempString = [sal stringValue];
+    NSString *retString;
+    
+    if([tempString length] >= 3)
+    {
+        
+        retString = [[[tempString substringToIndex:[tempString length]-2] stringByAppendingString:@"."] stringByAppendingString:[tempString substringFromIndex:[tempString length]-2]];  
+        return retString;
+    }
+    else if([tempString length] == 1)
+    {
+        
+        retString = [tempString stringByAppendingString:@".00"]; 
+        return retString;
+    }
+    else
+    {
+        retString = [tempString stringByAppendingString:@".00"];
+        return retString;    
+    }
     
     
 }
@@ -540,6 +575,7 @@
     self.temp3Label = nil;
     self.pHLabel = nil;
     self.lastUpdatedLabel = nil;
+    self.salinityLabel = nil;
     }
 
 
@@ -605,6 +641,8 @@
     self.request = nil;
     self.response = nil;
     self.tempScale = nil;
+    self.salinityLabel = nil;
+    self.salinityValue = nil;
     [super viewDidUnload];
 }
 
@@ -670,6 +708,8 @@
     [response release];
     [tempScale release];
     [paramArray release];
+    [salinityLabel release];
+    [salinityValue release];
     [super dealloc];
     
 }

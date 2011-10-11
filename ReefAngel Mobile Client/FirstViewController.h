@@ -16,7 +16,7 @@
 
 @interface FirstViewController : UIViewController<UIApplicationDelegate, UITabBarDelegate, UIScrollViewDelegate>{
 
-    UILabel *temp1Label, *temp2Label, *temp3Label, *pHLabel, *lastUpdatedLabel, *relay1, *relay2, *relay3, *relay4, *relay5, *relay6, *relay7, *relay8, *box2;
+    UILabel *temp1Label, *temp2Label, *temp3Label, *pHLabel, *lastUpdatedLabel, *relay1, *relay2, *relay3, *relay4, *relay5, *relay6, *relay7, *relay8, *box2, *salinityLabel, *salinityValue;
     UIButton *b1R1Indicator, *b1R2Indicator, *b1R3Indicator, *b1R4Indicator, *b1R5Indicator, *b1R6Indicator, *b1R7Indicator, *b1R8Indicator, *b2R1Indicator, *b2R2Indicator, *b2R3Indicator, *b2R4Indicator, *b2R5Indicator, *b2R6Indicator, *b2R7Indicator, *b2R8Indicator;
             
     IBOutlet UISwitch *box1Relay1, *box1Relay2, *box1Relay3, *box1Relay4, *box1Relay5, *box1Relay6, *box1Relay7, *box1Relay8, *box2Relay1, *box2Relay2, *box2Relay3, *box2Relay4, *box2Relay5, *box2Relay6, *box2Relay7, *box2Relay8;
@@ -36,7 +36,7 @@
 
 @property (readwrite, copy) NSString *wifiUrl, *enteredURL, *tempScale;
 @property (readwrite, copy) NSString *fullUrl;
-@property (nonatomic, retain) IBOutlet UILabel *temp1Label, *relay1, *relay2, *relay3, *relay4, *relay5, *relay6, *relay7, *relay8, *relay21, *relay22, *relay23, *relay24, *relay25, *relay26, *relay27, *relay28;
+@property (nonatomic, retain) IBOutlet UILabel *temp1Label, *relay1, *relay2, *relay3, *relay4, *relay5, *relay6, *relay7, *relay8, *relay21, *relay22, *relay23, *relay24, *relay25, *relay26, *relay27, *relay28, *salinityLabel, *salinityValue;
 @property (nonatomic, retain) IBOutlet UILabel *temp2Label;
 @property (nonatomic, retain) IBOutlet UILabel *temp3Label;
 @property (nonatomic, retain) IBOutlet UILabel *pHLabel;
@@ -82,7 +82,7 @@
 -(NSString *) formatPh : (NSNumber *) pH;
 -(void)updateRelayBoxes : (RA *) ra;
 -(NSString *)buildRelayBinary : (NSNumber *)relayByte;
-
+-(NSString *) formatSal : (NSNumber *)sal;
 -(void)sendUpdate:(NSString *) controllerUrl;
 - (void)request:(ASIHTTPRequest *)request didReceiveData:(NSData *)data;
 
