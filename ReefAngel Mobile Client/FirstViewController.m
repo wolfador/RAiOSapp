@@ -18,7 +18,7 @@
 @synthesize box2Relay1, box2Relay2, box2Relay3, box2Relay4, box2Relay5, box2Relay6, box2Relay7, box2Relay8;
 
 @synthesize wifiUrl,fullUrl,lastUpdatedLabel;
-@synthesize box2, enteredURL, response, request, tempScale, salinityLabel, salinityValue;
+@synthesize box2, enteredURL, response, request, tempScale, salinityLabel, salinityValue, temp2Value, temp3Value;
 
 
 - (void)viewDidLoad
@@ -29,7 +29,6 @@
     [self.scrollView setScrollEnabled:YES];
     [self.scrollView setContentSize:CGSizeMake(320, 570)];     
     self.scrollView.delegate = self;
-    
     
 }
 
@@ -70,10 +69,7 @@
     if(raParam)
     {
         temp1Label.text = [raParam.formattedTemp1 stringByAppendingString:self.tempScale];
-        temp2Label.text = [raParam.formattedTemp2 stringByAppendingString:self.tempScale];
-        temp3Label.text = [raParam.formattedTemp3 stringByAppendingString:self.tempScale];
         pHLabel.text    = raParam.formattedpH;
-        //salinityLabel.text = [raParam.SAL stringValue];
         salinityValue.text = raParam.formattedSal;
         
         
@@ -154,12 +150,9 @@
 
 -(void)SendUpdate:(NSString *)url
 {
-    
-
     [self sendUpdate:url];
 
     [self UpdateUI:raParam];
-    
 }
 
 -(IBAction)refreshParams
@@ -174,9 +167,6 @@
 		[alertView show];
 		[alertView release];
     }
-    
-   
-
     
 }
 -(IBAction) toggleRelay:(UISwitch*)sender
@@ -382,9 +372,28 @@
     else {
         self.tempScale = @"";
     }
-    params.formattedTemp2 = [self formatTemp:params.T2];
-    params.formattedTemp3 = [self formatTemp:params.T3];
+    
+    //hides T2 if not configured
+    if ([params.T2 intValue] == 0) {
+        temp2Value.text = @"N/A";
+    }
+    else
+    {
+        params.formattedTemp2 = [self formatTemp:params.T2];
+        temp2Value.text = [raParam.formattedTemp2 stringByAppendingString:self.tempScale];
+    }
+    //hides T3 if not configured
+    if ([params.T3 intValue] == 0) {
+        temp3Value.text = @"N/A";
+    }
+    else
+    {
+        params.formattedTemp3 = [self formatTemp:params.T3];
+        temp3Value.text = [raParam.formattedTemp3 stringByAppendingString:self.tempScale];
+    }
+
     params.formattedpH = [self formatPh:params.PH];
+    //hides Sal if not added to ReefAngel Features.
     if (params.SAL == NULL) {
         self.salinityLabel.hidden = YES;
         self.salinityValue.hidden = YES;
@@ -424,7 +433,7 @@
     if([tempString length] >= 3)
     {
         
-        retString = [[[tempString substringToIndex:[tempString length]-2] stringByAppendingString:@"."] stringByAppendingString:[tempString substringFromIndex:[tempString length]-2]];  
+        retString = [[[tempString substringToIndex:[tempString length]-3] stringByAppendingString:@"."] stringByAppendingString:[tempString substringFromIndex:[tempString length]-3]];  
         return retString;
     }
     else if([tempString length] == 1)
@@ -438,8 +447,6 @@
         retString = [tempString stringByAppendingString:@".00"];
         return retString;    
     }
-    
-    
 }
 
 -(NSString *) formatPh : (NSNumber *)pH
