@@ -398,6 +398,13 @@
         self.salinityLabel.hidden = YES;
         self.salinityValue.hidden = YES;
     }
+    else if([params.SAL intValue] == 60)
+    {
+        self.salinityLabel.hidden = NO;
+        self.salinityValue.hidden = NO;
+        params.formattedSal = @"N/A";
+    }
+
     else
     {
         self.salinityLabel.hidden = NO;
