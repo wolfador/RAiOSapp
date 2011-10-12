@@ -17,7 +17,7 @@
 @interface FirstViewController : UIViewController<UIApplicationDelegate, UITabBarDelegate, UIScrollViewDelegate>{
 
     UILabel *temp1Label, *temp2Label, *temp3Label, *pHLabel, *lastUpdatedLabel, *relay1, *relay2, *relay3, *relay4, *relay5, *relay6, *relay7, *relay8, *box2, *salinityLabel, *salinityValue, *temp2Value, *temp3Value;
-    UIButton *b1R1Indicator, *b1R2Indicator, *b1R3Indicator, *b1R4Indicator, *b1R5Indicator, *b1R6Indicator, *b1R7Indicator, *b1R8Indicator, *b2R1Indicator, *b2R2Indicator, *b2R3Indicator, *b2R4Indicator, *b2R5Indicator, *b2R6Indicator, *b2R7Indicator, *b2R8Indicator;
+    UIButton *b1R1Indicator, *b1R2Indicator, *b1R3Indicator, *b1R4Indicator, *b1R5Indicator, *b1R6Indicator, *b1R7Indicator, *b1R8Indicator, *b2R1Indicator, *b2R2Indicator, *b2R3Indicator, *b2R4Indicator, *b2R5Indicator, *b2R6Indicator, *b2R7Indicator, *b2R8Indicator, *changeWater, *buttonPress;
             
     IBOutlet UISwitch *box1Relay1, *box1Relay2, *box1Relay3, *box1Relay4, *box1Relay5, *box1Relay6, *box1Relay7, *box1Relay8, *box2Relay1, *box2Relay2, *box2Relay3, *box2Relay4, *box2Relay5, *box2Relay6, *box2Relay7, *box2Relay8;
     NSString *fullUrl;
@@ -51,7 +51,7 @@
 @property (nonatomic, retain) IBOutlet UISwitch *box1Relay7;
 @property (nonatomic, retain) IBOutlet UISwitch *box1Relay8;
 @property (nonatomic, retain) IBOutlet UILabel *box2;
-@property (nonatomic, retain) IBOutlet UIButton *b2R1Indicator;
+@property (nonatomic, retain) IBOutlet UIButton *b2R1Indicator, *changeWater, *buttonPress;
 @property (nonatomic, retain) IBOutlet UIButton *b2R2Indicator;
 @property (nonatomic, retain) IBOutlet UIButton *b2R3Indicator;
 @property (nonatomic, retain) IBOutlet UIButton *b2R4Indicator;
@@ -85,9 +85,10 @@
 -(NSString *) formatSal : (NSNumber *)sal;
 -(void)sendUpdate:(NSString *) controllerUrl;
 - (void)request:(ASIHTTPRequest *)request didReceiveData:(NSData *)data;
-
+-(IBAction) waterChange;
 -(IBAction) refreshParams;
 -(IBAction) toggleRelay:(id)sender;
+-(IBAction) pressButton;
 -(BOOL) reachable;
 -(void)UpdateUI:(RA*)ra;
 -(void) loadData;

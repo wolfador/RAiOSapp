@@ -18,7 +18,7 @@
 @synthesize box2Relay1, box2Relay2, box2Relay3, box2Relay4, box2Relay5, box2Relay6, box2Relay7, box2Relay8;
 
 @synthesize wifiUrl,fullUrl,lastUpdatedLabel;
-@synthesize box2, enteredURL, response, request, tempScale, salinityLabel, salinityValue, temp2Value, temp3Value;
+@synthesize box2, enteredURL, response, request, tempScale, salinityLabel, salinityValue, temp2Value, temp3Value, changeWater, buttonPress;
 
 
 - (void)viewDidLoad
@@ -32,7 +32,8 @@
     
 }
 
--(BOOL)reachable{
+-(BOOL)reachable
+{
     NSString *http = @"http://";
     NSRange range = [self.enteredURL rangeOfString : http];
     if (range.location == NSNotFound) {
@@ -169,6 +170,33 @@
     }
     
 }
+-(IBAction)waterChange
+{
+    if ([self reachable]) {
+       
+            self.fullUrl = [NSString stringWithFormat:@"%@w ",self.wifiUrl];
+            [self SendUpdate:fullUrl];
+        self.buttonPress.hidden = NO;
+        self.changeWater.hidden = YES;
+        [self refreshParams];
+}
+    else
+    {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
+    }
+    
+}
+-(IBAction)pressButton
+{
+    self.changeWater.hidden = NO;
+    self.buttonPress.hidden = YES;
+    self.fullUrl = [NSString stringWithFormat:@"%@bp ",self.wifiUrl];
+    [self SendUpdate:fullUrl];
+    [self refreshParams];
+}
+
 -(IBAction) toggleRelay:(UISwitch*)sender
 {
     if([sender class] == [UISwitch class])
@@ -197,7 +225,8 @@
 
 
   }
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
+{
     // Return YES for supported orientations
 	
 	return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
