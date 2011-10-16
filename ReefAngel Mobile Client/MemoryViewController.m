@@ -113,10 +113,8 @@
     self.overheatValue = [restored objectForKey:@"Overheat"];
     
      if ([self reachable]) {
-    if ([self.heaterOnValue isEqualToString:self.HeaterOn.text]) {
-        }
-    else
-    {
+    if (![self.heaterOnValue isEqualToString:self.HeaterOn.text]) {
+      
         NSString *replaceDecimal = [self.HeaterOn.text stringByReplacingOccurrencesOfString:@"." withString:@""];
         NSMutableString *updatedValue = [NSMutableString stringWithString:replaceDecimal];
         if ([replaceDecimal length] <= 2) {
@@ -128,10 +126,7 @@
         NSString *updateMemory = [NSString stringWithFormat:@"%@mi%i,%@ ",self.wifiURL,self.HeaterOn.tag,updatedValue];
             [self updateValue:updateMemory];
     }
-    if ([self.heaterOffValue isEqualToString: self.HeaterOff.text]) {
-    }
-    else
-    {
+    if (![self.heaterOffValue isEqualToString: self.HeaterOff.text]) {
         NSString *replaceDecimal = [self.HeaterOff.text stringByReplacingOccurrencesOfString:@"." withString:@""];
         NSMutableString *updatedValue = [NSMutableString stringWithString:replaceDecimal];
         if ([replaceDecimal length] <= 2) {
@@ -144,18 +139,11 @@
             [self updateValue:updateMemory];
     }
 
-    if ([self.feedTimerValue isEqualToString: self.FeedTimer.text]) {
-    }
-    else
-    {
+    if (![self.feedTimerValue isEqualToString: self.FeedTimer.text]) {
             NSString *updateMemory = [NSString stringWithFormat:@"%@mi%i,%@ ",self.wifiURL,self.FeedTimer.tag,self.FeedTimer.text];
             [self updateValue:updateMemory];
     }
-    if ([self.overheatValue isEqualToString:self.Overheat.text]) {
-           }
-    else
-    {
-
+    if (![self.overheatValue isEqualToString:self.Overheat.text]) {
         NSString *replaceDecimal = [self.Overheat.text stringByReplacingOccurrencesOfString:@"." withString:@""];
         NSMutableString *updatedValue = [NSMutableString stringWithString:replaceDecimal];
         if ([replaceDecimal length] <= 3) {
@@ -167,25 +155,15 @@
             NSString *updateMemory = [NSString stringWithFormat:@"%@mi%i,%@ ",self.wifiURL,self.Overheat.tag,updatedValue];
             [self updateValue:updateMemory];
     }
-    if ([self.daylightValue isEqualToString:self.PWMD.text]) {
-}
-    else
-    {
+    if (![self.daylightValue isEqualToString:self.PWMD.text]) {
         NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.PWMD.tag,self.PWMD.text];
         [self updateValue:updateMemory];
-
     }
-         if ([self.LCDTimerValue isEqualToString:self.LCDTimer.text]) {
-}
-    else
-    {
+         if (![self.LCDTimerValue isEqualToString:self.LCDTimer.text]) {
         NSString *updateMemory = [NSString stringWithFormat:@"%@mi%i,%@ ",self.wifiURL,self.LCDTimer.tag,self.LCDTimer.text];
         [self updateValue:updateMemory];
     }
-    if ([self.actinicValue isEqualToString:self.PWMA.text]) {
-    }
-    else
-    {
+    if (![self.actinicValue isEqualToString:self.PWMA.text]) {
         NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.PWMA.tag,self.PWMA.text];
         [self updateValue:updateMemory];
     }
