@@ -21,7 +21,7 @@
     ASIHTTPRequest *request;
     XmlParser *xmlParser;
     MEM *memValues;
-    IBOutlet UITextField *HeaterOn, *HeaterOff, *FeedTimer, *Overheat, *PWMD, *PWMA, *LCDTimer;  
+    IBOutlet UITextField *HeaterOn, *HeaterOff, *FeedTimer, *Overheat, *PWMD, *PWMA, *LCDTimer, *MHOnHour, *MHOnMin, *MHOffHour, *MHOffMin, *StdOnHour, *StdOnMin, *StdOffHour, *StdOffMin;  
     NSString *wifiURL, *enteredUrl, *fullURL;
     IBOutlet UISlider *Actinic, *Daylight;
     NSString *daylightValue, *actinicValue, *heaterOnValue, *heaterOffValue, *feedTimerValue, *overheatValue, *LCDTimerValue, *sendUpdateMem;
@@ -32,7 +32,7 @@
 @property (assign, nonatomic) IBOutlet id <MemoryViewControllerDelegate> delegate;
 @property (nonatomic, retain) NSString *wifiURL, *enteredURL, *fullURL, *daylightValue, *actinicValue, *heaterOnValue, *heaterOffValue, *feedTimerValue, *overheatValue, *LCDTimerValue, *sendUpdateMem;
 @property (nonatomic, retain) ASIHTTPRequest *request;
-@property (nonatomic, retain)  IBOutlet UITextField *HeaterOn, *HeaterOff, *FeedTimer, *Overheat, *PWMD, *PWMA, *LCDTimer;
+@property (nonatomic, retain)  IBOutlet UITextField *HeaterOn, *HeaterOff, *FeedTimer, *Overheat, *PWMD, *PWMA, *LCDTimer, *MHOnHour, *MHOnMin, *MHOffHour, *MHOffMin, *StdOnHour, *StdOnMin, *StdOffHour, *StdOffMin;
 @property (nonatomic, retain)  IBOutlet UISlider *Actinic, *Daylight;
 @property (nonatomic, retain) IBOutlet UILabel *ForC, *ForC2, *ForC3;
 - (IBAction)done;

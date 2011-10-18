@@ -159,7 +159,7 @@
 -(IBAction)refreshParams
 {
     if ([self reachable]) {
-        self.fullUrl = [NSString stringWithFormat:@"%@r99 ",self.wifiUrl];
+        self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
             [self SendUpdate:fullUrl];
     }
     else
@@ -174,8 +174,8 @@
 {
     if ([self reachable]) {
        
-            self.fullUrl = [NSString stringWithFormat:@"%@w ",self.wifiUrl];
-            [self SendUpdate:fullUrl];
+            self.fullUrl = [NSString stringWithFormat:@"%@mw",self.wifiUrl];
+            [self sendMode:fullUrl];
         self.buttonPress.hidden = NO;
         self.changeWater.hidden = YES;
         [self refreshParams];
@@ -192,8 +192,8 @@
 {
     self.changeWater.hidden = NO;
     self.buttonPress.hidden = YES;
-    self.fullUrl = [NSString stringWithFormat:@"%@bp ",self.wifiUrl];
-    [self SendUpdate:fullUrl];
+    self.fullUrl = [NSString stringWithFormat:@"%@bp",self.wifiUrl];
+    [self sendMode:fullUrl];
     [self refreshParams];
 }
 
@@ -310,7 +310,7 @@
         self.b2R8Indicator.hidden = YES;
     }
     if ([self reachable]) {
-        self.fullUrl = [NSString stringWithFormat:@"%@r99 ",self.wifiUrl];
+        self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
             [self SendUpdate:fullUrl];
     }
     else if ([self.enteredURL length] == 0)
@@ -342,7 +342,7 @@
     NSURL *url = [NSURL URLWithString: controllerUrl];
     self.request = [ASIHTTPRequest requestWithURL:url]; 
     [self.request setDelegate:self];
-   [self.request setDidReceiveDataSelector:@selector(request:didReceiveData:)];
+   [self.request setDidReceiveDataSelector:@selector(request:ReceiveData:)];
 //currently not working with iOS5
 //    [self.request setShouldPresentAuthenticationDialog: YES];
     
@@ -351,8 +351,18 @@
     lastUpdatedLabel.textColor = [UIColor greenColor];
         
 }
+-(void)sendMode:(NSString *) controllerUrl
+{
 
-- (void)request:(ASIHTTPRequest *)request didReceiveData:(NSData *)data
+    NSURL *url = [NSURL URLWithString: controllerUrl];
+   ASIHTTPRequest *modeChange = [ASIHTTPRequest requestWithURL:url]; 
+    NSLog(@"%@", url);
+    [modeChange setDelegate:self];
+    [modeChange startSynchronous];
+    
+}
+
+- (void)request:(ASIHTTPRequest *)request ReceiveData:(NSData *)data
 {
     
    raParam = [[RA alloc] init] ;

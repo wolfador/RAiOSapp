@@ -84,7 +84,7 @@
 -(NSString *)buildRelayBinary : (NSNumber *)relayByte;
 -(NSString *) formatSal : (NSNumber *)sal;
 -(void)sendUpdate:(NSString *) controllerUrl;
-- (void)request:(ASIHTTPRequest *)request didReceiveData:(NSData *)data;
+- (void)request:(ASIHTTPRequest *)request ReceiveData:(NSData *)data;
 -(IBAction) waterChange;
 -(IBAction) refreshParams;
 -(IBAction) toggleRelay:(id)sender;
@@ -93,5 +93,6 @@
 -(void)UpdateUI:(RA*)ra;
 -(void) loadData;
 -(void)SendUpdate:(NSString *)url;
+-(void)sendMode:(NSString *) controllerUrl;
 @end
 

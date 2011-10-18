@@ -10,7 +10,7 @@
 
 @implementation MemoryViewController
 @synthesize delegate = _delegate, request;
-@synthesize HeaterOn, HeaterOff, FeedTimer, Overheat, PWMD, PWMA, LCDTimer, wifiURL, enteredURL, fullURL, Actinic, Daylight, daylightValue, actinicValue, heaterOnValue, heaterOffValue, feedTimerValue, overheatValue, LCDTimerValue, sendUpdateMem, ForC, ForC2, ForC3;
+@synthesize HeaterOn, HeaterOff, FeedTimer, Overheat, PWMD, PWMA, LCDTimer, wifiURL, enteredURL, fullURL, Actinic, Daylight, daylightValue, actinicValue, heaterOnValue, heaterOffValue, feedTimerValue, overheatValue, LCDTimerValue, sendUpdateMem, ForC, ForC2, ForC3, MHOnHour, MHOnMin, MHOffHour, MHOffMin, StdOnHour, StdOnMin, StdOffHour, StdOffMin;
 - (IBAction)done
 {
     [self.delegate memoryViewControllerDidFinish:self];
@@ -191,6 +191,14 @@
         [Dictionary setObject: [memValues.M814 stringValue] forKey: @"FeedTimer"];
         [Dictionary setObject: [memValues.M816 stringValue] forKey: @"LCDTimer"];
         [Dictionary setObject: self.Overheat.text forKey: @"Overheat"];
+        [Dictionary setObject: [memValues.M802 stringValue] forKey:@"MHOffHour"];
+        [Dictionary setObject: [memValues.M803 stringValue] forKey:@"MHOffMin"];
+        [Dictionary setObject: [memValues.M800 stringValue] forKey:@"MHOnHour"];
+        [Dictionary setObject: [memValues.M801 stringValue] forKey:@"MHOnMin"];
+        [Dictionary setObject: [memValues.M806 stringValue] forKey:@"StdOffHour"];
+        [Dictionary setObject: [memValues.M807 stringValue] forKey:@"StdOffMin"];
+        [Dictionary setObject: [memValues.M804 stringValue] forKey:@"StdOnHour"];
+        [Dictionary setObject: [memValues.M805 stringValue] forKey:@"StdOnMin"];
         [Dictionary writeToFile:path atomically:YES];
         
         self.Actinic.value = [memValues.M821 integerValue];
@@ -199,6 +207,14 @@
         self.PWMD.text = [memValues.M820 stringValue];
         self.PWMA.text = [memValues.M821 stringValue];
         self.LCDTimer.text = [memValues.M816 stringValue];
+        self.MHOffHour.text = [memValues.M802 stringValue];
+        self.MHOffMin.text = [memValues.M803 stringValue];
+        self.MHOnHour.text = [memValues.M800 stringValue];
+        self.MHOnMin.text = [memValues.M801 stringValue];
+        self.StdOffHour.text = [memValues.M806 stringValue];
+        self.StdOffMin.text = [memValues.M807 stringValue];
+        self.StdOnHour.text = [memValues.M804 stringValue];
+        self.StdOnMin.text = [memValues.M805 stringValue];
 
         
 
@@ -358,6 +374,14 @@
     self.overheatValue = nil;
     self.LCDTimerValue = nil;
     self.sendUpdateMem = nil;
+    self.MHOnMin = nil;
+    self.MHOnHour = nil;
+    self.MHOffMin = nil;
+    self.MHOffHour = nil;
+    self.StdOnHour = nil;
+    self.StdOnMin = nil;
+    self.StdOffHour = nil;
+    self.StdOffMin = nil;
 
 }
 
@@ -389,6 +413,15 @@
     [overheatValue release];
     [LCDTimerValue release];
     [sendUpdateMem release];
+    //*MHOnHour, *MHOnMin, *MHOffHour, *MHOffMin, *StdOnHour, *StdOnMin, *StdOffHour, *StdOffMin
+    [MHOnHour release];
+    [MHOnMin release];
+    [MHOffHour release];
+    [MHOffMin release];
+    [StdOffHour release];
+    [StdOffMin release];
+    [StdOnHour release];
+    [StdOnMin release];
    // [memValues release];
    // [xmlParser release];
    // [paramArray release];
