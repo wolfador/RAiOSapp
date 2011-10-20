@@ -9,8 +9,8 @@
 #import "MemoryViewController.h"
 
 @implementation MemoryViewController
-@synthesize delegate = _delegate, request;
-@synthesize HeaterOn, HeaterOff, FeedTimer, Overheat, PWMD, PWMA, LCDTimer, wifiURL, enteredURL, fullURL, Actinic, Daylight, daylightValue, actinicValue, heaterOnValue, heaterOffValue, feedTimerValue, overheatValue, LCDTimerValue, sendUpdateMem, ForC, ForC2, ForC3, MHOnHour, MHOnMin, MHOffHour, MHOffMin, StdOnHour, StdOnMin, StdOffHour, StdOffMin;
+@synthesize delegate = _delegate;
+@synthesize HeaterOn, HeaterOff, FeedTimer, Overheat, PWMD, PWMA, LCDTimer, wifiURL, enteredURL, fullURL, Actinic, Daylight, daylightValue, actinicValue, heaterOnValue, heaterOffValue, feedTimerValue, overheatValue, LCDTimerValue, sendUpdateMem, ForC, ForC2, ForC3, MHOnHour, MHOnMin, MHOffHour, MHOffMin, StdOnHour, StdOnMin, StdOffHour, StdOffMin, scrollView;
 - (IBAction)done
 {
     [self.delegate memoryViewControllerDidFinish:self];
@@ -265,53 +265,64 @@
 }
 -(void)updateValue:(NSString *) controllerUrl
 {
-    //[self.request clearDelegatesAndCancel];
-
     NSURL *url = [NSURL URLWithString: controllerUrl];
-    ASIHTTPRequest *pushUpdate = [ASIHTTPRequest requestWithURL:url]; 
-    //[pushUpdate setShouldPresentAuthenticationDialog: YES];
-    
-    [pushUpdate startAsynchronous];
-    
+    NSURLRequest *theRequest=[NSURLRequest requestWithURL:url                        
+                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
+                              
+                                          timeoutInterval:60.0];
+    NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
+    if(!theConnection)
+    {
+        
+    }
     
     
 }
 -(void)sendUpdate:(NSString *) controllerUrl
 {
-    //[self.request clearDelegatesAndCancel];
-    
-    
     NSURL *url = [NSURL URLWithString: controllerUrl];
-    self.request = [ASIHTTPRequest requestWithURL:url]; 
-    [self.request setDelegate:self];
-    [self.request setDidReceiveDataSelector:@selector(request:didReceiveData:)];
-    //not working with iOS5
-    //[self.request setShouldPresentAuthenticationDialog: YES];
+    NSURLRequest *theRequest=[NSURLRequest requestWithURL:url                        
+                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
+                              
+                                          timeoutInterval:60.0];
     
-    [self.request startAsynchronous];
+    NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
+    
+    if (!theConnection) {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
+        
+    }
+
 
     
 }
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 
-- (void)request:(ASIHTTPRequest *)request didReceiveData:(NSData *)data
-{
-    
+{    
+    NSString *memData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSRange range = [memData rangeOfString:@">OK</" options:NSCaseInsensitiveSearch];
+    if( range.location != NSNotFound ) {
+        NSLog(@"Value Updated");
+    }
+    else
+    {
     memValues = [[MEM alloc] init] ;
     xmlParser = [[XmlParser alloc] init] ;
     
     
-    NSString *memData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
     paramArray = [xmlParser fromXml:memData withObject:memValues];
     [memData release];
     memValues = [paramArray lastObject];
-
+    
     [self formatRA:memValues];
     [self UpdateUI:memValues];
-    
-   
+       [connection release];
+    }
     
 }
-
 
 -(BOOL)reachable{
     if ([self.enteredURL length] > 0) {
@@ -346,6 +357,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.scrollView setScrollEnabled:YES];
+    [self.scrollView setContentSize:CGSizeMake(320, 700)];     
+    self.scrollView.delegate = self;
     [self loadData];
     // Do any additional setup after loading the view from its nib.
 }
@@ -353,7 +367,6 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    self.request = nil;
     self.HeaterOn = nil;
     self.HeaterOff = nil;
     self.FeedTimer = nil;
@@ -382,6 +395,7 @@
     self.StdOnMin = nil;
     self.StdOffHour = nil;
     self.StdOffMin = nil;
+    self.scrollView = nil;
 
 }
 
@@ -392,7 +406,6 @@
 }
 -(void) dealloc
 {
-    [request release];
     [HeaterOn release];
     [HeaterOff release];
     [FeedTimer release];
@@ -422,6 +435,7 @@
     [StdOffMin release];
     [StdOnHour release];
     [StdOnMin release];
+    [scrollView release];
    // [memValues release];
    // [xmlParser release];
    // [paramArray release];
