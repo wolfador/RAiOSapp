@@ -9,7 +9,6 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#import "ASIHTTPRequest.h"
 #import "RA_ParamObject.h"
 #import "XmlParser.h"
 #import "Reachability.h"
@@ -25,11 +24,9 @@
     RA *raParam;
     IBOutlet UIScrollView *scrollView;
     NSString *urlLocation;
-
-    ASIHTTPRequest *request;
     NSString *response;
     XmlParser *xmlParser;
-     NSMutableArray *paramArray;
+    NSMutableArray *paramArray;
     
 
 }
@@ -76,7 +73,6 @@
 @property (nonatomic, retain) IBOutlet UIButton *b1R7Indicator;
 @property (nonatomic, retain) IBOutlet UIButton *b1R8Indicator;
 @property (nonatomic, retain) NSString *response;
-@property (nonatomic, retain) ASIHTTPRequest *request;
 -(void)formatRA : (RA *) params;
 -(NSString *)formatTemp : (NSNumber *) temp;
 -(NSString *) formatPh : (NSNumber *) pH;
@@ -84,7 +80,6 @@
 -(NSString *)buildRelayBinary : (NSNumber *)relayByte;
 -(NSString *) formatSal : (NSNumber *)sal;
 -(void)sendUpdate:(NSString *) controllerUrl;
-- (void)request:(ASIHTTPRequest *)request ReceiveData:(NSData *)data;
 -(IBAction) waterChange;
 -(IBAction) refreshParams;
 -(IBAction) toggleRelay:(id)sender;

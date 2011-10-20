@@ -18,7 +18,7 @@
 @synthesize box2Relay1, box2Relay2, box2Relay3, box2Relay4, box2Relay5, box2Relay6, box2Relay7, box2Relay8;
 
 @synthesize wifiUrl,fullUrl,lastUpdatedLabel;
-@synthesize box2, enteredURL, response, request, tempScale, salinityLabel, salinityValue, temp2Value, temp3Value, changeWater, buttonPress;
+@synthesize box2, enteredURL, response, tempScale, salinityLabel, salinityValue, temp2Value, temp3Value, changeWater, buttonPress;
 
 
 - (void)viewDidLoad
@@ -160,7 +160,7 @@
 {
     if ([self reachable]) {
         self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
-            [self SendUpdate:fullUrl];
+        [self SendUpdate:self.fullUrl];
     }
     else
     {
@@ -336,17 +336,21 @@
 
 -(void)sendUpdate:(NSString *) controllerUrl
 {
-    [self.request clearDelegatesAndCancel];
-    
-    
+
     NSURL *url = [NSURL URLWithString: controllerUrl];
-    self.request = [ASIHTTPRequest requestWithURL:url]; 
-    [self.request setDelegate:self];
-   [self.request setDidReceiveDataSelector:@selector(request:ReceiveData:)];
-//currently not working with iOS5
-//    [self.request setShouldPresentAuthenticationDialog: YES];
+    NSURLRequest *theRequest=[NSURLRequest requestWithURL:url                        
+                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
+                              
+                                          timeoutInterval:60.0];
     
-    [self.request startAsynchronous];
+    NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
+    
+    if (!theConnection) {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
+        
+    }
     lastUpdatedLabel.text = @"Updating";
     lastUpdatedLabel.textColor = [UIColor greenColor];
         
@@ -355,20 +359,34 @@
 {
 
     NSURL *url = [NSURL URLWithString: controllerUrl];
-   ASIHTTPRequest *modeChange = [ASIHTTPRequest requestWithURL:url]; 
-    NSLog(@"%@", url);
-    [modeChange setDelegate:self];
-    [modeChange startSynchronous];
+    NSURLRequest *theRequest=[NSURLRequest requestWithURL:url                        
+                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
+                              
+                                          timeoutInterval:60.0];
     
+    NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
+    
+    if (!theConnection) {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
+        
+    }
 }
 
-- (void)request:(ASIHTTPRequest *)request ReceiveData:(NSData *)data
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+
 {
-    
-   raParam = [[RA alloc] init] ;
+    raParam = [[RA alloc] init] ;
     xmlParser = [[XmlParser alloc] init] ;
     self.response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    
+    NSRange range = [self.response rangeOfString:@"<MODE>" options:NSCaseInsensitiveSearch];
+    if( range.location != NSNotFound ) {
+        NSLog(@"MODE");
+    }
+
+    else
+    {
     paramArray = [xmlParser fromXml:self.response withObject:raParam];
     
     raParam = [paramArray lastObject];
@@ -395,9 +413,10 @@
     
     [raParam release];
     [xmlParser release];
+    }
+    [connection release];
     
 }
-
 -(void)formatRA : (RA *)params
 {
     params.formattedTemp1 = [self formatTemp:params.T1];
@@ -691,7 +710,6 @@
     self.b1R6Indicator = nil;
     self.b1R7Indicator = nil;
     self.b1R8Indicator = nil;
-    self.request = nil;
     self.response = nil;
     self.tempScale = nil;
     self.salinityLabel = nil;
@@ -757,7 +775,6 @@
     [b1R6Indicator release];
     [b1R7Indicator release];
     [b1R8Indicator release];
-    [request release];
     [response release];
     [tempScale release];
     [paramArray release];
