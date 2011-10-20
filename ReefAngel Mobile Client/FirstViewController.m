@@ -377,16 +377,19 @@
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 
 {
-    raParam = [[RA alloc] init] ;
-    xmlParser = [[XmlParser alloc] init] ;
+    
     self.response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSRange range = [self.response rangeOfString:@"<MODE>" options:NSCaseInsensitiveSearch];
     if( range.location != NSNotFound ) {
         NSLog(@"MODE");
+        
+        //add code to handle Mode OK or not
     }
 
     else
     {
+        raParam = [[RA alloc] init] ;
+        xmlParser = [[XmlParser alloc] init] ;
     paramArray = [xmlParser fromXml:self.response withObject:raParam];
     
     raParam = [paramArray lastObject];
