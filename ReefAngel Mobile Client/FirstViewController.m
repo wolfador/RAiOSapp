@@ -17,7 +17,7 @@
 @synthesize b2R1Indicator, b2R2Indicator, b2R3Indicator,  b2R4Indicator, b2R5Indicator, b2R6Indicator, b2R7Indicator, b2R8Indicator;
 @synthesize box2Relay1, box2Relay2, box2Relay3, box2Relay4, box2Relay5, box2Relay6, box2Relay7, box2Relay8;
 
-@synthesize wifiUrl,fullUrl,lastUpdatedLabel;
+@synthesize wifiUrl,fullUrl,lastUpdatedLabel, current_version;
 @synthesize box2, enteredURL, response, tempScale, salinityLabel, salinityValue, temp2Value, temp3Value, changeWater, buttonPress;
 
 
@@ -311,7 +311,9 @@
     }
     if ([self reachable]) {
         self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
-            [self SendUpdate:fullUrl];
+            NSString *version = [NSString stringWithFormat:@"%@v",self.wifiUrl];
+        [self SendUpdate:version];
+            //[self SendUpdate:self.fullUrl];
     }
     else if ([self.enteredURL length] == 0)
     {
@@ -377,19 +379,32 @@
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 
 {
-    
+    xmlParser = [[XmlParser alloc] init] ;
     self.response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSRange range = [self.response rangeOfString:@"<MODE>" options:NSCaseInsensitiveSearch];
+    NSRange range2 = [self.response rangeOfString:@"</V>" options:NSCaseInsensitiveSearch];
     if( range.location != NSNotFound ) {
         NSLog(@"MODE");
         
         //add code to handle Mode OK or not
     }
+    else if(range2.location != NSNotFound )
+    {
+        if ([self.response length] > 7) {
+            NSString *newStr = [self.response substringFromIndex:3];
+            NSString *version = [newStr substringToIndex:[newStr length] - 4];
+            self.current_version = [version stringByReplacingOccurrencesOfString:@"." withString:@""];
+        }
+        [self ConfigureUI:current_version];
+        
+        self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
+        [self SendUpdate:self.fullUrl];
 
+    }
     else
     {
         raParam = [[RA alloc] init] ;
-        xmlParser = [[XmlParser alloc] init] ;
+        
     paramArray = [xmlParser fromXml:self.response withObject:raParam];
     
     raParam = [paramArray lastObject];
@@ -415,10 +430,27 @@
     [self UpdateUI:raParam];
     
     [raParam release];
-    [xmlParser release];
+    
     }
+    [xmlParser release];
     [connection release];
     
+}
+-(void)ConfigureUI:(NSString*) ver
+{
+    NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+    [f setNumberStyle:NSNumberFormatterDecimalStyle];
+    NSNumber *version = [f numberFromString:ver];
+    [f release];
+    if ([version intValue] <= 8518) {
+        self.changeWater.hidden = YES;
+        self.buttonPress.hidden = YES;
+    }
+    else
+    {
+        self.changeWater.hidden = NO;
+    }
+
 }
 -(void)formatRA : (RA *)params
 {
