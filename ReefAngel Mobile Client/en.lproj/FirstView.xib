@@ -85,7 +85,7 @@
 								<string key="NSFrame">{{192, 98}, {86, 29}}</string>
 								<reference key="NSSuperview" ref="118087838"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="283511770"/>
+								<reference key="NSNextKeyView" ref="1008576090"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -404,7 +404,7 @@
 								<string key="NSFrame">{{192, 130}, {86, 29}}</string>
 								<reference key="NSSuperview" ref="118087838"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="203297880"/>
+								<reference key="NSNextKeyView" ref="831189045"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -1325,7 +1325,7 @@
 							</object>
 							<object class="IBUILabel" id="916649043">
 								<reference key="NSNextResponder" ref="118087838"/>
-								<int key="NSvFlags">292</int>
+								<int key="NSvFlags">-2147483356</int>
 								<string key="NSFrame">{{10, 75}, {65, 50}}</string>
 								<reference key="NSSuperview" ref="118087838"/>
 								<reference key="NSWindow"/>
@@ -1358,10 +1358,11 @@
 							</object>
 							<object class="IBUIButton" id="1008576090">
 								<reference key="NSNextResponder" ref="118087838"/>
-								<int key="NSvFlags">292</int>
+								<int key="NSvFlags">-2147483356</int>
 								<string key="NSFrame">{{30, 130}, {25, 25}}</string>
 								<reference key="NSSuperview" ref="118087838"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="283511770"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">1</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -1384,6 +1385,7 @@
 								<string key="NSFrame">{{30, 167}, {25, 25}}</string>
 								<reference key="NSSuperview" ref="118087838"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="203297880"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">2</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -1923,6 +1925,14 @@
 						<reference key="destination" ref="1008576090"/>
 					</object>
 					<int key="connectionID">459</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">waterChangeLabel</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="916649043"/>
+					</object>
+					<int key="connectionID">461</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -2835,7 +2845,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">460</int>
+			<int key="maxID">461</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2954,6 +2964,7 @@
 							<string>temp2Value</string>
 							<string>temp3Label</string>
 							<string>temp3Value</string>
+							<string>waterChangeLabel</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -3013,6 +3024,7 @@
 							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UIScrollView</string>
+							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
@@ -3085,6 +3097,7 @@
 							<string>temp2Value</string>
 							<string>temp3Label</string>
 							<string>temp3Value</string>
+							<string>waterChangeLabel</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -3330,6 +3343,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">temp3Value</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">waterChangeLabel</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 						</object>
