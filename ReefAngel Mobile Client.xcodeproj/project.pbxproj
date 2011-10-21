@@ -234,8 +234,6 @@
 				55C73908135A4004007AE60B /* model */,
 				55C73904135A3257007AE60B /* images */,
 				55DF42941359DA3900C45B47 /* Supporting Files */,
-				55DF429D1359DA3900C45B47 /* ReefAngel_Mobile_ClientAppDelegate.m */,
-				55DF429C1359DA3900C45B47 /* ReefAngel_Mobile_ClientAppDelegate.h */,
 				55DF42A21359DA3900C45B47 /* FirstViewController.h */,
 				55DF42A31359DA3900C45B47 /* FirstViewController.m */,
 				55C7397F135BDA9A007AE60B /* SecondViewController.h */,
@@ -253,6 +251,8 @@
 		55DF42941359DA3900C45B47 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				55DF429D1359DA3900C45B47 /* ReefAngel_Mobile_ClientAppDelegate.m */,
+				55DF429C1359DA3900C45B47 /* ReefAngel_Mobile_ClientAppDelegate.h */,
 				8049D1B614269F500051D834 /* savedata.plist */,
 				55DF42951359DA3900C45B47 /* ReefAngel Mobile Client-Info.plist */,
 				55DF42961359DA3900C45B47 /* InfoPlist.strings */,
