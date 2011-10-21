@@ -9,15 +9,15 @@
 #import "Controls.h"
 
 @implementation Controls
-@synthesize temp1Label, temp2Label, temp3Label, pHLabel, scrollView, relay1, relay2, relay3, relay4, relay5, relay6, relay7, relay8, relay21, relay22, relay23, relay24, relay25, relay26, relay27, relay28;
+@synthesize scrollView, relay1, relay2, relay3, relay4, relay5, relay6, relay7, relay8, relay21, relay22, relay23, relay24, relay25, relay26, relay27, relay28;
 @synthesize box1Relay1, box1Relay2, box1Relay3, box1Relay4, box1Relay5, box1Relay6, box1Relay7, box1Relay8;
-@synthesize b1R1Indicator, b1R2Indicator, b1R3Indicator,  b1R4Indicator, b1R5Indicator, b1R6Indicator, b1R7Indicator, b1R8Indicator;
+@synthesize b1R1Indicator, b1R2Indicator, b1R3Indicator, b1R4Indicator, b1R5Indicator, b1R6Indicator, b1R7Indicator, b1R8Indicator;
 
-@synthesize b2R1Indicator, b2R2Indicator, b2R3Indicator,  b2R4Indicator, b2R5Indicator, b2R6Indicator, b2R7Indicator, b2R8Indicator;
+@synthesize b2R1Indicator, b2R2Indicator, b2R3Indicator, b2R4Indicator, b2R5Indicator, b2R6Indicator, b2R7Indicator, b2R8Indicator;
 @synthesize box2Relay1, box2Relay2, box2Relay3, box2Relay4, box2Relay5, box2Relay6, box2Relay7, box2Relay8;
 
 @synthesize wifiUrl,fullUrl,lastUpdatedLabel, current_version;
-@synthesize box2, enteredURL, response, tempScale, salinityLabel, salinityValue, temp2Value, temp3Value, changeWater, buttonPress, waterChangeLabel;
+@synthesize box2, enteredURL, response, changeWater, buttonPress, waterChangeLabel;
 
 
 
@@ -69,9 +69,6 @@
     
     if(raParam)
     {
-        temp1Label.text = [raParam.formattedTemp1 stringByAppendingString:self.tempScale];
-        pHLabel.text    = raParam.formattedpH;
-        salinityValue.text = raParam.formattedSal;
         
         
         if(!raParam.isRelay1OFFMask && !raParam.isRelay1ONMask)
@@ -420,8 +417,7 @@
         paramArray = [xmlParser fromXml:self.response withObject:raParam];
         
         raParam = [paramArray lastObject];
-        
-        [self formatRA:raParam];
+
         [self updateRelayBoxes:raParam];
         [self UpdateUI:raParam];
         if (self.response != NULL) {
@@ -467,60 +463,7 @@
     }
     
 }
--(void)formatRA : (RA *)params
-{
-    params.formattedTemp1 = [self formatTemp:params.T1];
-    if ([params.T1 intValue] <= 45 && [params.T1 intValue] > 0) {
-        self.tempScale = @"*C";
-    }
-    else if([params.T1 intValue] >= 46 && [params.T1 intValue] > 0)
-    {
-        self.tempScale = @"*F";
-    }
-    else {
-        self.tempScale = @"";
-    }
-    
-    //hides T2 if not configured
-    if ([params.T2 intValue] == 0) {
-        temp2Value.text = @"N/A";
-    }
-    else
-    {
-        params.formattedTemp2 = [self formatTemp:params.T2];
-        temp2Value.text = [raParam.formattedTemp2 stringByAppendingString:self.tempScale];
-    }
-    //hides T3 if not configured
-    if ([params.T3 intValue] == 0) {
-        temp3Value.text = @"N/A";
-    }
-    else
-    {
-        params.formattedTemp3 = [self formatTemp:params.T3];
-        temp3Value.text = [raParam.formattedTemp3 stringByAppendingString:self.tempScale];
-    }
-    
-    params.formattedpH = [self formatPh:params.PH];
-    //hides Sal if not added to ReefAngel Features.
-    if (params.SAL == NULL) {
-        self.salinityLabel.hidden = YES;
-        self.salinityValue.hidden = YES;
-    }
-    else if([params.SAL intValue] == 60)
-    {
-        self.salinityLabel.hidden = NO;
-        self.salinityValue.hidden = NO;
-        params.formattedSal = @"N/A";
-    }
-    
-    else
-    {
-        self.salinityLabel.hidden = NO;
-        self.salinityValue.hidden = NO;
-        params.formattedSal = [self formatSal:params.SAL]; 
-    }
-    
-}
+
 
 -(NSString *) formatTemp : (NSNumber *)temp
 {   
@@ -540,55 +483,6 @@
     
     
 }
--(NSString *) formatSal : (NSNumber *)sal
-{   
-    NSString *tempString = [sal stringValue];
-    NSString *retString;
-    
-    if([tempString length] >= 3)
-    {
-        
-        retString = [[[tempString substringToIndex:[tempString length]-3] stringByAppendingString:@"."] stringByAppendingString:[tempString substringFromIndex:[tempString length]-3]];  
-        return retString;
-    }
-    else if([tempString length] == 1)
-    {
-        
-        retString = [tempString stringByAppendingString:@".00"]; 
-        return retString;
-    }
-    else
-    {
-        retString = [tempString stringByAppendingString:@".00"];
-        return retString;    
-    }
-}
-
--(NSString *) formatPh : (NSNumber *)pH
-{
-    NSString *tempString = [pH stringValue];
-    NSString *retString;
-    
-    if([tempString length] >= 3)
-    {
-        
-        retString = [[[tempString substringToIndex:[tempString length]-2] stringByAppendingString:@"."] stringByAppendingString:[tempString substringFromIndex:[tempString length]-2]];  
-        return retString;
-    }
-    else if([tempString length] == 1)
-    {
-        
-        retString = [tempString stringByAppendingString:@".00"]; 
-        return retString;
-    }
-    else
-    {
-        retString = [tempString stringByAppendingString:@".00"];
-        return retString;    
-    }
-    
-}
-
 -(void)updateRelayBoxes : (RA *) ra
 {
     NSString *binaryString = [self buildRelayBinary:ra.R];
@@ -676,7 +570,6 @@
     // Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
     
-    self.temp1Label = nil;
     self.relay1 = nil;
     self.relay2 = nil;
     self.relay3 = nil;
@@ -693,19 +586,15 @@
     self.relay26 = nil;
     self.relay27 = nil;
     self.relay28 = nil;
-    self.temp2Label = nil;
-    self.temp3Label = nil;
-    self.pHLabel = nil;
+
     self.lastUpdatedLabel = nil;
-    self.salinityLabel = nil;
+
 }
 
 
 - (void)viewDidUnload
 {
     
-    
-    self.temp1Label = nil;
     self.relay1 = nil;
     self.relay2 = nil;
     self.relay3 = nil;
@@ -722,9 +611,6 @@
     self.relay26 = nil;
     self.relay27 = nil;
     self.relay28 = nil;
-    self.temp2Label = nil;
-    self.temp3Label = nil;
-    self.pHLabel = nil;
     self.lastUpdatedLabel = nil;
     self.scrollView = nil;
     self.box1Relay1 = nil;
@@ -761,16 +647,12 @@
     self.b1R7Indicator = nil;
     self.b1R8Indicator = nil;
     self.response = nil;
-    self.tempScale = nil;
-    self.salinityLabel = nil;
-    self.salinityValue = nil;
     [super viewDidUnload];
 }
 
 
 - (void)dealloc
 {
-    [temp1Label release];
     [relay1 release];
     [relay2 release];
     [relay3 release];
@@ -787,9 +669,6 @@
     [relay26 release];
     [relay27 release];
     [relay28 release];
-    [temp2Label release];
-    [temp3Label release];
-    [pHLabel release];
     [lastUpdatedLabel release];
     [scrollView release];
     [box1Relay1 release];
@@ -828,8 +707,6 @@
     [response release];
     [tempScale release];
     [paramArray release];
-    [salinityLabel release];
-    [salinityValue release];
     [super dealloc];
     
 }
