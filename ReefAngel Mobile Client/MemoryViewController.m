@@ -270,12 +270,14 @@
                                               cachePolicy:NSURLRequestUseProtocolCachePolicy
                               
                                           timeoutInterval:60.0];
-    NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
+    
+    NSURLConnection *theConnection = [NSURLConnection connectionWithRequest:theRequest delegate:self];
     if(!theConnection)
     {
-        
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
     }
-    
     
 }
 -(void)sendUpdate:(NSString *) controllerUrl
@@ -286,15 +288,14 @@
                               
                                           timeoutInterval:60.0];
     
-    NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
     
+    NSURLConnection *theConnection = [NSURLConnection connectionWithRequest:theRequest delegate:self];    
     if (!theConnection) {
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
 		[alertView show];
 		[alertView release];
         
     }
-
 
     
 }
@@ -314,14 +315,15 @@
     
     
     paramArray = [xmlParser fromXml:memData withObject:memValues];
-    [memData release];
+    
     memValues = [paramArray lastObject];
     
     [self formatRA:memValues];
     [self UpdateUI:memValues];
-       [connection release];
+      
+        
     }
-    
+    [memData release];
 }
 
 -(BOOL)reachable{
