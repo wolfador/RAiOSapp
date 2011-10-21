@@ -13,9 +13,9 @@
 #import "ReefAngel_Mobile_ClientAppDelegate.h"
 #import "MemoryViewController.h"
 
-@protocol PassURL <NSObject>
--(void) setURL: (NSString *) enteredURL;
-@end
+//@protocol PassURL <NSObject>
+//-(void) setURL: (NSString *) enteredURL;
+//@end
 
 @interface SecondViewController : UIViewController <UITextFieldDelegate, UIScrollViewDelegate, MemoryViewControllerDelegate>{
     IBOutlet UIScrollView *scrollView;
