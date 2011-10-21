@@ -18,7 +18,7 @@
 @synthesize box2Relay1, box2Relay2, box2Relay3, box2Relay4, box2Relay5, box2Relay6, box2Relay7, box2Relay8;
 
 @synthesize wifiUrl,fullUrl,lastUpdatedLabel, current_version;
-@synthesize box2, enteredURL, response, tempScale, salinityLabel, salinityValue, temp2Value, temp3Value, changeWater, buttonPress;
+@synthesize box2, enteredURL, response, tempScale, salinityLabel, salinityValue, temp2Value, temp3Value, changeWater, buttonPress, waterChangeLabel;
 
 
 - (void)viewDidLoad
@@ -345,8 +345,9 @@
                               
                                           timeoutInterval:60.0];
     
-    NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
+   // NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
     
+    NSURLConnection *theConnection = [NSURLConnection connectionWithRequest:theRequest delegate:self];
     if (!theConnection) {
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
 		[alertView show];
@@ -366,7 +367,8 @@
                               
                                           timeoutInterval:60.0];
     
-    NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
+   // NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
+    NSURLConnection *theConnection = [NSURLConnection connectionWithRequest:theRequest delegate:self];
     
     if (!theConnection) {
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
@@ -380,21 +382,34 @@
 
 {
     xmlParser = [[XmlParser alloc] init] ;
-    self.response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+   // self.response = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSString *receivedData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    self.response = [NSString stringWithString:receivedData];
+    [receivedData release];
+    
     NSRange range = [self.response rangeOfString:@"<MODE>" options:NSCaseInsensitiveSearch];
     NSRange range2 = [self.response rangeOfString:@"</V>" options:NSCaseInsensitiveSearch];
     if( range.location != NSNotFound ) {
         NSLog(@"MODE");
-        
-        //add code to handle Mode OK or not
+        if (![self.response isEqualToString:@"<MODE>OK</MODE>"]) {
+            
+            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to start" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+            [alertView show];
+            [alertView release];
+            self.changeWater.hidden = NO;
+            self.buttonPress.hidden = YES;
+        }
+
+        //refresh Params / relays to reflect mode start
+        [self SendUpdate:self.fullUrl];
     }
     else if(range2.location != NSNotFound )
     {
-        if ([self.response length] > 7) {
-            NSString *newStr = [self.response substringFromIndex:3];
-            NSString *version = [newStr substringToIndex:[newStr length] - 4];
+        //removes <V> and </V>
+            NSString *newStr = [self.response stringByReplacingOccurrencesOfString:@"<V>" withString:@""];
+            NSString *version = [newStr stringByReplacingOccurrencesOfString:@"</V>" withString:@""];
             self.current_version = [version stringByReplacingOccurrencesOfString:@"." withString:@""];
-        }
+        
         [self ConfigureUI:current_version];
         
         self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
@@ -433,7 +448,7 @@
     
     }
     [xmlParser release];
-    [connection release];
+   // [connection release];
     
 }
 -(void)ConfigureUI:(NSString*) ver
@@ -444,10 +459,13 @@
     [f release];
     if ([version intValue] <= 8518) {
         self.changeWater.hidden = YES;
+        self.waterChangeLabel.hidden = YES;
         self.buttonPress.hidden = YES;
+    
     }
     else
     {
+        self.waterChangeLabel.hidden = NO;
         self.changeWater.hidden = NO;
     }
 

@@ -28,6 +28,7 @@
     XmlParser *xmlParser;
     NSMutableArray *paramArray;
    NSString *current_version;
+    IBOutlet UILabel *waterChangeLabel;
     
 
 }
@@ -35,7 +36,7 @@
 @property (readwrite, copy) NSString *wifiUrl, *enteredURL, *tempScale;
 @property (readwrite, copy) NSString *fullUrl, *current_version;
 @property (nonatomic, retain) IBOutlet UILabel *temp1Label, *relay1, *relay2, *relay3, *relay4, *relay5, *relay6, *relay7, *relay8, *relay21, *relay22, *relay23, *relay24, *relay25, *relay26, *relay27, *relay28, *salinityLabel, *salinityValue;
-@property (nonatomic, retain) IBOutlet UILabel *temp2Label, *temp2Value;
+@property (nonatomic, retain) IBOutlet UILabel *temp2Label, *temp2Value, *waterChangeLabel;
 @property (nonatomic, retain) IBOutlet UILabel *temp3Label, *temp3Value;
 @property (nonatomic, retain) IBOutlet UILabel *pHLabel;
 @property (nonatomic, retain) IBOutlet UILabel *lastUpdatedLabel;
