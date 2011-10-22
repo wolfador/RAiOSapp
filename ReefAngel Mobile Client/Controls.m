@@ -17,7 +17,7 @@
 @synthesize box2Relay1, box2Relay2, box2Relay3, box2Relay4, box2Relay5, box2Relay6, box2Relay7, box2Relay8;
 
 @synthesize wifiUrl,fullUrl,lastUpdatedLabel, current_version;
-@synthesize box2, enteredURL, response, changeWater, buttonPress, waterChangeLabel, feedMode, feedModeLabel, buttonPressLabel;
+@synthesize box2, enteredURL, response, changeWater, buttonPress, waterChangeLabel, feedMode, feedModeLabel, buttonPressLabel, versionLowLabel;
 
 
 
@@ -29,6 +29,7 @@
     [self.scrollView setScrollEnabled:YES];
     [self.scrollView setContentSize:CGSizeMake(320, 570)];     
     self.scrollView.delegate = self;
+
     
 }
 
@@ -460,22 +461,20 @@
     NSNumber *version = [f numberFromString:ver];
     [f release];
     if ([version intValue] <= 8518) {
-        self.changeWater.hidden = YES;
-        self.waterChangeLabel.hidden = YES;
-        self.buttonPress.hidden = YES;
-        self.buttonPressLabel.hidden = YES;
-        self.feedMode.hidden = YES;
-        self.feedModeLabel.hidden = YES;
+        
+        self.changeWater.enabled = NO;
+        self.buttonPress.enabled = NO;
+        self.feedMode.enabled = NO;
+        self.versionLowLabel.hidden = NO;
+      
         
     }
     else
     {
-        self.waterChangeLabel.hidden = NO;
-        self.changeWater.hidden = NO;
-        self.buttonPress.hidden = NO;
-        self.buttonPressLabel.hidden = NO;
-        self.feedMode.hidden = NO;
-        self.feedModeLabel.hidden = NO;
+        self.changeWater.enabled = YES;
+        self.buttonPress.enabled = YES;
+        self.feedMode.enabled = YES;
+        self.versionLowLabel.hidden = YES;
     }
     
 }
