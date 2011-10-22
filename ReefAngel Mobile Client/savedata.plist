@@ -41,6 +41,6 @@
 	<key>EnteredURL</key>
 	<string></string>
 	<key>TempScale</key>
-	<string>F</string>
+	<string>*F</string>
 </dict>
 </plist>
