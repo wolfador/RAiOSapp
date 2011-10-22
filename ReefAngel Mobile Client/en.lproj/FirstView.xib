@@ -46,10 +46,10 @@
 						<int key="NSvFlags">274</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIView" id="880243583">
+							<object class="IBUIView" id="390885102">
 								<reference key="NSNextResponder" ref="118087838"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{13, 233}, {318, 180}}</string>
+								<string key="NSFrame">{{-59, 235}, {318, 180}}</string>
 								<reference key="NSSuperview" ref="118087838"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
@@ -207,7 +207,7 @@
 								<string key="NSFrame">{{192, 198}, {86, 29}}</string>
 								<reference key="NSSuperview" ref="118087838"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="880243583"/>
+								<reference key="NSNextKeyView" ref="390885102"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -472,7 +472,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">temp1MeterView</string>
 						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="880243583"/>
+						<reference key="destination" ref="390885102"/>
 					</object>
 					<int key="connectionID">466</int>
 				</object>
@@ -535,7 +535,7 @@
 							<reference ref="440809998"/>
 							<reference ref="512122906"/>
 							<reference ref="446168157"/>
-							<reference ref="880243583"/>
+							<reference ref="390885102"/>
 						</object>
 						<reference key="parent" ref="456029200"/>
 					</object>
@@ -601,7 +601,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">464</int>
-						<reference key="object" ref="880243583"/>
+						<reference key="object" ref="390885102"/>
 						<reference key="parent" ref="118087838"/>
 					</object>
 				</object>
