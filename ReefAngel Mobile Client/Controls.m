@@ -17,7 +17,7 @@
 @synthesize box2Relay1, box2Relay2, box2Relay3, box2Relay4, box2Relay5, box2Relay6, box2Relay7, box2Relay8;
 
 @synthesize wifiUrl,fullUrl,lastUpdatedLabel, current_version;
-@synthesize box2, enteredURL, response, changeWater, buttonPress, waterChangeLabel;
+@synthesize box2, enteredURL, response, changeWater, buttonPress, waterChangeLabel, feedMode, feedModeLabel, buttonPressLabel;
 
 
 
@@ -173,8 +173,6 @@
         
         self.fullUrl = [NSString stringWithFormat:@"%@mw",self.wifiUrl];
         [self sendMode:fullUrl];
-        self.buttonPress.hidden = NO;
-        self.changeWater.hidden = YES;
         [self refreshParams];
     }
     else
@@ -185,10 +183,23 @@
     }
     
 }
+-(IBAction)startFeedMode
+{
+    if ([self reachable]) {
+        
+        self.fullUrl = [NSString stringWithFormat:@"%@mf",self.wifiUrl];
+        [self sendMode:fullUrl];
+        [self refreshParams];
+    }
+    else
+    {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
+    }
+}
 -(IBAction)pressButton
 {
-    self.changeWater.hidden = NO;
-    self.buttonPress.hidden = YES;
     self.fullUrl = [NSString stringWithFormat:@"%@bp",self.wifiUrl];
     [self sendMode:fullUrl];
     [self refreshParams];
@@ -390,8 +401,6 @@
             UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to start" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
             [alertView show];
             [alertView release];
-            self.changeWater.hidden = NO;
-            self.buttonPress.hidden = YES;
         }
         
         //refresh Params / relays to reflect mode start
@@ -454,12 +463,19 @@
         self.changeWater.hidden = YES;
         self.waterChangeLabel.hidden = YES;
         self.buttonPress.hidden = YES;
+        self.buttonPressLabel.hidden = YES;
+        self.feedMode.hidden = YES;
+        self.feedModeLabel.hidden = YES;
         
     }
     else
     {
         self.waterChangeLabel.hidden = NO;
         self.changeWater.hidden = NO;
+        self.buttonPress.hidden = NO;
+        self.buttonPressLabel.hidden = NO;
+        self.feedMode.hidden = NO;
+        self.feedModeLabel.hidden = NO;
     }
     
 }
@@ -647,6 +663,12 @@
     self.b1R7Indicator = nil;
     self.b1R8Indicator = nil;
     self.response = nil;
+    self.changeWater = nil;
+    self.waterChangeLabel = nil;
+    self.buttonPress = nil;
+    self.buttonPressLabel = nil;
+    self.feedMode = nil;
+    self.feedModeLabel = nil;
     [super viewDidUnload];
 }
 
@@ -707,6 +729,12 @@
     [response release];
     [tempScale release];
     [paramArray release];
+    [changeWater release];
+    [waterChangeLabel release];
+    [buttonPress release];
+    [buttonPressLabel release];
+    [feedMode release];
+    [feedModeLabel release];
     [super dealloc];
     
 }
