@@ -30,6 +30,7 @@
 		55DF42AD1359DA3900C45B47 /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55DF42AB1359DA3900C45B47 /* SecondView.xib */; };
 		740EBAE514510C2700D02ADF /* Controls.m in Sources */ = {isa = PBXBuildFile; fileRef = 740EBAE314510C2600D02ADF /* Controls.m */; };
 		740EBAE814510CC800D02ADF /* Controls.xib in Resources */ = {isa = PBXBuildFile; fileRef = 740EBAE714510CC800D02ADF /* Controls.xib */; };
+		740EBAFB14525ADA00D02ADF /* Memdata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 740EBAFA14525ADA00D02ADF /* Memdata.plist */; };
 		7497B71C143B8FBA002752D4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7497B71B143B8FBA002752D4 /* libz.dylib */; };
 		74E48061144FB1550097CA99 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E48060144FB1550097CA99 /* User.m */; };
 		80020DD8142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80020DD7142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.m */; };
@@ -88,6 +89,7 @@
 		740EBAE214510C2600D02ADF /* Controls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Controls.h; sourceTree = "<group>"; };
 		740EBAE314510C2600D02ADF /* Controls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Controls.m; sourceTree = "<group>"; };
 		740EBAE714510CC800D02ADF /* Controls.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Controls.xib; path = "ReefAngel Mobile Client/Controls.xib"; sourceTree = "<group>"; };
+		740EBAFA14525ADA00D02ADF /* Memdata.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Memdata.plist; sourceTree = "<group>"; };
 		7497B71B143B8FBA002752D4 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		74E4805F144FB1550097CA99 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		74E48060144FB1550097CA99 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 		55DF42941359DA3900C45B47 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				740EBAFA14525ADA00D02ADF /* Memdata.plist */,
 				55DF429D1359DA3900C45B47 /* ReefAngel_Mobile_ClientAppDelegate.m */,
 				55DF429C1359DA3900C45B47 /* ReefAngel_Mobile_ClientAppDelegate.h */,
 				8049D1B614269F500051D834 /* savedata.plist */,
@@ -351,6 +354,7 @@
 				8060DE90142D756600248B60 /* ReefAngel-Logo-512x512.png in Resources */,
 				80A77CD41437B81B00861996 /* MemoryViewController.xib in Resources */,
 				740EBAE814510CC800D02ADF /* Controls.xib in Resources */,
+				740EBAFB14525ADA00D02ADF /* Memdata.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
