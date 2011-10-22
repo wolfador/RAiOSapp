@@ -109,7 +109,7 @@
 	float exponent = pow(10, power);
 	if (temp < 0.2) {
 		tickIncrement = 0.1 * exponent;
-		minorTickIncrement = tickIncrement / 5.0;
+		minorTickIncrement = tickIncrement / 2.0;
 	} else if (temp < 0.5) {
 		tickIncrement = 0.2 * pow(10, power);
 		minorTickIncrement = tickIncrement / 4.0;
@@ -120,6 +120,7 @@
 		tickIncrement = 1.0 * pow(10, power);		
 		minorTickIncrement = tickIncrement / 5.0;
 	}
+
 }
 
 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)ctx {
