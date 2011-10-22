@@ -15,7 +15,7 @@
 @synthesize enteredURL, scrollView, url, port, updatedURL;
 @synthesize relayExp, relay1, relay2, relay3, relay4, relay5, relay6, relay7, relay8;
 @synthesize exprelay1, exprelay2, exprelay3, exprelay4, exprelay5, exprelay6, exprelay7, exprelay8;
-@synthesize exprelay1Label, exprelay2Label, exprelay3Label, exprelay4Label, exprelay5Label, exprelay6Label, exprelay7Label, exprelay8Label;
+@synthesize exprelay1Label, exprelay2Label, exprelay3Label, exprelay4Label, exprelay5Label, exprelay6Label, exprelay7Label, exprelay8Label, tempScale;
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
@@ -173,6 +173,12 @@
         [Dictionary setObject: self.relay6.text forKey: @"Relay6"];
         [Dictionary setObject: self.relay7.text forKey: @"Relay7"];
         [Dictionary setObject: self.relay8.text forKey: @"Relay8"];
+        if (self.tempScale.selectedSegmentIndex == 0) {
+            [Dictionary setObject: @"*F" forKey: @"TempScale"];
+        }
+        else if (self.tempScale.selectedSegmentIndex == 1) {
+            [Dictionary setObject: @"*C" forKey: @"TempScale"];
+        }
 		
         if(relayExp.on)    
         {
