@@ -40,5 +40,7 @@
 	<string>2000</string>
 	<key>EnteredURL</key>
 	<string></string>
+	<key>TempScale</key>
+	<string>F</string>
 </dict>
 </plist>

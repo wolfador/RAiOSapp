@@ -13,6 +13,8 @@
 #import "XmlParser.h"
 #import "Reachability.h"
 
+@class MeterView;
+
 @interface FirstViewController : UIViewController<UIApplicationDelegate, UITabBarDelegate, UIScrollViewDelegate>{
 
     UILabel *temp1Label, *temp2Label, *temp3Label, *pHLabel, *lastUpdatedLabel, *salinityLabel, *salinityValue, *temp2Value, *temp3Value;
@@ -25,6 +27,8 @@
     XmlParser *xmlParser;
     NSMutableArray *paramArray;
    NSString *current_version;  
+    
+    MeterView *temp1MeterView;
 
 }
 
@@ -36,6 +40,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *pHLabel;
 @property (nonatomic, retain) IBOutlet UILabel *lastUpdatedLabel;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, retain) IBOutlet MeterView *temp1MeterView;
 
 @property (nonatomic, retain) NSString *response;
 -(void)formatRA : (RA *) params;

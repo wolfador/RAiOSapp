@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Actinic</key>
+	<string>100</string>
+	<key>Daylight</key>
+	<string>100</string>
+	<key>FeedTimer</key>
+	<string>800</string>
+	<key>HeaterOff</key>
+	<string>80</string>
+	<key>HeaterOn</key>
+	<string>78</string>
+	<key>LCDTimer</key>
+	<string>500</string>
+	<key>MHOffHour</key>
+	<string>15</string>
+	<key>MHOffMin</key>
+	<string>0</string>
+	<key>MHOnHour</key>
+	<string>8</string>
+	<key>MHOnMin</key>
+	<string>0</string>
+	<key>Overheat</key>
+	<string>150.0</string>
+	<key>StdOffHour</key>
+	<string>19</string>
+	<key>StdOffMin</key>
+	<string>30</string>
+	<key>StdOnHour</key>
+	<string>10</string>
+	<key>StdOnMin</key>
+	<string>30</string>
+</dict>
+</plist>

@@ -7,12 +7,13 @@
 //
 
 #import "FirstViewController.h"
-
+#import "MeterView.h"
 
 @implementation FirstViewController
 @synthesize temp1Label, temp2Label, temp3Label, pHLabel, scrollView;
 @synthesize wifiUrl,fullUrl,lastUpdatedLabel, current_version;
 @synthesize enteredURL, response, tempScale, salinityLabel, salinityValue, temp2Value, temp3Value;
+@synthesize temp1MeterView;
 
 
 - (void)viewDidLoad
@@ -23,6 +24,28 @@
     [self.scrollView setScrollEnabled:YES];
     [self.scrollView setContentSize:CGSizeMake(320, 570)];     
     self.scrollView.delegate = self;
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"Memdata.plist"];
+	
+	NSDictionary  *restored = [NSDictionary dictionaryWithContentsOfFile: path];
+    
+    //meter
+    self.temp1MeterView.startAngle = -3.0 * M_PI / 3.0;
+	self.temp1MeterView.arcLength = M_PI / 2.0;
+	self.temp1MeterView.value = 0.0;
+	self.temp1MeterView.textLabel.text = @"T1";
+	self.temp1MeterView.minNumber = [[restored objectForKey:@"HeaterOff"] integerValue] - 3 ;
+	self.temp1MeterView.maxNumber = [[restored objectForKey:@"HeaterOn"] integerValue] + 3;
+	self.temp1MeterView.textLabel.font = [UIFont fontWithName:@"Cochin-BoldItalic" size:15.0];
+	self.temp1MeterView.textLabel.textColor = [UIColor colorWithRed:0.7 green:1.0 blue:1.0 alpha:1.0];
+	self.temp1MeterView.needle.tintColor = [UIColor brownColor];
+	self.temp1MeterView.needle.width = 1.0;
+    self.temp1MeterView.lineWidth = 2.5;
+    self.temp1MeterView.needle.length = 0.6;
+    
+
     
 }
 
@@ -64,6 +87,12 @@
     if(raParam)
     {
         temp1Label.text = [raParam.formattedTemp1 stringByAppendingString:self.tempScale];
+        self.temp1MeterView.value = [raParam.formattedTemp1 floatValue];
+        NSString *T1 = [NSString stringWithString:@"T1 "];
+        self.temp1MeterView.textLabel.text = [T1 stringByAppendingString:raParam.formattedTemp1];
+        
+        self.temp1MeterView.minNumber = [raParam.formattedTemp1 integerValue] - 3;
+        self.temp1MeterView.maxNumber = [raParam.formattedTemp1 integerValue] + 3;
         pHLabel.text    = raParam.formattedpH;
         salinityValue.text = raParam.formattedSal;
         
@@ -404,6 +433,8 @@
     self.tempScale = nil;
     self.salinityLabel = nil;
     self.salinityValue = nil;
+    self.fullUrl = nil;
+    self.wifiUrl = nil;
     [super viewDidUnload];
 }
 
@@ -421,6 +452,8 @@
     [paramArray release];
     [salinityLabel release];
     [salinityValue release];
+    [fullUrl release];
+    [wifiUrl release];
     [super dealloc];
     
 }

@@ -38,6 +38,18 @@
         [[NSFileManager defaultManager] copyItemAtPath:path toPath:documentsDirectory error:nil];
     }
     
+    NSString *path2 = [documentsDirectory stringByAppendingPathComponent:@"Memdata.plist"];
+    BOOL fileExists2 = [[NSFileManager defaultManager] fileExistsAtPath:path2];
+    if (!fileExists2) {
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"Memdata.plist"];
+        NSString *path = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Memdata.plist"];
+        
+        [[NSFileManager defaultManager] copyItemAtPath:path toPath:documentsDirectory error:nil];
+    }
+    
+    
     
     return YES;
 }
