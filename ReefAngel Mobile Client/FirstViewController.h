@@ -20,7 +20,6 @@
     NSString *fullUrl;
     NSString *wifiUrl, *enteredURL, *tempScale;
     RA *raParam;
-    //IBOutlet UIScrollView *scrollView;
     NSString *urlLocation;
     NSString *response;
     XmlParser *xmlParser;
@@ -37,7 +36,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *temp3Label, *temp3Value;
 @property (nonatomic, retain) IBOutlet UILabel *pHLabel;
 @property (nonatomic, retain) IBOutlet UILabel *lastUpdatedLabel;
-//@property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
+
 @property (nonatomic, retain) NSString *response;
 -(void)formatRA : (RA *) params;
 -(NSString *)formatTemp : (NSNumber *) temp;

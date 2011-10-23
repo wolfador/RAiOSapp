@@ -10,11 +10,13 @@
 
 @implementation MemoryViewController
 @synthesize delegate = _delegate;
-@synthesize HeaterOn, HeaterOff, FeedTimer, Overheat, PWMD, PWMA, LCDTimer, wifiURL, enteredURL, fullURL, Actinic, Daylight, daylightValue, actinicValue, heaterOnValue, heaterOffValue, feedTimerValue, overheatValue, LCDTimerValue, sendUpdateMem, ForC, ForC2, ForC3, MHOnHour, MHOnMin, MHOffHour, MHOffMin, StdOnHour, StdOnMin, StdOffHour, StdOffMin, scrollView;
+@synthesize HeaterOn, HeaterOff, FeedTimer, Overheat, PWMD, PWMA, LCDTimer, wifiURL, enteredURL, fullURL, Actinic, Daylight, daylightValue, actinicValue, heaterOnValue, heaterOffValue, feedTimerValue, overheatValue, LCDTimerValue, sendUpdateMem, ForC, ForC2, ForC3, MHOnHour, MHOnMin, MHOffHour, MHOffMin, StdOnHour, StdOnMin, StdOffHour, StdOffMin, scrollView, MHOnHourValue, MHOnMinValue, MHOffHourValue, MHOffMinValue, StdOnHourValue, StdOnMinValue, StdOffHourValue, StdOffMinValue;
+
 - (IBAction)done
 {
     [self.delegate memoryViewControllerDidFinish:self];
 }
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -23,7 +25,9 @@
     }
     return self;
 }
--(IBAction) textFieldDoneEditing : (id) sender{
+
+-(IBAction) textFieldDoneEditing : (id) sender
+{
     [sender resignFirstResponder];
 }
 
@@ -59,6 +63,7 @@
       
         }
 }
+
 -(IBAction)slideDoneChanging:(UISlider *)sender
 {
     if(sender.tag == 820)
@@ -74,6 +79,7 @@
                  
     }
 }
+
 -(void) loadData
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -96,6 +102,7 @@
     }
 
 }
+
 -(IBAction) save
 {
     [self hideKeyboard];
@@ -111,6 +118,14 @@
      self.feedTimerValue = [restored objectForKey:@"FeedTimer"];
      self.LCDTimerValue = [restored objectForKey:@"LCDTimer"];
     self.overheatValue = [restored objectForKey:@"Overheat"];
+    self.MHOffHourValue = [restored objectForKey:@"MHOffHour"];
+    self.MHOffMinValue = [restored objectForKey:@"MHOffMin"];
+    self.MHOnHourValue = [restored objectForKey:@"MHOnHour"];
+    self.MHOnMinValue = [restored objectForKey:@"MHOnMin"];
+    self.StdOffHourValue = [restored objectForKey:@"StdOffHour"];
+    self.StdOffMinValue = [restored objectForKey:@"StdOffMin"];
+    self.StdOnHourValue = [restored objectForKey:@"StdOnHour"];
+    self.StdOnMinValue = [restored objectForKey:@"StdOnMin"];
     
      if ([self reachable]) {
     if (![self.heaterOnValue isEqualToString:self.HeaterOn.text]) {
@@ -167,10 +182,43 @@
         NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.PWMA.tag,self.PWMA.text];
         [self updateValue:updateMemory];
     }
+    if (![self.MHOffHourValue isEqualToString:self.MHOffHour.text]) {
+        NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.MHOffHour.tag,self.MHOffHour.text];
+        [self updateValue:updateMemory];
+         }    
+    if (![self.MHOffMinValue isEqualToString:self.MHOffMin.text]) {
+        NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.MHOffMin.tag,self.MHOffMin.text];
+        [self updateValue:updateMemory];
+         }
+    if (![self.MHOnHourValue isEqualToString:self.MHOnHour.text]) {
+        NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.MHOnHour.tag,self.MHOnHour.text];
+        [self updateValue:updateMemory];
+         }   
+    if (![self.MHOnMinValue isEqualToString:self.MHOnMin.text]) {
+        NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.MHOnMin.tag,self.MHOnMin.text];
+        [self updateValue:updateMemory];
+         } 
+    if (![self.StdOffHourValue isEqualToString:self.StdOffHour.text]) {
+        NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.StdOffHour.tag,self.StdOffHour.text];
+        [self updateValue:updateMemory];
+         }    
+    if (![self.StdOffMinValue isEqualToString:self.StdOffMin.text]) {
+        NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.StdOffMin.tag,self.StdOffMin.text];
+        [self updateValue:updateMemory];
+         }  
+    if (![self.StdOnHourValue isEqualToString:self.StdOnHour.text]) {
+        NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.StdOnHour.tag,self.StdOnHour.text];
+        [self updateValue:updateMemory];
+         } 
+    if (![self.StdOnMinValue isEqualToString:self.StdOnMin.text]) {
+        NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.StdOnMin.tag,self.StdOnMin.text];
+        [self updateValue:updateMemory];
+         }  
+         
      }
-    
   
 }
+
 -(void)UpdateUI:(MEM*)mem
 {
     if(memValues)
@@ -224,7 +272,6 @@
     
 }
 
-
 -(void)formatRA : (MEM *)params
 {
     self.HeaterOn.text = [self formatTemp:memValues.M822];
@@ -263,6 +310,7 @@
     
     
 }
+
 -(void)updateValue:(NSString *) controllerUrl
 {
     NSURL *url = [NSURL URLWithString: controllerUrl];
@@ -280,6 +328,7 @@
     }
     
 }
+
 -(void)sendUpdate:(NSString *) controllerUrl
 {
     NSURL *url = [NSURL URLWithString: controllerUrl];
@@ -299,8 +348,8 @@
 
     
 }
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {    
     NSString *memData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSRange range = [memData rangeOfString:@">OK</" options:NSCaseInsensitiveSearch];
@@ -326,9 +375,25 @@
     [memData release];
 }
 
--(BOOL)reachable{
-    if ([self.enteredURL length] > 0) {
+-(BOOL)reachable
+{
+    NSString *http = @"http://";
+    NSRange range = [self.enteredURL rangeOfString : http];
+    if (range.location == NSNotFound) {
         
+        NSString *testURL = [NSString stringWithString:self.enteredURL];
+        Reachability *r = [Reachability reachabilityWithHostName:testURL];
+        NetworkStatus internetStatus = [r currentReachabilityStatus];
+        if(internetStatus == NotReachable) {
+            return NO;
+        }
+        else
+        {
+            return YES;
+        }
+    }
+    else
+    {
         NSString *testURL = [self.enteredURL substringFromIndex:7];
         Reachability *r = [Reachability reachabilityWithHostName:testURL];
         NetworkStatus internetStatus = [r currentReachabilityStatus];
@@ -339,12 +404,8 @@
         {
             return YES;
         }
-        
     }
-    return NO;
-    
 }
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -398,6 +459,14 @@
     self.StdOffHour = nil;
     self.StdOffMin = nil;
     self.scrollView = nil;
+    self.MHOnMinValue = nil;
+    self.MHOnHourValue = nil;
+    self.MHOffMinValue = nil;
+    self.MHOffHourValue = nil;
+    self.StdOnHourValue = nil;
+    self.StdOnMinValue = nil;
+    self.StdOffHourValue = nil;
+    self.StdOffMinValue = nil;
 
 }
 
@@ -406,6 +475,7 @@
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
+
 -(void) dealloc
 {
     [HeaterOn release];
@@ -428,7 +498,6 @@
     [overheatValue release];
     [LCDTimerValue release];
     [sendUpdateMem release];
-    //*MHOnHour, *MHOnMin, *MHOffHour, *MHOffMin, *StdOnHour, *StdOnMin, *StdOffHour, *StdOffMin
     [MHOnHour release];
     [MHOnMin release];
     [MHOffHour release];
@@ -438,9 +507,14 @@
     [StdOnHour release];
     [StdOnMin release];
     [scrollView release];
-   // [memValues release];
-   // [xmlParser release];
-   // [paramArray release];
+    [MHOnHourValue release];
+    [MHOnMinValue release];
+    [MHOffHourValue release];
+    [MHOffMinValue release];
+    [StdOffHourValue release];
+    [StdOffMinValue release];
+    [StdOnHourValue release];
+    [StdOnMinValue release];
     [super dealloc];
 
 }

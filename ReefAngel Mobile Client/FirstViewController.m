@@ -10,7 +10,7 @@
 
 
 @implementation FirstViewController
-@synthesize temp1Label, temp2Label, temp3Label, pHLabel; //scrollView;
+@synthesize temp1Label, temp2Label, temp3Label, pHLabel;
 @synthesize wifiUrl,fullUrl,lastUpdatedLabel, current_version;
 @synthesize enteredURL, response, tempScale, salinityLabel, salinityValue, temp2Value, temp3Value;
 
@@ -19,10 +19,6 @@
 {
         
     [super viewDidLoad];
-    
-    //[self.scrollView setScrollEnabled:YES];
-    //[self.scrollView setContentSize:CGSizeMake(320, 570)];     
-    //self.scrollView.delegate = self;
 
 }
 
@@ -167,6 +163,7 @@
     lastUpdatedLabel.textColor = [UIColor greenColor];
         
 }
+
 -(void)sendMode:(NSString *) controllerUrl
 {
 

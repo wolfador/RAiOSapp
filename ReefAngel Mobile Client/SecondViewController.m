@@ -62,7 +62,8 @@
     return YES;
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)activeScrollView {
+- (void)scrollViewWillBeginDragging:(UIScrollView *)activeScrollView 
+{
     
     [self hideKeyboard];
     
