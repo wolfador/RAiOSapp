@@ -10,7 +10,7 @@
 
 
 @implementation FirstViewController
-@synthesize temp1Label, temp2Label, temp3Label, pHLabel, scrollView;
+@synthesize temp1Label, temp2Label, temp3Label, pHLabel; //scrollView;
 @synthesize wifiUrl,fullUrl,lastUpdatedLabel, current_version;
 @synthesize enteredURL, response, tempScale, salinityLabel, salinityValue, temp2Value, temp3Value;
 
@@ -20,12 +20,11 @@
         
     [super viewDidLoad];
     
-    [self.scrollView setScrollEnabled:YES];
-    [self.scrollView setContentSize:CGSizeMake(320, 570)];     
-    self.scrollView.delegate = self;
+    //[self.scrollView setScrollEnabled:YES];
+    //[self.scrollView setContentSize:CGSizeMake(320, 570)];     
+    //self.scrollView.delegate = self;
 
-    
-    }
+}
 
 -(BOOL)reachable
 {
@@ -106,6 +105,7 @@
 	return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 	
 }
+
 -(void) loadData
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -115,7 +115,10 @@
 	NSDictionary  *restored = [NSDictionary dictionaryWithContentsOfFile: path];
 	self.wifiUrl = [restored objectForKey:@"URL"];
     self.enteredURL = [restored objectForKey:@"EnteredURL"];
-//    self.tempScale = [restored objectForKey:@"TempScale"];
+   self.tempScale = [restored objectForKey:@"TempScale"];
+    if (self.tempScale == nil) {
+        self.tempScale = @"*F";
+    }
     
     if ([self reachable]) {
         self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
@@ -142,7 +145,6 @@
     [super viewDidAppear:animated];
     [self loadData];
 }
-
 
 -(void)sendUpdate:(NSString *) controllerUrl
 {
@@ -185,8 +187,8 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-
 {
+
     xmlParser = [[XmlParser alloc] init] ;
     NSString *receivedData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     self.response = [NSString stringWithString:receivedData];
@@ -238,9 +240,9 @@
     
     }
     [xmlParser release];
-   // [connection release];
     
 }
+
 -(void)ConfigureUI:(NSString*) ver
 {
     NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
@@ -257,6 +259,7 @@
     }
 
 }
+
 -(void)formatRA : (RA *)params
 {
     params.formattedTemp1 = [self formatTemp:params.T1];
@@ -319,6 +322,7 @@
     
     
 }
+
 -(NSString *) formatSal : (NSNumber *)sal
 {   
     NSString *tempString = [sal stringValue];
@@ -367,6 +371,7 @@
     }
     
 }
+
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -380,7 +385,6 @@
     self.salinityLabel = nil;
     }
 
-
 - (void)viewDidUnload
 {
     
@@ -390,7 +394,7 @@
     self.temp3Label = nil;
     self.pHLabel = nil;
     self.lastUpdatedLabel = nil;
-    self.scrollView = nil;
+    //self.scrollView = nil;
 
     self.response = nil;
     self.tempScale = nil;
@@ -401,7 +405,6 @@
     [super viewDidUnload];
 }
 
-
 - (void)dealloc
 {
     [temp1Label release];
@@ -409,7 +412,7 @@
     [temp3Label release];
     [pHLabel release];
     [lastUpdatedLabel release];
-    [scrollView release];
+    //[scrollView release];
     [response release];
     [tempScale release];
     [paramArray release];

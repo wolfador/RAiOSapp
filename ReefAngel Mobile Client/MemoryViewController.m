@@ -305,7 +305,7 @@
     NSString *memData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSRange range = [memData rangeOfString:@">OK</" options:NSCaseInsensitiveSearch];
     if( range.location != NSNotFound ) {
-        NSLog(@"Value Updated");
+        
     }
     else
     {

@@ -168,6 +168,7 @@
     }
     
 }
+
 -(IBAction)waterChange
 {
     if ([self reachable]) {
@@ -184,6 +185,7 @@
     }
     
 }
+
 -(IBAction)startFeedMode
 {
     if ([self reachable]) {
@@ -199,6 +201,7 @@
 		[alertView release];
     }
 }
+
 -(IBAction)pressButton
 {
     self.fullUrl = [NSString stringWithFormat:@"%@bp",self.wifiUrl];
@@ -241,6 +244,7 @@
 	return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 	
 }
+
 -(void) loadData
 {
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -344,7 +348,6 @@
     [self loadData];
 }
 
-
 -(void)sendUpdate:(NSString *) controllerUrl
 {
     
@@ -366,6 +369,7 @@
     lastUpdatedLabel.textColor = [UIColor greenColor];
     
 }
+
 -(void)sendMode:(NSString *) controllerUrl
 {
     
@@ -386,7 +390,6 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-
 {
     xmlParser = [[XmlParser alloc] init] ;
     NSString *receivedData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -396,7 +399,7 @@
     NSRange range = [self.response rangeOfString:@"<MODE>" options:NSCaseInsensitiveSearch];
     NSRange range2 = [self.response rangeOfString:@"</V>" options:NSCaseInsensitiveSearch];
     if( range.location != NSNotFound ) {
-        NSLog(@"MODE");
+        
         if (![self.response isEqualToString:@"<MODE>OK</MODE>"]) {
             
             UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to start" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
@@ -454,6 +457,7 @@
     // [connection release];
     
 }
+
 -(void)ConfigureUI:(NSString*) ver
 {
     NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
@@ -479,7 +483,6 @@
     
 }
 
-
 -(NSString *) formatTemp : (NSNumber *)temp
 {   
     NSString *tempString = [temp stringValue];
@@ -498,6 +501,7 @@
     
     
 }
+
 -(void)updateRelayBoxes : (RA *) ra
 {
     NSString *binaryString = [self buildRelayBinary:ra.R];
@@ -606,7 +610,6 @@
 
 }
 
-
 - (void)viewDidUnload
 {
     
@@ -670,7 +673,6 @@
     self.feedModeLabel = nil;
     [super viewDidUnload];
 }
-
 
 - (void)dealloc
 {

@@ -17,6 +17,7 @@
 @synthesize exprelay1, exprelay2, exprelay3, exprelay4, exprelay5, exprelay6, exprelay7, exprelay8;
 @synthesize exprelay1Label, exprelay2Label, exprelay3Label, exprelay4Label, exprelay5Label, exprelay6Label, exprelay7Label, exprelay8Label, tempScale;
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+
 - (void)viewDidLoad
 {
     
@@ -35,7 +36,8 @@
     self.scrollView.delegate = self;
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
     [self.url resignFirstResponder];
     [self.relay1 resignFirstResponder];
     [self.relay2 resignFirstResponder];
@@ -59,15 +61,18 @@
     }
     return YES;
 }
+
 - (void)scrollViewWillBeginDragging:(UIScrollView *)activeScrollView {
     
     [self hideKeyboard];
     
 }
 
--(IBAction) textFieldDoneEditing : (id) sender{
+-(IBAction) textFieldDoneEditing : (id) sender
+{
     [sender resignFirstResponder];
     }
+
 -(IBAction) hideKeyboard
 {
     
@@ -96,7 +101,8 @@
 
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
+{
     // Return YES for supported orientations
 	
 	return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
@@ -110,6 +116,7 @@
     memcontroller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
     [self presentModalViewController:memcontroller animated:YES];
 }
+
 - (void)memoryViewControllerDidFinish:(MemoryViewController *)controller
 {
     [self dismissModalViewControllerAnimated:YES];
@@ -162,6 +169,7 @@
             [self.updatedURL appendString:@"/"];
         }
 
+        
 		[Dictionary setObject: self.enteredURL forKey: @"EnteredURL"];
         [Dictionary setObject: self.updatedURL forKey: @"URL"];
         [Dictionary setObject: self.port.text forKey: @"Port"];
@@ -232,6 +240,7 @@
     }
 
 }
+
 -(IBAction)turnOnRelayExp
 {
     if(relayExp.on)    
@@ -327,7 +336,6 @@ else
 
 }
 
-
 - (void)viewDidUnload
 {
     
@@ -363,7 +371,6 @@ else
      [super viewDidUnload];
 
 }
-
 
 - (void)dealloc
 {
