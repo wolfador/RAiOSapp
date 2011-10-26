@@ -3,14 +3,14 @@
 //  ReefAngel Mobile Client
 //
 //  Created by John Wiebalk on 10/1/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Wolfador. All rights reserved.
 //
 
 #import "MemoryViewController.h"
 
 @implementation MemoryViewController
 @synthesize delegate = _delegate;
-@synthesize HeaterOn, HeaterOff, FeedTimer, Overheat, PWMD, PWMA, LCDTimer, wifiURL, enteredURL, fullURL, Actinic, Daylight, daylightValue, actinicValue, heaterOnValue, heaterOffValue, feedTimerValue, overheatValue, LCDTimerValue, sendUpdateMem, ForC, ForC2, ForC3, MHOnHour, MHOnMin, MHOffHour, MHOffMin, StdOnHour, StdOnMin, StdOffHour, StdOffMin, scrollView, MHOnHourValue, MHOnMinValue, MHOffHourValue, MHOffMinValue, StdOnHourValue, StdOnMinValue, StdOffHourValue, StdOffMinValue;
+@synthesize HeaterOn, HeaterOff, FeedTimer, Overheat, PWMD, PWMA, LCDTimer, wifiURL, enteredURL, fullURL, Actinic, Daylight, daylightValue, actinicValue, heaterOnValue, heaterOffValue, feedTimerValue, overheatValue, LCDTimerValue, sendUpdateMem, ForC, ForC2, ForC3, MHOnHour, MHOnMin, MHOffHour, MHOffMin, StdOnHour, StdOnMin, StdOffHour, StdOffMin, scrollView, MHOnHourValue, MHOnMinValue, MHOffHourValue, MHOffMinValue, StdOnHourValue, StdOnMinValue, StdOffHourValue, StdOffMinValue, tempScale;
 
 - (IBAction)done
 {
@@ -89,6 +89,10 @@
 	NSDictionary  *restored = [NSDictionary dictionaryWithContentsOfFile: path];
 	self.wifiURL = [restored objectForKey:@"URL"];
     self.enteredURL = [restored objectForKey:@"EnteredURL"];
+    self.tempScale = [restored objectForKey:@"TempScale"];
+    if (self.tempScale == nil) {
+        self.tempScale = @"*F";
+    }
     
     if ([self reachable]) {
         self.fullURL = [NSString stringWithFormat:@"%@ma ",self.wifiURL];
@@ -275,18 +279,10 @@
 -(void)formatRA : (MEM *)params
 {
     self.HeaterOn.text = [self formatTemp:memValues.M822];
-    if([memValues.M822 intValue] <= 45)
-    {
-        ForC.text = @"*C";
-        ForC2.text = @"*C";
-        ForC3.text = @"*C";
-    }
-    else
-    {
-        ForC.text = @"*F";
-        ForC2.text = @"*F";
-        ForC3.text = @"*F";
-    }
+        ForC.text = self.tempScale;
+        ForC2.text = self.tempScale;
+        ForC3.text = self.tempScale;
+    
     self.HeaterOff.text = [self formatTemp:memValues.M824];
     self.Overheat.text = [self formatTemp:memValues.M818];
     

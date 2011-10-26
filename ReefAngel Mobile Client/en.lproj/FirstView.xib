@@ -43,7 +43,7 @@
 					<object class="IBUILabel" id="281855748">
 						<reference key="NSNextResponder" ref="456029200"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{170, 243}, {86, 29}}</string>
+						<string key="NSFrame">{{170, 245}, {86, 29}}</string>
 						<reference key="NSSuperview" ref="456029200"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="226278390"/>
@@ -78,7 +78,6 @@
 						<string key="NSFrame">{{170, 124}, {86, 29}}</string>
 						<reference key="NSSuperview" ref="456029200"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -143,7 +142,7 @@
 					<object class="IBUILabel" id="272020004">
 						<reference key="NSNextResponder" ref="456029200"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{170, 66}, {86, 29}}</string>
+						<string key="NSFrame">{{170, 61}, {86, 29}}</string>
 						<reference key="NSSuperview" ref="456029200"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="512122906"/>
@@ -473,9 +472,9 @@
 							<reference ref="226278390"/>
 							<reference ref="415462443"/>
 							<reference ref="440809998"/>
+							<reference ref="1065067678"/>
 							<reference ref="272020004"/>
 							<reference ref="281855748"/>
-							<reference ref="1065067678"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">View</string>

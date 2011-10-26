@@ -3,7 +3,7 @@
 //  ReefAngel Mobile Client
 //
 //  Created by John Wiebalk on 10/20/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 Wolfador. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
