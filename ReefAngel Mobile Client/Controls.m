@@ -174,7 +174,7 @@
     if ([self reachable]) {
         
         self.fullUrl = [NSString stringWithFormat:@"%@mw",self.wifiUrl];
-        [self sendMode:fullUrl];
+        [self sendMode:self.fullUrl];
         [self refreshParams];
     }
     else
@@ -191,7 +191,7 @@
     if ([self reachable]) {
         
         self.fullUrl = [NSString stringWithFormat:@"%@mf",self.wifiUrl];
-        [self sendMode:fullUrl];
+        [self sendMode:self.fullUrl];
         [self refreshParams];
     }
     else
@@ -205,7 +205,7 @@
 -(IBAction)pressButton
 {
     self.fullUrl = [NSString stringWithFormat:@"%@bp",self.wifiUrl];
-    [self sendMode:fullUrl];
+    [self sendMode:self.fullUrl];
     [self refreshParams];
 }
 
@@ -417,7 +417,7 @@
         NSString *version = [newStr stringByReplacingOccurrencesOfString:@"</V>" withString:@""];
         self.current_version = [version stringByReplacingOccurrencesOfString:@"." withString:@""];
         
-        [self ConfigureUI:current_version];
+        [self ConfigureUI:self.current_version];
         
         self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
         [self SendUpdate:self.fullUrl];
@@ -671,6 +671,7 @@
     self.buttonPressLabel = nil;
     self.feedMode = nil;
     self.feedModeLabel = nil;
+    self.current_version = nil;
     [super viewDidUnload];
 }
 
@@ -736,6 +737,7 @@
     [buttonPressLabel release];
     [feedMode release];
     [feedModeLabel release];
+    [current_version release];
     [super dealloc];
     
 }
