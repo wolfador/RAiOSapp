@@ -49,7 +49,6 @@
 		8060DE8D142D756600248B60 /* icon-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE86142D756600248B60 /* icon-small@2x.png */; };
 		8060DE8E142D756600248B60 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE87142D756600248B60 /* icon.png */; };
 		8060DE8F142D756600248B60 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE88142D756600248B60 /* icon@2x.png */; };
-		8060DE90142D756600248B60 /* ReefAngel-Logo-512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE89142D756600248B60 /* ReefAngel-Logo-512x512.png */; };
 		80A77CD31437B81B00861996 /* MemoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A77CD11437B81B00861996 /* MemoryViewController.m */; };
 		80A77CD41437B81B00861996 /* MemoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80A77CD21437B81B00861996 /* MemoryViewController.xib */; };
 		80B5F9CE1437BC910084685C /* MemValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 80B5F9CD1437BC910084685C /* MemValues.m */; };
@@ -118,7 +117,6 @@
 		8060DE86142D756600248B60 /* icon-small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-small@2x.png"; sourceTree = "<group>"; };
 		8060DE87142D756600248B60 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		8060DE88142D756600248B60 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
-		8060DE89142D756600248B60 /* ReefAngel-Logo-512x512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ReefAngel-Logo-512x512.png"; sourceTree = "<group>"; };
 		80A77CD01437B81B00861996 /* MemoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryViewController.h; sourceTree = "<group>"; };
 		80A77CD11437B81B00861996 /* MemoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoryViewController.m; sourceTree = "<group>"; };
 		80A77CD21437B81B00861996 /* MemoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MemoryViewController.xib; path = "ReefAngel Mobile Client/MemoryViewController.xib"; sourceTree = "<group>"; };
@@ -156,7 +154,6 @@
 				8060DE86142D756600248B60 /* icon-small@2x.png */,
 				8060DE87142D756600248B60 /* icon.png */,
 				8060DE88142D756600248B60 /* icon@2x.png */,
-				8060DE89142D756600248B60 /* ReefAngel-Logo-512x512.png */,
 				80DF04AD14282C3400A45FFA /* Default@2x.png */,
 				80DF04AF14282C5C00A45FFA /* Default.png */,
 				559DB7FB14257084004EC75A /* bluebutton1.png */,
@@ -354,7 +351,6 @@
 				8060DE8D142D756600248B60 /* icon-small@2x.png in Resources */,
 				8060DE8E142D756600248B60 /* icon.png in Resources */,
 				8060DE8F142D756600248B60 /* icon@2x.png in Resources */,
-				8060DE90142D756600248B60 /* ReefAngel-Logo-512x512.png in Resources */,
 				80A77CD41437B81B00861996 /* MemoryViewController.xib in Resources */,
 				740EBAE814510CC800D02ADF /* Controls.xib in Resources */,
 				740EBAFB14525ADA00D02ADF /* Memdata.plist in Resources */,
