@@ -34,6 +34,53 @@
 		742118F41453705F007AB4BC /* dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 742118F31453705F007AB4BC /* dashboard.png */; };
 		7497B71C143B8FBA002752D4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7497B71B143B8FBA002752D4 /* libz.dylib */; };
 		74E48061144FB1550097CA99 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E48060144FB1550097CA99 /* User.m */; };
+		74EAC8AD145F350C006C9A00 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DF429A1359DA3900C45B47 /* main.m */; };
+		74EAC8AE145F350C006C9A00 /* ReefAngel_Mobile_ClientAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DF429D1359DA3900C45B47 /* ReefAngel_Mobile_ClientAppDelegate.m */; };
+		74EAC8AF145F350C006C9A00 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DF42A31359DA3900C45B47 /* FirstViewController.m */; };
+		74EAC8B0145F350C006C9A00 /* RA_ParamObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C7390D135A40CD007AE60B /* RA_ParamObject.m */; };
+		74EAC8B1145F350C006C9A00 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C73935135A4941007AE60B /* Reachability.m */; };
+		74EAC8B2145F350C006C9A00 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C73980135BDA9A007AE60B /* SecondViewController.m */; };
+		74EAC8B3145F350C006C9A00 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8049D191142584BF0051D834 /* GDataXMLNode.m */; };
+		74EAC8B4145F350C006C9A00 /* TypeMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 8049D193142584BF0051D834 /* TypeMapping.m */; };
+		74EAC8B5145F350C006C9A00 /* XmlHeaderHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8049D199142584BF0051D834 /* XmlHeaderHelper.m */; };
+		74EAC8B6145F350C006C9A00 /* XmlParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 8049D19B142584BF0051D834 /* XmlParser.m */; };
+		74EAC8B7145F350C006C9A00 /* WonderXMLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8049D1A6142584DC0051D834 /* WonderXMLAppDelegate.m */; };
+		74EAC8B8145F350C006C9A00 /* WonderXMLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8049D1A8142584DC0051D834 /* WonderXMLViewController.m */; };
+		74EAC8B9145F350C006C9A00 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80020DD7142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.m */; };
+		74EAC8BA145F350C006C9A00 /* MemoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 80A77CD11437B81B00861996 /* MemoryViewController.m */; };
+		74EAC8BB145F350C006C9A00 /* MemValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 80B5F9CD1437BC910084685C /* MemValues.m */; };
+		74EAC8BC145F350C006C9A00 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E48060144FB1550097CA99 /* User.m */; };
+		74EAC8BD145F350C006C9A00 /* Controls.m in Sources */ = {isa = PBXBuildFile; fileRef = 740EBAE314510C2600D02ADF /* Controls.m */; };
+		74EAC8BF145F350C006C9A00 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7497B71B143B8FBA002752D4 /* libz.dylib */; };
+		74EAC8C0145F350C006C9A00 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C73961135A4BD9007AE60B /* MobileCoreServices.framework */; };
+		74EAC8C1145F350C006C9A00 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C7395F135A4BCE007AE60B /* SystemConfiguration.framework */; };
+		74EAC8C2145F350C006C9A00 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C7395D135A4BB9007AE60B /* CFNetwork.framework */; };
+		74EAC8C3145F350C006C9A00 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DF428D1359DA3900C45B47 /* UIKit.framework */; };
+		74EAC8C4145F350C006C9A00 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DF428F1359DA3900C45B47 /* Foundation.framework */; };
+		74EAC8C5145F350C006C9A00 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55DF42911359DA3900C45B47 /* CoreGraphics.framework */; };
+		74EAC8C7145F350C006C9A00 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55DF42961359DA3900C45B47 /* InfoPlist.strings */; };
+		74EAC8CB145F350C006C9A00 /* bluebutton1.png in Resources */ = {isa = PBXBuildFile; fileRef = 559DB7FB14257084004EC75A /* bluebutton1.png */; };
+		74EAC8CC145F350C006C9A00 /* labelBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 559DB7FC14257084004EC75A /* labelBG.png */; };
+		74EAC8CD145F350C006C9A00 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 559DB7FD14257084004EC75A /* refresh.png */; };
+		74EAC8CE145F350C006C9A00 /* settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 559DB7FE14257084004EC75A /* settings.png */; };
+		74EAC8CF145F350C006C9A00 /* tankicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 559DB7FF14257084004EC75A /* tankicon.png */; };
+		74EAC8D0145F350C006C9A00 /* WonderXML-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8049D197142584BF0051D834 /* WonderXML-Info.plist */; };
+		74EAC8D1145F350C006C9A00 /* savedata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8049D1B614269F500051D834 /* savedata.plist */; };
+		74EAC8D2145F350C006C9A00 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 80DF04AD14282C3400A45FFA /* Default@2x.png */; };
+		74EAC8D3145F350C006C9A00 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 80DF04AF14282C5C00A45FFA /* Default.png */; };
+		74EAC8D4145F350C006C9A00 /* icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE83142D756600248B60 /* icon-72.png */; };
+		74EAC8D5145F350C006C9A00 /* icon-small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE84142D756600248B60 /* icon-small-50.png */; };
+		74EAC8D6145F350C006C9A00 /* icon-small.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE85142D756600248B60 /* icon-small.png */; };
+		74EAC8D7145F350C006C9A00 /* icon-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE86142D756600248B60 /* icon-small@2x.png */; };
+		74EAC8D8145F350C006C9A00 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE87142D756600248B60 /* icon.png */; };
+		74EAC8D9145F350C006C9A00 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8060DE88142D756600248B60 /* icon@2x.png */; };
+		74EAC8DC145F350C006C9A00 /* Memdata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 740EBAFA14525ADA00D02ADF /* Memdata.plist */; };
+		74EAC8DD145F350C006C9A00 /* dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 742118F31453705F007AB4BC /* dashboard.png */; };
+		74EAC8EE145F3511006C9A00 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74EAC8E6145F3511006C9A00 /* MainWindow.xib */; };
+		74EAC8EF145F3511006C9A00 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74EAC8E8145F3511006C9A00 /* FirstView.xib */; };
+		74EAC8F0145F3511006C9A00 /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74EAC8EA145F3511006C9A00 /* SecondView.xib */; };
+		74EAC8F1145F3511006C9A00 /* MemoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74EAC8EC145F3511006C9A00 /* MemoryViewController.xib */; };
+		74EAC8F2145F3511006C9A00 /* Controls.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74EAC8ED145F3511006C9A00 /* Controls.xib */; };
 		80020DD8142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 80020DD7142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.m */; };
 		8049D19C142584BF0051D834 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8049D191142584BF0051D834 /* GDataXMLNode.m */; };
 		8049D19D142584BF0051D834 /* TypeMapping.m in Sources */ = {isa = PBXBuildFile; fileRef = 8049D193142584BF0051D834 /* TypeMapping.m */; };
@@ -94,6 +141,13 @@
 		7497B71B143B8FBA002752D4 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		74E4805F144FB1550097CA99 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		74E48060144FB1550097CA99 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		74EAC8E1145F350C006C9A00 /* ReefAngel-iPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ReefAngel-iPad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		74EAC8E5145F350D006C9A00 /* ReefAngel copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ReefAngel copy-Info.plist"; path = "/Users/Wolfador/Documents/RAiOSapp/ReefAngel copy-Info.plist"; sourceTree = "<absolute>"; };
+		74EAC8E7145F3511006C9A00 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "Resources-iPad/ReefAngel Mobile Client/en.lproj/MainWindow.xib"; sourceTree = "<group>"; };
+		74EAC8E9145F3511006C9A00 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "Resources-iPad/ReefAngel Mobile Client/en.lproj/FirstView.xib"; sourceTree = "<group>"; };
+		74EAC8EB145F3511006C9A00 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "Resources-iPad/ReefAngel Mobile Client/en.lproj/SecondView.xib"; sourceTree = "<group>"; };
+		74EAC8EC145F3511006C9A00 /* MemoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = MemoryViewController.xib; path = "Resources-iPad/ReefAngel Mobile Client/MemoryViewController.xib"; sourceTree = "<group>"; };
+		74EAC8ED145F3511006C9A00 /* Controls.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Controls.xib; path = "Resources-iPad/ReefAngel Mobile Client/Controls.xib"; sourceTree = "<group>"; };
 		80020DD6142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingScrollView.h; sourceTree = "<group>"; };
 		80020DD7142FB4C60030DEF7 /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		8049D190142584BF0051D834 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
@@ -138,6 +192,20 @@
 				55DF428E1359DA3900C45B47 /* UIKit.framework in Frameworks */,
 				55DF42901359DA3900C45B47 /* Foundation.framework in Frameworks */,
 				55DF42921359DA3900C45B47 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		74EAC8BE145F350C006C9A00 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74EAC8BF145F350C006C9A00 /* libz.dylib in Frameworks */,
+				74EAC8C0145F350C006C9A00 /* MobileCoreServices.framework in Frameworks */,
+				74EAC8C1145F350C006C9A00 /* SystemConfiguration.framework in Frameworks */,
+				74EAC8C2145F350C006C9A00 /* CFNetwork.framework in Frameworks */,
+				74EAC8C3145F350C006C9A00 /* UIKit.framework in Frameworks */,
+				74EAC8C4145F350C006C9A00 /* Foundation.framework in Frameworks */,
+				74EAC8C5145F350C006C9A00 /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,9 +274,11 @@
 		55DF427E1359DA3900C45B47 = {
 			isa = PBXGroup;
 			children = (
+				74EAC8E3145F350C006C9A00 /* Resources-iPad */,
 				55DF42931359DA3900C45B47 /* ReefAngel Mobile Client */,
 				55DF428C1359DA3900C45B47 /* Frameworks */,
 				55DF428A1359DA3900C45B47 /* Products */,
+				74EAC8E5145F350D006C9A00 /* ReefAngel copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -216,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				55DF42891359DA3900C45B47 /* ReefAngel.app */,
+				74EAC8E1145F350C006C9A00 /* ReefAngel-iPad.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -282,6 +353,18 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		74EAC8E3145F350C006C9A00 /* Resources-iPad */ = {
+			isa = PBXGroup;
+			children = (
+				74EAC8E6145F3511006C9A00 /* MainWindow.xib */,
+				74EAC8E8145F3511006C9A00 /* FirstView.xib */,
+				74EAC8EA145F3511006C9A00 /* SecondView.xib */,
+				74EAC8EC145F3511006C9A00 /* MemoryViewController.xib */,
+				74EAC8ED145F3511006C9A00 /* Controls.xib */,
+			);
+			name = "Resources-iPad";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -300,6 +383,23 @@
 			name = ReefAngel;
 			productName = "ReefAngel Mobile Client";
 			productReference = 55DF42891359DA3900C45B47 /* ReefAngel.app */;
+			productType = "com.apple.product-type.application";
+		};
+		74EAC8AB145F350C006C9A00 /* ReefAngel-iPad */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 74EAC8DE145F350C006C9A00 /* Build configuration list for PBXNativeTarget "ReefAngel-iPad" */;
+			buildPhases = (
+				74EAC8AC145F350C006C9A00 /* Sources */,
+				74EAC8BE145F350C006C9A00 /* Frameworks */,
+				74EAC8C6145F350C006C9A00 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ReefAngel-iPad";
+			productName = "ReefAngel Mobile Client";
+			productReference = 74EAC8E1145F350C006C9A00 /* ReefAngel-iPad.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -323,6 +423,7 @@
 			projectRoot = "";
 			targets = (
 				55DF42881359DA3900C45B47 /* ReefAngel */,
+				74EAC8AB145F350C006C9A00 /* ReefAngel-iPad */,
 			);
 		};
 /* End PBXProject section */
@@ -358,6 +459,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		74EAC8C6145F350C006C9A00 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74EAC8C7145F350C006C9A00 /* InfoPlist.strings in Resources */,
+				74EAC8CB145F350C006C9A00 /* bluebutton1.png in Resources */,
+				74EAC8CC145F350C006C9A00 /* labelBG.png in Resources */,
+				74EAC8CD145F350C006C9A00 /* refresh.png in Resources */,
+				74EAC8CE145F350C006C9A00 /* settings.png in Resources */,
+				74EAC8CF145F350C006C9A00 /* tankicon.png in Resources */,
+				74EAC8D0145F350C006C9A00 /* WonderXML-Info.plist in Resources */,
+				74EAC8D1145F350C006C9A00 /* savedata.plist in Resources */,
+				74EAC8D2145F350C006C9A00 /* Default@2x.png in Resources */,
+				74EAC8D3145F350C006C9A00 /* Default.png in Resources */,
+				74EAC8D4145F350C006C9A00 /* icon-72.png in Resources */,
+				74EAC8D5145F350C006C9A00 /* icon-small-50.png in Resources */,
+				74EAC8D6145F350C006C9A00 /* icon-small.png in Resources */,
+				74EAC8D7145F350C006C9A00 /* icon-small@2x.png in Resources */,
+				74EAC8D8145F350C006C9A00 /* icon.png in Resources */,
+				74EAC8D9145F350C006C9A00 /* icon@2x.png in Resources */,
+				74EAC8DC145F350C006C9A00 /* Memdata.plist in Resources */,
+				74EAC8DD145F350C006C9A00 /* dashboard.png in Resources */,
+				74EAC8EE145F3511006C9A00 /* MainWindow.xib in Resources */,
+				74EAC8EF145F3511006C9A00 /* FirstView.xib in Resources */,
+				74EAC8F0145F3511006C9A00 /* SecondView.xib in Resources */,
+				74EAC8F1145F3511006C9A00 /* MemoryViewController.xib in Resources */,
+				74EAC8F2145F3511006C9A00 /* Controls.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -382,6 +513,30 @@
 				80B5F9CE1437BC910084685C /* MemValues.m in Sources */,
 				74E48061144FB1550097CA99 /* User.m in Sources */,
 				740EBAE514510C2700D02ADF /* Controls.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		74EAC8AC145F350C006C9A00 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74EAC8AD145F350C006C9A00 /* main.m in Sources */,
+				74EAC8AE145F350C006C9A00 /* ReefAngel_Mobile_ClientAppDelegate.m in Sources */,
+				74EAC8AF145F350C006C9A00 /* FirstViewController.m in Sources */,
+				74EAC8B0145F350C006C9A00 /* RA_ParamObject.m in Sources */,
+				74EAC8B1145F350C006C9A00 /* Reachability.m in Sources */,
+				74EAC8B2145F350C006C9A00 /* SecondViewController.m in Sources */,
+				74EAC8B3145F350C006C9A00 /* GDataXMLNode.m in Sources */,
+				74EAC8B4145F350C006C9A00 /* TypeMapping.m in Sources */,
+				74EAC8B5145F350C006C9A00 /* XmlHeaderHelper.m in Sources */,
+				74EAC8B6145F350C006C9A00 /* XmlParser.m in Sources */,
+				74EAC8B7145F350C006C9A00 /* WonderXMLAppDelegate.m in Sources */,
+				74EAC8B8145F350C006C9A00 /* WonderXMLViewController.m in Sources */,
+				74EAC8B9145F350C006C9A00 /* TPKeyboardAvoidingScrollView.m in Sources */,
+				74EAC8BA145F350C006C9A00 /* MemoryViewController.m in Sources */,
+				74EAC8BB145F350C006C9A00 /* MemValues.m in Sources */,
+				74EAC8BC145F350C006C9A00 /* User.m in Sources */,
+				74EAC8BD145F350C006C9A00 /* Controls.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +576,30 @@
 			);
 			name = SecondView.xib;
 			path = "ReefAngel Mobile Client";
+			sourceTree = "<group>";
+		};
+		74EAC8E6145F3511006C9A00 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				74EAC8E7145F3511006C9A00 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		74EAC8E8145F3511006C9A00 /* FirstView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				74EAC8E9145F3511006C9A00 /* en */,
+			);
+			name = FirstView.xib;
+			sourceTree = "<group>";
+		};
+		74EAC8EA145F3511006C9A00 /* SecondView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				74EAC8EB145F3511006C9A00 /* en */,
+			);
+			name = SecondView.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -520,6 +699,52 @@
 			};
 			name = Release;
 		};
+		74EAC8DF145F350C006C9A00 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer: John Wiebalk (92HEE83TZH)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ReefAngel Mobile Client/ReefAngel Mobile Client-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = "ReefAngel copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = "ReefAngel-iPad";
+				PROVISIONING_PROFILE = "3A963270-5B9A-453C-88A2-CB96C04ADD6E";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		74EAC8E0145F350C006C9A00 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: John Wiebalk";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: John Wiebalk";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ReefAngel Mobile Client/ReefAngel Mobile Client-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				INFOPLIST_FILE = "ReefAngel copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				PRODUCT_NAME = "ReefAngel-iPad";
+				PROVISIONING_PROFILE = "B40DB360-F9A6-40B9-A65A-9054980B7B3F";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B40DB360-F9A6-40B9-A65A-9054980B7B3F";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -537,6 +762,15 @@
 			buildConfigurations = (
 				55DF42C71359DA3900C45B47 /* Debug */,
 				55DF42C81359DA3900C45B47 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		74EAC8DE145F350C006C9A00 /* Build configuration list for PBXNativeTarget "ReefAngel-iPad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				74EAC8DF145F350C006C9A00 /* Debug */,
+				74EAC8E0145F350C006C9A00 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
