@@ -237,11 +237,17 @@
     
     
 }
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
 {
-    // Return YES for supported orientations
-	
-	return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        
+        return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown || interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
+    }
+    else
+    {
+        return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+	}
 	
 }
 
@@ -365,8 +371,8 @@
 		[alertView release];
         
     }
-    lastUpdatedLabel.text = @"Updating";
-    lastUpdatedLabel.textColor = [UIColor greenColor];
+    self.lastUpdatedLabel.text = @"Updating";
+    self.lastUpdatedLabel.textColor = [UIColor greenColor];
     
 }
 
@@ -437,15 +443,15 @@
             NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
             [formatter setDateFormat:@"MMM dd yyyy : hh:mm:ss a"];
             NSDate *date = [NSDate date];
-            lastUpdatedLabel.text = [formatter stringFromDate:date];
-            lastUpdatedLabel.textColor = [UIColor greenColor];
+            self.lastUpdatedLabel.text = [formatter stringFromDate:date];
+            self.lastUpdatedLabel.textColor = [UIColor greenColor];
         }
         else
         {
-            if (lastUpdatedLabel.text.length == 0) {
-                lastUpdatedLabel.text = @"Please Refresh";
+            if (self.lastUpdatedLabel.text.length == 0) {
+                self.lastUpdatedLabel.text = @"Please Refresh";
             }
-            lastUpdatedLabel.textColor = [UIColor redColor];
+            self.lastUpdatedLabel.textColor = [UIColor redColor];
             
         }
         [self UpdateUI:raParam];
@@ -605,7 +611,6 @@
     self.relay26 = nil;
     self.relay27 = nil;
     self.relay28 = nil;
-
     self.lastUpdatedLabel = nil;
 
 }

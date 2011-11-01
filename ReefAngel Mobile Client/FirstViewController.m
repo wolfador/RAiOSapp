@@ -61,8 +61,8 @@
     {
         self.temp1Label.text = [raParam.formattedTemp1 stringByAppendingString:self.tempScale];
         
-        pHLabel.text    = raParam.formattedpH;
-        salinityValue.text = raParam.formattedSal;
+        self.pHLabel.text    = raParam.formattedpH;
+        self.salinityValue.text = raParam.formattedSal;
         
 
         
@@ -204,7 +204,7 @@
             NSString *version = [newStr stringByReplacingOccurrencesOfString:@"</V>" withString:@""];
             self.current_version = [version stringByReplacingOccurrencesOfString:@"." withString:@""];
         
-        [self ConfigureUI:current_version];
+        [self ConfigureUI:self.current_version];
         
         self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
         [self SendUpdate:self.fullUrl];
@@ -224,15 +224,15 @@
         NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
         [formatter setDateFormat:@"MMM dd yyyy : hh:mm:ss a"];
         NSDate *date = [NSDate date];
-        lastUpdatedLabel.text = [formatter stringFromDate:date];
-        lastUpdatedLabel.textColor = [UIColor greenColor];
+        self.lastUpdatedLabel.text = [formatter stringFromDate:date];
+        self.lastUpdatedLabel.textColor = [UIColor greenColor];
     }
     else
     {
-        if (lastUpdatedLabel.text.length == 0) {
-            lastUpdatedLabel.text = @"Please Refresh";
+        if (self.lastUpdatedLabel.text.length == 0) {
+            self.lastUpdatedLabel.text = @"Please Refresh";
         }
-        lastUpdatedLabel.textColor = [UIColor redColor];
+        self.lastUpdatedLabel.textColor = [UIColor redColor];
         
     }
     [self UpdateUI:raParam];
@@ -266,21 +266,21 @@
     params.formattedTemp1 = [self formatTemp:params.T1];
     //hides T2 if not configured
     if ([params.T2 intValue] == 0) {
-        temp2Value.text = @"N/A";
+        self.temp2Value.text = @"N/A";
     }
     else
     {
         params.formattedTemp2 = [self formatTemp:params.T2];
-        temp2Value.text = [raParam.formattedTemp2 stringByAppendingString:self.tempScale];
+        self.temp2Value.text = [raParam.formattedTemp2 stringByAppendingString:self.tempScale];
     }
     //hides T3 if not configured
     if ([params.T3 intValue] == 0) {
-        temp3Value.text = @"N/A";
+        self.temp3Value.text = @"N/A";
     }
     else
     {
         params.formattedTemp3 = [self formatTemp:params.T3];
-        temp3Value.text = [raParam.formattedTemp3 stringByAppendingString:self.tempScale];
+        self.temp3Value.text = [raParam.formattedTemp3 stringByAppendingString:self.tempScale];
     }
 
     params.formattedpH = [self formatPh:params.PH];

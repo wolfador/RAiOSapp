@@ -42,6 +42,7 @@
     [self.LCDTimer resignFirstResponder];
 	return YES;
 }
+
 -(IBAction)hideKeyboard
 {
     [self.HeaterOn resignFirstResponder];
@@ -52,6 +53,7 @@
     [self.PWMA resignFirstResponder];
     [self.LCDTimer resignFirstResponder];
 }
+
 - (IBAction) sliderValueChanged:(UISlider *)sender
 {
     if(sender.tag == 820)
@@ -279,9 +281,9 @@
 -(void)formatRA : (MEM *)params
 {
     self.HeaterOn.text = [self formatTemp:memValues.M822];
-        ForC.text = self.tempScale;
-        ForC2.text = self.tempScale;
-        ForC3.text = self.tempScale;
+        self.ForC.text = self.tempScale;
+        self.ForC2.text = self.tempScale;
+        self.ForC3.text = self.tempScale;
     
     self.HeaterOff.text = [self formatTemp:memValues.M824];
     self.Overheat.text = [self formatTemp:memValues.M818];
@@ -468,8 +470,14 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        
+        return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown || interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
+    }
+    else
+    {
+        return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+	}
 }
 
 -(void) dealloc

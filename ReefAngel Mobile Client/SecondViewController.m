@@ -104,9 +104,14 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
 {
-    // Return YES for supported orientations
-	
-	return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        
+        return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown || interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
+    }
+    else
+    {
+        return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+	}
 	
 }
 
@@ -266,7 +271,7 @@
         [self.scrollView setContentSize:CGSizeMake(320, 850)];
         
     
-    self.exprelay1Label.hidden = NO;
+        self.exprelay1Label.hidden = NO;
         self.exprelay2Label.hidden = NO;
         self.exprelay3Label.hidden = NO;
         self.exprelay4Label.hidden = NO;
@@ -285,23 +290,23 @@
 }
 else
 {
-    [self.scrollView setContentSize:CGSizeMake(320, 600)];
-    self.exprelay1Label.hidden = YES;
-    self.exprelay2Label.hidden = YES;
-    self.exprelay3Label.hidden = YES;
-    self.exprelay4Label.hidden = YES;
-    self.exprelay5Label.hidden = YES;
-    self.exprelay6Label.hidden = YES;
-    self.exprelay7Label.hidden = YES;
-    self.exprelay8Label.hidden = YES;
-    self.exprelay1.hidden = YES;
-    self.exprelay2.hidden = YES;
-    self.exprelay3.hidden = YES;
-    self.exprelay4.hidden = YES;
-    self.exprelay5.hidden = YES;
-    self.exprelay6.hidden = YES;
-    self.exprelay7.hidden = YES;
-    self.exprelay8.hidden = YES;
+        [self.scrollView setContentSize:CGSizeMake(320, 600)];
+        self.exprelay1Label.hidden = YES;
+        self.exprelay2Label.hidden = YES;
+        self.exprelay3Label.hidden = YES;
+        self.exprelay4Label.hidden = YES;
+        self.exprelay5Label.hidden = YES;
+        self.exprelay6Label.hidden = YES;
+        self.exprelay7Label.hidden = YES;
+        self.exprelay8Label.hidden = YES;
+        self.exprelay1.hidden = YES;
+        self.exprelay2.hidden = YES;
+        self.exprelay3.hidden = YES;
+        self.exprelay4.hidden = YES;
+        self.exprelay5.hidden = YES;
+        self.exprelay6.hidden = YES;
+        self.exprelay7.hidden = YES;
+        self.exprelay8.hidden = YES;
 }
 
 }
