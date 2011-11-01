@@ -32,6 +32,8 @@
 		740EBAE814510CC800D02ADF /* Controls.xib in Resources */ = {isa = PBXBuildFile; fileRef = 740EBAE714510CC800D02ADF /* Controls.xib */; };
 		740EBAFB14525ADA00D02ADF /* Memdata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 740EBAFA14525ADA00D02ADF /* Memdata.plist */; };
 		742118F41453705F007AB4BC /* dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 742118F31453705F007AB4BC /* dashboard.png */; };
+		746D0FE1145F78AF0000FAAB /* MyiPadTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746D0FE0145F78AF0000FAAB /* MyiPadTabBarController.m */; };
+		746D0FE3145F7D1A0000FAAB /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 746D0FE2145F7D1A0000FAAB /* Default-Portrait~ipad.png */; };
 		7497B71C143B8FBA002752D4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7497B71B143B8FBA002752D4 /* libz.dylib */; };
 		74E48061144FB1550097CA99 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E48060144FB1550097CA99 /* User.m */; };
 		74EAC8AD145F350C006C9A00 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DF429A1359DA3900C45B47 /* main.m */; };
@@ -138,10 +140,13 @@
 		740EBAE714510CC800D02ADF /* Controls.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Controls.xib; path = "ReefAngel Mobile Client/Controls.xib"; sourceTree = "<group>"; };
 		740EBAFA14525ADA00D02ADF /* Memdata.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Memdata.plist; sourceTree = "<group>"; };
 		742118F31453705F007AB4BC /* dashboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dashboard.png; sourceTree = "<group>"; };
+		746D0FDF145F78AF0000FAAB /* MyiPadTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyiPadTabBarController.h; sourceTree = "<group>"; };
+		746D0FE0145F78AF0000FAAB /* MyiPadTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyiPadTabBarController.m; sourceTree = "<group>"; };
+		746D0FE2145F7D1A0000FAAB /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		7497B71B143B8FBA002752D4 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		74E4805F144FB1550097CA99 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		74E48060144FB1550097CA99 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		74EAC8E1145F350C006C9A00 /* ReefAngel-iPad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ReefAngel-iPad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		74EAC8E1145F350C006C9A00 /* ReefAngel HD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ReefAngel HD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74EAC8E5145F350D006C9A00 /* ReefAngel copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ReefAngel copy-Info.plist"; path = "/Users/Wolfador/Documents/RAiOSapp/ReefAngel copy-Info.plist"; sourceTree = "<absolute>"; };
 		74EAC8E7145F3511006C9A00 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "Resources-iPad/ReefAngel Mobile Client/en.lproj/MainWindow.xib"; sourceTree = "<group>"; };
 		74EAC8E9145F3511006C9A00 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "Resources-iPad/ReefAngel Mobile Client/en.lproj/FirstView.xib"; sourceTree = "<group>"; };
@@ -274,11 +279,9 @@
 		55DF427E1359DA3900C45B47 = {
 			isa = PBXGroup;
 			children = (
-				74EAC8E3145F350C006C9A00 /* Resources-iPad */,
 				55DF42931359DA3900C45B47 /* ReefAngel Mobile Client */,
 				55DF428C1359DA3900C45B47 /* Frameworks */,
 				55DF428A1359DA3900C45B47 /* Products */,
-				74EAC8E5145F350D006C9A00 /* ReefAngel copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -286,7 +289,7 @@
 			isa = PBXGroup;
 			children = (
 				55DF42891359DA3900C45B47 /* ReefAngel.app */,
-				74EAC8E1145F350C006C9A00 /* ReefAngel-iPad.app */,
+				74EAC8E1145F350C006C9A00 /* ReefAngel HD.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 		55DF42931359DA3900C45B47 /* ReefAngel Mobile Client */ = {
 			isa = PBXGroup;
 			children = (
+				74EAC8E3145F350C006C9A00 /* Resources-iPad */,
 				740EBAE91451171000D02ADF /* XIB */,
 				55C73917135A4865007AE60B /* 3rdParty */,
 				55C73908135A4004007AE60B /* model */,
@@ -333,6 +337,7 @@
 				55DF429C1359DA3900C45B47 /* ReefAngel_Mobile_ClientAppDelegate.h */,
 				8049D1B614269F500051D834 /* savedata.plist */,
 				55DF42951359DA3900C45B47 /* ReefAngel Mobile Client-Info.plist */,
+				74EAC8E5145F350D006C9A00 /* ReefAngel copy-Info.plist */,
 				55DF42961359DA3900C45B47 /* InfoPlist.strings */,
 				55DF42991359DA3900C45B47 /* ReefAngel Mobile Client-Prefix.pch */,
 				55DF429A1359DA3900C45B47 /* main.m */,
@@ -356,6 +361,9 @@
 		74EAC8E3145F350C006C9A00 /* Resources-iPad */ = {
 			isa = PBXGroup;
 			children = (
+				746D0FDF145F78AF0000FAAB /* MyiPadTabBarController.h */,
+				746D0FE2145F7D1A0000FAAB /* Default-Portrait~ipad.png */,
+				746D0FE0145F78AF0000FAAB /* MyiPadTabBarController.m */,
 				74EAC8E6145F3511006C9A00 /* MainWindow.xib */,
 				74EAC8E8145F3511006C9A00 /* FirstView.xib */,
 				74EAC8EA145F3511006C9A00 /* SecondView.xib */,
@@ -363,6 +371,7 @@
 				74EAC8ED145F3511006C9A00 /* Controls.xib */,
 			);
 			name = "Resources-iPad";
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -385,9 +394,9 @@
 			productReference = 55DF42891359DA3900C45B47 /* ReefAngel.app */;
 			productType = "com.apple.product-type.application";
 		};
-		74EAC8AB145F350C006C9A00 /* ReefAngel-iPad */ = {
+		74EAC8AB145F350C006C9A00 /* ReefAngel HD */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 74EAC8DE145F350C006C9A00 /* Build configuration list for PBXNativeTarget "ReefAngel-iPad" */;
+			buildConfigurationList = 74EAC8DE145F350C006C9A00 /* Build configuration list for PBXNativeTarget "ReefAngel HD" */;
 			buildPhases = (
 				74EAC8AC145F350C006C9A00 /* Sources */,
 				74EAC8BE145F350C006C9A00 /* Frameworks */,
@@ -397,9 +406,9 @@
 			);
 			dependencies = (
 			);
-			name = "ReefAngel-iPad";
+			name = "ReefAngel HD";
 			productName = "ReefAngel Mobile Client";
-			productReference = 74EAC8E1145F350C006C9A00 /* ReefAngel-iPad.app */;
+			productReference = 74EAC8E1145F350C006C9A00 /* ReefAngel HD.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -423,7 +432,7 @@
 			projectRoot = "";
 			targets = (
 				55DF42881359DA3900C45B47 /* ReefAngel */,
-				74EAC8AB145F350C006C9A00 /* ReefAngel-iPad */,
+				74EAC8AB145F350C006C9A00 /* ReefAngel HD */,
 			);
 		};
 /* End PBXProject section */
@@ -486,6 +495,7 @@
 				74EAC8F0145F3511006C9A00 /* SecondView.xib in Resources */,
 				74EAC8F1145F3511006C9A00 /* MemoryViewController.xib in Resources */,
 				74EAC8F2145F3511006C9A00 /* Controls.xib in Resources */,
+				746D0FE3145F7D1A0000FAAB /* Default-Portrait~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,6 +547,7 @@
 				74EAC8BB145F350C006C9A00 /* MemValues.m in Sources */,
 				74EAC8BC145F350C006C9A00 /* User.m in Sources */,
 				74EAC8BD145F350C006C9A00 /* Controls.m in Sources */,
+				746D0FE1145F78AF0000FAAB /* MyiPadTabBarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -713,7 +724,7 @@
 				INFOPLIST_FILE = "ReefAngel copy-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_NAME = "ReefAngel-iPad";
+				PRODUCT_NAME = "ReefAngel HD";
 				PROVISIONING_PROFILE = "3A963270-5B9A-453C-88A2-CB96C04ADD6E";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
@@ -735,7 +746,7 @@
 				INFOPLIST_FILE = "ReefAngel copy-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_NAME = "ReefAngel-iPad";
+				PRODUCT_NAME = "ReefAngel HD";
 				PROVISIONING_PROFILE = "B40DB360-F9A6-40B9-A65A-9054980B7B3F";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B40DB360-F9A6-40B9-A65A-9054980B7B3F";
 				SDKROOT = iphoneos;
@@ -766,7 +777,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		74EAC8DE145F350C006C9A00 /* Build configuration list for PBXNativeTarget "ReefAngel-iPad" */ = {
+		74EAC8DE145F350C006C9A00 /* Build configuration list for PBXNativeTarget "ReefAngel HD" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				74EAC8DF145F350C006C9A00 /* Debug */,
