@@ -12,18 +12,18 @@
 @implementation ReefAngel_Mobile_ClientAppDelegate
 
 
-@synthesize window=_window;
+//@synthesize window=_window;
 
-@synthesize tabBarController=_tabBarController;
-
+//@synthesize tabBarController=_tabBarController;
+@synthesize window, tabBarController;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     // Add the tab bar controller's current view as a subview of the window
-    self.window.rootViewController = self.tabBarController;
-    [self.window makeKeyAndVisible];
+    //self.window.rootViewController = self.tabBarController;
+    //[self.window makeKeyAndVisible];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -49,6 +49,8 @@
         [[NSFileManager defaultManager] copyItemAtPath:path toPath:documentsDirectory error:nil];
     }
     
+    [window addSubview:tabBarController.view];
+    [window makeKeyAndVisible];
     
     
     return YES;
@@ -61,12 +63,19 @@
      Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
      */
 }
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    // Return YES for supported orientations
-	
-	return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
-	
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
+{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        
+        return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown || interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
+    }
+    else
+    {
+        return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+	}
 }
+
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     /*
@@ -100,8 +109,10 @@
 
 - (void)dealloc
 {
-    [_window release];
-    [_tabBarController release];
+    //[_window release];
+    //[_tabBarController release];
+    [tabBarController release];
+    [window release];
     [super dealloc];
 }
 

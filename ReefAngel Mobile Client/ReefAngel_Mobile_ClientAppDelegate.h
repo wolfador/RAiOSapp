@@ -13,6 +13,7 @@
 @interface ReefAngel_Mobile_ClientAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
 
     UIWindow *window;
+    UITabBarController *tabBarController;
 
     
 }
