@@ -12,7 +12,7 @@
 @implementation FirstViewController
 @synthesize temp1Label, temp2Label, temp3Label, pHLabel;
 @synthesize wifiUrl,fullUrl,lastUpdatedLabel, current_version;
-@synthesize enteredURL, response, tempScale, salinityLabel, salinityValue, temp2Value, temp3Value;
+@synthesize enteredURL, response, tempScale, salinityLabel, salinityValue, temp2Value, temp3Value, temp1Value;
 
 
 - (void)viewDidLoad
@@ -59,7 +59,7 @@
 
     if(raParam)
     {
-        self.temp1Label.text = [raParam.formattedTemp1 stringByAppendingString:self.tempScale];
+        self.temp1Value.text = [raParam.formattedTemp1 stringByAppendingString:self.tempScale];
         
         self.pHLabel.text    = raParam.formattedpH;
         self.salinityValue.text = raParam.formattedSal;
@@ -116,6 +116,34 @@
 	self.wifiUrl = [restored objectForKey:@"URL"];
     self.enteredURL = [restored objectForKey:@"EnteredURL"];
    self.tempScale = [restored objectForKey:@"TempScale"];
+    self.temp1Label.text = [restored objectForKey:@"Temp1"];
+    self.temp2Label.text = [restored objectForKey:@"Temp2"];
+    self.temp3Label.text = [restored objectForKey:@"Temp3"];
+    if ([self.temp1Label.text length] == 0) {
+        self.temp1Label.text = @"Water:";
+    }
+    if ([self.temp2Label.text length] == 0) {
+        self.temp2Label.text = @"Room:";
+    }
+    if ([self.temp3Label.text length] == 0) {
+        self.temp3Label.text = @"Lights:";
+    }
+    
+    NSString *colon = @":";
+    NSRange range = [self.temp1Label.text rangeOfString : colon];
+    if (range.location == NSNotFound) {
+        self.temp1Label.text  = [self.temp1Label.text stringByAppendingString:colon];
+    }
+    NSRange range2 = [self.temp2Label.text rangeOfString : colon];
+    if (range2.location == NSNotFound) {
+        self.temp2Label.text  = [self.temp2Label.text stringByAppendingString:colon];
+    }
+    NSRange range3 = [self.temp3Label.text rangeOfString : colon];
+    if (range3.location == NSNotFound) {
+        self.temp3Label.text  = [self.temp3Label.text stringByAppendingString:colon];
+    }
+    
+    
     if (self.tempScale == nil) {
         self.tempScale = @"*F";
     }
@@ -384,6 +412,7 @@
     self.pHLabel = nil;
     self.lastUpdatedLabel = nil;
     self.salinityLabel = nil;
+    
     }
 
 - (void)viewDidUnload
@@ -396,7 +425,7 @@
     self.pHLabel = nil;
     self.lastUpdatedLabel = nil;
     //self.scrollView = nil;
-
+    self.temp1Value = nil;
     self.response = nil;
     self.tempScale = nil;
     self.salinityLabel = nil;
@@ -421,6 +450,9 @@
     [salinityValue release];
     [fullUrl release];
     [wifiUrl release];
+    [temp1Value release];
+    [temp2Value release];
+    [temp3Value release];
     [super dealloc];
     
 }

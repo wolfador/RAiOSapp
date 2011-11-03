@@ -12,7 +12,7 @@
 @implementation SecondViewController
 
 
-@synthesize enteredURL, scrollView, url, port, updatedURL;
+@synthesize enteredURL, scrollView, url, port, updatedURL, temp1, temp2, temp3;
 @synthesize relayExp, relay1, relay2, relay3, relay4, relay5, relay6, relay7, relay8;
 @synthesize exprelay1, exprelay2, exprelay3, exprelay4, exprelay5, exprelay6, exprelay7, exprelay8;
 @synthesize exprelay1Label, exprelay2Label, exprelay3Label, exprelay4Label, exprelay5Label, exprelay6Label, exprelay7Label, exprelay8Label, tempScale;
@@ -26,11 +26,11 @@
     [self.scrollView setScrollEnabled:YES];
     if(relayExp.on)    
     {
-        [self.scrollView setContentSize:CGSizeMake(320, 850)];
+        [self.scrollView setContentSize:CGSizeMake(320, 1000)];
     }
     else
     {
-      [self.scrollView setContentSize:CGSizeMake(320, 600)];  
+      [self.scrollView setContentSize:CGSizeMake(320, 700)];  
     }
     
     self.scrollView.delegate = self;
@@ -39,6 +39,9 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [self.url resignFirstResponder];
+    [self.temp1 resignFirstResponder];
+    [self.temp2 resignFirstResponder];
+    [self.temp3 resignFirstResponder];
     [self.relay1 resignFirstResponder];
     [self.relay2 resignFirstResponder];
     [self.relay3 resignFirstResponder];
@@ -79,6 +82,9 @@
     
     [self.url resignFirstResponder];
     [self.port resignFirstResponder];
+    [self.temp1 resignFirstResponder];
+    [self.temp2 resignFirstResponder];
+    [self.temp3 resignFirstResponder];
     [self.relay1 resignFirstResponder];
     [self.relay2 resignFirstResponder];
     [self.relay3 resignFirstResponder];
@@ -187,6 +193,9 @@
         [Dictionary setObject: self.relay6.text forKey: @"Relay6"];
         [Dictionary setObject: self.relay7.text forKey: @"Relay7"];
         [Dictionary setObject: self.relay8.text forKey: @"Relay8"];
+        [Dictionary setObject: self.temp1.text forKey: @"Temp1"];
+        [Dictionary setObject: self.temp2.text forKey: @"Temp2"];
+        [Dictionary setObject: self.temp3.text forKey: @"Temp3"];
         if (self.tempScale.selectedSegmentIndex == 0) {
             [Dictionary setObject: @"*F" forKey: @"TempScale"];
         }
@@ -231,6 +240,19 @@
     self.relay6.text = [restored objectForKey:@"Relay6"];
     self.relay7.text = [restored objectForKey:@"Relay7"];
     self.relay8.text = [restored objectForKey:@"Relay8"];
+    self.temp1.text = [restored objectForKey:@"Temp1"];
+    self.temp2.text = [restored objectForKey:@"Temp2"];
+    self.temp3.text = [restored objectForKey:@"Temp3"];
+    if ([self.temp1.text length] == 0) {
+        self.temp1.text = @"Water";
+    }
+    if ([self.temp2.text length] == 0) {
+        self.temp2.text = @"Room";
+    }
+    if ([self.temp3.text length] == 0) {
+        self.temp3.text = @"Lights";
+    }
+    
     if([[restored objectForKey:@"ExpansionON"] isEqualToString: @"ON"])
     {
         [relayExp setOn:YES];
@@ -268,7 +290,7 @@
         self.exprelay8.text = [restored objectForKey:@"ExpRelay8"];
         
         //resize scroll length for longer screen
-        [self.scrollView setContentSize:CGSizeMake(320, 850)];
+        [self.scrollView setContentSize:CGSizeMake(320, 1000)];
         
     
         self.exprelay1Label.hidden = NO;
@@ -290,7 +312,7 @@
 }
 else
 {
-        [self.scrollView setContentSize:CGSizeMake(320, 600)];
+        [self.scrollView setContentSize:CGSizeMake(320, 700)];
         self.exprelay1Label.hidden = YES;
         self.exprelay2Label.hidden = YES;
         self.exprelay3Label.hidden = YES;
@@ -374,6 +396,9 @@ else
     self.relay8 = nil;
     self.url = nil;
     self.enteredURL = nil;
+    self.temp1 = nil;
+    self.temp2 = nil;
+    self.temp3 = nil;
      [super viewDidUnload];
 
 }
@@ -409,6 +434,9 @@ else
     [url release];
     [enteredURL release];
     [memcontroller release];
+    [temp1 release];
+    [temp2 release];
+    [temp3 release];
      [super dealloc];
 }
 @end

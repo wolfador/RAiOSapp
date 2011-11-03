@@ -16,7 +16,7 @@
 
 @interface FirstViewController : UIViewController<UIApplicationDelegate, UITabBarDelegate, UIScrollViewDelegate>{
 
-    UILabel *temp1Label, *temp2Label, *temp3Label, *pHLabel, *lastUpdatedLabel, *salinityLabel, *salinityValue, *temp2Value, *temp3Value;
+    UILabel *pHLabel, *lastUpdatedLabel, *salinityLabel, *salinityValue, *temp2Value, *temp3Value;
     NSString *fullUrl;
     NSString *wifiUrl, *enteredURL, *tempScale;
     RA *raParam;
@@ -25,6 +25,7 @@
     XmlParser *xmlParser;
     NSMutableArray *paramArray;
    NSString *current_version;  
+    IBOutlet UILabel *temp1Label, *temp2Label, *temp3Label, *temp1Value;
 
 
 }
@@ -35,7 +36,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *temp2Label, *temp2Value;
 @property (nonatomic, retain) IBOutlet UILabel *temp3Label, *temp3Value;
 @property (nonatomic, retain) IBOutlet UILabel *pHLabel;
-@property (nonatomic, retain) IBOutlet UILabel *lastUpdatedLabel;
+@property (nonatomic, retain) IBOutlet UILabel *lastUpdatedLabel, *temp1Value;
 
 @property (nonatomic, retain) NSString *response;
 -(void)formatRA : (RA *) params;

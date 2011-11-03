@@ -42,5 +42,11 @@
 	<string></string>
 	<key>TempScale</key>
 	<string>*F</string>
+	<key>Temp1</key>
+	<string>Water</string>
+	<key>Temp2</key>
+	<string>Room</string>
+	<key>Temp3</key>
+	<string>Lights</string>
 </dict>
 </plist>

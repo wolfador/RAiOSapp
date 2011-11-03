@@ -372,14 +372,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">temp1Label</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="272020004"/>
-					</object>
-					<int key="connectionID">314</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">salinityValue</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="415462443"/>
@@ -425,6 +417,22 @@
 						<reference key="destination" ref="456029200"/>
 					</object>
 					<int key="connectionID">482</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">temp1Label</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="86208569"/>
+					</object>
+					<int key="connectionID">483</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">temp1Value</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="272020004"/>
+					</object>
+					<int key="connectionID">484</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -596,7 +604,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">482</int>
+			<int key="maxID">484</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -624,6 +632,7 @@
 							<string>salinityLabel</string>
 							<string>salinityValue</string>
 							<string>temp1Label</string>
+							<string>temp1Value</string>
 							<string>temp2Label</string>
 							<string>temp2Value</string>
 							<string>temp3Label</string>
@@ -631,6 +640,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
@@ -651,6 +661,7 @@
 							<string>salinityLabel</string>
 							<string>salinityValue</string>
 							<string>temp1Label</string>
+							<string>temp1Value</string>
 							<string>temp2Label</string>
 							<string>temp2Value</string>
 							<string>temp3Label</string>
@@ -676,6 +687,10 @@
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">temp1Label</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">temp1Value</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
