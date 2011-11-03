@@ -148,7 +148,7 @@
 		7497B71B143B8FBA002752D4 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		74E4805F144FB1550097CA99 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		74E48060144FB1550097CA99 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		74EAC8E1145F350C006C9A00 /* ReefAngel HD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ReefAngel HD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		74EAC8E1145F350C006C9A00 /* ReefAngel-HD.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ReefAngel-HD.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		74EAC8E5145F350D006C9A00 /* ReefAngel copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ReefAngel copy-Info.plist"; path = "/Users/Wolfador/Documents/RAiOSapp/ReefAngel copy-Info.plist"; sourceTree = "<absolute>"; };
 		74EAC8E7145F3511006C9A00 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "Resources-iPad/ReefAngel Mobile Client/en.lproj/MainWindow.xib"; sourceTree = "<group>"; };
 		74EAC8E9145F3511006C9A00 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "Resources-iPad/ReefAngel Mobile Client/en.lproj/FirstView.xib"; sourceTree = "<group>"; };
@@ -292,7 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				55DF42891359DA3900C45B47 /* ReefAngel.app */,
-				74EAC8E1145F350C006C9A00 /* ReefAngel HD.app */,
+				74EAC8E1145F350C006C9A00 /* ReefAngel-HD.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -411,7 +411,7 @@
 			);
 			name = "ReefAngel HD";
 			productName = "ReefAngel Mobile Client";
-			productReference = 74EAC8E1145F350C006C9A00 /* ReefAngel HD.app */;
+			productReference = 74EAC8E1145F350C006C9A00 /* ReefAngel-HD.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
