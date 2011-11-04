@@ -19,6 +19,7 @@
             isRelay6ONMask, isRelay7ONMask, isRelay8ONMask, isRelay1OFFMask, isRelay2OFFMask, isRelay3OFFMask, isRelay4OFFMask, isRelay5OFFMask, isRelay6OFFMask, isRelay7OFFMask, isRelay8OFFMask,isRelay01Active, isRelay02Active, isRelay03Active, isRelay04Active, isRelay05Active, isRelay06Active, isRelay07Active, isRelay08Active,
 isRelay01ONMask, isRelay02ONMask, isRelay03ONMask, isRelay04ONMask, isRelay05ONMask, isRelay06ONMask, isRelay07ONMask, isRelay08ONMask,
 isRelay01OFFMask, isRelay02OFFMask, isRelay03OFFMask, isRelay04OFFMask, isRelay05OFFMask, isRelay06OFFMask, isRelay07OFFMask, isRelay08OFFMask, PWMA, PWMD, SAL, formattedSal;
+@synthesize T1N, T2N, T3N, R1N, R2N, R3N, R4N, R5N, R6N, R7N, R8N, R11N, R12N, R13N, R14N, R15N, R16N, R17N, R18N;
 
 -(void) dealloc
 {
@@ -54,6 +55,27 @@ isRelay01OFFMask, isRelay02OFFMask, isRelay03OFFMask, isRelay04OFFMask, isRelay0
     [ATOHIGH release];
     [PWMD release];
     [PWMA release];
+    
+    [T1N release];
+    [T2N release];
+    [T3N release];
+    [R1N release];
+    [R2N release];
+    [R3N release];
+    [R4N release];
+    [R5N release];
+    [R6N release];
+    [R7N release];
+    [R8N release];
+    [R11N release];
+    [R12N release];
+    [R13N release];
+    [R14N release];
+    [R15N release];
+    [R16N release];
+    [R17N release];
+    [R18N release];
+    
     [super dealloc];
 }
  

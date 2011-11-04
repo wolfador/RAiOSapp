@@ -14,7 +14,7 @@
 #import "MemoryViewController.h"
 #import "XmlParser.h"
 #import "Reachability.h"
-#import "WebBanner.h"
+#import "RA_ParamObject.h"
 
 @interface SecondViewController : UIViewController <UITextFieldDelegate, UIScrollViewDelegate, MemoryViewControllerDelegate>{
     IBOutlet UIScrollView *scrollView;
@@ -26,17 +26,18 @@
     MemoryViewController *memcontroller;
     IBOutlet UISegmentedControl *tempScale;
     UIButton *loadNames;
-    NSString *bannerUrl;
+    NSString *bannerUrl, *response;
     XmlParser *xmlParser;
-    BANNER *webBanner;
+    RA *webBanner;
     NSMutableArray *paramArray;
+    NSMutableData *receivedData;
 
 
 }
 
 @property (nonatomic, retain) NSMutableString *enteredURL, *updatedURL;
 @property (nonatomic, retain) UIButton *loadNames;
-@property (nonatomic, retain) NSString *bannerUrl;
+@property (nonatomic, retain) NSString *bannerUrl, *response;
 @property (nonatomic, retain) IBOutlet UITextField *url, *relay1, *relay2, *relay3, *relay4, *relay5, *relay6, *relay7, *relay8, *userName;
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UISwitch *relayExp;
@@ -51,4 +52,5 @@
 -(IBAction)loadPortNames;
 -(void) loadData;
 -(void)getPorts:(NSString *) controllerUrl;
+-(void)updatePorts:(RA *) banner;
 @end

@@ -12,7 +12,7 @@
 @implementation SecondViewController
 
 
-@synthesize enteredURL, scrollView, url, port, updatedURL, temp1, temp2, temp3;
+@synthesize enteredURL, scrollView, url, port, updatedURL, temp1, temp2, temp3, response;
 @synthesize relayExp, relay1, relay2, relay3, relay4, relay5, relay6, relay7, relay8;
 @synthesize exprelay1, exprelay2, exprelay3, exprelay4, exprelay5, exprelay6, exprelay7, exprelay8, userName;
 @synthesize exprelay1Label, exprelay2Label, exprelay3Label, exprelay4Label, exprelay5Label, exprelay6Label, exprelay7Label, exprelay8Label, tempScale, loadNames, bannerUrl;
@@ -368,27 +368,52 @@ else
 		[alertView release];
         
     }
+    //receivedData = [[NSMutableData data] retain];
+    //NSLog(@"%@", receivedData);
+
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     
     xmlParser = [[XmlParser alloc] init] ;
-    NSString *receivedData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSString *response = [NSString stringWithString:receivedData];
-    [receivedData release];
-    NSLog(@"%@", response);
+    NSString *received = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+    self.response = [NSString stringWithString:received];
 
-    webBanner = [[BANNER alloc] init];
-    paramArray = [xmlParser fromXml:response withObject:webBanner];
-    
-    [webBanner release];
     
     
-    [xmlParser release];
+     NSRange range2 = [self.response rangeOfString:@"</RA>" options:NSCaseInsensitiveSearch];
+    if(range2.location == NSNotFound )
+    {
+        NSLog(@"error downloading");
+        
+        //add retry
+        
+    }
+    else
+    {
+        webBanner = [[RA alloc] init];
+        paramArray = [xmlParser fromXml:self.response withObject:webBanner];
+        webBanner = [paramArray lastObject];
+    [self updatePorts:webBanner];
+    }
+    
     
 }
 
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+   // NSLog(@"finished");
+}
+
+-(void) updatePorts:(RA *)banner
+{
+    if (banner.T1N != NULL) {
+        self.temp1.text = banner.T1N;
+    }
+    self.temp2.text = banner.T2N;
+   self.temp3.text = banner.T3N;
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -458,6 +483,7 @@ else
     self.temp3 = nil;
     self.bannerUrl = nil;
     self.loadNames = nil;
+    self.response = nil;
      [super viewDidUnload];
 
 }
@@ -498,6 +524,7 @@ else
     [temp3 release];
     [bannerUrl release];
     [loadNames release];
+    [response release];
      [super dealloc];
 }
 @end
