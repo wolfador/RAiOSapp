@@ -14,8 +14,8 @@
 
 @synthesize enteredURL, scrollView, url, port, updatedURL, temp1, temp2, temp3;
 @synthesize relayExp, relay1, relay2, relay3, relay4, relay5, relay6, relay7, relay8;
-@synthesize exprelay1, exprelay2, exprelay3, exprelay4, exprelay5, exprelay6, exprelay7, exprelay8;
-@synthesize exprelay1Label, exprelay2Label, exprelay3Label, exprelay4Label, exprelay5Label, exprelay6Label, exprelay7Label, exprelay8Label, tempScale;
+@synthesize exprelay1, exprelay2, exprelay3, exprelay4, exprelay5, exprelay6, exprelay7, exprelay8, userName;
+@synthesize exprelay1Label, exprelay2Label, exprelay3Label, exprelay4Label, exprelay5Label, exprelay6Label, exprelay7Label, exprelay8Label, tempScale, loadNames, bannerUrl;
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 
 - (void)viewDidLoad
@@ -196,6 +196,7 @@
         [Dictionary setObject: self.temp1.text forKey: @"Temp1"];
         [Dictionary setObject: self.temp2.text forKey: @"Temp2"];
         [Dictionary setObject: self.temp3.text forKey: @"Temp3"];
+        [Dictionary setObject: self.userName.text forKey: @"UserName"];
         if (self.tempScale.selectedSegmentIndex == 0) {
             [Dictionary setObject: @"*F" forKey: @"TempScale"];
         }
@@ -243,6 +244,10 @@
     self.temp1.text = [restored objectForKey:@"Temp1"];
     self.temp2.text = [restored objectForKey:@"Temp2"];
     self.temp3.text = [restored objectForKey:@"Temp3"];
+    self.userName.text = [restored objectForKey:@"UserName"];
+    if ([self.userName.text length] == 0) {
+        self.userName.text = @"";
+    }
     if ([self.temp1.text length] == 0) {
         self.temp1.text = @"Water";
     }
@@ -333,6 +338,58 @@ else
 
 }
 
+-(IBAction)loadPortNames
+{
+    if ([self.userName.text length] == 0) {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please Enter UserName" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
+    }
+    else
+    {
+        self.bannerUrl = [@"http://www.reefangel.com/status/xml.aspx?id=" stringByAppendingString:self.userName.text];
+        [self getPorts:self.bannerUrl];
+    }
+}
+-(void)getPorts:(NSString *) controllerUrl
+{
+    
+    NSURL *bannerurl = [NSURL URLWithString: controllerUrl];
+    NSURLRequest *theRequest=[NSURLRequest requestWithURL:bannerurl                        
+                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
+                              
+                                          timeoutInterval:60.0];
+    
+    NSURLConnection *theConnection = [NSURLConnection connectionWithRequest:theRequest delegate:self];
+    
+    if (!theConnection) {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
+        
+    }
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    
+    xmlParser = [[XmlParser alloc] init] ;
+    NSString *receivedData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSString *response = [NSString stringWithString:receivedData];
+    [receivedData release];
+    NSLog(@"%@", response);
+
+    webBanner = [[BANNER alloc] init];
+    paramArray = [xmlParser fromXml:response withObject:webBanner];
+    
+    [webBanner release];
+    
+    
+    [xmlParser release];
+    
+}
+
+
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.
@@ -399,6 +456,8 @@ else
     self.temp1 = nil;
     self.temp2 = nil;
     self.temp3 = nil;
+    self.bannerUrl = nil;
+    self.loadNames = nil;
      [super viewDidUnload];
 
 }
@@ -437,6 +496,8 @@ else
     [temp1 release];
     [temp2 release];
     [temp3 release];
+    [bannerUrl release];
+    [loadNames release];
      [super dealloc];
 }
 @end
