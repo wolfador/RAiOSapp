@@ -413,6 +413,14 @@ else
     }
     self.temp2.text = banner.T2N;
    self.temp3.text = banner.T3N;
+    self.relay1.text = banner.R1N;
+    self.relay2.text = banner.R2N;
+    self.relay3.text = banner.R3N;
+    self.relay4.text = banner.R4N;
+    self.relay5.text = banner.R5N;
+    self.relay6.text = banner.R6N;
+    self.relay7.text = banner.R7N;
+    self.relay8.text = banner.R8N;
 }
 
 - (void)didReceiveMemoryWarning
