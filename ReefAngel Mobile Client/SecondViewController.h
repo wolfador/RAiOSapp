@@ -21,11 +21,11 @@
     NSMutableString *enteredURL, *updatedURL;
     IBOutlet UITextField *url, *relay1, *relay2, *relay3, *relay4, *relay5, *relay6, *relay7, *relay8, *port, *temp1, *temp2, *temp3;
     IBOutlet UITextField *exprelay1, *exprelay2, *exprelay3, *exprelay4, *exprelay5, *exprelay6, *exprelay7, *exprelay8, *userName;
-    IBOutlet UILabel *exprelay1Label, *exprelay2Label, *exprelay3Label, *exprelay4Label, *exprelay5Label, *exprelay6Label, *exprelay7Label, *exprelay8Label;
+    IBOutlet UILabel *exprelay1Label, *exprelay2Label, *exprelay3Label, *exprelay4Label, *exprelay5Label, *exprelay6Label, *exprelay7Label, *exprelay8Label, *relay1Label, *relay2Label, *relay3Label, *relay4Label, *relay5Label, *relay6Label, *relay7Label, *relay8Label, *temp1Label, *temp2Label, *temp3Label;
     IBOutlet UISwitch *relayExp;
     MemoryViewController *memcontroller;
     IBOutlet UISegmentedControl *tempScale;
-    UIButton *loadNames;
+    IBOutlet UIButton *loadNames, *hideNames, *showNames;
     NSString *bannerUrl, *response;
     XmlParser *xmlParser;
     RA *webBanner;
@@ -36,21 +36,22 @@
 }
 
 @property (nonatomic, retain) NSMutableString *enteredURL, *updatedURL;
-@property (nonatomic, retain) UIButton *loadNames;
+@property (nonatomic, retain) IBOutlet UIButton *loadNames, *hideNames, *showNames;
 @property (nonatomic, retain) NSString *bannerUrl, *response;
 @property (nonatomic, retain) IBOutlet UITextField *url, *relay1, *relay2, *relay3, *relay4, *relay5, *relay6, *relay7, *relay8, *userName;
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) IBOutlet UISwitch *relayExp;
 @property (nonatomic, retain) IBOutlet UISegmentedControl *tempScale;
 @property (nonatomic, retain) IBOutlet UITextField *exprelay1, *exprelay2, *exprelay3, *exprelay4, *exprelay5, *exprelay6, *exprelay7, *exprelay8, *port, *temp1, *temp2, *temp3;
-@property (nonatomic, retain) IBOutlet UILabel *exprelay1Label, *exprelay2Label, *exprelay3Label, *exprelay4Label, *exprelay5Label, *exprelay6Label, *exprelay7Label, *exprelay8Label;
+@property (nonatomic, retain) IBOutlet UILabel *exprelay1Label, *exprelay2Label, *exprelay3Label, *exprelay4Label, *exprelay5Label, *exprelay6Label, *exprelay7Label, *exprelay8Label, *relay1Label, *relay2Label, *relay3Label, *relay4Label, *relay5Label, *relay6Label, *relay7Label, *relay8Label, *temp1Label, *temp2Label, *temp3Label;
 -(IBAction) textFieldDoneEditing : (id) sender;
--(IBAction)saveData;
--(IBAction)hideKeyboard;
--(IBAction)turnOnRelayExp;
--(IBAction)flipMemory;
--(IBAction)loadPortNames;
+-(IBAction) saveData;
+-(IBAction) hideKeyboard;
+-(IBAction) turnOnRelayExp;
+-(IBAction) flipMemory;
+-(IBAction) loadPortNames;
 -(void) loadData;
--(void)getPorts:(NSString *) controllerUrl;
--(void)updatePorts:(RA *) banner;
+-(void) getPorts:(NSString *) controllerUrl;
+-(void) updatePorts:(RA *) banner;
+-(BOOL) reachable;
 @end

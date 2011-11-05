@@ -50,6 +50,6 @@
 -(void)ConfigureUI:(NSString*) ver;
 -(void) loadData;
 -(void)SendUpdate:(NSString *)url;
--(void)sendMode:(NSString *) controllerUrl;
+//-(void)sendMode:(NSString *) controllerUrl;
 @end
 

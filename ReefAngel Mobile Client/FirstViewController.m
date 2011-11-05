@@ -195,7 +195,7 @@
     lastUpdatedLabel.textColor = [UIColor greenColor];
         
 }
-
+/*
 -(void)sendMode:(NSString *) controllerUrl
 {
 
@@ -214,7 +214,7 @@
         
     }
 }
-
+*/
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
 

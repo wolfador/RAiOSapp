@@ -15,7 +15,8 @@
 @synthesize enteredURL, scrollView, url, port, updatedURL, temp1, temp2, temp3, response;
 @synthesize relayExp, relay1, relay2, relay3, relay4, relay5, relay6, relay7, relay8;
 @synthesize exprelay1, exprelay2, exprelay3, exprelay4, exprelay5, exprelay6, exprelay7, exprelay8, userName;
-@synthesize exprelay1Label, exprelay2Label, exprelay3Label, exprelay4Label, exprelay5Label, exprelay6Label, exprelay7Label, exprelay8Label, tempScale, loadNames, bannerUrl;
+@synthesize exprelay1Label, exprelay2Label, exprelay3Label, exprelay4Label, exprelay5Label, exprelay6Label, exprelay7Label, exprelay8Label, tempScale, loadNames, bannerUrl, hideNames, showNames;
+@synthesize  relay1Label, relay2Label, relay3Label, relay4Label, relay5Label, relay6Label, relay7Label, relay8Label, temp1Label, temp2Label, temp3Label;
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 
 - (void)viewDidLoad
@@ -24,16 +25,32 @@
     [super viewDidLoad];   
     [self loadData];
     [self.scrollView setScrollEnabled:YES];
-    if(relayExp.on)    
+    if(self.relayExp.on)    
     {
-        [self.scrollView setContentSize:CGSizeMake(320, 1000)];
+        [self.scrollView setContentSize:CGSizeMake(320, 1200)];
     }
     else
     {
-      [self.scrollView setContentSize:CGSizeMake(320, 700)];  
+      [self.scrollView setContentSize:CGSizeMake(320, 430)];  
     }
     
     self.scrollView.delegate = self;
+}
+
+-(BOOL)reachable
+{
+
+    
+        NSString *testURL = @"www.reefangel.com";
+        Reachability *r = [Reachability reachabilityWithHostName:testURL];
+        NetworkStatus internetStatus = [r currentReachabilityStatus];
+        if(internetStatus == NotReachable) {
+            return NO;
+        }
+        else
+        {
+            return YES;
+        }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -51,6 +68,7 @@
     [self.relay7 resignFirstResponder];
     [self.relay8 resignFirstResponder];
     [self.port resignFirstResponder];
+    [self.userName resignFirstResponder];
     if(relayExp.on)    
     {
         [self.exprelay1 resignFirstResponder];
@@ -93,6 +111,7 @@
     [self.relay6 resignFirstResponder];
     [self.relay7 resignFirstResponder];
     [self.relay8 resignFirstResponder];
+    [self.userName resignFirstResponder];
     if(relayExp.on)    
     {
         [self.exprelay1 resignFirstResponder];
@@ -125,7 +144,7 @@
 {    
     memcontroller = [[MemoryViewController alloc] initWithNibName:@"MemoryViewController" bundle:nil] ;
     memcontroller.delegate = self;
-    memcontroller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    memcontroller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentModalViewController:memcontroller animated:YES];
 }
 
@@ -260,7 +279,7 @@
     
     if([[restored objectForKey:@"ExpansionON"] isEqualToString: @"ON"])
     {
-        [relayExp setOn:YES];
+        [self.relayExp setOn:YES];
         [self turnOnRelayExp];
         self.exprelay1.text = [restored objectForKey:@"ExpRelay1"];
         self.exprelay2.text = [restored objectForKey:@"ExpRelay2"];
@@ -276,7 +295,7 @@
 
 -(IBAction)turnOnRelayExp
 {
-    if(relayExp.on)    
+    if(self.relayExp.on)    
     {
         //Loads saved names for exp module
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -293,9 +312,9 @@
         self.exprelay6.text = [restored objectForKey:@"ExpRelay6"];
         self.exprelay7.text = [restored objectForKey:@"ExpRelay7"];
         self.exprelay8.text = [restored objectForKey:@"ExpRelay8"];
-        
+        /*
         //resize scroll length for longer screen
-        [self.scrollView setContentSize:CGSizeMake(320, 1000)];
+        [self.scrollView setContentSize:CGSizeMake(320, 1200)];
         
     
         self.exprelay1Label.hidden = NO;
@@ -314,10 +333,12 @@
         self.exprelay6.hidden = NO;
         self.exprelay7.hidden = NO;
         self.exprelay8.hidden = NO;
+         */
 }
 else
 {
-        [self.scrollView setContentSize:CGSizeMake(320, 700)];
+    
+        [self.scrollView setContentSize:CGSizeMake(320, 800)];
         self.exprelay1Label.hidden = YES;
         self.exprelay2Label.hidden = YES;
         self.exprelay3Label.hidden = YES;
@@ -334,6 +355,7 @@ else
         self.exprelay6.hidden = YES;
         self.exprelay7.hidden = YES;
         self.exprelay8.hidden = YES;
+     
 }
 
 }
@@ -347,10 +369,113 @@ else
     }
     else
     {
+        if([self reachable])
+           {
         self.bannerUrl = [@"http://www.reefangel.com/status/xml.aspx?id=" stringByAppendingString:self.userName.text];
         [self getPorts:self.bannerUrl];
+           }
     }
 }
+
+-(IBAction)viewNames:(UIButton *)sender
+{
+    
+     UIButton *but = (UIButton*)sender;
+    
+    //NSLog(@"%@", but.tag);
+    if (but.tag == 1) {
+        [self.scrollView setContentSize:CGSizeMake(320, 800)];
+        self.hideNames.hidden = NO;
+        self.showNames.hidden = YES;
+        self.relay1.hidden = NO;
+        self.relay2.hidden = NO;
+        self.relay3.hidden = NO;
+        self.relay4.hidden = NO;
+        self.relay5.hidden = NO;
+        self.relay6.hidden = NO;
+        self.relay7.hidden = NO;
+        self.relay8.hidden = NO;
+        self.temp1.hidden = NO;
+        self.temp2.hidden = NO;
+        self.temp3.hidden = NO;
+        self.relay1Label.hidden = NO;
+        self.relay2Label.hidden = NO;
+        self.relay3Label.hidden = NO;
+        self.relay4Label.hidden = NO;
+        self.relay5Label.hidden = NO;
+        self.relay6Label.hidden = NO;
+        self.relay7Label.hidden = NO;
+        self.relay8Label.hidden = NO;
+        self.temp1Label.hidden = NO;
+        self.temp2Label.hidden = NO;
+        self.temp3Label.hidden = NO;
+        if (self.relayExp.on) {
+            [self.scrollView setContentSize:CGSizeMake(320, 1100)];
+            self.exprelay1Label.hidden = NO;
+            self.exprelay2Label.hidden = NO;
+            self.exprelay3Label.hidden = NO;
+            self.exprelay4Label.hidden = NO;
+            self.exprelay5Label.hidden = NO;
+            self.exprelay6Label.hidden = NO;
+            self.exprelay7Label.hidden = NO;
+            self.exprelay8Label.hidden = NO;
+            self.exprelay1.hidden = NO;
+            self.exprelay2.hidden = NO;
+            self.exprelay3.hidden = NO;
+            self.exprelay4.hidden = NO;
+            self.exprelay5.hidden = NO;
+            self.exprelay6.hidden = NO;
+            self.exprelay7.hidden = NO;
+            self.exprelay8.hidden = NO;
+        }
+    }
+    if (but.tag == 2) {
+        [self.scrollView setContentSize:CGSizeMake(320, 430)];
+        self.hideNames.hidden = YES;
+        self.showNames.hidden = NO;
+        self.relay1.hidden = YES;
+        self.relay2.hidden = YES;
+        self.relay3.hidden = YES;
+        self.relay4.hidden = YES;
+        self.relay5.hidden = YES;
+        self.relay6.hidden = YES;
+        self.relay7.hidden = YES;
+        self.relay8.hidden = YES;
+        self.relay1Label.hidden = YES;
+        self.relay2Label.hidden = YES;
+        self.relay3Label.hidden = YES;
+        self.relay4Label.hidden = YES;
+        self.relay5Label.hidden = YES;
+        self.relay6Label.hidden = YES;
+        self.relay7Label.hidden = YES;
+        self.relay8Label.hidden = YES;
+        self.temp1.hidden = YES;
+        self.temp2.hidden = YES;
+        self.temp3.hidden = YES;
+        self.temp1Label.hidden = YES;
+        self.temp2Label.hidden = YES;
+        self.temp3Label.hidden = YES;
+        if (self.relayExp.on) {
+            self.exprelay1Label.hidden = YES;
+            self.exprelay2Label.hidden = YES;
+            self.exprelay3Label.hidden = YES;
+            self.exprelay4Label.hidden = YES;
+            self.exprelay5Label.hidden = YES;
+            self.exprelay6Label.hidden = YES;
+            self.exprelay7Label.hidden = YES;
+            self.exprelay8Label.hidden = YES;
+            self.exprelay1.hidden = YES;
+            self.exprelay2.hidden = YES;
+            self.exprelay3.hidden = YES;
+            self.exprelay4.hidden = YES;
+            self.exprelay5.hidden = YES;
+            self.exprelay6.hidden = YES;
+            self.exprelay7.hidden = YES;
+            self.exprelay8.hidden = YES;
+        }
+    }
+}
+
 -(void)getPorts:(NSString *) controllerUrl
 {
     
@@ -385,9 +510,7 @@ else
      NSRange range2 = [self.response rangeOfString:@"</RA>" options:NSCaseInsensitiveSearch];
     if(range2.location == NSNotFound )
     {
-        NSLog(@"error downloading");
-        
-        //add retry
+        [self getPorts:self.bannerUrl];
         
     }
     else
@@ -395,7 +518,11 @@ else
         webBanner = [[RA alloc] init];
         paramArray = [xmlParser fromXml:self.response withObject:webBanner];
         webBanner = [paramArray lastObject];
-    [self updatePorts:webBanner];
+    
+        if (webBanner != Nil) {
+            [self updatePorts:webBanner];
+            [self saveData];
+        }
     }
     
     
@@ -408,11 +535,9 @@ else
 
 -(void) updatePorts:(RA *)banner
 {
-    if (banner.T1N != NULL) {
-        self.temp1.text = banner.T1N;
-    }
+    self.temp1.text = banner.T1N;
     self.temp2.text = banner.T2N;
-   self.temp3.text = banner.T3N;
+    self.temp3.text = banner.T3N;
     self.relay1.text = banner.R1N;
     self.relay2.text = banner.R2N;
     self.relay3.text = banner.R3N;
@@ -421,6 +546,27 @@ else
     self.relay6.text = banner.R6N;
     self.relay7.text = banner.R7N;
     self.relay8.text = banner.R8N;
+    if (![banner.R11N isEqualToString: @"0"]) {
+        [self.relayExp setOn:YES];
+        
+        self.exprelay1.text = banner.R11N;
+        self.exprelay2.text = banner.R12N;
+        self.exprelay3.text = banner.R13N;
+        self.exprelay4.text = banner.R14N;
+        self.exprelay5.text = banner.R15N;
+        self.exprelay6.text = banner.R16N;
+        self.exprelay7.text = banner.R17N;
+        self.exprelay8.text = banner.R18N;
+        [self saveData];
+        [self turnOnRelayExp];
+    }
+    else
+    {
+        //turns relayexp off if not found in banner, may not use as some people may not have it in banner but want the exp on
+        //[self.relayExp setOn:NO];
+        [self saveData];
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -451,6 +597,14 @@ else
     self.relay6 = nil;
     self.relay7 = nil;
     self.relay8 = nil;
+    self.relay1Label = nil;
+    self.relay2Label = nil;
+    self.relay3Label = nil;
+    self.relay4Label = nil;
+    self.relay5Label = nil;
+    self.relay6Label = nil;
+    self.relay7Label = nil;
+    self.relay8Label = nil;
 
 }
 
@@ -492,6 +646,19 @@ else
     self.bannerUrl = nil;
     self.loadNames = nil;
     self.response = nil;
+    self.showNames = nil;
+    self.hideNames = nil;
+    self.relay1Label = nil;
+    self.relay2Label = nil;
+    self.relay3Label = nil;
+    self.relay4Label = nil;
+    self.relay5Label = nil;
+    self.relay6Label = nil;
+    self.relay7Label = nil;
+    self.relay8Label = nil;
+    self.temp1Label = nil;
+    self.temp2Label = nil;
+    self.temp3Label = nil;
      [super viewDidUnload];
 
 }
@@ -533,6 +700,20 @@ else
     [bannerUrl release];
     [loadNames release];
     [response release];
+    [hideNames release];
+    [showNames release];
+    [temp1Label release];
+    [temp2Label release];
+    [temp3Label release];
+    [relay1Label release];
+    [relay2Label release];
+    [relay3Label release];
+    [relay4Label release];
+    [relay5Label release];
+    [relay6Label release];
+    [relay7Label release];
+    [relay8Label release];
+    
      [super dealloc];
 }
 @end
