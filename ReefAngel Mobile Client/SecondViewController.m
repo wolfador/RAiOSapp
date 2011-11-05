@@ -15,7 +15,7 @@
 @synthesize enteredURL, scrollView, url, port, updatedURL, temp1, temp2, temp3, response;
 @synthesize relayExp, relay1, relay2, relay3, relay4, relay5, relay6, relay7, relay8;
 @synthesize exprelay1, exprelay2, exprelay3, exprelay4, exprelay5, exprelay6, exprelay7, exprelay8, userName;
-@synthesize exprelay1Label, exprelay2Label, exprelay3Label, exprelay4Label, exprelay5Label, exprelay6Label, exprelay7Label, exprelay8Label, tempScale, loadNames, bannerUrl, hideNames, showNames;
+@synthesize exprelay1Label, exprelay2Label, exprelay3Label, exprelay4Label, exprelay5Label, exprelay6Label, exprelay7Label, exprelay8Label, tempScale, loadNames, bannerUrl, hideNames, showNames, receivedData;
 @synthesize  relay1Label, relay2Label, relay3Label, relay4Label, relay5Label, relay6Label, relay7Label, relay8Label, temp1Label, temp2Label, temp3Label;
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 
@@ -493,21 +493,27 @@ else
 		[alertView release];
         
     }
-    //receivedData = [[NSMutableData data] retain];
-    //NSLog(@"%@", receivedData);
+    else
+    {
+        self.receivedData = [NSMutableData data];
+    }
 
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+-(void) connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
+    [self.receivedData appendData: data];
     
-    xmlParser = [[XmlParser alloc] init] ;
-    NSString *received = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
-    self.response = [NSString stringWithString:received];
+}
 
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+
+    xmlParser = [[XmlParser alloc] init] ;
+    NSString *received = [[[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding] autorelease];
+    self.response = [NSString stringWithString:received];
     
-    
-     NSRange range2 = [self.response rangeOfString:@"</RA>" options:NSCaseInsensitiveSearch];
+    NSRange range2 = [self.response rangeOfString:@"</RA>" options:NSCaseInsensitiveSearch];
     if(range2.location == NSNotFound )
     {
         [self getPorts:self.bannerUrl];
@@ -515,22 +521,18 @@ else
     }
     else
     {
+        
         webBanner = [[RA alloc] init];
         paramArray = [xmlParser fromXml:self.response withObject:webBanner];
         webBanner = [paramArray lastObject];
-    
+        
         if (webBanner != Nil) {
             [self updatePorts:webBanner];
             [self saveData];
         }
     }
     
-    
-}
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-   // NSLog(@"finished");
 }
 
 -(void) updatePorts:(RA *)banner
@@ -546,7 +548,8 @@ else
     self.relay6.text = banner.R6N;
     self.relay7.text = banner.R7N;
     self.relay8.text = banner.R8N;
-    if (![banner.R11N isEqualToString: @"0"]) {
+
+    if (![banner.R11N isEqualToString: @"Relay 11"] && banner.R1 > 0) {
         [self.relayExp setOn:YES];
         
         self.exprelay1.text = banner.R11N;
@@ -557,6 +560,22 @@ else
         self.exprelay6.text = banner.R16N;
         self.exprelay7.text = banner.R17N;
         self.exprelay8.text = banner.R18N;
+        self.exprelay1Label.hidden = NO;
+        self.exprelay2Label.hidden = NO;
+        self.exprelay3Label.hidden = NO;
+        self.exprelay4Label.hidden = NO;
+        self.exprelay5Label.hidden = NO;
+        self.exprelay6Label.hidden = NO;
+        self.exprelay7Label.hidden = NO;
+        self.exprelay8Label.hidden = NO;
+        self.exprelay1.hidden = NO;
+        self.exprelay2.hidden = NO;
+        self.exprelay3.hidden = NO;
+        self.exprelay4.hidden = NO;
+        self.exprelay5.hidden = NO;
+        self.exprelay6.hidden = NO;
+        self.exprelay7.hidden = NO;
+        self.exprelay8.hidden = NO;
         [self saveData];
         [self turnOnRelayExp];
     }
@@ -659,6 +678,7 @@ else
     self.temp1Label = nil;
     self.temp2Label = nil;
     self.temp3Label = nil;
+    self.receivedData = nil;
      [super viewDidUnload];
 
 }
@@ -713,6 +733,7 @@ else
     [relay6Label release];
     [relay7Label release];
     [relay8Label release];
+    [receivedData release];
     
      [super dealloc];
 }

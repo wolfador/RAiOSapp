@@ -44,6 +44,7 @@
 @property (nonatomic, retain) IBOutlet UISegmentedControl *tempScale;
 @property (nonatomic, retain) IBOutlet UITextField *exprelay1, *exprelay2, *exprelay3, *exprelay4, *exprelay5, *exprelay6, *exprelay7, *exprelay8, *port, *temp1, *temp2, *temp3;
 @property (nonatomic, retain) IBOutlet UILabel *exprelay1Label, *exprelay2Label, *exprelay3Label, *exprelay4Label, *exprelay5Label, *exprelay6Label, *exprelay7Label, *exprelay8Label, *relay1Label, *relay2Label, *relay3Label, *relay4Label, *relay5Label, *relay6Label, *relay7Label, *relay8Label, *temp1Label, *temp2Label, *temp3Label;
+@property (nonatomic, retain) NSMutableData *receivedData;
 -(IBAction) textFieldDoneEditing : (id) sender;
 -(IBAction) saveData;
 -(IBAction) hideKeyboard;
