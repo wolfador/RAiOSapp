@@ -13,10 +13,15 @@
 @synthesize temp1Label, temp2Label, temp3Label, pHLabel;
 @synthesize wifiUrl,fullUrl,lastUpdatedLabel, current_version;
 @synthesize enteredURL, response, tempScale, salinityLabel, salinityValue, temp2Value, temp3Value, temp1Value;
-
+@synthesize AIWvalue, AIBvalue, AIRBvalue, scrollView, AIWLabel, AIBLabel, AIRBLabel;
 
 - (void)viewDidLoad
 {
+    [self.scrollView setScrollEnabled:YES];
+    [self.scrollView setContentSize:CGSizeMake(320, 900)];  
+    
+    self.scrollView.delegate = self;
+
         
     [super viewDidLoad];
 
@@ -195,26 +200,7 @@
     lastUpdatedLabel.textColor = [UIColor greenColor];
         
 }
-/*
--(void)sendMode:(NSString *) controllerUrl
-{
 
-    NSURL *url = [NSURL URLWithString: controllerUrl];
-    NSURLRequest *theRequest=[NSURLRequest requestWithURL:url                        
-                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
-                              
-                                          timeoutInterval:60.0];
-
-    NSURLConnection *theConnection = [NSURLConnection connectionWithRequest:theRequest delegate:self];
-    
-    if (!theConnection) {
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
-		[alertView show];
-		[alertView release];
-        
-    }
-}
-*/
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
 
@@ -330,6 +316,65 @@
         self.salinityValue.hidden = NO;
        params.formattedSal = [self formatSal:params.SAL]; 
     }
+    if (params.AIB != NULL && params.SAL == NULL) {
+        CGRect BValuePosition = self.AIBvalue.frame;
+        BValuePosition.origin.y = BValuePosition.origin.y - 45;
+        self.AIBvalue.frame = BValuePosition;
+        
+        CGRect WValuePosition = self.AIWvalue.frame;
+        WValuePosition.origin.y = WValuePosition.origin.y - 45;
+        self.AIWvalue.frame = WValuePosition;
+        
+        CGRect RBValuePosition = self.AIRBvalue.frame;
+        RBValuePosition.origin.y = RBValuePosition.origin.y - 45;
+        self.AIRBvalue.frame = RBValuePosition;
+        
+        CGRect RBLabelPosition = self.AIRBLabel.frame;
+        RBLabelPosition.origin.y = RBLabelPosition.origin.y - 45;
+        self.AIRBLabel.frame = RBLabelPosition;
+        
+        CGRect BLabelPosition = self.AIBLabel.frame;
+        BLabelPosition.origin.y = BLabelPosition.origin.y - 45;
+        self.AIBLabel.frame = BLabelPosition;
+        
+        CGRect WLabelPosition = self.AIWLabel.frame;
+        WLabelPosition.origin.y = WLabelPosition.origin.y - 45;
+        self.AIWLabel.frame = WLabelPosition;
+        
+        self.AIBvalue.hidden = NO;
+        self.AIRBvalue.hidden = NO;
+        self.AIWvalue.hidden = NO;
+        self.AIBLabel.hidden = NO;
+        self.AIRBLabel.hidden = NO;
+        self.AIWLabel.hidden = NO;
+        self.AIWvalue.text = [params.AIW stringValue];
+        self.AIBvalue.text = [params.AIB stringValue];
+        self.AIRBvalue.text = [params.AIRB stringValue];
+
+    }
+    else if(params.AIB != NULL)
+    {
+        self.AIBvalue.hidden = NO;
+        self.AIRBvalue.hidden = NO;
+        self.AIWvalue.hidden = NO;
+        self.AIBLabel.hidden = NO;
+        self.AIRBLabel.hidden = NO;
+        self.AIWLabel.hidden = NO;
+        self.AIWvalue.text = [params.AIW stringValue];
+        self.AIBvalue.text = [params.AIB stringValue];
+        self.AIRBvalue.text = [params.AIRB stringValue];
+        
+    }
+    else
+    {
+        self.AIBvalue.hidden = YES;
+        self.AIRBvalue.hidden = YES;
+        self.AIWvalue.hidden = YES;
+        self.AIBLabel.hidden = YES;
+        self.AIRBLabel.hidden = YES;
+        self.AIWLabel.hidden = YES; 
+    }
+
 
 }
 
@@ -424,7 +469,7 @@
     self.temp3Label = nil;
     self.pHLabel = nil;
     self.lastUpdatedLabel = nil;
-    //self.scrollView = nil;
+    self.scrollView = nil;
     self.temp1Value = nil;
     self.response = nil;
     self.tempScale = nil;
@@ -432,6 +477,13 @@
     self.salinityValue = nil;
     self.fullUrl = nil;
     self.wifiUrl = nil;
+    self.scrollView = nil;
+    self.AIBvalue = nil;
+    self.AIWvalue = nil;
+    self.AIRBvalue = nil;
+    self.AIBLabel = nil;
+    self.AIRBLabel = nil;
+    self.AIWLabel = nil;
     [super viewDidUnload];
 }
 
@@ -442,7 +494,6 @@
     [temp3Label release];
     [pHLabel release];
     [lastUpdatedLabel release];
-    //[scrollView release];
     [response release];
     [tempScale release];
     [paramArray release];
@@ -453,6 +504,14 @@
     [temp1Value release];
     [temp2Value release];
     [temp3Value release];
+    [AIBvalue release];
+    [AIRBvalue release];
+    [AIWvalue release];
+    [scrollView release];
+    [AIBLabel release];
+    [AIRBLabel release];
+    [AIRBLabel release];
+    
     [super dealloc];
     
 }
