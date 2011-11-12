@@ -18,7 +18,7 @@
 - (void)viewDidLoad
 {
     [self.scrollView setScrollEnabled:YES];
-    [self.scrollView setContentSize:CGSizeMake(320, 900)];  
+    [self.scrollView setContentSize:CGSizeMake(320, 500)];  
     
     self.scrollView.delegate = self;
 
@@ -260,10 +260,12 @@
 
 -(void)ConfigureUI:(NSString*) ver
 {
+    /*
     NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
     [f setNumberStyle:NSNumberFormatterDecimalStyle];
     NSNumber *version = [f numberFromString:ver];
     [f release];
+    
     if ([version intValue] <= 8518) {
         
     
@@ -272,6 +274,7 @@
     {
         
     }
+     */
 
 }
 
@@ -317,6 +320,8 @@
        params.formattedSal = [self formatSal:params.SAL]; 
     }
     if (params.AIB != NULL && params.SAL == NULL) {
+        
+        //moves labels to compensate for Salinity not being enabled.        
         CGRect BValuePosition = self.AIBvalue.frame;
         BValuePosition.origin.y = BValuePosition.origin.y - 45;
         self.AIBvalue.frame = BValuePosition;
@@ -347,12 +352,13 @@
         self.AIBLabel.hidden = NO;
         self.AIRBLabel.hidden = NO;
         self.AIWLabel.hidden = NO;
-        self.AIWvalue.text = [params.AIW stringValue];
-        self.AIBvalue.text = [params.AIB stringValue];
-        self.AIRBvalue.text = [params.AIRB stringValue];
+        self.AIWvalue.text = [[params.AIW stringValue] stringByAppendingString:@"%"];
+        self.AIBvalue.text = [[params.AIB stringValue] stringByAppendingString:@"%"];
+        self.AIRBvalue.text = [[params.AIRB stringValue] stringByAppendingString:@"%"];
+        [self.scrollView setContentSize:CGSizeMake(320, 600)]; 
 
     }
-    else if(params.AIB != NULL)
+    else if(params.AIB != NULL && params.SAL != NULL)
     {
         self.AIBvalue.hidden = NO;
         self.AIRBvalue.hidden = NO;
@@ -360,9 +366,10 @@
         self.AIBLabel.hidden = NO;
         self.AIRBLabel.hidden = NO;
         self.AIWLabel.hidden = NO;
-        self.AIWvalue.text = [params.AIW stringValue];
-        self.AIBvalue.text = [params.AIB stringValue];
-        self.AIRBvalue.text = [params.AIRB stringValue];
+        self.AIWvalue.text = [[params.AIW stringValue] stringByAppendingString:@"%"];
+        self.AIBvalue.text = [[params.AIB stringValue] stringByAppendingString:@"%"];
+        self.AIRBvalue.text = [[params.AIRB stringValue] stringByAppendingString:@"%"];
+        [self.scrollView setContentSize:CGSizeMake(320, 650)]; 
         
     }
     else
@@ -373,6 +380,7 @@
         self.AIBLabel.hidden = YES;
         self.AIRBLabel.hidden = YES;
         self.AIWLabel.hidden = YES; 
+        [self.scrollView setScrollEnabled:NO];
     }
 
 
