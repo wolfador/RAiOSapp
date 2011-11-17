@@ -24,7 +24,7 @@
     NSString *response;
     XmlParser *xmlParser;
     NSMutableArray *paramArray;
-   NSString *current_version;  
+    NSString *current_version;  
     IBOutlet UILabel *temp1Label, *temp2Label, *temp3Label, *temp1Value;
     IBOutlet UIScrollView *scrollView;
 
@@ -40,16 +40,16 @@
 @property (nonatomic, retain) IBOutlet UILabel *lastUpdatedLabel, *temp1Value, *AIWLabel, *AIBLabel, *AIRBLabel;
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) NSString *response;
--(void)formatRA : (RA *) params;
--(NSString *)formatTemp : (NSNumber *) temp;
+-(void) formatRA : (RA *) params;
+-(NSString *) formatTemp : (NSNumber *) temp;
 -(NSString *) formatPh : (NSNumber *) pH;
 -(NSString *) formatSal : (NSNumber *)sal;
--(void)sendUpdate:(NSString *) controllerUrl;
+-(void) sendUpdate:(NSString *) controllerUrl;
 -(IBAction) refreshParams;
 -(BOOL) reachable;
--(void)UpdateUI:(RA*)ra;
--(void)ConfigureUI:(NSString*) ver;
+-(void) UpdateUI:(RA*)ra;
+-(void) ConfigureUI:(NSString*) ver;
 -(void) loadData;
--(void)SendUpdate:(NSString *)url;
+-(void) SendUpdate:(NSString *)url;
 @end
 

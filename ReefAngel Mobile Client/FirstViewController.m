@@ -260,7 +260,7 @@
 
 -(void)ConfigureUI:(NSString*) ver
 {
-    /*
+    
     NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
     [f setNumberStyle:NSNumberFormatterDecimalStyle];
     NSNumber *version = [f numberFromString:ver];
@@ -274,7 +274,7 @@
     {
         
     }
-     */
+     
 
 }
 
@@ -302,6 +302,8 @@
 
     params.formattedpH = [self formatPh:params.PH];
     //hides Sal if not added to ReefAngel Features.
+    
+    
     if (params.SAL == NULL) {
         self.salinityLabel.hidden = YES;
         self.salinityValue.hidden = YES;
@@ -321,7 +323,11 @@
     }
     if (params.AIB != NULL && params.SAL == NULL) {
         
-        //moves labels to compensate for Salinity not being enabled.        
+        //moves labels to compensate for Salinity not being enabled.
+        NSString *percent = @"%";
+        NSRange range = [self.AIBvalue.text rangeOfString : percent];
+        if (range.location == NSNotFound) {
+            
         CGRect BValuePosition = self.AIBvalue.frame;
         BValuePosition.origin.y = BValuePosition.origin.y - 45;
         self.AIBvalue.frame = BValuePosition;
@@ -345,6 +351,7 @@
         CGRect WLabelPosition = self.AIWLabel.frame;
         WLabelPosition.origin.y = WLabelPosition.origin.y - 45;
         self.AIWLabel.frame = WLabelPosition;
+        }
         
         self.AIBvalue.hidden = NO;
         self.AIRBvalue.hidden = NO;
