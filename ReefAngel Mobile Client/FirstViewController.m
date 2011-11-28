@@ -67,8 +67,8 @@
         self.temp1Value.text = [raParam.formattedTemp1 stringByAppendingString:self.tempScale];
         
         self.pHLabel.text    = raParam.formattedpH;
-        self.salinityValue.text = raParam.formattedSal;
-        
+        //self.salinityValue.text = raParam.formattedSal;
+        self.salinityValue.text = [raParam.SAL stringValue];
 
         
         raParam = nil;
