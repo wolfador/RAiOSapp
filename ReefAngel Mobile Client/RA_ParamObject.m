@@ -20,7 +20,7 @@
 isRelay01ONMask, isRelay02ONMask, isRelay03ONMask, isRelay04ONMask, isRelay05ONMask, isRelay06ONMask, isRelay07ONMask, isRelay08ONMask,
 isRelay01OFFMask, isRelay02OFFMask, isRelay03OFFMask, isRelay04OFFMask, isRelay05OFFMask, isRelay06OFFMask, isRelay07OFFMask, isRelay08OFFMask, PWMA, PWMD, SAL, formattedSal;
 @synthesize T1N, T2N, T3N, R1N, R2N, R3N, R4N, R5N, R6N, R7N, R8N, R11N, R12N, R13N, R14N, R15N, R16N, R17N, R18N;
-@synthesize AIW, AIB, AIRB, RFM, RFS, RFD, RFW, RFB, RFG, RFR, RFI, ORP, PWME0;
+@synthesize AIW, AIB, AIRB, RFM, RFS, RFD, RFW, RFB, RFG, RFR, RFI, ORP, PWME0, LOGDATE, REM, EM;
 
 -(void) dealloc
 {
@@ -89,6 +89,9 @@ isRelay01OFFMask, isRelay02OFFMask, isRelay03OFFMask, isRelay04OFFMask, isRelay0
     [RFS release];
     [RFW release];
     [PWME0 release];
+    [LOGDATE release];
+    [REM release];
+    [EM release];
     
     [super dealloc];
 }
