@@ -27,6 +27,7 @@
     NSString *current_version;  
     IBOutlet UILabel *temp1Label, *temp2Label, *temp3Label, *temp1Value;
     IBOutlet UIScrollView *scrollView;
+    NSMutableData *receivedData;
 
 
 }
@@ -40,6 +41,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *lastUpdatedLabel, *temp1Value, *AIWLabel, *AIBLabel, *AIRBLabel;
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) NSString *response;
+@property (nonatomic, retain) NSMutableData *receivedData;
 -(void) formatRA : (RA *) params;
 -(NSString *) formatTemp : (NSNumber *) temp;
 -(NSString *) formatPh : (NSNumber *) pH;

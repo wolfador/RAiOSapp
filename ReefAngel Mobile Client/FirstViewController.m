@@ -13,7 +13,7 @@
 @synthesize temp1Label, temp2Label, temp3Label, pHLabel;
 @synthesize wifiUrl, fullUrl,lastUpdatedLabel, current_version, directConnect;
 @synthesize enteredURL, response, tempScale, salinityLabel, salinityValue, temp2Value, temp3Value, temp1Value;
-@synthesize AIWvalue, AIBvalue, AIRBvalue, scrollView, AIWLabel, AIBLabel, AIRBLabel;
+@synthesize AIWvalue, AIBvalue, AIRBvalue, scrollView, AIWLabel, AIBLabel, AIRBLabel, receivedData;
 
 - (void)viewDidLoad
 {
@@ -222,6 +222,9 @@
 		[alertView release];
         
     }
+    {
+        self.receivedData = [NSMutableData data];
+    }
     lastUpdatedLabel.text = @"Updating";
     lastUpdatedLabel.textColor = [UIColor greenColor];
         
@@ -229,68 +232,68 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-
-    xmlParser = [[XmlParser alloc] init] ;
-    NSString *receivedData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    self.response = [NSString stringWithString:receivedData];
-    NSLog(@"%@", self.response);
-    [receivedData release];
     
+    [self.receivedData appendData: data];
+}
 
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    xmlParser = [[XmlParser alloc] init] ;
+    NSString *data = [[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding];
+    self.response = [NSString stringWithString:data];
+    
     NSRange range2 = [self.response rangeOfString:@"</V>" options:NSCaseInsensitiveSearch];
     if(range2.location != NSNotFound )
     {
         //removes <V> and </V>
-            NSString *newStr = [self.response stringByReplacingOccurrencesOfString:@"<V>" withString:@""];
-            NSString *version = [newStr stringByReplacingOccurrencesOfString:@"</V>" withString:@""];
-            self.current_version = [version stringByReplacingOccurrencesOfString:@"." withString:@""];
+        NSString *newStr = [self.response stringByReplacingOccurrencesOfString:@"<V>" withString:@""];
+        NSString *version = [newStr stringByReplacingOccurrencesOfString:@"</V>" withString:@""];
+        self.current_version = [version stringByReplacingOccurrencesOfString:@"." withString:@""];
         
         [self ConfigureUI:self.current_version];
         if ([self.directConnect isEqualToString:@"ON"])
         {
-        self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
-        [self SendUpdate:self.fullUrl];
+            self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
+            [self SendUpdate:self.fullUrl];
         }
         else
         {
             [self SendUpdate:self.wifiUrl];
         }
-
+        
     }
     else
     {
         raParam = [[RA alloc] init] ;
         
-    paramArray = [xmlParser fromXml:self.response withObject:raParam];
-    
-    raParam = [paramArray lastObject];
-    
-    [self formatRA:raParam];
-    [self UpdateUI:raParam];
-    if (self.response != NULL) {
-        NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
-        [formatter setDateFormat:@"MMM dd yyyy : hh:mm:ss a"];
-        NSDate *date = [NSDate date];
-        self.lastUpdatedLabel.text = [formatter stringFromDate:date];
-        self.lastUpdatedLabel.textColor = [UIColor greenColor];
-    }
-    else
-    {
-        if (self.lastUpdatedLabel.text.length == 0) {
-            self.lastUpdatedLabel.text = @"Please Refresh";
+        paramArray = [xmlParser fromXml:self.response withObject:raParam];
+        
+        raParam = [paramArray lastObject];
+        
+        [self formatRA:raParam];
+        [self UpdateUI:raParam];
+        if (self.response != NULL) {
+            NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
+            [formatter setDateFormat:@"MMM dd yyyy : hh:mm:ss a"];
+            NSDate *date = [NSDate date];
+            self.lastUpdatedLabel.text = [formatter stringFromDate:date];
+            self.lastUpdatedLabel.textColor = [UIColor greenColor];
         }
-        self.lastUpdatedLabel.textColor = [UIColor redColor];
+        else
+        {
+            if (self.lastUpdatedLabel.text.length == 0) {
+                self.lastUpdatedLabel.text = @"Please Refresh";
+            }
+            self.lastUpdatedLabel.textColor = [UIColor redColor];
+            
+        }
+        [self UpdateUI:raParam];
+        
+        [raParam release];
         
     }
-    [self UpdateUI:raParam];
-    
-    [raParam release];
-    
-    }
     [xmlParser release];
-    
 }
-
 -(void)ConfigureUI:(NSString*) ver
 {
     
@@ -546,6 +549,7 @@
     self.AIBLabel = nil;
     self.AIRBLabel = nil;
     self.AIWLabel = nil;
+    self.receivedData = nil;
     [super viewDidUnload];
 }
 
@@ -573,6 +577,7 @@
     [AIBLabel release];
     [AIRBLabel release];
     [AIRBLabel release];
+    [receivedData release];
     
     [super dealloc];
     
