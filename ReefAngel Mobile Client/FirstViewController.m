@@ -11,7 +11,7 @@
 
 @implementation FirstViewController
 @synthesize temp1Label, temp2Label, temp3Label, pHLabel;
-@synthesize wifiUrl,fullUrl,lastUpdatedLabel, current_version;
+@synthesize wifiUrl, fullUrl,lastUpdatedLabel, current_version, directConnect;
 @synthesize enteredURL, response, tempScale, salinityLabel, salinityValue, temp2Value, temp3Value, temp1Value;
 @synthesize AIWvalue, AIBvalue, AIRBvalue, scrollView, AIWLabel, AIBLabel, AIRBLabel;
 
@@ -29,6 +29,7 @@
 
 -(BOOL)reachable
 {
+    
     NSString *http = @"http://";
     NSRange range = [self.enteredURL rangeOfString : http];
     if (range.location == NSNotFound) {
@@ -37,10 +38,12 @@
         Reachability *r = [Reachability reachabilityWithHostName:testURL];
         NetworkStatus internetStatus = [r currentReachabilityStatus];
         if(internetStatus == NotReachable) {
+
             return NO;
+            
         }
         else
-        {
+        { 
             return YES;
         }
     }
@@ -87,8 +90,15 @@
 -(IBAction)refreshParams
 {
     if ([self reachable]) {
-        self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
-        [self SendUpdate:self.fullUrl];
+        if ([self.directConnect isEqualToString:@"ON"])
+        {
+            self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
+            [self SendUpdate:self.fullUrl];
+        }
+        else
+        {
+         [self SendUpdate:self.wifiUrl];
+        }
     }
     else
     {
@@ -118,12 +128,22 @@
 	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"savedata.plist"];
 	
 	NSDictionary  *restored = [NSDictionary dictionaryWithContentsOfFile: path];
-	self.wifiUrl = [restored objectForKey:@"URL"];
-    self.enteredURL = [restored objectForKey:@"EnteredURL"];
-   self.tempScale = [restored objectForKey:@"TempScale"];
+    self.directConnect = [restored objectForKey:@"DirectConnect"];
+    if ([self.directConnect isEqualToString:@"ON"]) {
+        self.wifiUrl = [restored objectForKey:@"URL"];
+        self.enteredURL = [restored objectForKey:@"EnteredURL"];
+
+    }
+    else
+    {
+        self.wifiUrl = [restored objectForKey:@"RaURL"];
+        self.enteredURL = @"forum.reefangel.com";
+    }
+	   self.tempScale = [restored objectForKey:@"TempScale"];
     self.temp1Label.text = [restored objectForKey:@"Temp1"];
     self.temp2Label.text = [restored objectForKey:@"Temp2"];
     self.temp3Label.text = [restored objectForKey:@"Temp3"];
+    
     if ([self.temp1Label.text length] == 0) {
         self.temp1Label.text = @"Water:";
     }
@@ -154,10 +174,16 @@
     }
     
     if ([self reachable]) {
+        if ([self.directConnect isEqualToString:@"ON"])
+        {
         self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
             NSString *version = [NSString stringWithFormat:@"%@v",self.wifiUrl];
         [self SendUpdate:version];
-            //[self SendUpdate:self.fullUrl];
+        }
+        else
+        {
+            [self SendUpdate:self.wifiUrl];
+        }
     }
     else if ([self.enteredURL length] == 0)
     {
@@ -207,6 +233,7 @@
     xmlParser = [[XmlParser alloc] init] ;
     NSString *receivedData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     self.response = [NSString stringWithString:receivedData];
+    NSLog(@"%@", self.response);
     [receivedData release];
     
 
@@ -219,9 +246,15 @@
             self.current_version = [version stringByReplacingOccurrencesOfString:@"." withString:@""];
         
         [self ConfigureUI:self.current_version];
-        
+        if ([self.directConnect isEqualToString:@"ON"])
+        {
         self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
         [self SendUpdate:self.fullUrl];
+        }
+        else
+        {
+            [self SendUpdate:self.wifiUrl];
+        }
 
     }
     else
@@ -304,7 +337,7 @@
     //hides Sal if not added to ReefAngel Features.
     
     
-    if (params.SAL == NULL) {
+    if (params.SAL == NULL || [params.SAL intValue] == 0) {
         self.salinityLabel.hidden = YES;
         self.salinityValue.hidden = YES;
     }
@@ -321,6 +354,7 @@
         self.salinityValue.hidden = NO;
        params.formattedSal = [self formatSal:params.SAL]; 
     }
+    if ([self.directConnect isEqualToString:@"ON"]) {
     if (params.AIB != NULL && params.SAL == NULL) {
         
         //moves labels to compensate for Salinity not being enabled.
@@ -389,7 +423,7 @@
         self.AIWLabel.hidden = YES; 
         [self.scrollView setScrollEnabled:NO];
     }
-
+    }
 
 }
 

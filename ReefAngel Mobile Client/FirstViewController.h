@@ -20,7 +20,7 @@
     NSString *fullUrl;
     NSString *wifiUrl, *enteredURL, *tempScale;
     RA *raParam;
-    NSString *urlLocation;
+    NSString *urlLocation, *directConnect;
     NSString *response;
     XmlParser *xmlParser;
     NSMutableArray *paramArray;
@@ -32,7 +32,7 @@
 }
 
 @property (readwrite, copy) NSString *wifiUrl, *enteredURL, *tempScale;
-@property (readwrite, copy) NSString *fullUrl, *current_version;
+@property (readwrite, copy) NSString *fullUrl, *current_version, *directConnect;
 @property (nonatomic, retain) IBOutlet UILabel *temp1Label, *salinityLabel, *salinityValue;
 @property (nonatomic, retain) IBOutlet UILabel *temp2Label, *temp2Value;
 @property (nonatomic, retain) IBOutlet UILabel *temp3Label, *temp3Value;

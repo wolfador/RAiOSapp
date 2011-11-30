@@ -22,11 +22,11 @@
     IBOutlet UITextField *url, *relay1, *relay2, *relay3, *relay4, *relay5, *relay6, *relay7, *relay8, *port, *temp1, *temp2, *temp3;
     IBOutlet UITextField *exprelay1, *exprelay2, *exprelay3, *exprelay4, *exprelay5, *exprelay6, *exprelay7, *exprelay8, *userName;
     IBOutlet UILabel *exprelay1Label, *exprelay2Label, *exprelay3Label, *exprelay4Label, *exprelay5Label, *exprelay6Label, *exprelay7Label, *exprelay8Label, *relay1Label, *relay2Label, *relay3Label, *relay4Label, *relay5Label, *relay6Label, *relay7Label, *relay8Label, *temp1Label, *temp2Label, *temp3Label;
-    IBOutlet UISwitch *relayExp;
+    IBOutlet UISwitch *relayExp, *directConnect;
     MemoryViewController *memcontroller;
     IBOutlet UISegmentedControl *tempScale;
     IBOutlet UIButton *loadNames, *hideNames, *showNames;
-    NSString *bannerUrl, *response;
+    NSString *bannerUrl, *response, *raURL;
     XmlParser *xmlParser;
     RA *webBanner;
     NSMutableArray *paramArray;
@@ -37,10 +37,10 @@
 
 @property (nonatomic, retain) NSMutableString *enteredURL, *updatedURL;
 @property (nonatomic, retain) IBOutlet UIButton *loadNames, *hideNames, *showNames;
-@property (nonatomic, retain) NSString *bannerUrl, *response;
+@property (nonatomic, retain) NSString *bannerUrl, *response, *raURL;
 @property (nonatomic, retain) IBOutlet UITextField *url, *relay1, *relay2, *relay3, *relay4, *relay5, *relay6, *relay7, *relay8, *userName;
 @property (nonatomic, retain) UIScrollView *scrollView;
-@property (nonatomic, retain) IBOutlet UISwitch *relayExp;
+@property (nonatomic, retain) IBOutlet UISwitch *relayExp, *directConnect;
 @property (nonatomic, retain) IBOutlet UISegmentedControl *tempScale;
 @property (nonatomic, retain) IBOutlet UITextField *exprelay1, *exprelay2, *exprelay3, *exprelay4, *exprelay5, *exprelay6, *exprelay7, *exprelay8, *port, *temp1, *temp2, *temp3;
 @property (nonatomic, retain) IBOutlet UILabel *exprelay1Label, *exprelay2Label, *exprelay3Label, *exprelay4Label, *exprelay5Label, *exprelay6Label, *exprelay7Label, *exprelay8Label, *relay1Label, *relay2Label, *relay3Label, *relay4Label, *relay5Label, *relay6Label, *relay7Label, *relay8Label, *temp1Label, *temp2Label, *temp3Label;

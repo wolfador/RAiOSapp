@@ -15,8 +15,8 @@
 @synthesize enteredURL, scrollView, url, port, updatedURL, temp1, temp2, temp3, response;
 @synthesize relayExp, relay1, relay2, relay3, relay4, relay5, relay6, relay7, relay8;
 @synthesize exprelay1, exprelay2, exprelay3, exprelay4, exprelay5, exprelay6, exprelay7, exprelay8, userName;
-@synthesize exprelay1Label, exprelay2Label, exprelay3Label, exprelay4Label, exprelay5Label, exprelay6Label, exprelay7Label, exprelay8Label, tempScale, loadNames, bannerUrl, hideNames, showNames, receivedData;
-@synthesize  relay1Label, relay2Label, relay3Label, relay4Label, relay5Label, relay6Label, relay7Label, relay8Label, temp1Label, temp2Label, temp3Label;
+@synthesize exprelay1Label, exprelay2Label, exprelay3Label, exprelay4Label, exprelay5Label, exprelay6Label, exprelay7Label, exprelay8Label, tempScale, loadNames, bannerUrl, hideNames, showNames, receivedData, raURL;
+@synthesize  relay1Label, relay2Label, relay3Label, relay4Label, relay5Label, relay6Label, relay7Label, relay8Label, temp1Label, temp2Label, temp3Label, directConnect;
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 
 - (void)viewDidLoad
@@ -41,7 +41,7 @@
 {
 
     
-        NSString *testURL = @"www.reefangel.com";
+        NSString *testURL = @"forum.reefangel.com";
         Reachability *r = [Reachability reachabilityWithHostName:testURL];
         NetworkStatus internetStatus = [r currentReachabilityStatus];
         if(internetStatus == NotReachable) {
@@ -182,24 +182,36 @@
         {
             self.updatedURL = [NSMutableString stringWithString:self.enteredURL];
         }
-        BOOL portColon;
-        
-        portColon = [self.updatedURL hasSuffix:@":"];
-        
-        if (!portColon)
-        {
-                    [self.updatedURL appendString:@":"];
-            }
-        [self.updatedURL appendString:self.port.text];
-        BOOL endingSlash;
-        
-        endingSlash = [self.updatedURL hasSuffix:@"/"];
-        
-        if (!endingSlash)
-        {
-            [self.updatedURL appendString:@"/"];
-        }
 
+        
+        NSString *forum = @"forum.reefangel.com";
+        NSRange range2 = [self.enteredURL rangeOfString:forum];
+        if (range2.location == NSNotFound) {
+            BOOL portColon;
+            
+            portColon = [self.updatedURL hasSuffix:@":"];
+            
+            if (!portColon)
+            {
+                [self.updatedURL appendString:@":"];
+            }
+            [self.updatedURL appendString:self.port.text];
+            BOOL endingSlash;
+            
+            endingSlash = [self.updatedURL hasSuffix:@"/"];
+            
+            if (!endingSlash)
+            {
+                [self.updatedURL appendString:@"/"];
+            }
+
+        }
+        else
+        {
+             self.updatedURL = [NSMutableString stringWithString:self.enteredURL];
+        }
+        
+                
         
 		[Dictionary setObject: self.enteredURL forKey: @"EnteredURL"];
         [Dictionary setObject: self.updatedURL forKey: @"URL"];
@@ -216,6 +228,16 @@
         [Dictionary setObject: self.temp2.text forKey: @"Temp2"];
         [Dictionary setObject: self.temp3.text forKey: @"Temp3"];
         [Dictionary setObject: self.userName.text forKey: @"UserName"];
+        if ([self.userName.text length] > 0 && !self.directConnect.on) {
+            NSString *forumURL = [NSString stringWithString:@"http://forum.reefangel.com/status/params.aspx?id="];
+            self.raURL = [forumURL stringByAppendingString:self.userName.text];
+        [Dictionary setObject: self.raURL forKey: @"RaURL"];
+            [Dictionary setObject: @"OFF" forKey: @"DirectConnect"];
+                                  
+        }
+        if (self.directConnect.on) {
+            [Dictionary setObject: @"ON" forKey: @"DirectConnect"];
+        }
         if (self.tempScale.selectedSegmentIndex == 0) {
             [Dictionary setObject: @"*F" forKey: @"TempScale"];
         }
@@ -276,7 +298,10 @@
     if ([self.temp3.text length] == 0) {
         self.temp3.text = @"Lights";
     }
-    
+    if([[restored objectForKey:@"DirectConnect"] isEqualToString: @"ON"])
+    {
+        [self.directConnect setOn:YES];
+    }
     if([[restored objectForKey:@"ExpansionON"] isEqualToString: @"ON"])
     {
         [self.relayExp setOn:YES];
@@ -371,7 +396,7 @@ else
     {
         if([self reachable])
            {
-        self.bannerUrl = [@"http://www.reefangel.com/status/xml.aspx?id=" stringByAppendingString:self.userName.text];
+        self.bannerUrl = [@"http://forum.reefangel.com/status/labels.aspx?id=" stringByAppendingString:self.userName.text];
         [self getPorts:self.bannerUrl];
            }
     }
@@ -679,6 +704,7 @@ else
     self.temp2Label = nil;
     self.temp3Label = nil;
     self.receivedData = nil;
+    self.raURL = nil;
      [super viewDidUnload];
 
 }
@@ -734,6 +760,7 @@ else
     [relay7Label release];
     [relay8Label release];
     [receivedData release];
+    [raURL release];
     
      [super dealloc];
 }
