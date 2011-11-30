@@ -424,6 +424,19 @@
         [self.scrollView setScrollEnabled:NO];
     }
     }
+    else
+    {
+        self.AIBvalue.hidden = NO;
+        self.AIRBvalue.hidden = NO;
+        self.AIWvalue.hidden = NO;
+        self.AIBLabel.hidden = NO;
+        self.AIRBLabel.hidden = NO;
+        self.AIWLabel.hidden = NO;
+        self.AIWvalue.text = [[params.AIW stringValue] stringByAppendingString:@"%"];
+        self.AIBvalue.text = [[params.AIB stringValue] stringByAppendingString:@"%"];
+        self.AIRBvalue.text = [[params.AIRB stringValue] stringByAppendingString:@"%"];
+         [self.scrollView setContentSize:CGSizeMake(320, 650)]; 
+    }
 
 }
 
