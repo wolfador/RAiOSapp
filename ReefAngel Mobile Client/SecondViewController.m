@@ -302,6 +302,10 @@
     {
         [self.directConnect setOn:YES];
     }
+    else
+    {
+        [self.directConnect setOn:NO];
+    }
     if([[restored objectForKey:@"ExpansionON"] isEqualToString: @"ON"])
     {
         [self.relayExp setOn:YES];
