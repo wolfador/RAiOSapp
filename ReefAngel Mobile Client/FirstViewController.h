@@ -50,8 +50,6 @@
 -(IBAction) refreshParams;
 -(BOOL) reachable;
 -(void) UpdateUI:(RA*)ra;
--(void) ConfigureUI:(NSString*) ver;
 -(void) loadData;
--(void) SendUpdate:(NSString *)url;
 @end
 

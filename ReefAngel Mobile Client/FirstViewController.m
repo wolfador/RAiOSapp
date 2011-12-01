@@ -80,24 +80,17 @@
 
 }
 
--(void)SendUpdate:(NSString *)url
-{
-    [self sendUpdate:url];
-
-    [self UpdateUI:raParam];
-}
-
 -(IBAction)refreshParams
 {
     if ([self reachable]) {
         if ([self.directConnect isEqualToString:@"ON"])
         {
             self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
-            [self SendUpdate:self.fullUrl];
+            [self sendUpdate:self.fullUrl];
         }
         else
         {
-         [self SendUpdate:self.wifiUrl];
+         [self sendUpdate:self.wifiUrl];
         }
     }
     else
@@ -177,12 +170,10 @@
         if ([self.directConnect isEqualToString:@"ON"])
         {
         self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
-            NSString *version = [NSString stringWithFormat:@"%@v",self.wifiUrl];
-        [self SendUpdate:version];
         }
         else
         {
-            [self SendUpdate:self.wifiUrl];
+            [self sendUpdate:self.wifiUrl];
         }
     }
     else if ([self.enteredURL length] == 0)
@@ -222,6 +213,7 @@
 		[alertView release];
         
     }
+    else
     {
         self.receivedData = [NSMutableData data];
     }
@@ -239,31 +231,9 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     xmlParser = [[XmlParser alloc] init] ;
-    NSString *data = [[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding];
-    self.response = [NSString stringWithString:data];
+    NSString *received = [[[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding] autorelease];
+    self.response = [NSString stringWithString:received];
     
-    NSRange range2 = [self.response rangeOfString:@"</V>" options:NSCaseInsensitiveSearch];
-    if(range2.location != NSNotFound )
-    {
-        //removes <V> and </V>
-        NSString *newStr = [self.response stringByReplacingOccurrencesOfString:@"<V>" withString:@""];
-        NSString *version = [newStr stringByReplacingOccurrencesOfString:@"</V>" withString:@""];
-        self.current_version = [version stringByReplacingOccurrencesOfString:@"." withString:@""];
-        
-        [self ConfigureUI:self.current_version];
-        if ([self.directConnect isEqualToString:@"ON"])
-        {
-            self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
-            [self SendUpdate:self.fullUrl];
-        }
-        else
-        {
-            [self SendUpdate:self.wifiUrl];
-        }
-        
-    }
-    else
-    {
         raParam = [[RA alloc] init] ;
         
         paramArray = [xmlParser fromXml:self.response withObject:raParam];
@@ -273,11 +243,14 @@
         [self formatRA:raParam];
         [self UpdateUI:raParam];
         if (self.response != NULL) {
+            if ([self.directConnect isEqualToString:@"ON"])
+            {
             NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
             [formatter setDateFormat:@"MMM dd yyyy : hh:mm:ss a"];
             NSDate *date = [NSDate date];
             self.lastUpdatedLabel.text = [formatter stringFromDate:date];
             self.lastUpdatedLabel.textColor = [UIColor greenColor];
+            }
         }
         else
         {
@@ -287,35 +260,24 @@
             self.lastUpdatedLabel.textColor = [UIColor redColor];
             
         }
-        [self UpdateUI:raParam];
-        
-        [raParam release];
-        
-    }
-    [xmlParser release];
-}
--(void)ConfigureUI:(NSString*) ver
-{
-    
-    NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
-    [f setNumberStyle:NSNumberFormatterDecimalStyle];
-    NSNumber *version = [f numberFromString:ver];
-    [f release];
-    
-    if ([version intValue] <= 8518) {
-        
-    
-    }
-    else
-    {
-        
-    }
-     
-
 }
 
 -(void)formatRA : (RA *)params
 {
+    
+    if (![self.directConnect isEqualToString:@"ON"])
+    {
+    NSDateFormatter *dateformat = [[[NSDateFormatter alloc]init]autorelease];
+    [dateformat setDateFormat:@"MM/dd/yyyy h:mm:ss a"];
+        //[dateformat setTimeZone:[NSTimeZone localTimeZone]];
+    NSDate *date2 = [dateformat dateFromString: params.LOGDATE];
+        NSTimeInterval timeZoneOffset = [[NSTimeZone systemTimeZone] secondsFromGMTForDate:date2];
+        NSDate *localDate = [date2 dateByAddingTimeInterval:timeZoneOffset];
+        
+    self.lastUpdatedLabel.text = [dateformat stringFromDate:localDate];
+    self.lastUpdatedLabel.textColor = [UIColor greenColor];
+}
+    
     params.formattedTemp1 = [self formatTemp:params.T1];
     //hides T2 if not configured
     if ([params.T2 intValue] == 0) {
@@ -418,6 +380,7 @@
     }
     else
     {
+        
         self.AIBvalue.hidden = YES;
         self.AIRBvalue.hidden = YES;
         self.AIWvalue.hidden = YES;
@@ -427,8 +390,36 @@
         [self.scrollView setScrollEnabled:NO];
     }
     }
-    else
+    else if ([params.EM intValue] == 4)
     {
+        NSString *percent = @"%";
+        NSRange range = [self.AIBvalue.text rangeOfString : percent];
+        if (range.location == NSNotFound) {
+            
+            CGRect BValuePosition = self.AIBvalue.frame;
+            BValuePosition.origin.y = BValuePosition.origin.y - 45;
+            self.AIBvalue.frame = BValuePosition;
+            
+            CGRect WValuePosition = self.AIWvalue.frame;
+            WValuePosition.origin.y = WValuePosition.origin.y - 45;
+            self.AIWvalue.frame = WValuePosition;
+            
+            CGRect RBValuePosition = self.AIRBvalue.frame;
+            RBValuePosition.origin.y = RBValuePosition.origin.y - 45;
+            self.AIRBvalue.frame = RBValuePosition;
+            
+            CGRect RBLabelPosition = self.AIRBLabel.frame;
+            RBLabelPosition.origin.y = RBLabelPosition.origin.y - 45;
+            self.AIRBLabel.frame = RBLabelPosition;
+            
+            CGRect BLabelPosition = self.AIBLabel.frame;
+            BLabelPosition.origin.y = BLabelPosition.origin.y - 45;
+            self.AIBLabel.frame = BLabelPosition;
+            
+            CGRect WLabelPosition = self.AIWLabel.frame;
+            WLabelPosition.origin.y = WLabelPosition.origin.y - 45;
+            self.AIWLabel.frame = WLabelPosition;
+        }
         self.AIBvalue.hidden = NO;
         self.AIRBvalue.hidden = NO;
         self.AIWvalue.hidden = NO;
@@ -439,6 +430,15 @@
         self.AIBvalue.text = [[params.AIB stringValue] stringByAppendingString:@"%"];
         self.AIRBvalue.text = [[params.AIRB stringValue] stringByAppendingString:@"%"];
          [self.scrollView setContentSize:CGSizeMake(320, 650)]; 
+    }
+    else if([params.EM intValue] == 0)
+    {
+        self.AIBvalue.hidden = YES;
+        self.AIRBvalue.hidden = YES;
+        self.AIWvalue.hidden = YES;
+        self.AIBLabel.hidden = YES;
+        self.AIRBLabel.hidden = YES;
+        self.AIWLabel.hidden = YES;
     }
 
 }
@@ -578,6 +578,8 @@
     [AIRBLabel release];
     [AIRBLabel release];
     [receivedData release];
+    [raParam release];
+    [xmlParser release];
     
     [super dealloc];
     
