@@ -1694,7 +1694,7 @@ static xmlChar *SplitQNameReverse(const xmlChar *qname, xmlChar **prefix) {
     // since it's a CF object, were anyone to use this in a GC environment,
     // this would need to be released in a finalize method, too
     if (xmlDoc_->_private != NULL) {
-      CFRelease(xmlDoc_->_private);
+     // CFRelease(xmlDoc_->_private);
     }
 
     xmlFreeDoc(xmlDoc_);
