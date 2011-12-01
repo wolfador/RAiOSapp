@@ -26,15 +26,14 @@ NSString *urlLocation;
 NSString *response;
 XmlParser *xmlParser;
 NSMutableArray *paramArray;
-NSString *current_version;
-IBOutlet UILabel *waterChangeLabel, *feedModeLabel, *buttonPressLabel, *versionLowLabel;
+IBOutlet UILabel *waterChangeLabel, *feedModeLabel, *buttonPressLabel;
 
 
 }
 
 @property (readwrite, copy) NSString *wifiUrl, *enteredURL;
-@property (readwrite, copy) NSString *fullUrl, *current_version;
-@property (nonatomic, retain) IBOutlet UILabel *relay1, *relay2, *relay3, *relay4, *relay5, *relay6, *relay7, *relay8, *relay21, *relay22, *relay23, *relay24, *relay25, *relay26, *relay27, *relay28, *versionLowLabel;
+@property (readwrite, copy) NSString *fullUrl;
+@property (nonatomic, retain) IBOutlet UILabel *relay1, *relay2, *relay3, *relay4, *relay5, *relay6, *relay7, *relay8, *relay21, *relay22, *relay23, *relay24, *relay25, *relay26, *relay27, *relay28;
 @property (nonatomic, retain) IBOutlet UILabel *waterChangeLabel, *feedModeLabel, *buttonPressLabel;
 @property (nonatomic, retain) IBOutlet UILabel *lastUpdatedLabel;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
@@ -82,9 +81,7 @@ IBOutlet UILabel *waterChangeLabel, *feedModeLabel, *buttonPressLabel, *versionL
 -(IBAction) startFeedMode;
 -(BOOL) reachable;
 -(void) UpdateUI:(RA*)ra;
--(void) ConfigureUI:(NSString*) ver;
 -(void) loadData;
--(void) SendUpdate:(NSString *)url;
 -(void) sendMode:(NSString *) controllerUrl;
 
 @end

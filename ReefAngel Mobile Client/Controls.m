@@ -16,8 +16,8 @@
 @synthesize b2R1Indicator, b2R2Indicator, b2R3Indicator, b2R4Indicator, b2R5Indicator, b2R6Indicator, b2R7Indicator, b2R8Indicator;
 @synthesize box2Relay1, box2Relay2, box2Relay3, box2Relay4, box2Relay5, box2Relay6, box2Relay7, box2Relay8;
 
-@synthesize wifiUrl,fullUrl,lastUpdatedLabel, current_version;
-@synthesize box2, enteredURL, response, changeWater, buttonPress, waterChangeLabel, feedMode, feedModeLabel, buttonPressLabel, versionLowLabel;
+@synthesize wifiUrl,fullUrl,lastUpdatedLabel;
+@synthesize box2, enteredURL, response, changeWater, buttonPress, waterChangeLabel, feedMode, feedModeLabel, buttonPressLabel;
 
 
 
@@ -147,18 +147,11 @@
     
 }
 
--(void)SendUpdate:(NSString *)url
-{
-    [self sendUpdate:url];
-    
-    [self UpdateUI:raParam];
-}
-
 -(IBAction)refreshParams
 {
     if ([self reachable]) {
         self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
-        [self SendUpdate:self.fullUrl];
+        [self sendUpdate:self.fullUrl];
     }
     else
     {
@@ -227,7 +220,7 @@
         
     }    
     if ([self reachable]) {
-        [self SendUpdate:fullUrl];
+        [self sendUpdate:fullUrl];
     }
     else {
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
@@ -330,9 +323,7 @@
     }
     if ([self reachable]) {
         self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
-        NSString *version = [NSString stringWithFormat:@"%@v",self.wifiUrl];
-        [self SendUpdate:version];
-        //[self SendUpdate:self.fullUrl];
+        [self sendUpdate:self.fullUrl];
     }
     else if ([self.enteredURL length] == 0)
     {
@@ -403,7 +394,6 @@
     [receivedData release];
     
     NSRange range = [self.response rangeOfString:@"<MODE>" options:NSCaseInsensitiveSearch];
-    NSRange range2 = [self.response rangeOfString:@"</V>" options:NSCaseInsensitiveSearch];
     if( range.location != NSNotFound ) {
         
         if (![self.response isEqualToString:@"<MODE>OK</MODE>"]) {
@@ -414,22 +404,9 @@
         }
         
         //refresh Params / relays to reflect mode start
-        [self SendUpdate:self.fullUrl];
+        [self sendUpdate:self.fullUrl];
     }
-    else if(range2.location != NSNotFound )
-    {
-        //removes <V> and </V>
-        NSString *newStr = [self.response stringByReplacingOccurrencesOfString:@"<V>" withString:@""];
-        NSString *version = [newStr stringByReplacingOccurrencesOfString:@"</V>" withString:@""];
-        self.current_version = [version stringByReplacingOccurrencesOfString:@"." withString:@""];
-        
-        [self ConfigureUI:self.current_version];
-        
-        self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
-        [self SendUpdate:self.fullUrl];
-        
-    }
-    else
+        else
     {
         raParam = [[RA alloc] init] ;
         
@@ -460,32 +437,6 @@
         
     }
     [xmlParser release];
-    // [connection release];
-    
-}
-
--(void)ConfigureUI:(NSString*) ver
-{
-    NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
-    [f setNumberStyle:NSNumberFormatterDecimalStyle];
-    NSNumber *version = [f numberFromString:ver];
-    [f release];
-    if ([version intValue] <= 8518) {
-        
-        self.changeWater.enabled = NO;
-        self.buttonPress.enabled = NO;
-        self.feedMode.enabled = NO;
-        self.versionLowLabel.hidden = NO;
-      
-        
-    }
-    else
-    {
-        self.changeWater.enabled = YES;
-        self.buttonPress.enabled = YES;
-        self.feedMode.enabled = YES;
-        self.versionLowLabel.hidden = YES;
-    }
     
 }
 
@@ -676,7 +627,6 @@
     self.buttonPressLabel = nil;
     self.feedMode = nil;
     self.feedModeLabel = nil;
-    self.current_version = nil;
     [super viewDidUnload];
 }
 
@@ -742,7 +692,6 @@
     [buttonPressLabel release];
     [feedMode release];
     [feedModeLabel release];
-    [current_version release];
     [super dealloc];
     
 }
