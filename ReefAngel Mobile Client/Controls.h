@@ -22,8 +22,8 @@ NSString *fullUrl;
 NSString *wifiUrl, *enteredURL, *tempScale;
 RA *raParam;
 IBOutlet UIScrollView *scrollView;
-NSString *urlLocation;
-NSString *response;
+NSString *urlLocation, *proxy;
+NSString *response, *directConnect;
 XmlParser *xmlParser;
 NSMutableArray *paramArray;
 IBOutlet UILabel *waterChangeLabel, *feedModeLabel, *buttonPressLabel;
@@ -31,8 +31,8 @@ IBOutlet UILabel *waterChangeLabel, *feedModeLabel, *buttonPressLabel;
 
 }
 
-@property (readwrite, copy) NSString *wifiUrl, *enteredURL;
-@property (readwrite, copy) NSString *fullUrl;
+@property (readwrite, copy) NSString *wifiUrl, *enteredURL, *proxy;
+@property (readwrite, copy) NSString *fullUrl, *directConnect;
 @property (nonatomic, retain) IBOutlet UILabel *relay1, *relay2, *relay3, *relay4, *relay5, *relay6, *relay7, *relay8, *relay21, *relay22, *relay23, *relay24, *relay25, *relay26, *relay27, *relay28;
 @property (nonatomic, retain) IBOutlet UILabel *waterChangeLabel, *feedModeLabel, *buttonPressLabel;
 @property (nonatomic, retain) IBOutlet UILabel *lastUpdatedLabel;

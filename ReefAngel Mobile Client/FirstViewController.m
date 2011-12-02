@@ -70,7 +70,6 @@
         self.temp1Value.text = [raParam.formattedTemp1 stringByAppendingString:self.tempScale];
         
         self.pHLabel.text    = raParam.formattedpH;
-        //self.salinityValue.text = raParam.formattedSal;
         self.salinityValue.text = [raParam.SAL stringValue];
 
         
@@ -170,6 +169,7 @@
         if ([self.directConnect isEqualToString:@"ON"])
         {
         self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
+            [self sendUpdate:self.fullUrl];
         }
         else
         {
@@ -224,7 +224,7 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    
+    self.lastUpdatedLabel.text = @"Updating";
     [self.receivedData appendData: data];
 }
 
@@ -269,7 +269,6 @@
     {
     NSDateFormatter *dateformat = [[[NSDateFormatter alloc]init]autorelease];
     [dateformat setDateFormat:@"MM/dd/yyyy h:mm:ss a"];
-        //[dateformat setTimeZone:[NSTimeZone localTimeZone]];
     NSDate *date2 = [dateformat dateFromString: params.LOGDATE];
         NSTimeInterval timeZoneOffset = [[NSTimeZone systemTimeZone] secondsFromGMTForDate:date2];
         NSDate *localDate = [date2 dateByAddingTimeInterval:timeZoneOffset];
@@ -439,6 +438,8 @@
         self.AIBLabel.hidden = YES;
         self.AIRBLabel.hidden = YES;
         self.AIWLabel.hidden = YES;
+        self.salinityLabel.hidden = YES;
+        self.salinityValue.hidden = YES;
     }
 
 }

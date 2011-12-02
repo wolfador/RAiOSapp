@@ -156,7 +156,7 @@
 -(IBAction) saveData
 {
     [self hideKeyboard];
-    if ([self.url.text length] == 0) {
+    if ([self.url.text length] == 0 && self.directConnect.on) {
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please Enter a URL" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
 		[alertView show];
 		[alertView release];
@@ -182,11 +182,7 @@
         {
             self.updatedURL = [NSMutableString stringWithString:self.enteredURL];
         }
-
         
-        NSString *forum = @"forum.reefangel.com";
-        NSRange range2 = [self.enteredURL rangeOfString:forum];
-        if (range2.location == NSNotFound) {
             BOOL portColon;
             
             portColon = [self.updatedURL hasSuffix:@":"];
@@ -204,15 +200,8 @@
             {
                 [self.updatedURL appendString:@"/"];
             }
+            
 
-        }
-        else
-        {
-             self.updatedURL = [NSMutableString stringWithString:self.enteredURL];
-        }
-        
-                
-        
 		[Dictionary setObject: self.enteredURL forKey: @"EnteredURL"];
         [Dictionary setObject: self.updatedURL forKey: @"URL"];
         [Dictionary setObject: self.port.text forKey: @"Port"];
@@ -341,28 +330,29 @@
         self.exprelay6.text = [restored objectForKey:@"ExpRelay6"];
         self.exprelay7.text = [restored objectForKey:@"ExpRelay7"];
         self.exprelay8.text = [restored objectForKey:@"ExpRelay8"];
-        /*
-        //resize scroll length for longer screen
-        [self.scrollView setContentSize:CGSizeMake(320, 1200)];
-        
-    
-        self.exprelay1Label.hidden = NO;
-        self.exprelay2Label.hidden = NO;
-        self.exprelay3Label.hidden = NO;
-        self.exprelay4Label.hidden = NO;
-        self.exprelay5Label.hidden = NO;
-        self.exprelay6Label.hidden = NO;
-        self.exprelay7Label.hidden = NO;
-        self.exprelay8Label.hidden = NO;
-        self.exprelay1.hidden = NO;
-        self.exprelay2.hidden = NO;
-        self.exprelay3.hidden = NO;
-        self.exprelay4.hidden = NO;
-        self.exprelay5.hidden = NO;
-        self.exprelay6.hidden = NO;
-        self.exprelay7.hidden = NO;
-        self.exprelay8.hidden = NO;
-         */
+        if (self.loadNames.hidden == YES) {
+            [self.scrollView setContentSize:CGSizeMake(320, 1100)];
+            
+            
+            self.exprelay1Label.hidden = NO;
+            self.exprelay2Label.hidden = NO;
+            self.exprelay3Label.hidden = NO;
+            self.exprelay4Label.hidden = NO;
+            self.exprelay5Label.hidden = NO;
+            self.exprelay6Label.hidden = NO;
+            self.exprelay7Label.hidden = NO;
+            self.exprelay8Label.hidden = NO;
+            self.exprelay1.hidden = NO;
+            self.exprelay2.hidden = NO;
+            self.exprelay3.hidden = NO;
+            self.exprelay4.hidden = NO;
+            self.exprelay5.hidden = NO;
+            self.exprelay6.hidden = NO;
+            self.exprelay7.hidden = NO;
+            self.exprelay8.hidden = NO;
+        }
+
+         
 }
 else
 {
@@ -768,4 +758,5 @@ else
     
      [super dealloc];
 }
+
 @end

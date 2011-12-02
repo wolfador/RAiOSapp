@@ -16,7 +16,7 @@
 @synthesize b2R1Indicator, b2R2Indicator, b2R3Indicator, b2R4Indicator, b2R5Indicator, b2R6Indicator, b2R7Indicator, b2R8Indicator;
 @synthesize box2Relay1, box2Relay2, box2Relay3, box2Relay4, box2Relay5, box2Relay6, box2Relay7, box2Relay8;
 
-@synthesize wifiUrl,fullUrl,lastUpdatedLabel;
+@synthesize wifiUrl,fullUrl,lastUpdatedLabel, directConnect, proxy;
 @synthesize box2, enteredURL, response, changeWater, buttonPress, waterChangeLabel, feedMode, feedModeLabel, buttonPressLabel;
 
 
@@ -29,7 +29,6 @@
     [self.scrollView setScrollEnabled:YES];
     [self.scrollView setContentSize:CGSizeMake(320, 570)];     
     self.scrollView.delegate = self;
-
     
 }
 
@@ -70,7 +69,6 @@
     
     if(raParam)
     {
-        
         
         if(!raParam.isRelay1OFFMask && !raParam.isRelay1ONMask)
         {box1Relay1.on = raParam.isRelay1Active;b1R1Indicator.hidden = YES;}
@@ -150,7 +148,16 @@
 -(IBAction)refreshParams
 {
     if ([self reachable]) {
-        self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
+        if([self.directConnect isEqualToString:@"ON"])
+        {
+            self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
+        }
+        else
+        {
+            self.fullUrl = [NSString stringWithFormat:@"%@r99",self.proxy];
+        }
+
+        
         [self sendUpdate:self.fullUrl];
     }
     else
@@ -165,8 +172,15 @@
 -(IBAction)waterChange
 {
     if ([self reachable]) {
-        
-        self.fullUrl = [NSString stringWithFormat:@"%@mw",self.wifiUrl];
+        if([self.directConnect isEqualToString:@"ON"])
+        {
+            self.fullUrl = [NSString stringWithFormat:@"%@mw",self.wifiUrl];
+        }
+        else
+        {
+            self.fullUrl = [NSString stringWithFormat:@"%@mw",self.proxy];
+        }
+
         [self sendMode:self.fullUrl];
         [self refreshParams];
     }
@@ -182,8 +196,15 @@
 -(IBAction)startFeedMode
 {
     if ([self reachable]) {
+        if([self.directConnect isEqualToString:@"ON"])
+        {
+            self.fullUrl = [NSString stringWithFormat:@"%@mf",self.wifiUrl];
+        }
+        else
+        {
+           self.fullUrl = [NSString stringWithFormat:@"%@mf",self.proxy];
+        }
         
-        self.fullUrl = [NSString stringWithFormat:@"%@mf",self.wifiUrl];
         [self sendMode:self.fullUrl];
         [self refreshParams];
     }
@@ -197,7 +218,15 @@
 
 -(IBAction)pressButton
 {
-    self.fullUrl = [NSString stringWithFormat:@"%@bp",self.wifiUrl];
+    if([self.directConnect isEqualToString:@"ON"])
+    {
+        self.fullUrl = [NSString stringWithFormat:@"%@bp",self.wifiUrl];
+    }
+    else
+    {
+        self.fullUrl = [NSString stringWithFormat:@"%@bp",self.proxy];
+    }
+    
     [self sendMode:self.fullUrl];
     [self refreshParams];
 }
@@ -251,8 +280,23 @@
 	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"savedata.plist"];
 	
 	NSDictionary  *restored = [NSDictionary dictionaryWithContentsOfFile: path];
-	self.wifiUrl = [restored objectForKey:@"URL"];
+    
+    self.directConnect = [restored objectForKey:@"DirectConnect"];
+    self.wifiUrl = [restored objectForKey:@"URL"];
     self.enteredURL = [restored objectForKey:@"EnteredURL"];
+    if(![self.directConnect isEqualToString:@"ON"])
+    {
+        NSString *http = @"http://";
+        NSRange range = [self.wifiUrl rangeOfString : http];
+        if (range.location != NSNotFound) {
+            NSString *testURL = [self.wifiUrl substringFromIndex:7];
+            self.proxy = [@"http://forum.reefangel.com/status/proxy.aspx?u=" stringByAppendingString:testURL];
+        }
+        else
+        {
+            self.proxy = [@"http://forum.reefangel.com/status/proxy.aspx?u=" stringByAppendingString:self.wifiUrl];
+        }
+    }
     self.relay1.text = [restored objectForKey:@"Relay1"];
     self.relay2.text = [restored objectForKey:@"Relay2"];
     self.relay3.text = [restored objectForKey:@"Relay3"];
@@ -261,6 +305,7 @@
     self.relay6.text = [restored objectForKey:@"Relay6"];
     self.relay7.text = [restored objectForKey:@"Relay7"];
     self.relay8.text = [restored objectForKey:@"Relay8"];
+    
     
     if([[restored objectForKey:@"ExpansionON"] isEqualToString: @"ON"])
     {
@@ -321,9 +366,19 @@
         self.b2R7Indicator.hidden = YES;
         self.b2R8Indicator.hidden = YES;
     }
+    
     if ([self reachable]) {
+        if([self.directConnect isEqualToString:@"ON"])
+        {
         self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
         [self sendUpdate:self.fullUrl];
+        }
+        else
+        {
+            self.fullUrl = [NSString stringWithFormat:@"%@r99",self.proxy];
+            [self sendUpdate:self.fullUrl];
+        }
+        
     }
     else if ([self.enteredURL length] == 0)
     {
@@ -417,6 +472,7 @@
         [self updateRelayBoxes:raParam];
         [self UpdateUI:raParam];
         if (self.response != NULL) {
+           
             NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
             [formatter setDateFormat:@"MMM dd yyyy : hh:mm:ss a"];
             NSDate *date = [NSDate date];
@@ -461,6 +517,7 @@
 
 -(void)updateRelayBoxes : (RA *) ra
 {
+
     NSString *binaryString = [self buildRelayBinary:ra.R];
     NSString *binaryONMask = [self buildRelayBinary:ra.RON];
     NSString *binaryOFFMask = [self buildRelayBinary:ra.ROFF];
@@ -627,6 +684,7 @@
     self.buttonPressLabel = nil;
     self.feedMode = nil;
     self.feedModeLabel = nil;
+    self.directConnect = nil;
     [super viewDidUnload];
 }
 
@@ -692,6 +750,7 @@
     [buttonPressLabel release];
     [feedMode release];
     [feedModeLabel release];
+    [directConnect release];
     [super dealloc];
     
 }
