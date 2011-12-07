@@ -297,6 +297,7 @@
             self.proxy = [@"http://forum.reefangel.com/status/proxy.aspx?u=" stringByAppendingString:self.wifiUrl];
         }
     }
+
     self.relay1.text = [restored objectForKey:@"Relay1"];
     self.relay2.text = [restored objectForKey:@"Relay2"];
     self.relay3.text = [restored objectForKey:@"Relay3"];
@@ -380,7 +381,7 @@
         }
         
     }
-    else if ([self.enteredURL length] == 0)
+    else if ([self.enteredURL length] == 0 && ![self.directConnect isEqualToString:@"ON"])
     {
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Settings" message:@"Enter RA URL in settings." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
 		[alertView show];

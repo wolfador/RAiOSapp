@@ -121,15 +121,16 @@
 	
 	NSDictionary  *restored = [NSDictionary dictionaryWithContentsOfFile: path];
     self.directConnect = [restored objectForKey:@"DirectConnect"];
-    if ([self.directConnect isEqualToString:@"ON"]) {
-        self.wifiUrl = [restored objectForKey:@"URL"];
-        self.enteredURL = [restored objectForKey:@"EnteredURL"];
+    if (![self.directConnect isEqualToString:@"ON"]) {
+        
+        self.wifiUrl = [restored objectForKey:@"RaURL"];
+        self.enteredURL = @"forum.reefangel.com";
 
     }
     else
     {
-        self.wifiUrl = [restored objectForKey:@"RaURL"];
-        self.enteredURL = @"forum.reefangel.com";
+        self.wifiUrl = [restored objectForKey:@"URL"];
+        self.enteredURL = [restored objectForKey:@"EnteredURL"];
     }
 	   self.tempScale = [restored objectForKey:@"TempScale"];
     self.temp1Label.text = [restored objectForKey:@"Temp1"];
@@ -164,8 +165,8 @@
     if (self.tempScale == nil) {
         self.tempScale = @"*F";
     }
-    
-    if ([self reachable]) {
+
+    if ([self reachable] && self.directConnect != NULL) {
         if ([self.directConnect isEqualToString:@"ON"])
         {
         self.fullUrl = [NSString stringWithFormat:@"%@r99",self.wifiUrl];
@@ -176,7 +177,7 @@
             [self sendUpdate:self.wifiUrl];
         }
     }
-    else if ([self.enteredURL length] == 0)
+    else if ([self.enteredURL length] == 0 && [self.wifiUrl length] == 0)
     {
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Settings" message:@"Enter RA URL in settings." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
 		[alertView show];
