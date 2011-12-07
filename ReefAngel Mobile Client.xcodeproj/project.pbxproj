@@ -420,7 +420,7 @@
 		55DF42801359DA3900C45B47 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 			};
 			buildConfigurationList = 55DF42831359DA3900C45B47 /* Build configuration list for PBXProject "ReefAngel Mobile Client" */;
 			compatibilityVersion = "Xcode 3.2";
