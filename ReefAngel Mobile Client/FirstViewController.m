@@ -247,7 +247,7 @@
             if ([self.directConnect isEqualToString:@"ON"])
             {
             NSDateFormatter *formatter = [[[NSDateFormatter alloc]init]autorelease];
-            [formatter setDateFormat:@"MMM dd yyyy : hh:mm:ss a"];
+            [formatter setDateFormat:@"MM/dd/yyyy h:mm:ss a"];
             NSDate *date = [NSDate date];
             self.lastUpdatedLabel.text = [formatter stringFromDate:date];
             self.lastUpdatedLabel.textColor = [UIColor greenColor];
