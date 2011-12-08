@@ -1351,7 +1351,6 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<bool key="IBUIOn">YES</bool>
 							</object>
 							<object class="IBUILabel" id="11171289">
 								<reference key="NSNextResponder" ref="703078981"/>
