@@ -9,7 +9,7 @@
 #import "History.h"
 
 @implementation History
-@synthesize userName, url, fullUrl;
+@synthesize userName, url, fullUrl, probeList, probes, selected;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -46,6 +46,8 @@
     self.url = @"forum.reefangel.com";
     self.fullUrl = [NSString stringWithFormat:@"http://forum.reefangel.com/status/jsonp.aspx?id=%@", self.userName];
     
+    //append with &filter=t1 for specific history
+    
     if ([self reachable]) {
         //request history
         
@@ -58,7 +60,37 @@
     
 }
 
+-(NSString *) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    self.selected = [self.probes objectAtIndex:row];
+    return self.selected;
+}
 
+-(NSInteger) numberOfComponentsInPickerView:(UIPickerView *) probePicker
+{
+    return 1;
+}
+
+-(NSInteger)pickerView:(UIPickerView *)probePicker numberOfRowsInComponent:(NSInteger)component
+{
+    return [self.probes count];
+}
+
+-(NSString *) pickerView:(UIPickerView *) probePicker titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
+    return [self.probes objectAtIndex:row];
+}
+- (void)graphViewDidFinish:(GraphView *)controller
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+- (IBAction)graph
+{    
+    memcontroller = [[GraphView alloc] initWithNibName:nil bundle:nil] ;
+    memcontroller.delegate = self;
+    memcontroller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentModalViewController:memcontroller animated:YES];
+}
 
 - (void)didReceiveMemoryWarning
 {
@@ -73,6 +105,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.probes = [NSArray arrayWithObjects:@"T1",@"T2",@"T3",@"pH", nil];
     [self loadData];
     // Do any additional setup after loading the view from its nib.
 }
@@ -83,6 +116,7 @@
     self.url = nil;
     self.fullUrl = nil;
     self.userName = nil;
+    self.probes = nil;
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }

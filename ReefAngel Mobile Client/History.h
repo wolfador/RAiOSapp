@@ -10,11 +10,19 @@
 #import "SBJson.h"
 #import <Foundation/Foundation.h>
 #import "Reachability.h"
+#import "GraphView.h"
 
-@interface History : UIViewController {
-    NSString *userName, *url, *fullUrl;
+@interface History : UIViewController <GraphViewDelegate>{
+    NSString *userName, *url, *fullUrl, *selected;
+    IBOutlet UIPickerView *probeList;
+    NSArray *probes;
+    UIButton *graphBtn;
+    GraphView *memcontroller;
 }
-@property (readwrite, copy) NSString *userName, *url, *fullUrl;
+@property (readwrite, copy) NSString *userName, *url, *fullUrl, *selected;
+@property (readwrite, copy) NSArray *probes;
+@property (nonatomic, retain) IBOutlet UIPickerView *probeList;
 -(BOOL) reachable;
 -(void) loadData;
+-(IBAction)graph;
 @end
