@@ -17,12 +17,17 @@
     IBOutlet UIPickerView *probeList;
     NSArray *probes;
     UIButton *graphBtn;
-    GraphView *memcontroller;
+    GraphView *graphcontroller;
+    NSString *response, *basicURL;
+    NSMutableData *receivedData;
 }
-@property (readwrite, copy) NSString *userName, *url, *fullUrl, *selected;
+@property (readwrite, copy) NSString *userName, *url, *fullUrl, *selected, *response, *basicURL;
 @property (readwrite, copy) NSArray *probes;
+@property (nonatomic, retain) NSMutableData *receivedData;
 @property (nonatomic, retain) IBOutlet UIPickerView *probeList;
 -(BOOL) reachable;
 -(void) loadData;
 -(IBAction)graph;
+-(void)download:(NSString *) controllerUrl;
+
 @end

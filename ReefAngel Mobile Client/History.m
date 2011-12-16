@@ -9,7 +9,7 @@
 #import "History.h"
 
 @implementation History
-@synthesize userName, url, fullUrl, probeList, probes, selected;
+@synthesize userName, url, fullUrl, probeList, probes, selected, response, receivedData, basicURL;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,25 +44,14 @@
     
     self.userName = [restored objectForKey:@"UserName"];
     self.url = @"forum.reefangel.com";
-    self.fullUrl = [NSString stringWithFormat:@"http://forum.reefangel.com/status/jsonp.aspx?id=%@", self.userName];
-    
-    //append with &filter=t1 for specific history
-    
-    if ([self reachable]) {
-        //request history
-        
-    }
-    else {
-        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
-		[alertView show];
-		[alertView release];
-    }
+    self.basicURL = [NSString stringWithFormat:@"http://forum.reefangel.com/status/jsonp.aspx?id=%@", self.userName];
     
 }
 
 -(NSString *) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
     self.selected = [self.probes objectAtIndex:row];
+    self.fullUrl = [self.basicURL stringByAppendingFormat:@"&filter=%@",self.selected];
     return self.selected;
 }
 
@@ -84,13 +73,68 @@
 {
     [self dismissModalViewControllerAnimated:YES];
 }
+
 - (IBAction)graph
-{    
-    memcontroller = [[GraphView alloc] initWithNibName:nil bundle:nil] ;
-    memcontroller.delegate = self;
-    memcontroller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentModalViewController:memcontroller animated:YES];
+{   
+    
+    
+    if ([self reachable]) {
+        [self download:self.fullUrl];
+        
+    }
+    else {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
+    }
+   
 }
+-(void)download:(NSString *) controllerUrl
+{
+    
+    NSURL *theurl = [NSURL URLWithString: controllerUrl];
+    NSURLRequest *theRequest=[NSURLRequest requestWithURL:theurl                        
+                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
+                              
+                                          timeoutInterval:60.0];
+    
+    
+    NSURLConnection *theConnection = [NSURLConnection connectionWithRequest:theRequest delegate:self];
+    if (!theConnection) {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
+        
+    }
+    else
+    {
+        self.receivedData = [NSMutableData data];
+    }
+    
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    [self.receivedData appendData: data];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+
+    NSString *received = [[[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding] autorelease];
+    self.response = [NSString stringWithString:received];
+    
+
+    if (self.response != NULL) {
+        graphcontroller = [[GraphView alloc] initWithNibName:nil bundle:nil] ;
+        graphcontroller.delegate = self;
+        graphcontroller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        graphcontroller.historyData = [NSString stringWithString:self.response];
+        
+        [self presentModalViewController:graphcontroller animated:YES];
+    }
+}
+
 
 - (void)didReceiveMemoryWarning
 {

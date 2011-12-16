@@ -8,7 +8,7 @@
 
 #import "S7GraphView.h"
 #import <UIKit/UIKit.h>
-
+#import "SBJson.h"
 @class GraphView;
 
 @protocol GraphViewDelegate
@@ -20,10 +20,12 @@
 	int keyIndex;
 	int valueCount;
 	UINavigationBar *nav;
+    NSString *historyData;
 
 }
 @property (assign, nonatomic) IBOutlet id <GraphViewDelegate> delegate;
 @property (nonatomic, retain) S7GraphView *graphView;
+@property (nonatomic, retain) NSString *historyData;
 -(IBAction) keyButton;
 -(IBAction) showActionSheet;
 @end

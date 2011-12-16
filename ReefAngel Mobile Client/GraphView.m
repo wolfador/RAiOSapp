@@ -16,7 +16,7 @@
 @implementation GraphView
 
 @synthesize graphView;
-@synthesize delegate = _delegate;
+@synthesize delegate = _delegate, historyData;
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
@@ -24,6 +24,11 @@
 	self.graphView = [[S7GraphView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	self.view = self.graphView;
 	self.graphView.dataSource = self;
+    NSString *testString = [self.historyData substringFromIndex:1];
+    NSString *test2String = [testString substringToIndex: [testString length] - 2 ];
+    NSArray *test = [test2String JSONValue];
+    NSLog(@"%@", [test objectAtIndex:1]);
+    // outputs 1323416305000,55 need to split into seperate arrays at ,
 	[self.graphView reloadData];
 }
 
@@ -123,7 +128,6 @@
     	}
 - (void) actionSheet:(UIActionSheet *)actionSheet didDismisswithButtonIndex:(NSInteger)buttonIndex
 {
-    NSLog(@"Inside didDismisswithButtonIndex");
     if (!(buttonIndex == [actionSheet cancelButtonIndex])) {
     }
 }
@@ -175,22 +179,6 @@
 	 [self.graphView reloadData];
  }
 
-/*
- - (void)viewDidAppear:(BOOL)animated {
- [super viewDidAppear:animated];
- }
- */
-/*
- - (void)viewWillDisappear:(BOOL)animated {
- [super viewWillDisappear:animated];
-	 
- }
-  */
-/*
- - (void)viewDidDisappear:(BOOL)animated {
- [super viewDidDisappear:animated];
- }
- */
 - (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)
 toInterfaceOrientation duration:(NSTimeInterval)duration {
 	// Change graphview.frame to make it a litle smaller
