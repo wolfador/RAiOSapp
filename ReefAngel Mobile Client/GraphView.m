@@ -16,7 +16,7 @@
 @implementation GraphView
 
 @synthesize graphView;
-@synthesize delegate = _delegate, historyData;
+@synthesize delegate = _delegate, historyData, historyDict, fullArray;
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
@@ -25,10 +25,11 @@
 	self.view = self.graphView;
 	self.graphView.dataSource = self;
     NSString *testString = [self.historyData substringFromIndex:1];
-    NSString *test2String = [testString substringToIndex: [testString length] - 2 ];
-    NSArray *test = [test2String JSONValue];
-    NSLog(@"%@", [test objectAtIndex:1]);
-    // outputs 1323416305000,55 need to split into seperate arrays at ,
+    NSString *test2String = [testString substringToIndex: [testString length] - 6 ];
+    NSString *newString = [test2String stringByReplacingOccurrencesOfString:@"[" withString:@""];
+    NSString *newString2 = [newString stringByReplacingOccurrencesOfString:@"]," withString:@","];
+    self.fullArray = [newString2 componentsSeparatedByString: @","];
+       
 	[self.graphView reloadData];
 }
 
@@ -87,9 +88,16 @@
 			[nav setBarStyle: 1];
 			}
 	}
-	else { 	
-		nav = [[UINavigationBar alloc] initWithFrame: CGRectMake(0.0f, 0.0f, 320.0f, 48.0f)];
+	else { 
+        if(self.interfaceOrientation == UIInterfaceOrientationPortrait || self.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+			nav = [[UINavigationBar alloc] initWithFrame: CGRectMake(0.0f, 0.0f, 320.0f, 48.0f)];
+			[nav setBarStyle: 1];
+            
+		}
+        else {
+		nav = [[UINavigationBar alloc] initWithFrame: CGRectMake(0.0f, 0.0f, 480.0f, 48.0f)];
 		[nav setBarStyle: 1];
+        }
 	}
 
 
@@ -147,8 +155,14 @@
                     }
                 }
                 else {
-                    screenSize.height = screenSize.height * .89; 
-                    
+                        if(self.interfaceOrientation == UIInterfaceOrientationPortrait || self.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
+                    screenSize.height = screenSize.height * .89;
+                        }
+                        else
+                        {
+                            screenSize.height = screenSize.height * .68;
+                            screenSize.width = screenSize.width * 1.35;
+                        }
                 }
                 CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB(); 
                 CGContextRef ctx = CGBitmapContextCreate(nil, screenSize.width, screenSize.height, 8, 4*(int)screenSize.width, colorSpaceRef, kCGImageAlphaPremultipliedLast);
@@ -196,8 +210,13 @@ toInterfaceOrientation duration:(NSTimeInterval)duration {
 			nav.frame = CGRectMake(0.0f, 0.0f, 1024.0f, 48.0f);
 		}
 	}
-	else { 	
+	else { 	if(self.interfaceOrientation == UIInterfaceOrientationPortrait || self.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
 		nav.frame = CGRectMake(0.0f, 0.0f, 320.0f, 48.0f);
+    }
+    else {
+        nav.frame = CGRectMake(0.0f, 0.0f, 480.0f, 48.0f);
+        graphView.frame = CGRectMake(0.0f, 0.0f, 310.0f, 480.0f);
+    }
 	}
 }
 
@@ -240,40 +259,8 @@ toInterfaceOrientation duration:(NSTimeInterval)duration {
 	/* An array of objects that will be further formatted to be displayed on the X-axis.
 	 The number of elements should be equal to the number of points you have for every plot. */
 	
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *documentsDirectory = [paths objectAtIndex:0];
-	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"crazydata.plist"];
-	
-	NSDictionary  *restored = [NSDictionary dictionaryWithContentsOfFile: path];
-	NSArray *myKeys = [restored allKeys];
-	
-	NSArray *sortedKeys = [myKeys sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-	NSMutableArray *mutateArray = [NSMutableArray arrayWithArray:sortedKeys];
-	BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:path];
-	
-	if (fileExists) {
-	
-
-
-	
-	valueCount = [mutateArray count];
-	keyIndex = 1;
-	
-	
-	while (keyIndex < valueCount -1 ) {
-		NSString *blankString = [NSString stringWithString:@" "];
-		[mutateArray replaceObjectAtIndex:keyIndex withObject:blankString];
-		keyIndex ++;
-	}
-    }
-	
-	else {
-
-		[mutateArray addObject:@"No Data"];
-		
-	}
     
-	return mutateArray;
+	return self.fullArray;
 	
 	
 }
@@ -281,63 +268,9 @@ toInterfaceOrientation duration:(NSTimeInterval)duration {
 - (NSArray *)graphView:(S7GraphView *)graphView yValuesForPlot:(NSUInteger)plotIndex {
 	/* Return the values for a specific graph. Each plot is meant to have equal number of points.
 	 And this amount should be equal to the amount of elements you return from graphViewXValues: method. */
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	NSString *documentsDirectory = [paths objectAtIndex:0];
-	NSString *path = [documentsDirectory stringByAppendingPathComponent:@"crazydata.plist"];
-	
-	NSDictionary  *restored = [NSDictionary dictionaryWithContentsOfFile: path];
-	NSMutableArray *valueArray = [[NSMutableArray alloc] init];
-	[valueArray autorelease];
-	
-	BOOL fileExists = [[NSFileManager defaultManager] fileExistsAtPath:path];
-	
-	if (fileExists) {
-	NSArray *myKeys = [restored allKeys];
-	NSArray *sortedKeys = [myKeys sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-		
-
-	valueCount = [sortedKeys count];
-	keyIndex = 0;
 	
 	
-	while (keyIndex < valueCount) {
-		
-		id valueObject = [restored objectForKey: [sortedKeys objectAtIndex:keyIndex]];
-		
-		if ([valueObject isEqualToString: @"Somewhat Crazy"]) {
-			NSNumber *levelValue = [NSNumber numberWithInt:1];
-			[valueArray insertObject:levelValue atIndex:keyIndex];
-		}
-		
-		else if ([valueObject isEqualToString: @"Crazy"]) {
-			NSNumber *levelValue = [NSNumber numberWithInt:2];
-			[valueArray insertObject:levelValue atIndex:keyIndex];
-		}
-		
-		else if ([valueObject isEqualToString: @"Really Crazy"]) {
-			NSNumber *levelValue = [NSNumber numberWithInt:3];
-			[valueArray insertObject:levelValue atIndex:keyIndex];
-		}
-		
-		else if ([valueObject isEqualToString: @"The Craziest"]) {
-			NSNumber *levelValue = [NSNumber numberWithInt:4]; 
-			[valueArray insertObject:levelValue atIndex:keyIndex];
-		}
-		else  {
-			NSNumber *levelValue = [NSNumber numberWithInt:0];
-			[valueArray insertObject:levelValue atIndex:keyIndex];
-		}
-		keyIndex ++;
-	}
-		
-	}
-	else {
-		NSNumber *levelValue = [NSNumber numberWithInt:0];
-		[valueArray addObject:levelValue];
-	}
-
-	
-	return valueArray;
+	return self.fullArray;
 
 }
 - (BOOL)graphView:(S7GraphView *)graphView shouldFillPlot:(NSUInteger)plotIndex

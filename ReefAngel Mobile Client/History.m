@@ -122,7 +122,7 @@
 {
 
     NSString *received = [[[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding] autorelease];
-    self.response = [NSString stringWithString:received];
+       self.response = [NSString stringWithString:received];
     
 
     if (self.response != NULL) {
