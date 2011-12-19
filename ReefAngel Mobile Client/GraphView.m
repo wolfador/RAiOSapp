@@ -16,7 +16,7 @@
 @implementation GraphView
 
 @synthesize graphView;
-@synthesize delegate = _delegate, historyData, historyDict, fullArray;
+@synthesize delegate = _delegate, historyData, historyDict, fullArray, timeArray, valueArray, dataString, timeString;
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
@@ -28,8 +28,29 @@
     NSString *test2String = [testString substringToIndex: [testString length] - 6 ];
     NSString *newString = [test2String stringByReplacingOccurrencesOfString:@"[" withString:@""];
     NSString *newString2 = [newString stringByReplacingOccurrencesOfString:@"]," withString:@","];
-    self.fullArray = [newString2 componentsSeparatedByString: @","];
-       
+     NSString *newString3 = [newString2 stringByReplacingOccurrencesOfString:@" " withString:@""];
+    self.fullArray = [newString3 componentsSeparatedByString: @","];
+    self.timeArray = [NSMutableArray array];
+    self.valueArray = [NSMutableArray array];
+    int i;
+    int count;
+    count = [self.fullArray count];
+    
+    for (i = 0; i < count; i++) {
+      //  NSLog (@"Element %i = %@", i, [self.fullArray objectAtIndex: i]);
+        self.dataString = [NSString stringWithString:[self.fullArray objectAtIndex:i]];
+        
+        //NSLog(@"%@", arrayString);
+        if ([self.dataString length] > 4) {
+            
+            [self.timeArray addObject:[self.fullArray objectAtIndex:i]];
+        }
+        else {
+            
+            [self.valueArray addObject:[self.fullArray objectAtIndex:i]];
+        }
+    }
+
 	[self.graphView reloadData];
 }
 
@@ -50,15 +71,21 @@
 	NSNumberFormatter *numberFormatter = [NSNumberFormatter new];
 	[numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
 	[numberFormatter setMinimumFractionDigits:0];
-	[numberFormatter setMaximumFractionDigits:0];
+	[numberFormatter setMaximumFractionDigits:2];
 	
 	self.graphView.yValuesFormatter = numberFormatter;
+    
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    [dateFormatter setDateStyle:NSDateFormatterNoStyle];
+    
+    self.graphView.xValuesFormatter = dateFormatter;
 	       
 	[numberFormatter release];
 	
 	self.graphView.backgroundColor = [UIColor blackColor];
 	
-	self.graphView.drawAxisX = YES;
+	self.graphView.drawAxisX = NO;
 	self.graphView.drawAxisY = YES;
 	self.graphView.drawGridX = YES;
 	self.graphView.drawGridY = YES;
@@ -71,7 +98,8 @@
 	
 		
 	//update the data:
-	
+    
+    
 	[self.graphView reloadData];
 	
 	//determine if device is iPad to setup frame for NavBar
@@ -238,12 +266,19 @@ toInterfaceOrientation duration:(NSTimeInterval)duration {
 - (void)viewDidUnload {
 	// Release anything that can be recreated in viewDidLoad or on demand.
 	// e.g. self.myOutlet = nil;
+    self.timeArray = nil;
+    self.valueArray = nil;
+    self.historyData = nil;
+    self.historyDict = nil;
+    self.timeString = nil;
 }
-
 
 - (void)dealloc {
 	[graphView release];
-	graphView = nil;
+    [timeArray release];
+    [valueArray release];
+    [timeString release];
+
 	
     [super dealloc];
 }
@@ -258,10 +293,27 @@ toInterfaceOrientation duration:(NSTimeInterval)duration {
 - (NSArray *)graphViewXValues:(S7GraphView *)graphView {
 	/* An array of objects that will be further formatted to be displayed on the X-axis.
 	 The number of elements should be equal to the number of points you have for every plot. */
-	
     
-	return self.fullArray;
-	
+    int i;
+    int count;
+    count = [self.timeArray count];
+    
+    for (i = 0; i < count; i++) {
+        self.timeString = [NSString stringWithString:[self.timeArray objectAtIndex:i]];
+       
+        NSString *time2String = [self.timeString stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+        NSString *time3String = [time2String substringToIndex: [time2String length] - 3 ];
+        NSInteger timestamp = [time3String integerValue];
+        NSDate *date = [NSDate dateWithTimeIntervalSince1970:timestamp];
+        NSTimeInterval timeZoneOffset = [[NSTimeZone systemTimeZone] secondsFromGMTForDate:date];
+        NSDate *localDate = [date dateByAddingTimeInterval:timeZoneOffset];
+        //NSLog(@"%@", localDate);
+        [self.timeArray replaceObjectAtIndex:i withObject:localDate];
+       
+    }
+  
+    
+	return self.timeArray;
 	
 }
 
@@ -270,7 +322,7 @@ toInterfaceOrientation duration:(NSTimeInterval)duration {
 	 And this amount should be equal to the amount of elements you return from graphViewXValues: method. */
 	
 	
-	return self.fullArray;
+	return self.valueArray;
 
 }
 - (BOOL)graphView:(S7GraphView *)graphView shouldFillPlot:(NSUInteger)plotIndex

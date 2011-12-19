@@ -20,16 +20,18 @@
 	int keyIndex;
 	int valueCount;
 	UINavigationBar *nav;
-    NSString *historyData;
+    NSString *historyData, *dataString, *timeString;
     NSMutableDictionary *historyDict;
     NSArray *fullArray;
+    NSMutableArray *timeArray, *valueArray;
 
 }
 @property (assign, nonatomic) IBOutlet id <GraphViewDelegate> delegate;
 @property (nonatomic, retain) S7GraphView *graphView;
-@property (nonatomic, retain) NSString *historyData;
+@property (nonatomic, retain) NSString *historyData, *dataString, *timeString;
 @property (nonatomic, retain) NSMutableDictionary *historyDict;
 @property (nonatomic, retain) NSArray *fullArray;
+@property (nonatomic, retain) NSMutableArray *timeArray, *valueArray;
 -(IBAction) keyButton;
 -(IBAction) showActionSheet;
 @end

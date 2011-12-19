@@ -69,6 +69,7 @@
 {
     return [self.probes objectAtIndex:row];
 }
+
 - (void)graphViewDidFinish:(GraphView *)controller
 {
     [self dismissModalViewControllerAnimated:YES];
@@ -89,6 +90,7 @@
     }
    
 }
+
 -(void)download:(NSString *) controllerUrl
 {
     
@@ -149,7 +151,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.probes = [NSArray arrayWithObjects:@"T1",@"T2",@"T3",@"pH", nil];
+    self.probes = [NSArray arrayWithObjects: @"T1", @"T2", @"T3", @"ph", @"AIW", @"AIB", @"AIRB", nil];
     [self loadData];
     // Do any additional setup after loading the view from its nib.
 }
@@ -161,8 +163,9 @@
     self.fullUrl = nil;
     self.userName = nil;
     self.probes = nil;
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    self.receivedData = nil;
+    self.response = nil;
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
@@ -176,5 +179,14 @@
         return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 	}
 }
-
+- (void)dealloc
+{
+    [super dealloc];
+    [url release];
+    [fullUrl release];
+    [userName release];
+    [probes release];
+    [receivedData release];
+    [response release];
+}
 @end

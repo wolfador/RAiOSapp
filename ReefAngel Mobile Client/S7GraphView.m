@@ -163,7 +163,7 @@
 	if (maxY > 10000 && maxY < 100000) {
 		maxY = ceil(maxY / 10000) * 10000;
 	}
-	
+    
 	CGFloat step = (maxY - minY) / 5;
 	CGFloat stepY = (self.frame.size.height - (offsetY * 2)) / maxY;
 	
