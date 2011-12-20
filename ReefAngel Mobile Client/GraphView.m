@@ -83,18 +83,18 @@
 	       
 	[numberFormatter release];
 	
-	self.graphView.backgroundColor = [UIColor blackColor];
+	self.graphView.backgroundColor = [UIColor whiteColor];
 	
 	self.graphView.drawAxisX = NO;
 	self.graphView.drawAxisY = YES;
 	self.graphView.drawGridX = YES;
 	self.graphView.drawGridY = YES;
 	
-	self.graphView.xValuesColor = [UIColor whiteColor];
-	self.graphView.yValuesColor = [UIColor whiteColor];
+	self.graphView.xValuesColor = [UIColor blackColor];
+	self.graphView.yValuesColor = [UIColor blackColor];
 	
-	self.graphView.gridXColor = [UIColor whiteColor];
-	self.graphView.gridYColor = [UIColor whiteColor];
+	self.graphView.gridXColor = [UIColor blackColor];
+	self.graphView.gridYColor = [UIColor blackColor];
 	
 		
 	//update the data:
@@ -107,24 +107,24 @@
 	{
 		if(self.interfaceOrientation == UIInterfaceOrientationPortrait || self.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
 			nav = [[UINavigationBar alloc] initWithFrame: CGRectMake(0.0f, 0.0f, 768.0f, 48.0f)];
-			[nav setBarStyle: 1];
+			[nav setBarStyle: 0];
 
 		}
 		// Landscape Layout
 		else{
 			nav = [[UINavigationBar alloc] initWithFrame: CGRectMake(0.0f, 0.0f, 1024.0f, 48.0f)];
-			[nav setBarStyle: 1];
+			[nav setBarStyle: 0];
 			}
 	}
 	else { 
         if(self.interfaceOrientation == UIInterfaceOrientationPortrait || self.interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown) {
 			nav = [[UINavigationBar alloc] initWithFrame: CGRectMake(0.0f, 0.0f, 320.0f, 48.0f)];
-			[nav setBarStyle: 1];
+			[nav setBarStyle: 0];
             
 		}
         else {
 		nav = [[UINavigationBar alloc] initWithFrame: CGRectMake(0.0f, 0.0f, 480.0f, 48.0f)];
-		[nav setBarStyle: 1];
+		[nav setBarStyle: 0];
         }
 	}
 
@@ -157,8 +157,6 @@
         
     }
 
-  
-    
     popupQuery.cancelButtonIndex = 1;
     	    [popupQuery release];
     	}
@@ -314,7 +312,6 @@ toInterfaceOrientation duration:(NSTimeInterval)duration
         NSDate *date = [NSDate dateWithTimeIntervalSince1970:timestamp];
         NSTimeInterval timeZoneOffset = [[NSTimeZone systemTimeZone] secondsFromGMTForDate:date];
         NSDate *localDate = [date dateByAddingTimeInterval:timeZoneOffset];
-        //NSLog(@"%@", localDate);
         [self.timeArray replaceObjectAtIndex:i withObject:localDate];
        
     }

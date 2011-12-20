@@ -192,7 +192,6 @@
 {
     [super viewDidLoad];
     [self loadData];
-    //self.probes = [NSArray arrayWithObjects: @"T1", @"T2", @"T3", @"pH", @"AIW", @"AIB", @"AIRB", nil];
     self.days = [NSArray arrayWithObjects: @"1", @"2", @"3", @"4", @"5", @"6", @"7", nil];
     [self.probeList reloadAllComponents];
     [self.probeList selectRow:0 inComponent:1 animated:NO];
@@ -205,11 +204,17 @@
 {
     [super viewDidUnload];
     self.url = nil;
-    //self.fullUrl = nil;
     self.userName = nil;
     self.probes = nil;
     self.receivedData = nil;
     self.response = nil;
+    self.t1 = nil;
+    self.t2 = nil;
+    self.t3 = nil;
+    self.days = nil;
+    self.daysToGraph = nil;
+    self.basicURL = nil;
+    
     
 }
 
@@ -228,10 +233,15 @@
 {
     [super dealloc];
     [url release];
-    //[fullUrl release];
     [userName release];
     [probes release];
     [receivedData release];
     [response release];
+    [t1 release];
+    [t2 release];
+    [t3 release];
+    [days release];
+    [daysToGraph release];
+    [basicURL release];
 }
 @end
