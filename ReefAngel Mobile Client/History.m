@@ -9,7 +9,7 @@
 #import "History.h"
 
 @implementation History
-@synthesize userName, url, fullUrl, probeList, probes, selected, response, receivedData, basicURL;
+@synthesize userName, url, probeList, probes, selected, response, receivedData, basicURL, daysToGraph, days;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,29 +45,39 @@
     self.userName = [restored objectForKey:@"UserName"];
     self.url = @"forum.reefangel.com";
     self.basicURL = [NSString stringWithFormat:@"http://forum.reefangel.com/status/jsonp.aspx?id=%@", self.userName];
+
     
 }
 
--(NSString *) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+-(void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
 {
-    self.selected = [self.probes objectAtIndex:row];
-    self.fullUrl = [self.basicURL stringByAppendingFormat:@"&filter=%@",self.selected];
-    return self.selected;
+    if (component == 0) {
+        self.selected = [self.probes objectAtIndex:row];
+    }
+    self.daysToGraph = [self.days objectAtIndex:row];
 }
 
 -(NSInteger) numberOfComponentsInPickerView:(UIPickerView *) probePicker
 {
-    return 1;
+    return 2;
 }
 
 -(NSInteger)pickerView:(UIPickerView *)probePicker numberOfRowsInComponent:(NSInteger)component
 {
-    return [self.probes count];
+    if (component == 0) {
+        return [self.probes count];
+    }
+    return [self.days count];
+
+    
 }
 
 -(NSString *) pickerView:(UIPickerView *) probePicker titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
+     if (component == 0) {
     return [self.probes objectAtIndex:row];
+     }
+    return [self.days objectAtIndex:row];
 }
 
 - (void)graphViewDidFinish:(GraphView *)controller
@@ -78,9 +88,18 @@
 - (IBAction)graph
 {   
     
-    
+        NSInteger probe = [self.probeList selectedRowInComponent:0];
+        self.selected = [self.probes objectAtIndex:probe];
+    NSInteger numday = [self.probeList selectedRowInComponent:1];
+    self.daysToGraph = [self.days objectAtIndex:numday];
+    NSMutableString *fullUrl = [[NSMutableString alloc] init];
+    [fullUrl appendString:self.basicURL];
+       // [self.fullUrl appendFormat:@"&filter=%@",self.selected];
+    [fullUrl appendFormat:@"&filter=%@&range=%@",self.selected,self.daysToGraph];
+
     if ([self reachable]) {
-        [self download:self.fullUrl];
+        [self download:fullUrl];
+        [fullUrl release];
         
     }
     else {
@@ -151,7 +170,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.probes = [NSArray arrayWithObjects: @"T1", @"T2", @"T3", @"ph", @"AIW", @"AIB", @"AIRB", nil];
+    self.probes = [NSArray arrayWithObjects: @"T1", @"T2", @"T3", @"pH", @"AIW", @"AIB", @"AIRB", nil];
+    self.days = [NSArray arrayWithObjects: @"1", @"2", @"3", @"4", @"5", @"6", @"7", nil];
+    [self.probeList reloadAllComponents];
+    [self.probeList selectRow:0 inComponent:1 animated:NO];
+    [self.probeList selectRow:0 inComponent:0 animated:NO];
     [self loadData];
     // Do any additional setup after loading the view from its nib.
 }
@@ -160,7 +183,7 @@
 {
     [super viewDidUnload];
     self.url = nil;
-    self.fullUrl = nil;
+    //self.fullUrl = nil;
     self.userName = nil;
     self.probes = nil;
     self.receivedData = nil;
@@ -183,7 +206,7 @@
 {
     [super dealloc];
     [url release];
-    [fullUrl release];
+    //[fullUrl release];
     [userName release];
     [probes release];
     [receivedData release];

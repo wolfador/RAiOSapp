@@ -11,17 +11,18 @@
 #import "Reachability.h"
 #import "GraphView.h"
 
-@interface History : UIViewController <GraphViewDelegate>{
-    NSString *userName, *url, *fullUrl, *selected;
+@interface History : UIViewController <GraphViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate>{
+    NSString *userName, *url, *selected;
     IBOutlet UIPickerView *probeList;
-    NSArray *probes;
+    NSArray *probes, *days;
     UIButton *graphBtn;
     GraphView *graphcontroller;
     NSString *response, *basicURL;
     NSMutableData *receivedData;
+    NSString *daysToGraph;
 }
-@property (readwrite, copy) NSString *userName, *url, *fullUrl, *selected, *response, *basicURL;
-@property (readwrite, copy) NSArray *probes;
+@property (readwrite, copy) NSString *userName, *url, *selected, *response, *basicURL, *daysToGraph;
+@property (readwrite, copy) NSArray *probes, *days;
 @property (nonatomic, retain) NSMutableData *receivedData;
 @property (nonatomic, retain) IBOutlet UIPickerView *probeList;
 -(BOOL) reachable;

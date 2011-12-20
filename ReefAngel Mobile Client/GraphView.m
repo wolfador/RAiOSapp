@@ -167,7 +167,9 @@
     if (!(buttonIndex == [actionSheet cancelButtonIndex])) {
     }
 }
--(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+
+-(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex 
+{
      if (buttonIndex == 0) {
                 nav.hidden = YES;
 
@@ -215,14 +217,16 @@
            
 }
 
- - (void)viewWillAppear:(BOOL)animated {
+ - (void)viewWillAppear:(BOOL)animated 
+{
  [super viewWillAppear:animated];
 	 
 	 [self.graphView reloadData];
  }
 
 - (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)
-toInterfaceOrientation duration:(NSTimeInterval)duration {
+toInterfaceOrientation duration:(NSTimeInterval)duration 
+{
 	// Change graphview.frame to make it a litle smaller
 	[self.graphView reloadData];
 	
@@ -248,22 +252,24 @@ toInterfaceOrientation duration:(NSTimeInterval)duration {
 	}
 }
 
-
  // Override to allow orientations other than the default portrait orientation.
- - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+ - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
+{
  // Return YES for supported orientations.
 	 return YES;
  }
 
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning 
+{
 	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
 	
 	// Release any cached data, images, etc that aren't in use.
 }
 
-- (void)viewDidUnload {
+- (void)viewDidUnload 
+{
 	// Release anything that can be recreated in viewDidLoad or on demand.
 	// e.g. self.myOutlet = nil;
     self.timeArray = nil;
@@ -273,7 +279,8 @@ toInterfaceOrientation duration:(NSTimeInterval)duration {
     self.timeString = nil;
 }
 
-- (void)dealloc {
+- (void)dealloc 
+{
 	[graphView release];
     [timeArray release];
     [valueArray release];
