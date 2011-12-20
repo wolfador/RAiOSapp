@@ -9,7 +9,7 @@
 #import "History.h"
 
 @implementation History
-@synthesize userName, url, probeList, probes, selected, response, receivedData, basicURL, daysToGraph, days;
+@synthesize userName, url, probeList, probes, selected, response, receivedData, basicURL, daysToGraph, days, t1, t2, t3;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,7 +45,20 @@
     self.userName = [restored objectForKey:@"UserName"];
     self.url = @"forum.reefangel.com";
     self.basicURL = [NSString stringWithFormat:@"http://forum.reefangel.com/status/jsonp.aspx?id=%@", self.userName];
-
+    
+     self.t1 = [restored objectForKey:@"Temp1"];
+     self.t2 = [restored objectForKey:@"Temp2"];
+     self.t3 = [restored objectForKey:@"Temp3"];
+    if ([self.t1 length] == 0) {
+        self.t1 = @"T1";
+    }
+    if ([self.t2 length] == 0) {
+        self.t2 = @"T2";
+    }
+    if ([self.t3 length] == 0) {
+        self.t3 = @"T3";
+    }
+    self.probes = [NSArray arrayWithObjects: self.t1, self.t2, self.t3, @"pH", @"AIW", @"AIB", @"AIRB", nil];
     
 }
 
@@ -90,16 +103,24 @@
     
         NSInteger probe = [self.probeList selectedRowInComponent:0];
         self.selected = [self.probes objectAtIndex:probe];
+    if ([self.selected isEqualToString:self.t1]) {
+        self.selected = @"T1";
+    }
+    if ([self.selected isEqualToString:self.t2]) {
+        self.selected = @"T2";
+    }
+    if ([self.selected isEqualToString:self.t3]) {
+        self.selected = @"T3";
+    }
     NSInteger numday = [self.probeList selectedRowInComponent:1];
     self.daysToGraph = [self.days objectAtIndex:numday];
     NSMutableString *fullUrl = [[NSMutableString alloc] init];
     [fullUrl appendString:self.basicURL];
-       // [self.fullUrl appendFormat:@"&filter=%@",self.selected];
     [fullUrl appendFormat:@"&filter=%@&range=%@",self.selected,self.daysToGraph];
 
     if ([self reachable]) {
         [self download:fullUrl];
-        [fullUrl release];
+        
         
     }
     else {
@@ -107,7 +128,7 @@
 		[alertView show];
 		[alertView release];
     }
-   
+   [fullUrl release];
 }
 
 -(void)download:(NSString *) controllerUrl
@@ -170,12 +191,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.probes = [NSArray arrayWithObjects: @"T1", @"T2", @"T3", @"pH", @"AIW", @"AIB", @"AIRB", nil];
+    [self loadData];
+    //self.probes = [NSArray arrayWithObjects: @"T1", @"T2", @"T3", @"pH", @"AIW", @"AIB", @"AIRB", nil];
     self.days = [NSArray arrayWithObjects: @"1", @"2", @"3", @"4", @"5", @"6", @"7", nil];
     [self.probeList reloadAllComponents];
     [self.probeList selectRow:0 inComponent:1 animated:NO];
     [self.probeList selectRow:0 inComponent:0 animated:NO];
-    [self loadData];
+    
     // Do any additional setup after loading the view from its nib.
 }
 

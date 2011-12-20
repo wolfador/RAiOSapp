@@ -19,9 +19,9 @@
     GraphView *graphcontroller;
     NSString *response, *basicURL;
     NSMutableData *receivedData;
-    NSString *daysToGraph;
+    NSString *daysToGraph, *t1, *t2, *t3;
 }
-@property (readwrite, copy) NSString *userName, *url, *selected, *response, *basicURL, *daysToGraph;
+@property (readwrite, copy) NSString *userName, *url, *selected, *response, *basicURL, *daysToGraph, *t1, *t2, *t3;
 @property (readwrite, copy) NSArray *probes, *days;
 @property (nonatomic, retain) NSMutableData *receivedData;
 @property (nonatomic, retain) IBOutlet UIPickerView *probeList;
