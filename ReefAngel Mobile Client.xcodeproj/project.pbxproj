@@ -43,6 +43,8 @@
 		7460CC261460DE2F009CB7E2 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7460CC251460DE2E009CB7E2 /* Default-Landscape~ipad.png */; };
 		746D0FE1145F78AF0000FAAB /* MyiPadTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746D0FE0145F78AF0000FAAB /* MyiPadTabBarController.m */; };
 		746D0FE3145F7D1A0000FAAB /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 746D0FE2145F7D1A0000FAAB /* Default-Portrait~ipad.png */; };
+		7492421114A17C26008B9936 /* MultiTouchS7GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7492421014A17C26008B9936 /* MultiTouchS7GraphView.m */; };
+		7492421214A17C26008B9936 /* MultiTouchS7GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7492421014A17C26008B9936 /* MultiTouchS7GraphView.m */; };
 		7497B71C143B8FBA002752D4 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7497B71B143B8FBA002752D4 /* libz.dylib */; };
 		74E48061144FB1550097CA99 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 74E48060144FB1550097CA99 /* User.m */; };
 		74EAC8AD145F350C006C9A00 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55DF429A1359DA3900C45B47 /* main.m */; };
@@ -161,6 +163,8 @@
 		746D0FDF145F78AF0000FAAB /* MyiPadTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyiPadTabBarController.h; sourceTree = "<group>"; };
 		746D0FE0145F78AF0000FAAB /* MyiPadTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyiPadTabBarController.m; sourceTree = "<group>"; };
 		746D0FE2145F7D1A0000FAAB /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		7492420F14A17C26008B9936 /* MultiTouchS7GraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiTouchS7GraphView.h; sourceTree = "<group>"; };
+		7492421014A17C26008B9936 /* MultiTouchS7GraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiTouchS7GraphView.m; sourceTree = "<group>"; };
 		7497B71B143B8FBA002752D4 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		74E4805F144FB1550097CA99 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		74E48060144FB1550097CA99 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
@@ -271,6 +275,8 @@
 		55C73917135A4865007AE60B /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
+				7492420F14A17C26008B9936 /* MultiTouchS7GraphView.h */,
+				7492421014A17C26008B9936 /* MultiTouchS7GraphView.m */,
 				740A71C6149AF29A00846342 /* S7GraphView.h */,
 				740A71C7149AF29A00846342 /* S7GraphView.m */,
 				740A71C8149AF29A00846342 /* S7Macros.h */,
@@ -556,6 +562,7 @@
 				740A7190149AE77E00846342 /* History.m in Sources */,
 				740A71C9149AF29A00846342 /* S7GraphView.m in Sources */,
 				740A71CD149AF48C00846342 /* GraphView.m in Sources */,
+				7492421114A17C26008B9936 /* MultiTouchS7GraphView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,6 +591,7 @@
 				740A7191149AE77E00846342 /* History.m in Sources */,
 				740A71CA149AF29A00846342 /* S7GraphView.m in Sources */,
 				740A71CE149AF48C00846342 /* GraphView.m in Sources */,
+				7492421214A17C26008B9936 /* MultiTouchS7GraphView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
