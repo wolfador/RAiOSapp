@@ -477,7 +477,7 @@
 		CGContextFillRect(c, bottomOverlay);
 		
 		//CGRect dateRect = CGRectMake(offsetX, bottomOfGraph, rightBounds-offsetX-10.0f, offsetY-1);
-        CGRect dateRect = CGRectMake(100, 100, 100, 100);
+        CGRect dateRect = CGRectMake(100, 250, 120, 75);
 		CGContextAddRect(c, dateRect);
 		CGContextSetFillColorWithColor(c, self.backgroundColor.CGColor);
 		CGContextFillRect(c, dateRect);
@@ -508,11 +508,12 @@
 			
 			//NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
 			//[dateFormatter setDateFormat:@"EEEE, MMMM d, yyyy"];
-			NSString * dateString = [NSString stringWithString:[xValues objectAtIndex:leftIndex]];
+			NSString * dateString = [NSString stringWithFormat:@"%@\n%@", [xValues objectAtIndex:leftIndex], [yValues objectAtIndex:leftIndex]];
 			[dateString drawInRect:dateRect withFont:_detailFont 
 					 lineBreakMode:UILineBreakModeTailTruncation alignment:UITextAlignmentCenter];
+            
             //single touch output
-			NSLog(@"%@", dateString);
+			//NSLog(@"%@", dateString);
 			//[dateFormatter release];
 			//NSString * dateString = [NSString stringWithFormat:@"%d", ];
 		}
@@ -586,10 +587,12 @@
 			CGSize stringSize2 = [secondValueString sizeWithFont:_detailFont];	
 			[self displayBarBox:stringSize2 offsetY:offsetY+20 displayX:displayBarX c:c valueString:secondValueString i:1];
 
-			NSString * dateString = [NSString stringWithString:[xValues objectAtIndex:leftIndex]];
-            NSString * endDateString = [NSString stringWithString: [xValues objectAtIndex:rightIndex]];
+			NSString * dateString = [NSString stringWithFormat:@"%@\n%@", [xValues objectAtIndex:leftIndex], [yValues objectAtIndex:leftIndex]];
+            NSString * endDateString = [NSString stringWithFormat:@"%@\n%@", [xValues objectAtIndex:rightIndex], [yValues objectAtIndex:rightIndex]];
 			NSString * finalDateString = [NSString stringWithFormat:(@"%@ - %@"), dateString, endDateString];
-			NSLog(@"%@", finalDateString);
+			//NSLog(@"%@", finalDateString);
+            //double touch
+            
 			[finalDateString drawInRect:dateRect withFont:_detailFont lineBreakMode:UILineBreakModeTailTruncation alignment:UITextAlignmentCenter];
 			//[dateFormatter release];
 			CGContextSetLineWidth(c, 2.5f);		
