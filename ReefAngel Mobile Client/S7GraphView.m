@@ -2,7 +2,9 @@
 //  S7GraphView.m
 //  S7Touch
 //
-//  Created by Aleks Nesterow on 9/27/09.
+//  Created by Kiran Ryali for Multitouch use
+//
+//  Based on work by Aleks Nesterow on 9/27/09.
 //  aleks.nesterow@gmail.com
 //  
 //  Thanks to http://snobit.habrahabr.ru/ for releasing sources for his
@@ -81,6 +83,13 @@
 @synthesize xValuesColor = _xValuesColor, yValuesColor = _yValuesColor, gridXColor = _gridXColor, gridYColor = _gridYColor;
 @synthesize drawInfo = _drawInfo, info = _info, infoColor = _infoColor;
 
+@synthesize rightLineX, leftLineX;	//Added by Kiran
+@synthesize barColor = _barColor;
+@synthesize detailFont = _detailFont;
+@synthesize labelColor = _labelColor;
+@synthesize	snappingEnabled;
+
+
 - (id)initWithFrame:(CGRect)frame {
 	
     if (self = [super initWithFrame:frame]) {
@@ -101,6 +110,8 @@
 
 - (void)dealloc {
 	
+	[_dataSource release];
+	
 	[_xValuesFormatter release];
 	[_yValuesFormatter release];
 	
@@ -116,6 +127,43 @@
 	[super dealloc];
 }
 
+- (void) displayBarBox: (CGSize) stringSize offsetY: (CGFloat) offsetY displayX: (CGFloat) displayX c: (CGContextRef) c valueString: (NSString *) valueString i:(NSInteger)i  {
+			// Build the rounded rectangle box for the display
+			
+			UIColor * currentColor = [S7GraphView colorByIndex:i];
+			CGRect displayBar;
+			CGPoint topLeftCorner = CGPointMake(displayX, offsetY-stringSize.height);
+			CGPoint bottomLeftCorner = CGPointMake(topLeftCorner.x, topLeftCorner.y+(_detailFont.pointSize+5.0));
+			CGPoint topRightCorner = CGPointMake(topLeftCorner.x+stringSize.width+5.0, topLeftCorner.y);
+			CGPoint bottomRightCorner = CGPointMake(topRightCorner.x, bottomLeftCorner.y);
+			
+			CGFloat radius = (bottomRightCorner.y - topRightCorner.y)/2;
+			
+			// Draw the arcs for the rounded box
+			CGContextAddArc(c, topRightCorner.x, topRightCorner.y+radius, radius, 3.14/2, (3/2)*(3.14), 1);
+			CGContextSetFillColorWithColor(c, currentColor.CGColor);
+			CGContextFillPath(c);
+			CGContextAddArc(c, topLeftCorner.x, topLeftCorner.y+radius, radius,  0, (2)*(3.14), 0);
+			CGContextSetFillColorWithColor(c, currentColor.CGColor);
+			CGContextFillPath(c);
+						CGFloat displayY = (offsetY-stringSize.height);
+			displayBar = CGRectMake(displayX, displayY, stringSize.width+5.0, _detailFont.pointSize+5.0);
+			CGContextAddRect(c ,displayBar);
+			CGContextFillRect(c, displayBar);
+			
+			CGContextSetFillColorWithColor(c, currentColor.CGColor);
+			
+			CGContextSetFillColorWithColor(c, _labelColor.CGColor);
+			CGSize offset = CGSizeMake(-1.5, -1.5 );
+			UIColor * shadow = RGB( 50, 50, 50);
+			CGContextSetShadowWithColor(c, offset, 2, shadow.CGColor);
+			[valueString drawInRect:displayBar withFont:_detailFont
+					  lineBreakMode:UILineBreakModeTailTruncation alignment:UITextAlignmentCenter];
+			CGContextSetShadowWithColor(c, offset, 0, NULL);
+			//NSLog(@"%@ - %f", valueString,[valueString sizeWithFont:_detailFont].width);
+			CGContextSetFillColorWithColor(c, _xValuesColor.CGColor);
+
+}
 - (void)drawRect:(CGRect)rect {
 	
 	CGContextRef c = UIGraphicsGetCurrentContext();
@@ -129,7 +177,7 @@
 	}
 	
 	CGFloat offsetX = _drawAxisY ? 60.0f : 10.0f;
-	CGFloat offsetY = (_drawAxisX || _drawInfo) ? 30.0f : 10.0f;
+	CGFloat offsetY = (_drawAxisX || _drawInfo) ? 20.0f : 10.0f;
 	
 	CGFloat minY = 0.0;
 	CGFloat maxY = 0.0;
@@ -147,6 +195,7 @@
 			}
 		}
 	}
+	
 	if (maxY < 15) {
         maxY = 15;
 	} 
@@ -165,6 +214,8 @@
 	if (maxY > 10000 && maxY < 100000) {
 		maxY = ceil(maxY / 10000) * 10000;
 	}
+    
+	
 	CGFloat step = (maxY - minY) / 5;
 	CGFloat stepY = (self.frame.size.height - (offsetY * 2)) / maxY;
 	
@@ -177,13 +228,14 @@
 			
 			CGFloat lineDash[2];
 			lineDash[0] = 6.0f;
-			lineDash[1] = 6.0f;
+			lineDash[1] = 3.0f;
 			
-			CGContextSetLineDash(c, 0.0f, lineDash, 2);
-			CGContextSetLineWidth(c, 0.1f);
+			//CGContextSetLineDash(c, 0.0f, lineDash, 2);
+			CGContextSetLineDash(c, 0, NULL, 0);
+			CGContextSetLineWidth(c, 1.0f);
 			
 			CGPoint startPoint = CGPointMake(offsetX, self.frame.size.height - y - offsetY);
-			CGPoint endPoint = CGPointMake(self.frame.size.width - offsetX, self.frame.size.height - y - offsetY);
+			CGPoint endPoint = CGPointMake(self.frame.size.width - offsetX/4, self.frame.size.height - y - offsetY);
 			
 			CGContextMoveToPoint(c, startPoint.x, startPoint.y);
 			CGContextAddLineToPoint(c, endPoint.x, endPoint.y);
@@ -219,7 +271,7 @@
 	
 	if (xValuesCount > 5) {
 		
-		NSUInteger stepCount = 10;
+		NSUInteger stepCount = 5;
 		NSUInteger count = xValuesCount - 1;
 		
 		for (NSUInteger i = 4; i < 8; i++) {
@@ -237,14 +289,14 @@
 		maxStep = xValuesCount;
 	}
 	
-	CGFloat stepX = (self.frame.size.width - (offsetX * 2)) / (xValuesCount - 1);
+	CGFloat stepX = (self.frame.size.width - (offsetX * 5/4)) / (xValuesCount - 1);
 	
 	for (NSUInteger i = 0; i < maxStep; i++) {
 		
 		NSUInteger x = (i * step) * stepX;
 		
-		if (x > self.frame.size.width - (offsetX * 2)) {
-			x = self.frame.size.width - (offsetX * 2);
+		if (x > self.frame.size.width - (offsetX * 5/4)) {
+			x = self.frame.size.width - (offsetX * 5/4);
 		}
 		
 		NSUInteger index = i * step;
@@ -257,11 +309,11 @@
 			
 			CGFloat lineDash[2];
 			
-			lineDash[0] = 6.0f;
+			lineDash[0] = 3.0f;
 			lineDash[1] = 6.0f;
 			
 			CGContextSetLineDash(c, 0.0f, lineDash, 2);
-			CGContextSetLineWidth(c, 0.1f);
+			CGContextSetLineWidth(c, 1.0f);
 			
 			CGPoint startPoint = CGPointMake(x + offsetX, offsetY);
 			CGPoint endPoint = CGPointMake(x + offsetX, self.frame.size.height - offsetY);
@@ -291,7 +343,7 @@
 		}
 	}
 	
-	stepX = (self.frame.size.width - (offsetX * 2)) / (xValuesCount - 1);
+	stepX = (self.frame.size.width - (offsetX * 5/4)) / (xValuesCount - 1);
 	
 	CGContextSetLineDash(c, 0, NULL, 0);
 	
@@ -327,7 +379,7 @@
 			CGContextSetStrokeColorWithColor(c, plotColor);
 			CGContextStrokePath(c);
 			
-			if (shouldFill) {
+			if (shouldFill && plotIndex == 0) {
 				
 				CGContextMoveToPoint(c, startPoint.x, self.frame.size.height - offsetY);
 				CGContextAddLineToPoint(c, startPoint.x, startPoint.y);
@@ -335,19 +387,263 @@
 				CGContextAddLineToPoint(c, endPoint.x, self.frame.size.height - offsetY);
 				CGContextClosePath(c);
 				
-				CGContextSetFillColorWithColor(c, plotColor);
+				CGColorRef plotColor1 = CGColorCreateCopyWithAlpha(plotColor, 0.3);
+				
+				CGContextSetFillColorWithColor(c, plotColor1);
+				
+				CGColorRelease(plotColor1);
+				
 				CGContextFillPath(c);
 			}
 		}
 	}
 	
+	
 	if (_drawInfo) {
 		
-		font = [UIFont boldSystemFontOfSize:13.0f];
+		font = [UIFont systemFontOfSize:10.0f];
 		[self.infoColor set];
-		[_info drawInRect:CGRectMake(0.0f, 5.0f, self.frame.size.width, 20.0f) withFont:font
+		[[_info uppercaseString] drawInRect:CGRectMake(0.0f, 5.0f, self.frame.size.width, 20.0f) withFont:font
 			lineBreakMode:UILineBreakModeTailTruncation alignment:UITextAlignmentCenter];
 	}
+	
+#pragma mark MultiTouch methods
+	
+	NSArray *yValues = [self.dataSource graphView:self yValuesForPlot:0];		// User interaction only currently happens on the first plot
+	
+	CGFloat rightBounds = (stepX * ([yValues count]-1)) + offsetX + 10.0f;		//Add 7.0f for touch tolerance
+	
+	// Draw the left and right bars, Make sure that they are within the bounds of the graph
+	if(leftLineX != -1 && leftLineX >= offsetX && leftLineX <= rightBounds){	
+		// NSLog(@"\nLine Position: %f\n Frame Width: %f\n Calculated Bounds: %f", leftLineX, self.frame.size.width, self.frame.size.width-offsetX);
+		// Set the left line to start from the beginning of the graph to the bottom of it 
+
+		NSInteger leftIndex = (leftLineX-offsetX+(stepX/2))/stepX;
+		NSInteger leftValue = -1;
+		//NSLog(@"Index: %i", leftIndex);
+		// Sanity Check
+		if(leftIndex < [yValues count])
+			leftValue = [[yValues objectAtIndex:leftIndex] intValue];
+		
+		_barColor = [S7GraphView colorByIndex:0];
+		
+		// Snapping v. Guessing
+		if(snappingEnabled){
+			// Set the position of the bar to the x equivalent of 
+			leftLineX = leftIndex * stepX +offsetX;
+		}
+		else {
+			if(leftIndex+1 < [yValues count]){
+				// Interpolation
+				NSInteger nextValue = [[yValues objectAtIndex:leftIndex+1]intValue];
+				// Convert values and indexes to graph coordinates
+				CGFloat startX = leftIndex * stepX;
+				CGFloat endX = (leftIndex + 1) * stepX;
+				//NSLog(@"\nSTART: %f\n END: %f", startX, endX);
+				
+				// Y = MX + B
+				CGFloat slope = (nextValue-leftValue)/(endX-startX);// slope = Rise / Run
+				CGFloat yintercept = leftValue-(startX*slope);		// yint = (startX)slope - value
+				//CGFloat currentX = leftLineX - offsetX;						
+				
+				// Interpolated Value = (slope)(X) + yintercept
+				leftValue = slope*(leftLineX-offsetX) + yintercept;		
+				//NSLog(@"\ncurrnetX: %f\nslope: %f\n yintercept: %f\ncalculated: %d", currentX, slope, yintercept, leftValue);					
+			}
+		}
+		CGFloat yCoord = self.frame.size.height - (stepY*leftValue) - offsetY;
+				
+		CGContextSetLineWidth(c, 1.5f);								// width of the bars
+
+				
+		CGFloat components[] = 
+		{0,0,0,0};
+		CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
+		CGColorRef color = CGColorCreate(colorspace, components);
+		CGContextSetFillColorWithColor(c, color);	
+		
+		// Wipe out the title bar
+		CGRect titleOverlay = CGRectMake(offsetX, 0, rightBounds-
+										 offsetX-10.0f, offsetY-1);
+		CGContextAddRect(c, titleOverlay);
+		CGContextSetFillColorWithColor(c, self.backgroundColor.CGColor);
+		CGContextFillRect(c, titleOverlay);
+		
+		// Wipe out the bottom bar
+		CGFloat bottomOfGraph = self.frame.size.height - offsetY;
+		CGRect bottomOverlay = CGRectMake(0, bottomOfGraph, self.frame.size.width, offsetY-1);
+		CGContextAddRect(c, bottomOverlay);
+		CGContextSetFillColorWithColor(c, self.backgroundColor.CGColor);
+		CGContextFillRect(c, bottomOverlay);
+		
+		//CGRect dateRect = CGRectMake(offsetX, bottomOfGraph, rightBounds-offsetX-10.0f, offsetY-1);
+        CGRect dateRect = CGRectMake(100, 100, 100, 100);
+		CGContextAddRect(c, dateRect);
+		CGContextSetFillColorWithColor(c, self.backgroundColor.CGColor);
+		CGContextFillRect(c, dateRect);
+				
+		NSString * valueString = [NSString stringWithFormat:@"%d", leftValue];
+		//NSString * valueString = [[NSString alloc] initWithFormat:@"%d", leftValue];
+		//CGRect displayBar;
+		
+		// NSLog(@"%d", leftValue);
+		// If there is only one touch being handled, draw the box in a different position
+		CGContextSetLineWidth(c, 2.5f);								// width of the bars
+		
+		
+		if(rightLineX == -1){
+			
+			CGSize stringSize = [valueString sizeWithFont:_detailFont];
+			CGFloat displayX = (leftLineX-stringSize.width/2);	
+			if([self.dataSource graphViewNumberOfPlots:self] == 2){
+				NSArray *yValues2 = [self.dataSource graphView:self yValuesForPlot:1];
+				CGFloat	 displayX2 = (leftLineX+15);
+				NSString * secondValueString = [NSString stringWithFormat:@"%d", [[yValues2 objectAtIndex:leftIndex] intValue]];
+				CGSize stringSize2 = [secondValueString sizeWithFont:_detailFont];	
+				[self displayBarBox: stringSize2 offsetY:offsetY displayX:displayX2 c:c valueString:secondValueString i:1];
+				displayX = displayX - stringSize.width/2-20;
+			}
+			[self displayBarBox: stringSize offsetY: offsetY displayX: displayX c: c valueString: valueString i:0];
+
+			
+			//NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+			//[dateFormatter setDateFormat:@"EEEE, MMMM d, yyyy"];
+			NSString * dateString = [NSString stringWithString:[xValues objectAtIndex:leftIndex]];
+			[dateString drawInRect:dateRect withFont:_detailFont 
+					 lineBreakMode:UILineBreakModeTailTruncation alignment:UITextAlignmentCenter];
+            //single touch output
+			NSLog(@"%@", dateString);
+			//[dateFormatter release];
+			//NSString * dateString = [NSString stringWithFormat:@"%d", ];
+		}
+		if( rightLineX != -1 && rightLineX <= rightBounds && rightLineX >= offsetX){										
+			NSInteger rightIndex = (rightLineX-offsetX)/stepX;
+			NSInteger rightValue = [[yValues objectAtIndex:rightIndex] intValue];
+			CGFloat yCoord = self.frame.size.height - (stepY*rightValue) - offsetY;
+			
+			// FOR SNAPPING	- TODO: turn interpolation to a function
+			if(snappingEnabled){
+				rightLineX = rightIndex * stepX +offsetX;
+				rightValue = rightValue - leftValue;
+			}
+			// FOR INTERPOLATION
+			else {
+				if(rightIndex+1 < [yValues count]){
+					// Interpolation
+					NSInteger nextValue = [[yValues objectAtIndex:rightIndex+1]intValue];
+					// Convert values and indexes to graph coordinates
+					CGFloat startX = rightIndex * stepX;
+					CGFloat endX = (rightIndex + 1) * stepX;
+					//NSLog(@"\nSTART: %f\n END: %f", startX, endX);
+					// Y = MX + B
+					CGFloat slope = (nextValue-rightValue)/(endX-startX);// slope = Rise / Run
+					CGFloat yintercept = rightValue-(startX*slope);		// yint = (startX)slope - value
+					
+					// Interpolated Value = (slope)(X) + yintercept
+					CGFloat currentX = rightLineX - offsetX;
+					rightValue = slope*(currentX) + yintercept;	
+					//NSLog(@"\ncurrnetX: %f\nslope: %f\n yintercept: %f\ncalculated: %d", currentX, slope, yintercept, leftValue);					
+					rightValue = rightValue - leftValue;
+				}
+			}
+			
+			valueString = [NSString stringWithFormat:@"%d", rightValue];
+			if(rightValue>0){
+				valueString = [NSString stringWithFormat:@"+%@", valueString];
+			}
+			
+			CGSize fontSize = [valueString sizeWithFont:_detailFont];
+			
+			
+			
+			//_barColor = RGB(60,60,60);
+			//CGContextSetLineWidth(c, 1.0);		
+			CGPoint startPoint = CGPointMake(leftLineX, offsetY+10);
+			CGPoint endPoint = CGPointMake(rightLineX, offsetY+10);
+
+			UIColor * boxColor = [S7GraphView colorByIndex:0];
+			CGContextSetFillColorWithColor(c, boxColor.CGColor);
+			CGFloat displayBarX = leftLineX+(rightLineX-leftLineX)/2-(fontSize.width/2);
+			[self displayBarBox:fontSize offsetY:offsetY displayX:displayBarX c:c valueString:valueString i:0];
+			
+            /*
+			NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
+			[dateFormatter setDateFormat:@"EEEE, MMMM d, yyyy"];
+            */
+			CGContextSetFillColorWithColor(c, _xValuesColor.CGColor);
+			
+			
+			NSArray *yValues2 = [self.dataSource graphView:self yValuesForPlot:1];
+			NSInteger left = [[yValues2 objectAtIndex:leftIndex] intValue];
+			NSInteger right = [[yValues2 objectAtIndex:rightIndex] intValue];
+			NSString * secondValueString;
+			if(right-left > 0)
+				secondValueString = [NSString stringWithFormat:@"+%d", right-left];
+			else {
+				secondValueString = [NSString stringWithFormat:@"%d", right-left];
+			}
+
+			CGSize stringSize2 = [secondValueString sizeWithFont:_detailFont];	
+			[self displayBarBox:stringSize2 offsetY:offsetY+20 displayX:displayBarX c:c valueString:secondValueString i:1];
+
+			NSString * dateString = [NSString stringWithString:[xValues objectAtIndex:leftIndex]];
+            NSString * endDateString = [NSString stringWithString: [xValues objectAtIndex:rightIndex]];
+			NSString * finalDateString = [NSString stringWithFormat:(@"%@ - %@"), dateString, endDateString];
+			NSLog(@"%@", finalDateString);
+			[finalDateString drawInRect:dateRect withFont:_detailFont lineBreakMode:UILineBreakModeTailTruncation alignment:UITextAlignmentCenter];
+			//[dateFormatter release];
+			CGContextSetLineWidth(c, 2.5f);		
+			// Draw the right bar
+			startPoint = CGPointMake(rightLineX, 0);
+			endPoint = CGPointMake(rightLineX, self.frame.size.height);
+			
+			CGContextMoveToPoint(c, startPoint.x, offsetY);
+			CGContextAddLineToPoint(c, endPoint.x, self.frame.size.height-offsetY);
+			CGContextClosePath(c);
+			CGContextSetStrokeColorWithColor(c, _barColor.CGColor);
+			CGContextStrokePath(c);
+			
+			// Right marker
+			CGRect marker = CGRectMake(rightLineX-5.0, yCoord-5.0, 10.0, 10.0);
+			CGContextAddEllipseInRect(c, marker);
+			CGContextSetStrokeColorWithColor(c, _barColor.CGColor);
+			CGContextSetFillColorWithColor(c, _labelColor.CGColor);
+			CGContextFillEllipseInRect(c, marker);
+			CGContextStrokeEllipseInRect(c, marker);
+			}
+		
+		CGPoint startPoint = CGPointMake(leftLineX, offsetY);
+		CGPoint endPoint = CGPointMake(leftLineX, self.frame.size.height-offsetY);
+		
+		
+		CGSize offset = CGSizeMake(1.0,1.0 );
+		//UIColor * shadow = RGB( 0, 0, 0);
+		//CGContextSetShadowWithColor(c, offset, 2, shadow.CGColor);
+		
+		// Build the path to the point
+		CGContextMoveToPoint(c, startPoint.x, startPoint.y);
+		CGContextAddLineToPoint(c, endPoint.x, endPoint.y);
+		CGContextClosePath(c);
+		
+		CGContextSetStrokeColorWithColor(c, _barColor.CGColor);
+		//CGContextSetStrokeColorWithColor(c, self.gridYColor.CGColor);
+		// Draw the path 
+		CGContextStrokePath(c);
+		
+		CGContextSetShadowWithColor(c, offset, 2, NULL);
+		
+		//CGContextSetShadowWithColor(c, offset, 1, shadow.CGColor);
+		UIColor * markerColor = [[UIColor alloc]initWithWhite:1 alpha:1 ];
+		CGRect marker = CGRectMake(leftLineX-5.0, yCoord-5.0, 10.0, 10.0);
+		CGContextSetStrokeColorWithColor(c, _barColor.CGColor);
+		CGContextSetFillColorWithColor(c, markerColor.CGColor);
+		CGContextFillEllipseInRect(c, marker);
+		CGContextStrokeEllipseInRect(c, marker);
+		
+	}
+	
+	
+	
 }
 
 - (void)reloadData {
@@ -358,18 +654,21 @@
 #pragma mark PrivateMethods
 
 - (void)initializeComponent {
-	
 	_drawAxisX = YES;
 	_drawAxisY = YES;
 	_drawGridX = YES;
-	_drawGridY = YES;
-	
+	_drawGridY = YES;   
+	self.multipleTouchEnabled = YES;
+	self.userInteractionEnabled = YES;
 	_xValuesColor = [[UIColor blackColor] retain];
 	_yValuesColor = [[UIColor blackColor] retain];
-	
+	snappingEnabled = YES;
+	//_detailFont = [UIFont systemFontOfSize:15.0f];
+	_detailFont = [UIFont fontWithName:@"Helvetica" size:15.0f];
 	_gridXColor = [[UIColor blackColor] retain];
 	_gridYColor = [[UIColor blackColor] retain];
-	
+	_barColor = [[UIColor blackColor] retain];
+	_labelColor = [[UIColor whiteColor] retain];
 	_drawInfo = NO;
 	_infoColor = [[UIColor blackColor] retain];
 }

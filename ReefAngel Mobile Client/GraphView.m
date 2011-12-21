@@ -15,15 +15,19 @@
 
 @implementation GraphView
 
-@synthesize graphView;
+@synthesize graphView, mGraphView;
 @synthesize delegate = _delegate, historyData, historyDict, fullArray, timeArray, valueArray, dataString, timeString;
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
-	
+	/*
 	self.graphView = [[S7GraphView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	self.view = self.graphView;
 	self.graphView.dataSource = self;
+    */
+    self.mGraphView = [[MultiTouchS7GraphView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+	self.view = self.mGraphView;
+	self.mGraphView.dataSource = self;
     NSString *testString = [self.historyData substringFromIndex:1];
     NSString *test2String = [testString substringToIndex: [testString length] - 6 ];
     NSString *newString = [test2String stringByReplacingOccurrencesOfString:@"[" withString:@""];
@@ -51,7 +55,9 @@
         }
     }
 
-	[self.graphView reloadData];
+	//[self.graphView reloadData];
+    [self.mGraphView reloadData];
+ 
 }
 
 -(IBAction) keyButton
@@ -73,34 +79,36 @@
 	[numberFormatter setMinimumFractionDigits:0];
 	[numberFormatter setMaximumFractionDigits:2];
 	
-	self.graphView.yValuesFormatter = numberFormatter;
+	self.mGraphView.yValuesFormatter = numberFormatter;
     
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     [dateFormatter setDateStyle:NSDateFormatterNoStyle];
     
-    self.graphView.xValuesFormatter = dateFormatter;
+    self.mGraphView.xValuesFormatter = dateFormatter;
 	       
 	[numberFormatter release];
 	
-	self.graphView.backgroundColor = [UIColor whiteColor];
+	self.mGraphView.backgroundColor = [UIColor whiteColor];
 	
-	self.graphView.drawAxisX = NO;
-	self.graphView.drawAxisY = YES;
-	self.graphView.drawGridX = YES;
-	self.graphView.drawGridY = YES;
+	self.mGraphView.drawAxisX = NO;
+	self.mGraphView.drawAxisY = YES;
+	self.mGraphView.drawGridX = YES;
+	self.mGraphView.drawGridY = YES;
+    
 	
-	self.graphView.xValuesColor = [UIColor blackColor];
-	self.graphView.yValuesColor = [UIColor blackColor];
+	self.mGraphView.xValuesColor = [UIColor blackColor];
+	self.mGraphView.yValuesColor = [UIColor blackColor];
 	
-	self.graphView.gridXColor = [UIColor blackColor];
-	self.graphView.gridYColor = [UIColor blackColor];
+	self.mGraphView.gridXColor = [UIColor blackColor];
+	self.mGraphView.gridYColor = [UIColor blackColor];
 	
 		
 	//update the data:
     
     
-	[self.graphView reloadData];
+	[self.mGraphView reloadData];
+    
 	
 	//determine if device is iPad to setup frame for NavBar
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) 
@@ -139,7 +147,7 @@
 	[nav pushNavigationItem:item animated:NO ];
 	[item autorelease];
 	
-	[self.graphView addSubview:nav];
+	[self.mGraphView addSubview:nav];
 	
 }
 
@@ -219,14 +227,14 @@
 {
  [super viewWillAppear:animated];
 	 
-	 [self.graphView reloadData];
+	 [self.mGraphView reloadData];
  }
 
 - (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)
 toInterfaceOrientation duration:(NSTimeInterval)duration 
 {
 	// Change graphview.frame to make it a litle smaller
-	[self.graphView reloadData];
+	[self.mGraphView reloadData];
 	
 	//resize Navbar on rotation
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) 
@@ -245,7 +253,7 @@ toInterfaceOrientation duration:(NSTimeInterval)duration
     }
     else {
         nav.frame = CGRectMake(0.0f, 0.0f, 480.0f, 48.0f);
-        graphView.frame = CGRectMake(0.0f, 0.0f, 310.0f, 480.0f);
+        mGraphView.frame = CGRectMake(0.0f, 0.0f, 310.0f, 480.0f);
     }
 	}
 }
@@ -279,7 +287,7 @@ toInterfaceOrientation duration:(NSTimeInterval)duration
 
 - (void)dealloc 
 {
-	[graphView release];
+	[mGraphView release];
     [timeArray release];
     [valueArray release];
     [timeString release];
@@ -290,15 +298,16 @@ toInterfaceOrientation duration:(NSTimeInterval)duration
 
 #pragma mark protocol S7GraphViewDataSource
 
-- (NSUInteger)graphViewNumberOfPlots:(S7GraphView *)graphView {
+- (NSUInteger)graphViewNumberOfPlots:(MultiTouchS7GraphView *)graphView {
 	/* Return the number of plots you are going to have in the view. 1+ */
 	return 1;
 }
 
-- (NSArray *)graphViewXValues:(S7GraphView *)graphView {
+- (NSArray *)graphViewXValues:(MultiTouchS7GraphView *)graphView {
 	/* An array of objects that will be further formatted to be displayed on the X-axis.
 	 The number of elements should be equal to the number of points you have for every plot. */
     
+    /*
     int i;
     int count;
     count = [self.timeArray count];
@@ -315,13 +324,15 @@ toInterfaceOrientation duration:(NSTimeInterval)duration
         [self.timeArray replaceObjectAtIndex:i withObject:localDate];
        
     }
-  
+  */
     
 	return self.timeArray;
+    
+
 	
 }
 
-- (NSArray *)graphView:(S7GraphView *)graphView yValuesForPlot:(NSUInteger)plotIndex {
+- (NSArray *)graphView:(MultiTouchS7GraphView *)graphView yValuesForPlot:(NSUInteger)plotIndex {
 	/* Return the values for a specific graph. Each plot is meant to have equal number of points.
 	 And this amount should be equal to the amount of elements you return from graphViewXValues: method. */
 	
@@ -329,7 +340,7 @@ toInterfaceOrientation duration:(NSTimeInterval)duration
 	return self.valueArray;
 
 }
-- (BOOL)graphView:(S7GraphView *)graphView shouldFillPlot:(NSUInteger)plotIndex
+- (BOOL)graphView:(MultiTouchS7GraphView *)graphView shouldFillPlot:(NSUInteger)plotIndex
 {
 	return NO;
 }

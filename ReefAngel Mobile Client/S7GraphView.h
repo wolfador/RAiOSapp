@@ -91,7 +91,7 @@
 
 @end
 
-@interface S7GraphView : UIView {
+@interface S7GraphView : UIControl {
 	
 @private
 	
@@ -112,14 +112,26 @@
 	UIColor *_gridYColor;
 	
 	BOOL _drawInfo;
+	
 	NSString *_info;
 	UIColor *_infoColor;
+	
+	
+	// Added variables - Positions of left and right bars (touch interaction)
+	CGFloat leftLineX;
+	CGFloat rightLineX;
+	UIColor * _barColor;			// Color of the bar
+	UIColor * _labelColor;			// Color of the bar
+	UIFont * _detailFont;		// Font of the detail
+	
+	BOOL snappingEnabled;
+
 }
 
 /** Returns a different color for the first 10 plots. */
 + (UIColor *)colorByIndex:(NSInteger)index;
 
-@property (nonatomic, assign) IBOutlet id<S7GraphViewDataSource> dataSource;
+@property (nonatomic, retain) IBOutlet id<S7GraphViewDataSource> dataSource;
 
 @property (nonatomic, retain) IBOutlet NSFormatter *xValuesFormatter;
 @property (nonatomic, retain) IBOutlet NSFormatter *yValuesFormatter;
@@ -129,15 +141,25 @@
 @property (nonatomic, assign) BOOL drawGridX;
 @property (nonatomic, assign) BOOL drawGridY;
 
+
+
 @property (nonatomic, retain) UIColor *xValuesColor;
 @property (nonatomic, retain) UIColor *yValuesColor;
-
 @property (nonatomic, retain) UIColor *gridXColor;
 @property (nonatomic, retain) UIColor *gridYColor;
 
-@property (nonatomic, assign) BOOL drawInfo;
+@property BOOL drawInfo;
+
 @property (nonatomic, copy) NSString *info;
 @property (nonatomic, retain) UIColor *infoColor;
+
+@property (nonatomic, assign) CGFloat leftLineX;			//properties for leftLineX
+@property (nonatomic, assign) CGFloat rightLineX;
+@property (nonatomic, retain) UIColor *barColor;
+@property (nonatomic, retain) UIColor *labelColor;
+@property (nonatomic, retain) UIFont *detailFont;
+
+@property BOOL snappingEnabled;
 
 - (void)reloadData;
 
