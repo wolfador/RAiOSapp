@@ -9,7 +9,7 @@
 #import "MemValues.h"
 
 @implementation MEM
-@synthesize M822, M824, M814, M818, M820, M821, M816, M807, M806, M805, M804, M803, M802, M801, M800; 
+@synthesize M822, M824, M814, M818, M820, M821, M816, M807, M806, M805, M804, M803, M802, M801, M800, M836, M837, M838, M839, M843, M845; 
 -(void) dealloc
 {
     [M822 release];
@@ -27,6 +27,12 @@
     [M805 release];
     [M806 release];
     [M807 release];
+    [M836 release];
+    [M837 release];
+    [M838 release];
+    [M839 release];
+    [M843 release];
+    [M845 release];
     
     [super dealloc];
 }
