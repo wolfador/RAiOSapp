@@ -117,7 +117,6 @@
     NSMutableString *fullUrl = [[NSMutableString alloc] init];
     [fullUrl appendString:self.basicURL];
     [fullUrl appendFormat:@"&filter=%@&range=%@",self.selected,self.daysToGraph];
-
     if ([self reachable]) {
         [self download:fullUrl];
         
@@ -166,8 +165,7 @@
     NSString *received = [[[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding] autorelease];
        self.response = [NSString stringWithString:received];
     
-
-    if (self.response != NULL) {
+    if (self.response != NULL && [self.response length] > 5) {
         graphcontroller = [[GraphView alloc] initWithNibName:nil bundle:nil] ;
         graphcontroller.delegate = self;
         graphcontroller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
@@ -175,6 +173,12 @@
         
         [self presentModalViewController:graphcontroller animated:YES];
     }
+        else
+        {
+            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to download" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+            [alertView show];
+            [alertView release];
+        }
 }
 
 

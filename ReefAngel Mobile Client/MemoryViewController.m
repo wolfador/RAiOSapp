@@ -10,7 +10,8 @@
 
 @implementation MemoryViewController
 @synthesize delegate = _delegate;
-@synthesize HeaterOn, HeaterOff, FeedTimer, Overheat, PWMD, PWMA, LCDTimer, wifiURL, enteredURL, fullURL, Actinic, Daylight, daylightValue, actinicValue, heaterOnValue, heaterOffValue, feedTimerValue, overheatValue, LCDTimerValue, sendUpdateMem, ForC, ForC2, ForC3, MHOnHour, MHOnMin, MHOffHour, MHOffMin, StdOnHour, StdOnMin, StdOffHour, StdOffMin, scrollView, MHOnHourValue, MHOnMinValue, MHOffHourValue, MHOffMinValue, StdOnHourValue, StdOnMinValue, StdOffHourValue, StdOffMinValue, tempScale;
+@synthesize HeaterOn, HeaterOff, FeedTimer, Overheat, PWMD, PWMA, LCDTimer, wifiURL, enteredURL, fullURL, Actinic, Daylight, daylightValue, actinicValue, heaterOnValue, heaterOffValue, feedTimerValue, overheatValue, LCDTimerValue, sendUpdateMem, ForC, ForC2, ForC3, MHOnHour, MHOnMin, MHOffHour, MHOffMin, StdOnHour, StdOnMin, StdOffHour, StdOffMin, scrollView, MHOnHourValue, MHOnMinValue, MHOffHourValue, MHOffMinValue, StdOnHourValue, StdOnMinValue, StdOffHourValue, StdOffMinValue, tempScale, DP1Hr, DP1Min, DP2Hr, DP2Min, DP1Int, DP2Int;
+@synthesize DP1HrValue, DP1MinValue, DP2HrValue, DP2MinValue, DP1IntValue, DP2IntValue;
 
 - (IBAction)done
 {
@@ -132,6 +133,14 @@
     self.StdOffMinValue = [restored objectForKey:@"StdOffMin"];
     self.StdOnHourValue = [restored objectForKey:@"StdOnHour"];
     self.StdOnMinValue = [restored objectForKey:@"StdOnMin"];
+
+    self.DP1HrValue = [restored objectForKey:@"DP1Hr"];
+    self.DP1MinValue = [restored objectForKey:@"DP1Min"];
+    self.DP1IntValue = [restored objectForKey:@"DP1Int"];
+    self.DP2HrValue = [restored objectForKey:@"DP2Hr"];
+    self.DP2MinValue = [restored objectForKey:@"DP2Min"];
+    self.DP2IntValue = [restored objectForKey:@"DP2Int"];
+    
     
      if ([self reachable]) {
     if (![self.heaterOnValue isEqualToString:self.HeaterOn.text]) {
@@ -220,15 +229,47 @@
         NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.StdOnMin.tag,self.StdOnMin.text];
         [self updateValue:updateMemory];
          }  
+    if (![self.DP1HrValue isEqualToString:self.DP1Hr.text]) {
+        
+        NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.DP1Hr.tag,self.DP1Hr.text];
+        [self updateValue:updateMemory];
+        NSLog(@"%@", updateMemory);
+         }  
+    if (![self.DP2HrValue isEqualToString:self.DP2Hr.text]) {
+        NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.DP2Hr.tag,self.DP2Hr.text];
+        [self updateValue:updateMemory];
+        NSLog(@"%@", updateMemory);
+    }
+        if (![self.DP1MinValue isEqualToString:self.DP1Min.text]) {
+            NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.DP1Min.tag,self.DP1Min.text];
+            [self updateValue:updateMemory];
+            NSLog(@"%@", updateMemory);
+        }  
+        if (![self.DP2MinValue isEqualToString:self.DP2Min.text]) {
+            NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.DP2Min.tag,self.DP2Min.text];
+            [self updateValue:updateMemory];   
+            NSLog(@"%@", updateMemory);
+        }
+         if (![self.DP1IntValue isEqualToString:self.DP1Int.text]) {
+             NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.DP1Int.tag,self.DP1Int.text];
+             [self updateValue:updateMemory];
+             NSLog(@"%@", updateMemory);
+         }  
+         if (![self.DP2IntValue isEqualToString:self.DP2Int.text]) {
+             NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.DP2Int.tag,self.DP2Int.text];
+             [self updateValue:updateMemory];    
+             NSLog(@"%@", updateMemory);
+         }         
+         
          
      }
-  
 }
 
 -(void)UpdateUI:(MEM*)mem
 {
     if(memValues)
     {
+        
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
         NSString *path = [documentsDirectory stringByAppendingPathComponent:@"Memdata.plist"];
@@ -253,6 +294,13 @@
         [Dictionary setObject: [memValues.M807 stringValue] forKey:@"StdOffMin"];
         [Dictionary setObject: [memValues.M804 stringValue] forKey:@"StdOnHour"];
         [Dictionary setObject: [memValues.M805 stringValue] forKey:@"StdOnMin"];
+        [Dictionary setObject: [memValues.M836 stringValue] forKey:@"DP1Hr"];
+        [Dictionary setObject: [memValues.M837 stringValue] forKey:@"DP1Min"];
+        [Dictionary setObject: [memValues.M843 stringValue] forKey:@"DP1Int"];
+        [Dictionary setObject: [memValues.M838 stringValue] forKey:@"DP2Hr"];
+        [Dictionary setObject: [memValues.M839 stringValue] forKey:@"DP2Min"];
+        [Dictionary setObject: [memValues.M845 stringValue] forKey:@"DP2Int"];
+
         [Dictionary writeToFile:path atomically:YES];
         
         self.Actinic.value = [memValues.M821 integerValue];
@@ -269,7 +317,13 @@
         self.StdOffMin.text = [memValues.M807 stringValue];
         self.StdOnHour.text = [memValues.M804 stringValue];
         self.StdOnMin.text = [memValues.M805 stringValue];
+        self.DP1Hr.text = [memValues.M836 stringValue];
+        self.DP1Min.text = [memValues.M837 stringValue];
+        self.DP1Int.text = [memValues.M843 stringValue];
 
+        self.DP2Hr.text = [memValues.M838 stringValue];
+        self.DP2Min.text = [memValues.M839 stringValue];
+        self.DP2Int.text = [memValues.M845 stringValue];
         
 
         memValues = nil;
@@ -419,7 +473,7 @@
 {
     [super viewDidLoad];
     [self.scrollView setScrollEnabled:YES];
-    [self.scrollView setContentSize:CGSizeMake(320, 700)];     
+    [self.scrollView setContentSize:CGSizeMake(320, 900)];     
     self.scrollView.delegate = self;
     [self loadData];
     // Do any additional setup after loading the view from its nib.
@@ -465,6 +519,18 @@
     self.StdOnMinValue = nil;
     self.StdOffHourValue = nil;
     self.StdOffMinValue = nil;
+    self.DP1Hr = nil;
+    self.DP1Min = nil;
+    self.DP2Hr = nil;
+    self.DP2Min = nil;
+    self.DP1Int = nil;
+    self.DP2Int = nil;
+    self.DP1HrValue = nil;
+    self.DP1MinValue = nil;
+    self.DP2HrValue = nil;
+    self.DP2MinValue = nil;
+    self.DP1IntValue = nil;
+    self.DP2IntValue = nil;
 
 }
 
@@ -519,6 +585,18 @@
     [StdOffMinValue release];
     [StdOnHourValue release];
     [StdOnMinValue release];
+    [DP1Hr release];
+    [DP1Min release];
+    [DP1Int release];
+    [DP2Hr release];
+    [DP2Min release];
+    [DP2Int release];
+    [DP1HrValue release];
+    [DP1MinValue release];
+    [DP1IntValue release];
+    [DP2HrValue release];
+    [DP2MinValue release];
+    [DP2IntValue release];
     [super dealloc];
 
 }

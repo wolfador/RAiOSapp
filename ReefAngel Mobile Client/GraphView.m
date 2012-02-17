@@ -15,21 +15,19 @@
 
 @implementation GraphView
 
-@synthesize graphView, mGraphView;
+@synthesize mGraphView;
 @synthesize delegate = _delegate, historyData, historyDict, fullArray, timeArray, valueArray, dataString, timeString;
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
-	/*
-	self.graphView = [[S7GraphView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-	self.view = self.graphView;
-	self.graphView.dataSource = self;
-    */
+
     self.mGraphView = [[MultiTouchS7GraphView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	self.view = self.mGraphView;
 	self.mGraphView.dataSource = self;
     NSString *testString = [self.historyData substringFromIndex:1];
+    NSLog(@"%@", testString);
     NSString *test2String = [testString substringToIndex: [testString length] - 6 ];
+    NSLog(@"%@", test2String);
     NSString *newString = [test2String stringByReplacingOccurrencesOfString:@"[" withString:@""];
     NSString *newString2 = [newString stringByReplacingOccurrencesOfString:@"]," withString:@","];
      NSString *newString3 = [newString2 stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -41,13 +39,19 @@
     count = [self.fullArray count];
     
     for (i = 0; i < count; i++) {
-      //  NSLog (@"Element %i = %@", i, [self.fullArray objectAtIndex: i]);
-        self.dataString = [NSString stringWithString:[self.fullArray objectAtIndex:i]];
-        
-        //NSLog(@"%@", arrayString);
-        if ([self.dataString length] > 4) {
+
+        if ([[self.fullArray objectAtIndex:i] length] > 4) {
+            NSString *time2String = [[self.fullArray objectAtIndex:i] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+            NSString *time3String = [time2String substringToIndex: [time2String length] - 3 ];
             
-            [self.timeArray addObject:[self.fullArray objectAtIndex:i]];
+            NSDateFormatter *dateformat = [[[NSDateFormatter alloc]init]autorelease];
+            [dateformat setDateFormat:@"MM/dd h:mm a"];
+            NSInteger timestamp = [time3String integerValue];
+            NSDate *date = [NSDate dateWithTimeIntervalSince1970:timestamp];
+            NSString *stringDate = [dateformat stringFromDate:date];
+
+            
+            [self.timeArray addObject:stringDate];
         }
         else {
             
@@ -55,7 +59,6 @@
         }
     }
 
-	//[self.graphView reloadData];
     [self.mGraphView reloadData];
  
 }
@@ -283,6 +286,7 @@ toInterfaceOrientation duration:(NSTimeInterval)duration
     self.historyData = nil;
     self.historyDict = nil;
     self.timeString = nil;
+    self.fullArray = nil;
 }
 
 - (void)dealloc 
@@ -291,6 +295,10 @@ toInterfaceOrientation duration:(NSTimeInterval)duration
     [timeArray release];
     [valueArray release];
     [timeString release];
+    [fullArray release];
+    [historyData release];
+    [historyDict release];
+    [nav release];
 
 	
     [super dealloc];
@@ -307,24 +315,8 @@ toInterfaceOrientation duration:(NSTimeInterval)duration
 	/* An array of objects that will be further formatted to be displayed on the X-axis.
 	 The number of elements should be equal to the number of points you have for every plot. */
     
-    /*
-    int i;
-    int count;
-    count = [self.timeArray count];
     
-    for (i = 0; i < count; i++) {
-        self.timeString = [NSString stringWithString:[self.timeArray objectAtIndex:i]];
-       
-        NSString *time2String = [self.timeString stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-        NSString *time3String = [time2String substringToIndex: [time2String length] - 3 ];
-        NSInteger timestamp = [time3String integerValue];
-        NSDate *date = [NSDate dateWithTimeIntervalSince1970:timestamp];
-        NSTimeInterval timeZoneOffset = [[NSTimeZone systemTimeZone] secondsFromGMTForDate:date];
-        NSDate *localDate = [date dateByAddingTimeInterval:timeZoneOffset];
-        [self.timeArray replaceObjectAtIndex:i withObject:localDate];
-       
-    }
-  */
+  
     
 	return self.timeArray;
     

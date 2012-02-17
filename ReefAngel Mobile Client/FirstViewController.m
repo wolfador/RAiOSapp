@@ -165,7 +165,6 @@
     if (self.tempScale == nil) {
         self.tempScale = @"*F";
     }
-
     if ([self reachable] && self.directConnect != NULL) {
         if ([self.directConnect isEqualToString:@"ON"])
         {
@@ -177,7 +176,8 @@
             [self sendUpdate:self.wifiUrl];
         }
     }
-    else if ([self.enteredURL length] == 0 && [self.wifiUrl length] == 0)
+    
+    else if (self.directConnect == NULL && [self.wifiUrl length] == 0)
     {
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Settings" message:@"Enter RA URL in settings." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
 		[alertView show];
