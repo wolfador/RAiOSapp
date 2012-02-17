@@ -508,6 +508,9 @@
 			
 			//NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
 			//[dateFormatter setDateFormat:@"EEEE, MMMM d, yyyy"];
+            if (leftIndex < 0 || leftIndex > [xValues count] || leftIndex > [yValues count]) {
+                leftIndex = [yValues count] -1;
+            }
 			NSString * dateString = [NSString stringWithFormat:@"%@\n%@", [xValues objectAtIndex:leftIndex], [yValues objectAtIndex:leftIndex]];
 			[dateString drawInRect:dateRect withFont:_detailFont 
 					 lineBreakMode:UILineBreakModeTailTruncation alignment:UITextAlignmentCenter];
@@ -586,7 +589,9 @@
 
 			CGSize stringSize2 = [secondValueString sizeWithFont:_detailFont];	
 			[self displayBarBox:stringSize2 offsetY:offsetY+20 displayX:displayBarX c:c valueString:secondValueString i:1];
-
+            if (rightIndex > [xValues count] || rightIndex > [yValues count]) {
+                rightIndex = 1;
+            }
 			NSString * dateString = [NSString stringWithFormat:@"%@\n%@", [xValues objectAtIndex:leftIndex], [yValues objectAtIndex:leftIndex]];
             NSString * endDateString = [NSString stringWithFormat:@"%@\n%@", [xValues objectAtIndex:rightIndex], [yValues objectAtIndex:rightIndex]];
 			NSString * finalDateString = [NSString stringWithFormat:(@"%@ - %@"), dateString, endDateString];
