@@ -171,7 +171,6 @@
 
     NSString *received = [[[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding] autorelease];
        self.response = [NSString stringWithString:received];
-    
     if (self.response != NULL && [self.response length] > 5) {
         graphcontroller = [[GraphView alloc] initWithNibName:nil bundle:nil] ;
         graphcontroller.delegate = self;
