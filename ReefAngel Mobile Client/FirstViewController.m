@@ -361,6 +361,7 @@
         self.AIWvalue.text = [[params.AIW stringValue] stringByAppendingString:@"%"];
         self.AIBvalue.text = [[params.AIB stringValue] stringByAppendingString:@"%"];
         self.AIRBvalue.text = [[params.AIRB stringValue] stringByAppendingString:@"%"];
+        [self.scrollView setScrollEnabled:YES];
         [self.scrollView setContentSize:CGSizeMake(320, 600)]; 
 
     }
@@ -375,6 +376,7 @@
         self.AIWvalue.text = [[params.AIW stringValue] stringByAppendingString:@"%"];
         self.AIBvalue.text = [[params.AIB stringValue] stringByAppendingString:@"%"];
         self.AIRBvalue.text = [[params.AIRB stringValue] stringByAppendingString:@"%"];
+        [self.scrollView setScrollEnabled:YES];
         [self.scrollView setContentSize:CGSizeMake(320, 650)]; 
         
     }
@@ -429,6 +431,7 @@
         self.AIWvalue.text = [[params.AIW stringValue] stringByAppendingString:@"%"];
         self.AIBvalue.text = [[params.AIB stringValue] stringByAppendingString:@"%"];
         self.AIRBvalue.text = [[params.AIRB stringValue] stringByAppendingString:@"%"];
+        [self.scrollView setScrollEnabled:YES];
          [self.scrollView setContentSize:CGSizeMake(320, 650)]; 
     }
     else if([params.EM intValue] == 0)

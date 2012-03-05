@@ -43,6 +43,13 @@
 	NSDictionary  *restored = [NSDictionary dictionaryWithContentsOfFile: path];
     
     self.userName = [restored objectForKey:@"UserName"];
+    
+    if ([self.userName length] == 0) {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter UserName in Settings" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
+    }
+    
     self.url = @"forum.reefangel.com";
     self.basicURL = [NSString stringWithFormat:@"http://forum.reefangel.com/status/jsonp.aspx?id=%@", self.userName];
     

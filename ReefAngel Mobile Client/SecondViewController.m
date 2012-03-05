@@ -161,6 +161,11 @@
 		[alertView show];
 		[alertView release];
     }
+    else if ([self.url.text length] > 0 && !self.directConnect.on && [self.userName.text length] == 0) {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Enter UserName or Turn on DirectConnect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
+    }
     else
     {
 

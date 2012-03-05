@@ -11,7 +11,7 @@
 @implementation MemoryViewController
 @synthesize delegate = _delegate;
 @synthesize HeaterOn, HeaterOff, FeedTimer, Overheat, PWMD, PWMA, LCDTimer, wifiURL, enteredURL, fullURL, Actinic, Daylight, daylightValue, actinicValue, heaterOnValue, heaterOffValue, feedTimerValue, overheatValue, LCDTimerValue, sendUpdateMem, ForC, ForC2, ForC3, MHOnHour, MHOnMin, MHOffHour, MHOffMin, StdOnHour, StdOnMin, StdOffHour, StdOffMin, scrollView, MHOnHourValue, MHOnMinValue, MHOffHourValue, MHOffMinValue, StdOnHourValue, StdOnMinValue, StdOffHourValue, StdOffMinValue, tempScale, DP1Hr, DP1Min, DP2Hr, DP2Min, DP1Int, DP2Int;
-@synthesize DP1HrValue, DP1MinValue, DP2HrValue, DP2MinValue, DP1IntValue, DP2IntValue;
+@synthesize DP1HrValue, DP1MinValue, DP2HrValue, DP2MinValue, DP1IntValue, DP2IntValue, custom, customLoc;
 
 - (IBAction)done
 {
@@ -93,11 +93,18 @@
 	self.wifiURL = [restored objectForKey:@"URL"];
     self.enteredURL = [restored objectForKey:@"EnteredURL"];
     self.tempScale = [restored objectForKey:@"TempScale"];
+    
+    
     if (self.tempScale == nil) {
         self.tempScale = @"*F";
     }
-    
-    if ([self reachable]) {
+    if([[restored objectForKey:@"DirectConnect"] isEqualToString: @"OFF"])
+    {
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Turn on Direct Connect" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
+    }
+    else if ([self reachable]) {
         self.fullURL = [NSString stringWithFormat:@"%@ma ",self.wifiURL];
         [self sendUpdate:self.fullURL];
     }
@@ -233,34 +240,38 @@
         
         NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.DP1Hr.tag,self.DP1Hr.text];
         [self updateValue:updateMemory];
-        NSLog(@"%@", updateMemory);
+        
          }  
     if (![self.DP2HrValue isEqualToString:self.DP2Hr.text]) {
         NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.DP2Hr.tag,self.DP2Hr.text];
         [self updateValue:updateMemory];
-        NSLog(@"%@", updateMemory);
+        
     }
         if (![self.DP1MinValue isEqualToString:self.DP1Min.text]) {
             NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.DP1Min.tag,self.DP1Min.text];
             [self updateValue:updateMemory];
-            NSLog(@"%@", updateMemory);
+            
         }  
         if (![self.DP2MinValue isEqualToString:self.DP2Min.text]) {
             NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.DP2Min.tag,self.DP2Min.text];
             [self updateValue:updateMemory];   
-            NSLog(@"%@", updateMemory);
+            
         }
          if (![self.DP1IntValue isEqualToString:self.DP1Int.text]) {
              NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.DP1Int.tag,self.DP1Int.text];
              [self updateValue:updateMemory];
-             NSLog(@"%@", updateMemory);
+             
          }  
          if (![self.DP2IntValue isEqualToString:self.DP2Int.text]) {
              NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.DP2Int.tag,self.DP2Int.text];
              [self updateValue:updateMemory];    
-             NSLog(@"%@", updateMemory);
+             
          }         
-         
+         if ([self.custom.text length] > 0 && [self.customLoc.text length] > 0 ) {
+             NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.customLoc.text,self.custom.text];
+             [self updateValue:updateMemory];    
+           
+         }    
          
      }
 }
@@ -473,7 +484,7 @@
 {
     [super viewDidLoad];
     [self.scrollView setScrollEnabled:YES];
-    [self.scrollView setContentSize:CGSizeMake(320, 900)];     
+    [self.scrollView setContentSize:CGSizeMake(320, 1050)];     
     self.scrollView.delegate = self;
     [self loadData];
     // Do any additional setup after loading the view from its nib.
