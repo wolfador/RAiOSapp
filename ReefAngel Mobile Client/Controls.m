@@ -290,12 +290,15 @@
         NSRange range = [self.wifiUrl rangeOfString : http];
         if (range.location != NSNotFound) {
             NSString *testURL = [self.wifiUrl substringFromIndex:7];
-            self.proxy = [@"http://forum.reefangel.com/status/proxy.aspx?u=" stringByAppendingString:testURL];
+            //self.proxy = [@"http://forum.reefangel.com/status/proxy.aspx?u=" stringByAppendingString:testURL];
+             self.proxy = [@"http://" stringByAppendingString:testURL];
         }
         else
         {
-            self.proxy = [@"http://forum.reefangel.com/status/proxy.aspx?u=" stringByAppendingString:self.wifiUrl];
+            //self.proxy = [@"http://forum.reefangel.com/status/proxy.aspx?u=" stringByAppendingString:self.wifiUrl];
+            self.proxy = [@"http://" stringByAppendingString:self.wifiUrl];
         }
+        
     }
 
     self.relay1.text = [restored objectForKey:@"Relay1"];
@@ -497,6 +500,7 @@
     
 }
 
+
 -(NSString *) formatTemp : (NSNumber *)temp
 {   
     NSString *tempString = [temp stringValue];
@@ -553,9 +557,9 @@
     
     //2nd Relay Box
     
-    NSString *binary0String = [self buildRelayBinary:ra.R0];
-    NSString *binary0ONMask = [self buildRelayBinary:ra.RON0];
-    NSString *binary0OFFMask = [self buildRelayBinary:ra.ROFF0];
+    NSString *binary0String = [self buildRelayBinary:ra.R1];
+    NSString *binary0ONMask = [self buildRelayBinary:ra.RON1];
+    NSString *binary0OFFMask = [self buildRelayBinary:ra.ROFF1];
     ra.isRelay01Active = [[binary0String substringWithRange:NSMakeRange(0,1)] isEqualToString:@"1"] ? YES : NO;
     ra.isRelay02Active = [[binary0String substringWithRange:NSMakeRange(1,1)] isEqualToString:@"1"] ? YES : NO;
     ra.isRelay03Active = [[binary0String substringWithRange:NSMakeRange(2,1)] isEqualToString:@"1"] ? YES : NO;
