@@ -70,8 +70,8 @@
         self.temp1Value.text = [raParam.formattedTemp1 stringByAppendingString:self.tempScale];
         
         self.pHLabel.text    = raParam.formattedpH;
-        self.salinityValue.text = [raParam.SAL stringValue];
-
+        //self.salinityValue.text = [raParam.SAL stringValue];
+        self.salinityValue.text = raParam.formattedSal;
         
         raParam = nil;
         [raParam release];
@@ -475,7 +475,7 @@
     if([tempString length] >= 3)
     {
         
-        retString = [[[tempString substringToIndex:[tempString length]-3] stringByAppendingString:@"."] stringByAppendingString:[tempString substringFromIndex:[tempString length]-3]];  
+        retString = [[[tempString substringToIndex:[tempString length]-1] stringByAppendingString:@"."] stringByAppendingString:[tempString substringFromIndex:[tempString length]-1]];  
         return retString;
     }
     else if([tempString length] == 1)
