@@ -25,9 +25,7 @@
 	self.view = self.mGraphView;
 	self.mGraphView.dataSource = self;
     NSString *testString = [self.historyData substringFromIndex:1];
-    NSLog(@"%@", testString);
     NSString *test2String = [testString substringToIndex: [testString length] - 6 ];
-    NSLog(@"%@", test2String);
     NSString *newString = [test2String stringByReplacingOccurrencesOfString:@"[" withString:@""];
     NSString *newString2 = [newString stringByReplacingOccurrencesOfString:@"]," withString:@","];
      NSString *newString3 = [newString2 stringByReplacingOccurrencesOfString:@" " withString:@""];
