@@ -65,8 +65,8 @@
     if ([self.t3 length] == 0) {
         self.t3 = @"T3";
     }
-    self.probes = [NSArray arrayWithObjects: self.t1, self.t2, self.t3, @"pH", @"AIW", @"AIB", @"AIRB", nil];
-    
+    self.probes = [NSArray arrayWithObjects: self.t1, self.t2, self.t3, @"pH", @"SAL", @"ORP", @"PWMA", @"PWMD", @"AIW", @"AIB", @"AIRB", @"RFW", @"RFRB", @"RFR", @"RFG", @"RFB", @"RFI", @"RFM", @"RFS", @"RFD", nil];
+
 }
 
 -(void) pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component
@@ -74,7 +74,10 @@
     if (component == 0) {
         self.selected = [self.probes objectAtIndex:row];
     }
+    else
+    {
     self.daysToGraph = [self.days objectAtIndex:row];
+    }
 }
 
 -(NSInteger) numberOfComponentsInPickerView:(UIPickerView *) probePicker
@@ -87,9 +90,10 @@
     if (component == 0) {
         return [self.probes count];
     }
+    else
+    {
     return [self.days count];
-
-    
+    }
 }
 
 -(NSString *) pickerView:(UIPickerView *) probePicker titleForRow:(NSInteger)row forComponent:(NSInteger)component
@@ -97,7 +101,11 @@
      if (component == 0) {
     return [self.probes objectAtIndex:row];
      }
-    return [self.days objectAtIndex:row];
+    else
+    {
+        return [self.days objectAtIndex:row];
+    }
+    
 }
 
 - (void)graphViewDidFinish:(GraphView *)controller
@@ -181,7 +189,7 @@
     }
         else
         {
-            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Unable to download" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+            UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No Data Available" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
             [alertView show];
             [alertView release];
         }

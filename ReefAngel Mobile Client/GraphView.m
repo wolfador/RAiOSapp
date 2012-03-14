@@ -89,6 +89,7 @@
     self.mGraphView.xValuesFormatter = dateFormatter;
 	       
 	[numberFormatter release];
+    [dateFormatter release];
 	
 	self.mGraphView.backgroundColor = [UIColor whiteColor];
 	
@@ -285,6 +286,8 @@ toInterfaceOrientation duration:(NSTimeInterval)duration
     self.historyDict = nil;
     self.timeString = nil;
     self.fullArray = nil;
+    self.view = nil;
+    
 }
 
 - (void)dealloc 
