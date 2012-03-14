@@ -411,7 +411,7 @@
 	
 	NSArray *yValues = [self.dataSource graphView:self yValuesForPlot:0];		// User interaction only currently happens on the first plot
 	
-	CGFloat rightBounds = (stepX * ([yValues count]-1)) + offsetX + 10.0f;		//Add 7.0f for touch tolerance
+	CGFloat rightBounds = (stepX * ([yValues count]-2)) + offsetX + 10.0f;		//Add 7.0f for touch tolerance
 	
 	// Draw the left and right bars, Make sure that they are within the bounds of the graph
 	if(leftLineX != -1 && leftLineX >= offsetX && leftLineX <= rightBounds){	
