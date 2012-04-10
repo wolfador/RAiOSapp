@@ -40,6 +40,7 @@
 		740EBAE814510CC800D02ADF /* Controls.xib in Resources */ = {isa = PBXBuildFile; fileRef = 740EBAE714510CC800D02ADF /* Controls.xib */; };
 		740EBAFB14525ADA00D02ADF /* Memdata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 740EBAFA14525ADA00D02ADF /* Memdata.plist */; };
 		742118F41453705F007AB4BC /* dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 742118F31453705F007AB4BC /* dashboard.png */; };
+		74525CDD1533C5FD0038FC3E /* History.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74525CDC1533C5FD0038FC3E /* History.xib */; };
 		7460CC261460DE2F009CB7E2 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7460CC251460DE2E009CB7E2 /* Default-Landscape~ipad.png */; };
 		746D0FE1145F78AF0000FAAB /* MyiPadTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746D0FE0145F78AF0000FAAB /* MyiPadTabBarController.m */; };
 		746D0FE3145F7D1A0000FAAB /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 746D0FE2145F7D1A0000FAAB /* Default-Portrait~ipad.png */; };
@@ -159,6 +160,7 @@
 		740EBAE714510CC800D02ADF /* Controls.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Controls.xib; path = "ReefAngel Mobile Client/Controls.xib"; sourceTree = "<group>"; };
 		740EBAFA14525ADA00D02ADF /* Memdata.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Memdata.plist; sourceTree = "<group>"; };
 		742118F31453705F007AB4BC /* dashboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dashboard.png; sourceTree = "<group>"; };
+		74525CDC1533C5FD0038FC3E /* History.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = History.xib; path = "Resources-iPad/ReefAngel Mobile Client/History.xib"; sourceTree = "<group>"; };
 		7460CC251460DE2E009CB7E2 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		746D0FDF145F78AF0000FAAB /* MyiPadTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyiPadTabBarController.h; sourceTree = "<group>"; };
 		746D0FE0145F78AF0000FAAB /* MyiPadTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyiPadTabBarController.m; sourceTree = "<group>"; };
@@ -398,6 +400,7 @@
 				746D0FE2145F7D1A0000FAAB /* Default-Portrait~ipad.png */,
 				746D0FE0145F78AF0000FAAB /* MyiPadTabBarController.m */,
 				74EAC8E6145F3511006C9A00 /* MainWindow.xib */,
+				74525CDC1533C5FD0038FC3E /* History.xib */,
 				74EAC8E8145F3511006C9A00 /* FirstView.xib */,
 				74EAC8EA145F3511006C9A00 /* SecondView.xib */,
 				74EAC8EC145F3511006C9A00 /* MemoryViewController.xib */,
@@ -532,6 +535,7 @@
 				746D0FE3145F7D1A0000FAAB /* Default-Portrait~ipad.png in Resources */,
 				7460CC261460DE2F009CB7E2 /* Default-Landscape~ipad.png in Resources */,
 				740A7193149AE77E00846342 /* History.xib in Resources */,
+				74525CDD1533C5FD0038FC3E /* History.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -720,7 +724,7 @@
 				GCC_PREFIX_HEADER = "ReefAngel Mobile Client/ReefAngel Mobile Client-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "ReefAngel Mobile Client/ReefAngel Mobile Client-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -742,7 +746,7 @@
 				GCC_PREFIX_HEADER = "ReefAngel Mobile Client/ReefAngel Mobile Client-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "ReefAngel Mobile Client/ReefAngel Mobile Client-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
