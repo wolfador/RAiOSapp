@@ -69,8 +69,8 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 				<bool key="IBUIHorizontal">NO</bool>
-				<object class="IBUIViewController" key="IBUISelectedViewController" id="241043203">
-					<object class="IBUITabBarItem" key="IBUITabBarItem" id="155667162">
+				<object class="IBUIViewController" key="IBUISelectedViewController" id="643133647">
+					<object class="IBUITabBarItem" key="IBUITabBarItem" id="848071121">
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<reference key="IBUITabBar" ref="795333663"/>
 						<int key="IBUISystemItemIdentifier">6</int>
@@ -128,7 +128,7 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<bool key="IBUIHorizontal">NO</bool>
 					</object>
-					<reference ref="241043203"/>
+					<reference ref="643133647"/>
 					<object class="IBUIViewController" id="268481961">
 						<object class="IBUITabBarItem" key="IBUITabBarItem" id="807309489">
 							<string key="IBUITitle">Settings</string>
@@ -165,10 +165,10 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<reference ref="765670903"/>
 						<reference ref="242434413"/>
-						<reference ref="155667162"/>
+						<reference ref="848071121"/>
 						<reference ref="807309489"/>
 					</object>
-					<reference key="IBUISelectedItem" ref="155667162"/>
+					<reference key="IBUISelectedItem" ref="848071121"/>
 				</object>
 			</object>
 		</object>
@@ -237,7 +237,7 @@
 							<reference ref="1024858337"/>
 							<reference ref="268481961"/>
 							<reference ref="400950440"/>
-							<reference ref="241043203"/>
+							<reference ref="643133647"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Tab Bar Controller</string>
@@ -296,17 +296,17 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">131</int>
-						<reference key="object" ref="241043203"/>
+						<reference key="object" ref="643133647"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="155667162"/>
+							<reference ref="848071121"/>
 						</object>
 						<reference key="parent" ref="1034742383"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">132</int>
-						<reference key="object" ref="155667162"/>
-						<reference key="parent" ref="241043203"/>
+						<reference key="object" ref="848071121"/>
+						<reference key="parent" ref="643133647"/>
 					</object>
 				</object>
 			</object>
