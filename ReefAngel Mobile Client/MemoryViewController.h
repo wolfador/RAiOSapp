@@ -35,6 +35,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *ForC, *ForC2, *ForC3;
 - (IBAction)done;
 -(IBAction) save;
+-(IBAction) updateTime;
 -(void)sendUpdate:(NSString *) controllerUrl;
 -(void) loadData;
 -(void)UpdateUI:(MEM *)memValues;

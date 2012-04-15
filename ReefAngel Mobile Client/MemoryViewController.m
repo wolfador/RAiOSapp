@@ -116,6 +116,28 @@
     }
 
 }
+-(IBAction)updateTime
+{
+    //http://CONTROLLER_IP:2000/d0930,0808,11
+    /*
+     <D>
+     <HR>11</HR>
+     <MIN>25</MIN>
+     <MON>1</MON>
+     <DAY>23</DAY>
+     <YR>2000</YR>
+     </D>
+     */
+    NSDate* sourceDate = [NSDate date];
+    
+    NSDateFormatter *dateformat = [[[NSDateFormatter alloc]init]autorelease];
+    //[dateformat setDateFormat:@"MM/dd/yyyy h:mm:ss a"];
+    [dateformat setDateFormat:@"HHmm,MMdd,yy"];
+    NSString *date2 = [dateformat stringFromDate:sourceDate];
+    NSString *updateTime = [NSString stringWithFormat:@"%@d%@ ",self.wifiURL,date2];
+    [self sendUpdate:updateTime];
+    
+}
 
 -(IBAction) save
 {
@@ -417,7 +439,9 @@
     NSString *memData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSRange range = [memData rangeOfString:@">OK</" options:NSCaseInsensitiveSearch];
     if( range.location != NSNotFound ) {
-        
+        UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Updated" message:@"Mem updated" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+		[alertView show];
+		[alertView release];
     }
     else
     {
@@ -484,7 +508,7 @@
 {
     [super viewDidLoad];
     [self.scrollView setScrollEnabled:YES];
-    [self.scrollView setContentSize:CGSizeMake(320, 1050)];     
+    [self.scrollView setContentSize:CGSizeMake(320, 1250)];     
     self.scrollView.delegate = self;
     [self loadData];
     // Do any additional setup after loading the view from its nib.
