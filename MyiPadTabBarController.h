@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MyiPadTabBarController : UITabBarController {
-	
 }
+
 @end
