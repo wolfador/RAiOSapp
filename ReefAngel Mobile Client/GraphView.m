@@ -15,15 +15,23 @@
 
 @implementation GraphView
 
-@synthesize mGraphView;
+@synthesize mGraphView, nonTouchGraphView;
 @synthesize delegate = _delegate, historyData, historyDict, fullArray, timeArray, valueArray, dataString, timeString;
 
 // Implement loadView to create a view hierarchy programmatically, without using a nib.
 - (void)loadView {
-
-    self.mGraphView = [[MultiTouchS7GraphView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-	self.view = self.mGraphView;
-	self.mGraphView.dataSource = self;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) 
+	{
+        self.nonTouchGraphView = [[S7GraphView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        self.view = self.nonTouchGraphView;
+        self.nonTouchGraphView.dataSource = self;
+    }
+    else {
+        self.mGraphView = [[MultiTouchS7GraphView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        self.view = self.mGraphView;
+        self.mGraphView.dataSource = self;
+    }
+    
     NSString *testString = [self.historyData substringFromIndex:1];
     NSString *test2String = [testString substringToIndex: [testString length] - 6 ];
     NSString *newString = [test2String stringByReplacingOccurrencesOfString:@"[" withString:@""];
@@ -56,9 +64,23 @@
             [self.valueArray addObject:[self.fullArray objectAtIndex:i]];
         }
     }
-
-    [self.mGraphView reloadData];
- 
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) 
+	{
+        [self.nonTouchGraphView reloadData];
+    }
+    else {
+        [self.mGraphView reloadData];
+    }
+    
+ /*
+  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) 
+  {
+  
+  }
+  else {
+  
+  }
+  */
 }
 
 -(IBAction) keyButton
@@ -80,37 +102,56 @@
 	[numberFormatter setMinimumFractionDigits:0];
 	[numberFormatter setMaximumFractionDigits:2];
 	
-	self.mGraphView.yValuesFormatter = numberFormatter;
+    self.view.autoresizesSubviews = YES;
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	
     
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
     [dateFormatter setDateStyle:NSDateFormatterNoStyle];
-    
-    self.mGraphView.xValuesFormatter = dateFormatter;
-	       
-	[numberFormatter release];
-    [dateFormatter release];
-	
-	self.mGraphView.backgroundColor = [UIColor whiteColor];
-	
-	self.mGraphView.drawAxisX = NO;
-	self.mGraphView.drawAxisY = YES;
-	self.mGraphView.drawGridX = YES;
-	self.mGraphView.drawGridY = YES;
-    
-	
-	self.mGraphView.xValuesColor = [UIColor blackColor];
-	self.mGraphView.yValuesColor = [UIColor blackColor];
-	
-	self.mGraphView.gridXColor = [UIColor blackColor];
-	self.mGraphView.gridYColor = [UIColor blackColor];
-	
 		
 	//update the data:
     
     
 	[self.mGraphView reloadData];
-    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) 
+    {
+        self.nonTouchGraphView.yValuesFormatter = numberFormatter;
+        self.nonTouchGraphView.xValuesFormatter = dateFormatter;
+        self.nonTouchGraphView.backgroundColor = [UIColor whiteColor];
+        
+        self.nonTouchGraphView.drawAxisX = NO;
+        self.nonTouchGraphView.drawAxisY = YES;
+        self.nonTouchGraphView.drawGridX = YES;
+        self.nonTouchGraphView.drawGridY = YES;
+        
+        
+        self.nonTouchGraphView.xValuesColor = [UIColor blackColor];
+        self.nonTouchGraphView.yValuesColor = [UIColor blackColor];
+        
+        self.nonTouchGraphView.gridXColor = [UIColor blackColor];
+        self.nonTouchGraphView.gridYColor = [UIColor blackColor];
+
+    }
+    else {
+        self.mGraphView.yValuesFormatter = numberFormatter;
+        self.mGraphView.xValuesFormatter = dateFormatter;
+        self.mGraphView.backgroundColor = [UIColor whiteColor];
+        
+        self.mGraphView.drawAxisX = NO;
+        self.mGraphView.drawAxisY = YES;
+        self.mGraphView.drawGridX = YES;
+        self.mGraphView.drawGridY = YES;
+        
+        
+        self.mGraphView.xValuesColor = [UIColor blackColor];
+        self.mGraphView.yValuesColor = [UIColor blackColor];
+        
+        self.mGraphView.gridXColor = [UIColor blackColor];
+        self.mGraphView.gridYColor = [UIColor blackColor];
+    }
+    [numberFormatter release];
+    [dateFormatter release];
 	
 	//determine if device is iPad to setup frame for NavBar
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) 
@@ -148,8 +189,14 @@
     item.leftBarButtonItem = leftButton;
 	[nav pushNavigationItem:item animated:NO ];
 	[item autorelease];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) 
+    {
+        [self.nonTouchGraphView addSubview:nav];
+    }
+    else {
+        [self.mGraphView addSubview:nav];
+    }
 	
-	[self.mGraphView addSubview:nav];
 	
 }
 
@@ -228,15 +275,27 @@
  - (void)viewWillAppear:(BOOL)animated 
 {
  [super viewWillAppear:animated];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) 
+    {
+        [self.nonTouchGraphView reloadData];
+    }
+    else {
+        [self.mGraphView reloadData];
+    }
 	 
-	 [self.mGraphView reloadData];
  }
 
 - (void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)
 toInterfaceOrientation duration:(NSTimeInterval)duration 
 {
 	// Change graphview.frame to make it a litle smaller
-	[self.mGraphView reloadData];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) 
+    {
+        [self.nonTouchGraphView reloadData];
+    }
+    else {
+        [self.mGraphView reloadData];
+    }
 	
 	//resize Navbar on rotation
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) 
@@ -261,12 +320,17 @@ toInterfaceOrientation duration:(NSTimeInterval)duration
 }
 
  // Override to allow orientations other than the default portrait orientation.
- - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
 {
- // Return YES for supported orientations.
-	 return YES;
- }
-
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        
+        return (interfaceOrientation == UIInterfaceOrientationLandscapeLeft || interfaceOrientation == UIInterfaceOrientationLandscapeRight);
+    }
+    else
+    {
+        return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+	}
+}
 
 - (void)didReceiveMemoryWarning 
 {
@@ -293,6 +357,7 @@ toInterfaceOrientation duration:(NSTimeInterval)duration
 - (void)dealloc 
 {
 	[mGraphView release];
+    [nonTouchGraphView release];
     [timeArray release];
     [valueArray release];
     [timeString release];

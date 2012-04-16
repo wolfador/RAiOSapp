@@ -18,6 +18,7 @@
 
 @interface GraphView : UIViewController <S7GraphViewDataSource, UIActionSheetDelegate> {
     MultiTouchS7GraphView *mGraphView;
+    S7GraphView *nonTouchGraphView;
 	int keyIndex;
 	int valueCount;
 	UINavigationBar *nav;
@@ -34,6 +35,7 @@
 }
 @property (assign, nonatomic) IBOutlet id <GraphViewDelegate> delegate;
 @property (nonatomic, retain) MultiTouchS7GraphView *mGraphView;
+@property (nonatomic, retain) S7GraphView *nonTouchGraphView;
 @property (nonatomic, retain) NSString *historyData, *dataString, *timeString;
 @property (nonatomic, retain) NSMutableDictionary *historyDict;
 @property (nonatomic, retain) NSArray *fullArray;
