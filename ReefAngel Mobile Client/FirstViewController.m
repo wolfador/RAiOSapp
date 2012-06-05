@@ -13,7 +13,7 @@
 @synthesize temp1Label, temp2Label, temp3Label, pHLabel;
 @synthesize wifiUrl, fullUrl,lastUpdatedLabel, current_version, directConnect;
 @synthesize enteredURL, response, tempScale, salinityLabel, salinityValue, temp2Value, temp3Value, temp1Value;
-@synthesize AIWvalue, AIBvalue, AIRBvalue, scrollView, AIWLabel, AIBLabel, AIRBLabel, receivedData;
+@synthesize AIWvalue, AIBvalue, AIRBvalue, scrollView, AIWLabel, AIBLabel, AIRBLabel, receivedData, binaryEM;
 
 - (void)viewDidLoad
 {
@@ -445,7 +445,43 @@
         self.salinityLabel.hidden = YES;
         self.salinityValue.hidden = YES;
     }
+/*
+ EM Bits
+ // 00011111
+ 
+ // ||||||||_ PWM Expansion
+ 
+ // |||||||__ RF Expansion
+ 
+ // ||||||___ AI Expansion
+ 
+ // |||||____ Sal Expansion
+ 
+ // ||||_____ ORP Expansion
+ 
+ 
+ // |||______ Unused
+ 
+ // ||_______ Unused
+ 
+ // |________ Unused
+ 
 
+*/
+    
+    if (![self.directConnect isEqualToString:@"ON"])
+    {
+    
+    NSInteger theNumber = [params.EM intValue];
+    NSMutableString *str = [NSMutableString string];
+    for(NSInteger numberCopy = theNumber; numberCopy > 0; numberCopy >>= 1)
+    {
+        // Prepend "0" or "1", depending on the bit
+        [str insertString:((numberCopy & 1) ? @"1" : @"0") atIndex:0];
+    }
+    self.binaryEM = [NSString stringWithString:str];
+   // NSLog(@"Binary version: %@", self.binaryEM);
+    }
 }
 
 -(NSString *) formatTemp : (NSNumber *)temp
@@ -555,6 +591,7 @@
     self.AIRBLabel = nil;
     self.AIWLabel = nil;
     self.receivedData = nil;
+    self.binaryEM = nil;
     [super viewDidUnload];
 }
 
@@ -585,7 +622,7 @@
     [receivedData release];
     [raParam release];
     [xmlParser release];
-    
+    [binaryEM release];
     [super dealloc];
     
 }

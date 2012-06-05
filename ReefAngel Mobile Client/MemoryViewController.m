@@ -11,7 +11,7 @@
 @implementation MemoryViewController
 @synthesize delegate = _delegate;
 @synthesize HeaterOn, HeaterOff, FeedTimer, Overheat, PWMD, PWMA, LCDTimer, wifiURL, enteredURL, fullURL, Actinic, Daylight, daylightValue, actinicValue, heaterOnValue, heaterOffValue, feedTimerValue, overheatValue, LCDTimerValue, sendUpdateMem, ForC, ForC2, ForC3, MHOnHour, MHOnMin, MHOffHour, MHOffMin, StdOnHour, StdOnMin, StdOffHour, StdOffMin, scrollView, MHOnHourValue, MHOnMinValue, MHOffHourValue, MHOffMinValue, StdOnHourValue, StdOnMinValue, StdOffHourValue, StdOffMinValue, tempScale, DP1Hr, DP1Min, DP2Hr, DP2Min, DP1Int, DP2Int;
-@synthesize DP1HrValue, DP1MinValue, DP2HrValue, DP2MinValue, DP1IntValue, DP2IntValue, custom, customLoc;
+@synthesize DP1HrValue, DP1MinValue, DP2HrValue, DP2MinValue, DP1IntValue, DP2IntValue, custom, customLoc, rfMode, rfDuration, rfSpeed, rfModeValue, rfSpeedValue, rfDurationValue;
 
 - (IBAction)done
 {
@@ -41,6 +41,13 @@
     [self.PWMD resignFirstResponder];
     [self.PWMA resignFirstResponder];
     [self.LCDTimer resignFirstResponder];
+    [self.customLoc resignFirstResponder];
+    [self.custom resignFirstResponder];
+    [self.rfSpeed resignFirstResponder];
+    [self.rfMode resignFirstResponder];
+    [self.rfDuration resignFirstResponder];
+    
+    
 	return YES;
 }
 
@@ -53,6 +60,11 @@
     [self.PWMD resignFirstResponder];
     [self.PWMA resignFirstResponder];
     [self.LCDTimer resignFirstResponder];
+    [self.customLoc resignFirstResponder];
+    [self.custom resignFirstResponder];
+    [self.rfSpeed resignFirstResponder];
+    [self.rfMode resignFirstResponder];
+    [self.rfDuration resignFirstResponder];
 }
 
 - (IBAction) sliderValueChanged:(UISlider *)sender
@@ -169,6 +181,9 @@
     self.DP2HrValue = [restored objectForKey:@"DP2Hr"];
     self.DP2MinValue = [restored objectForKey:@"DP2Min"];
     self.DP2IntValue = [restored objectForKey:@"DP2Int"];
+    self.rfDurationValue = [restored objectForKey:@"RFDuration"];
+    self.rfModeValue = [restored objectForKey:@"RFMode"];
+    self.rfSpeedValue = [restored objectForKey:@"RFSpeed"];
     
     
      if ([self reachable]) {
@@ -288,14 +303,31 @@
              NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.DP2Int.tag,self.DP2Int.text];
              [self updateValue:updateMemory];    
              
-         }         
-         if ([self.custom.text length] > 0 && [self.customLoc.text length] > 0 ) {
-             NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.customLoc.text,self.custom.text];
+         }
+         if (![self.rfModeValue isEqualToString:self.rfMode.text]) {
+             NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.rfMode.tag,self.rfMode.text];
+             [self updateValue:updateMemory];
+             
+         } 
+         if (![self.rfSpeedValue isEqualToString:self.rfSpeed.text]) {
+             NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.rfSpeed.tag,self.rfSpeed.text];
              [self updateValue:updateMemory];    
-           
+             
+         } 
+         if (![self.rfDurationValue isEqualToString:self.rfDuration.text]) {
+             NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.rfDuration.tag,self.rfDuration.text];
+             [self updateValue:updateMemory];    
+             
+         } 
+         if ([self.custom.text length] > 0 && [self.customLoc.text length] > 0 ) {
+             NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,[self.customLoc.text intValue],self.custom.text];
+             [self updateValue:updateMemory];
+             self.custom.text = @"";
+             self.customLoc.text = @"";
          }    
          
      }
+    [self loadData];
 }
 
 -(void)UpdateUI:(MEM*)mem
@@ -333,6 +365,18 @@
         [Dictionary setObject: [memValues.M838 stringValue] forKey:@"DP2Hr"];
         [Dictionary setObject: [memValues.M839 stringValue] forKey:@"DP2Min"];
         [Dictionary setObject: [memValues.M845 stringValue] forKey:@"DP2Int"];
+        
+        if ([memValues.M857 stringValue] != nil && [memValues.M855 stringValue] != nil && [memValues.M856 stringValue] != nil) {
+            [Dictionary setObject: [memValues.M855 stringValue] forKey:@"RFMode"];
+            [Dictionary setObject: [memValues.M856 stringValue] forKey:@"RFSpeed"];
+            [Dictionary setObject: [memValues.M857 stringValue] forKey:@"RFDuration"];
+            
+        }
+        else {
+            [Dictionary setObject: self.rfDuration.text forKey:@"RFMode"];
+            [Dictionary setObject: self.rfMode.text forKey:@"RFSpeed"];
+            [Dictionary setObject: self.rfSpeed.text forKey:@"RFDuration"];
+        }
 
         [Dictionary writeToFile:path atomically:YES];
         
@@ -357,6 +401,10 @@
         self.DP2Hr.text = [memValues.M838 stringValue];
         self.DP2Min.text = [memValues.M839 stringValue];
         self.DP2Int.text = [memValues.M845 stringValue];
+        
+        self.rfDuration.text = [memValues.M857 stringValue];
+        self.rfSpeed.text = [memValues.M856 stringValue];
+        self.rfMode.text = [memValues.M855 stringValue];
         
 
         memValues = nil;
@@ -566,6 +614,12 @@
     self.DP2MinValue = nil;
     self.DP1IntValue = nil;
     self.DP2IntValue = nil;
+    self.rfMode = nil;
+    self.rfSpeed = nil;
+    self.rfDuration = nil;
+    self.rfModeValue = nil;
+    self.rfSpeedValue = nil;
+    self.rfDurationValue = nil;
 
 }
 
