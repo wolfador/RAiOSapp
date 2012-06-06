@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "XmlParser.h"
 #import "Reachability.h"
-#import "MemValues.h"
+//#import "MemValues.h"
 @class MemoryViewController;
 
 @protocol MemoryViewControllerDelegate
@@ -18,7 +18,7 @@
 
 @interface MemoryViewController : UIViewController <UITextFieldDelegate, UIScrollViewDelegate>{
     XmlParser *xmlParser;
-    MEM *memValues;
+    //MEM *memValues;
     IBOutlet UITextField *HeaterOn, *HeaterOff, *FeedTimer, *Overheat, *PWMD, *PWMA, *LCDTimer, *MHOnHour, *MHOnMin, *MHOffHour, *MHOffMin, *StdOnHour, *StdOnMin, *StdOffHour, *StdOffMin, *DP1Hr, *DP1Min, *DP2Hr, *DP2Min, *DP1Int, *DP2Int, *customLoc, *custom, *rfMode, *rfSpeed, *rfDuration;  
     NSString *wifiURL, *enteredUrl, *fullURL, *tempScale;
     IBOutlet UISlider *Actinic, *Daylight;
@@ -26,6 +26,7 @@
     IBOutlet UILabel *ForC, *ForC2, *ForC3;
     NSMutableArray *paramArray;
     IBOutlet UIScrollView *scrollView;
+    NSMutableDictionary *memLocations;
 }
 
 @property (assign, nonatomic) IBOutlet id <MemoryViewControllerDelegate> delegate;
@@ -38,11 +39,12 @@
 -(IBAction) updateTime;
 -(void)sendUpdate:(NSString *) controllerUrl;
 -(void) loadData;
--(void)UpdateUI:(MEM *)memValues;
+-(void)UpdatingUI;
+//-(void)UpdateUI:(MEM *)memValues;
 -(BOOL)reachable;
 -(void)updateValue:(NSString *) controllerUrl;
 - (IBAction) sliderValueChanged:(UISlider *)sender;
 -(IBAction)slideDoneChanging:(UISlider *)sender;
--(NSString *) formatTemp : (NSNumber *)temp;
+-(NSString *) formatTemp : (NSString *)temp;
 @property (nonatomic, retain) IBOutlet UIScrollView *scrollView;
 @end

@@ -46,7 +46,12 @@
     [self.rfSpeed resignFirstResponder];
     [self.rfMode resignFirstResponder];
     [self.rfDuration resignFirstResponder];
-    
+    [self.DP1Hr resignFirstResponder];
+    [self.DP1Int resignFirstResponder];
+    [self.DP1Min resignFirstResponder];
+    [self.DP2Hr resignFirstResponder];
+    [self.DP2Int resignFirstResponder];
+    [self.DP2Min resignFirstResponder];
     
 	return YES;
 }
@@ -65,6 +70,12 @@
     [self.rfSpeed resignFirstResponder];
     [self.rfMode resignFirstResponder];
     [self.rfDuration resignFirstResponder];
+    [self.DP1Hr resignFirstResponder];
+    [self.DP1Int resignFirstResponder];
+    [self.DP1Min resignFirstResponder];
+    [self.DP2Hr resignFirstResponder];
+    [self.DP2Int resignFirstResponder];
+    [self.DP2Min resignFirstResponder];
 }
 
 - (IBAction) sliderValueChanged:(UISlider *)sender
@@ -93,6 +104,7 @@
          [self updateValue:self.sendUpdateMem];
                  
     }
+    [self loadData];
 }
 
 -(void) loadData
@@ -106,7 +118,6 @@
     self.enteredURL = [restored objectForKey:@"EnteredURL"];
     self.tempScale = [restored objectForKey:@"TempScale"];
     
-    
     if (self.tempScale == nil) {
         self.tempScale = @"*F";
     }
@@ -117,7 +128,8 @@
 		[alertView release];
     }
     else if ([self reachable]) {
-        self.fullURL = [NSString stringWithFormat:@"%@ma ",self.wifiURL];
+        self.fullURL = [NSString stringWithFormat:@"%@mr ",self.wifiURL];
+        //self.fullURL = [NSString stringWithFormat:@"%@ma ",self.wifiURL];
         [self sendUpdate:self.fullURL];
     }
     else
@@ -126,8 +138,8 @@
 		[alertView show];
 		[alertView release];
     }
-
 }
+
 -(IBAction)updateTime
 {
     //http://CONTROLLER_IP:2000/d0930,0808,11
@@ -181,9 +193,9 @@
     self.DP2HrValue = [restored objectForKey:@"DP2Hr"];
     self.DP2MinValue = [restored objectForKey:@"DP2Min"];
     self.DP2IntValue = [restored objectForKey:@"DP2Int"];
-    self.rfDurationValue = [restored objectForKey:@"RFDuration"];
-    self.rfModeValue = [restored objectForKey:@"RFMode"];
-    self.rfSpeedValue = [restored objectForKey:@"RFSpeed"];
+    //self.rfDurationValue = [restored objectForKey:@"RFDuration"];
+    //self.rfModeValue = [restored objectForKey:@"RFMode"];
+    //self.rfSpeedValue = [restored objectForKey:@"RFSpeed"];
     
     
      if ([self reachable]) {
@@ -304,17 +316,17 @@
              [self updateValue:updateMemory];    
              
          }
-         if (![self.rfModeValue isEqualToString:self.rfMode.text]) {
+         if (self.rfMode.text.length > 0) {
              NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.rfMode.tag,self.rfMode.text];
              [self updateValue:updateMemory];
              
          } 
-         if (![self.rfSpeedValue isEqualToString:self.rfSpeed.text]) {
+         if (self.rfSpeed.text.length > 0) {
              NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.rfSpeed.tag,self.rfSpeed.text];
              [self updateValue:updateMemory];    
              
          } 
-         if (![self.rfDurationValue isEqualToString:self.rfDuration.text]) {
+         if (self.rfDuration.text.length > 0) {
              NSString *updateMemory = [NSString stringWithFormat:@"%@mb%i,%@ ",self.wifiURL,self.rfDuration.tag,self.rfDuration.text];
              [self updateValue:updateMemory];    
              
@@ -330,8 +342,12 @@
     [self loadData];
 }
 
+/*
 -(void)UpdateUI:(MEM*)mem
 {
+    
+    
+    
     if(memValues)
     {
         
@@ -342,16 +358,38 @@
 		NSMutableDictionary *Dictionary = [NSMutableDictionary dictionary];
 		NSDictionary  *restored = [NSDictionary dictionaryWithContentsOfFile: path];
 		[Dictionary addEntriesFromDictionary:restored];
-        
-        
         [Dictionary setObject: self.HeaterOn.text forKey: @"HeaterOn"];
-        [Dictionary setObject: [memValues.M821 stringValue] forKey: @"Actinic"];
-        [Dictionary setObject: [memValues.M820 stringValue] forKey: @"Daylight"];
         [Dictionary setObject: self.HeaterOff.text forKey: @"HeaterOff"];
-        [Dictionary setObject: [memValues.M814 stringValue] forKey: @"FeedTimer"];
-        [Dictionary setObject: [memValues.M816 stringValue] forKey: @"LCDTimer"];
         [Dictionary setObject: self.Overheat.text forKey: @"Overheat"];
-        [Dictionary setObject: [memValues.M802 stringValue] forKey:@"MHOffHour"];
+        [Dictionary setObject: self.MHOffHour.text forKey:@"MHOffHour"];
+        [Dictionary setObject: self.PWMA.text forKey: @"Actinic"];
+        [Dictionary setObject: self.PWMD.text forKey: @"Daylight"];
+        [Dictionary setObject: self.FeedTimer.text forKey: @"FeedTimer"];
+        [Dictionary setObject: self.LCDTimer.text forKey: @"LCDTimer"];
+        [Dictionary setObject: self.MHOffMin.text forKey:@"MHOffMin"];
+        [Dictionary setObject: self.MHOnHour.text forKey:@"MHOnHour"];
+        [Dictionary setObject: self.MHOnMin.text forKey:@"MHOnMin"];
+        [Dictionary setObject: self.StdOffMin.text forKey:@"StdOffHour"];
+        [Dictionary setObject: self.StdOffMin.text forKey:@"StdOffMin"];
+        [Dictionary setObject: self.StdOnHour.text forKey:@"StdOnHour"];
+        [Dictionary setObject: self.StdOnMin.text forKey:@"StdOnMin"];
+        [Dictionary setObject: self.DP1Hr.text forKey:@"DP1Hr"];
+        [Dictionary setObject: self.DP1Min.text forKey:@"DP1Min"];
+        [Dictionary setObject: self.DP1Int.text forKey:@"DP1Int"];
+        [Dictionary setObject: self.DP2Hr.text forKey:@"DP2Hr"];
+        [Dictionary setObject: self.DP2Min.text forKey:@"DP2Min"];
+        [Dictionary setObject: self.DP2Int.text forKey:@"DP2Int"];
+        [Dictionary setObject: self.rfMode.text forKey:@"RFMode"];
+        [Dictionary setObject: self.rfSpeed.text forKey:@"RFSpeed"];
+        [Dictionary setObject: self.rfDuration.text forKey:@"RFDuration"];
+    
+     
+     [Dictionary setObject: [memValues.M821 stringValue] forKey: @"Actinic"];
+     [Dictionary setObject: [memValues.M820 stringValue] forKey: @"Daylight"];
+     
+     [Dictionary setObject: [memValues.M814 stringValue] forKey: @"FeedTimer"];
+     [Dictionary setObject: [memValues.M816 stringValue] forKey: @"LCDTimer"];
+     
         [Dictionary setObject: [memValues.M803 stringValue] forKey:@"MHOffMin"];
         [Dictionary setObject: [memValues.M800 stringValue] forKey:@"MHOnHour"];
         [Dictionary setObject: [memValues.M801 stringValue] forKey:@"MHOnMin"];
@@ -379,13 +417,19 @@
         }
 
         [Dictionary writeToFile:path atomically:YES];
+
         
+            
+
         self.Actinic.value = [memValues.M821 integerValue];
+        //[memLocations objectForKey:@"855"]
+        
         self.Daylight.value = [memValues.M820 integerValue];
+        
         self.FeedTimer.text = [memValues.M814 stringValue];
         self.PWMD.text = [memValues.M820 stringValue];
         self.PWMA.text = [memValues.M821 stringValue];
-        self.LCDTimer.text = [memValues.M816 stringValue];
+        //self.LCDTimer.text = [memValues.M816 stringValue];
         self.MHOffHour.text = [memValues.M802 stringValue];
         self.MHOffMin.text = [memValues.M803 stringValue];
         self.MHOnHour.text = [memValues.M800 stringValue];
@@ -411,31 +455,105 @@
         [memValues release];
     }
     
+    
+}
+ */
+
+-(void)UpdatingUI
+{
+    
+    self.LCDTimer.text = [memLocations objectForKey:[NSString stringWithFormat:@"%i", self.LCDTimer.tag]];
+    self.FeedTimer.text = [memLocations objectForKey:[NSString stringWithFormat:@"%i", self.FeedTimer.tag]];
+    self.PWMD.text = [memLocations objectForKey:[NSString stringWithFormat:@"%i", self.PWMD.tag]];
+    self.PWMA.text = [memLocations objectForKey:[NSString stringWithFormat:@"%i", self.PWMA.tag]];
+    self.Actinic.value = [PWMA.text intValue];
+    self.Daylight.value = [PWMD.text intValue];
+    self.MHOffHour.text = [memLocations objectForKey:[NSString stringWithFormat:@"%i", self.MHOffHour.tag]];
+    self.MHOffMin.text = [memLocations objectForKey:[NSString stringWithFormat:@"%i", self.MHOffMin.tag]];
+    self.MHOnHour.text = [memLocations objectForKey:[NSString stringWithFormat:@"%i", self.MHOnHour.tag]];
+    self.MHOnMin.text = [memLocations objectForKey:[NSString stringWithFormat:@"%i", self.MHOnMin.tag]];
+    self.StdOffHour.text = [memLocations objectForKey:[NSString stringWithFormat:@"%i", self.StdOffHour.tag]];
+    self.StdOffMin.text = [memLocations objectForKey:[NSString stringWithFormat:@"%i", self.StdOffMin.tag]];
+    self.StdOnHour.text = [memLocations objectForKey:[NSString stringWithFormat:@"%i", self.StdOnHour.tag]];
+    self.StdOnMin.text = [memLocations objectForKey:[NSString stringWithFormat:@"%i", self.StdOnMin.tag]];
+    self.DP1Hr.text = [memLocations objectForKey:[NSString stringWithFormat:@"%i", self.DP1Hr.tag]];
+    self.DP1Min.text = [memLocations objectForKey:[NSString stringWithFormat:@"%i", self.DP1Min.tag]];
+    self.DP1Int.text = [memLocations objectForKey:[NSString stringWithFormat:@"%i", self.DP1Int.tag]];
+    self.DP2Hr.text = [memLocations objectForKey:[NSString stringWithFormat:@"%i", self.DP2Hr.tag]];
+    self.DP2Min.text = [memLocations objectForKey:[NSString stringWithFormat:@"%i", self.DP2Min.tag]];
+    self.DP2Int.text = [memLocations objectForKey:[NSString stringWithFormat:@"%i", self.DP2Int.tag]];
+    self.rfDuration.text = [memLocations objectForKey:[NSString stringWithFormat:@"%i", self.rfDuration.tag]];
+    self.rfSpeed.text = [memLocations objectForKey:[NSString stringWithFormat:@"%i", self.rfSpeed.tag]];
+    self.rfMode.text = [memLocations objectForKey:[NSString stringWithFormat:@"%i", self.rfMode.tag]];
+    
+    self.HeaterOn.text = [self formatTemp:[memLocations objectForKey:[NSString stringWithFormat:@"%i", self.HeaterOn.tag]]];
+    self.ForC.text = self.tempScale;
+    self.ForC2.text = self.tempScale;
+    self.ForC3.text = self.tempScale;
+    
+    self.HeaterOff.text = [self formatTemp:[memLocations objectForKey:[NSString stringWithFormat:@"%i", self.HeaterOff.tag]]];
+    self.Overheat.text = [self formatTemp:[memLocations objectForKey:[NSString stringWithFormat:@"%i", self.Overheat.tag]]];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"Memdata.plist"];
+    
+    NSMutableDictionary *Dictionary = [NSMutableDictionary dictionary];
+    NSDictionary  *restored = [NSDictionary dictionaryWithContentsOfFile: path];
+    [Dictionary addEntriesFromDictionary:restored];
+    [Dictionary setObject: self.HeaterOn.text forKey: @"HeaterOn"];
+    [Dictionary setObject: self.HeaterOff.text forKey: @"HeaterOff"];
+    [Dictionary setObject: self.Overheat.text forKey: @"Overheat"];
+    [Dictionary setObject: self.MHOffHour.text forKey:@"MHOffHour"];
+    [Dictionary setObject: self.PWMA.text forKey: @"Actinic"];
+    [Dictionary setObject: self.PWMD.text forKey: @"Daylight"];
+    [Dictionary setObject: self.FeedTimer.text forKey: @"FeedTimer"];
+    [Dictionary setObject: self.LCDTimer.text forKey: @"LCDTimer"];
+    [Dictionary setObject: self.MHOffMin.text forKey:@"MHOffMin"];
+    [Dictionary setObject: self.MHOnHour.text forKey:@"MHOnHour"];
+    [Dictionary setObject: self.MHOnMin.text forKey:@"MHOnMin"];
+    [Dictionary setObject: self.StdOffMin.text forKey:@"StdOffHour"];
+    [Dictionary setObject: self.StdOffMin.text forKey:@"StdOffMin"];
+    [Dictionary setObject: self.StdOnHour.text forKey:@"StdOnHour"];
+    [Dictionary setObject: self.StdOnMin.text forKey:@"StdOnMin"];
+    [Dictionary setObject: self.DP1Hr.text forKey:@"DP1Hr"];
+    [Dictionary setObject: self.DP1Min.text forKey:@"DP1Min"];
+    [Dictionary setObject: self.DP1Int.text forKey:@"DP1Int"];
+    [Dictionary setObject: self.DP2Hr.text forKey:@"DP2Hr"];
+    [Dictionary setObject: self.DP2Min.text forKey:@"DP2Min"];
+    [Dictionary setObject: self.DP2Int.text forKey:@"DP2Int"];
+    [Dictionary setObject: self.rfMode.text forKey:@"RFMode"];
+    [Dictionary setObject: self.rfSpeed.text forKey:@"RFSpeed"];
+    [Dictionary setObject: self.rfDuration.text forKey:@"RFDuration"];
+    
+    [Dictionary writeToFile:path atomically:YES];
+
 }
 
+/*
 -(void)formatRA : (MEM *)params
 {
-    self.HeaterOn.text = [self formatTemp:memValues.M822];
+    self.HeaterOn.text = [self formatTemp:[memLocations objectForKey:[NSString stringWithFormat:@"%i", self.HeaterOn.tag]]];
         self.ForC.text = self.tempScale;
         self.ForC2.text = self.tempScale;
         self.ForC3.text = self.tempScale;
     
-    self.HeaterOff.text = [self formatTemp:memValues.M824];
-    self.Overheat.text = [self formatTemp:memValues.M818];
+    self.HeaterOff.text = [self formatTemp:[memLocations objectForKey:[NSString stringWithFormat:@"%i", self.HeaterOff.tag]]];
+    self.Overheat.text = [self formatTemp:[memLocations objectForKey:[NSString stringWithFormat:@"%i", self.Overheat.tag]]];
     
 }
-
--(NSString *) formatTemp : (NSNumber *)temp
+*/
+-(NSString *) formatTemp : (NSString *)temp
 {   
-    NSString *tempString = [temp stringValue];
+    //NSString *tempString = [temp stringValue];
     NSString *retString;
-    if([tempString length] >= 3)
+    if([temp length] >= 3)
     {
-        retString = [[[tempString substringToIndex:[tempString length]-1] stringByAppendingString:@"."] stringByAppendingString:[tempString substringFromIndex:[tempString length]-1]];          
+        retString = [[[temp substringToIndex:[temp length]-1] stringByAppendingString:@"."] stringByAppendingString:[temp substringFromIndex:[temp length]-1]];          
     }
     else
     {
-        retString = [tempString stringByAppendingString:@".0"];
+        retString = [temp stringByAppendingString:@".0"];
     }
     
     
@@ -484,30 +602,54 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {    
+    
     NSString *memData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    
     NSRange range = [memData rangeOfString:@">OK</" options:NSCaseInsensitiveSearch];
     if( range.location != NSNotFound ) {
         UIAlertView* alertView = [[UIAlertView alloc] initWithTitle:@"Updated" message:@"Mem updated" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil];
 		[alertView show];
 		[alertView release];
+        //[self loadData];
     }
     else
     {
-    memValues = [[MEM alloc] init] ;
-    xmlParser = [[XmlParser alloc] init] ;
-    
-    
-    
-    paramArray = [xmlParser fromXml:memData withObject:memValues];
-    
-    memValues = [paramArray lastObject];
-    
-    [self formatRA:memValues];
-    [self UpdateUI:memValues];
-      
         
+        NSString *subString = [memData substringWithRange:NSMakeRange(5,[memData length]-11)];
+        int memLocation = 800;
+        memLocations = [[NSMutableDictionary alloc] init];
+        
+        for (int i=0; i < [subString length]; i=i+2) {
+            
+            NSString *key = [NSString stringWithFormat:@"%d", memLocation];
+            unsigned int dec;
+            
+            if (memLocation == 808 || memLocation == 810 || memLocation == 814 || memLocation == 816 || memLocation == 822 || memLocation == 824 || memLocation == 826 || memLocation == 828 || memLocation == 831 || memLocation == 833 || memLocation == 843 || memLocation == 845 || memLocation == 847 || memLocation == 876 || memLocation == 878 || memLocation == 880 || memLocation == 882 || memLocation == 885 || memLocation == 887 || memLocation == 889 || memLocation == 891) {
+                NSString *ichar  = [subString substringWithRange:NSMakeRange(i,4)];
+                NSScanner *scan = [NSScanner scannerWithString:ichar];
+                if ([scan scanHexInt:&dec]){
+                    NSString *decString = [NSString stringWithFormat:@"%d", dec];
+                    [memLocations setObject:decString forKey:key];
+                }
+                i= i + 2;
+                memLocation = memLocation +2;
+            }
+            else 
+            {
+                NSString *ichar  = [subString substringWithRange:NSMakeRange(i,2)];
+                NSScanner *scan = [NSScanner scannerWithString:ichar];
+                if ([scan scanHexInt:&dec]){
+                    NSString *decString = [NSString stringWithFormat:@"%d", dec];
+                    [memLocations setObject:decString forKey:key];
+                    memLocation++;
+                }
+                }
+        }
+        [self UpdatingUI];
     }
     [memData release];
+    
+    
 }
 
 -(BOOL)reachable
@@ -556,7 +698,7 @@
 {
     [super viewDidLoad];
     [self.scrollView setScrollEnabled:YES];
-    [self.scrollView setContentSize:CGSizeMake(320, 1250)];     
+    [self.scrollView setContentSize:CGSizeMake(320, 1600)];     
     self.scrollView.delegate = self;
     [self loadData];
     // Do any additional setup after loading the view from its nib.
@@ -686,6 +828,7 @@
     [DP2HrValue release];
     [DP2MinValue release];
     [DP2IntValue release];
+    [memLocations release];
     [super dealloc];
 
 }
