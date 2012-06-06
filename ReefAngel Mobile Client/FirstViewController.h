@@ -16,7 +16,7 @@
 
 @interface FirstViewController : UIViewController<UIApplicationDelegate, UITabBarDelegate, UIScrollViewDelegate>{
 
-    UILabel *pHLabel, *lastUpdatedLabel, *salinityLabel, *salinityValue, *temp2Value, *temp3Value, *AIWvalue, *AIBvalue, *AIRBvalue, *AIWLabel, *AIBLabel, *AIRBLabel;
+    UILabel *pHLabel, *lastUpdatedLabel, *salinityLabel, *salinityValue, *temp2Value, *temp3Value, *AIWvalue, *AIBvalue, *AIRBvalue, *AIWLabel, *AIBLabel, *AIRBLabel, *RFWhiteValue, *RFBlueValue, *RFRoyalBlueValue, *RFWhiteLabel, *RFBlueLabel, *RFRoyalBlueLabel, *RFRedValue, *RFRedLabel, *RFGreenLabel, *RFGreenValue, *RFSpeedLabel, *RFSpeedValue, *RFModeLabel, *RFModeValue, *RFDurationLabel, *RFDurationValue;
     NSString *fullUrl;
     NSString *wifiUrl, *enteredURL, *tempScale;
     RA *raParam;
@@ -39,7 +39,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *temp2Label, *temp2Value;
 @property (nonatomic, retain) IBOutlet UILabel *temp3Label, *temp3Value;
 @property (nonatomic, retain) IBOutlet UILabel *pHLabel, *AIWvalue, *AIBvalue, *AIRBvalue;
-@property (nonatomic, retain) IBOutlet UILabel *lastUpdatedLabel, *temp1Value, *AIWLabel, *AIBLabel, *AIRBLabel;
+@property (nonatomic, retain) IBOutlet UILabel *lastUpdatedLabel, *temp1Value, *AIWLabel, *AIBLabel, *AIRBLabel, *RFWhiteValue, *RFBlueValue, *RFRoyalBlueValue, *RFWhiteLabel, *RFBlueLabel, *RFRoyalBlueLabel, *RFRedValue, *RFRedLabel, *RFGreenLabel, *RFGreenValue, *RFSpeedLabel, *RFSpeedValue, *RFModeLabel, *RFModeValue, *RFDurationLabel, *RFDurationValue;
 @property (nonatomic, retain) UIScrollView *scrollView;
 @property (nonatomic, retain) NSString *response;
 @property (nonatomic, retain) NSString *binaryEM;

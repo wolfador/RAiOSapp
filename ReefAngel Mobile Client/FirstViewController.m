@@ -13,7 +13,7 @@
 @synthesize temp1Label, temp2Label, temp3Label, pHLabel;
 @synthesize wifiUrl, fullUrl,lastUpdatedLabel, current_version, directConnect;
 @synthesize enteredURL, response, tempScale, salinityLabel, salinityValue, temp2Value, temp3Value, temp1Value;
-@synthesize AIWvalue, AIBvalue, AIRBvalue, scrollView, AIWLabel, AIBLabel, AIRBLabel, receivedData, binaryEM;
+@synthesize AIWvalue, AIBvalue, AIRBvalue, scrollView, AIWLabel, AIBLabel, AIRBLabel, receivedData, binaryEM,  RFWhiteValue, RFBlueValue, RFRoyalBlueValue, RFWhiteLabel, RFBlueLabel, RFRoyalBlueLabel, RFRedValue, RFRedLabel, RFGreenLabel, RFGreenValue, RFSpeedLabel, RFSpeedValue, RFModeLabel, RFModeValue, RFDurationLabel, RFDurationValue;
 
 - (void)viewDidLoad
 {
@@ -444,7 +444,48 @@
         self.AIWLabel.hidden = YES;
         self.salinityLabel.hidden = YES;
         self.salinityValue.hidden = YES;
+        self.RFWhiteValue.hidden = YES;
+        self.RFBlueValue.hidden = YES;
+        self.RFRoyalBlueValue.hidden = YES;
+        self.RFRedValue.hidden = YES;
+        self.RFGreenValue.hidden = YES;
+        self.RFBlueLabel.hidden = YES;
+        self.RFGreenLabel.hidden = YES;
+        self.RFRoyalBlueLabel.hidden = YES;
+        self.RFRedLabel.hidden = YES;
+        self.RFWhiteLabel.hidden = YES;
+        
     }
+    if (params.RFB != NULL) {
+        self.RFWhiteValue.hidden = NO;
+        self.RFBlueValue.hidden = NO;
+        self.RFRoyalBlueValue.hidden = NO;
+        self.RFRedValue.hidden = NO;
+        self.RFGreenValue.hidden = NO;
+        self.RFBlueValue.text = [[params.RFB stringValue] stringByAppendingString:@"%"];
+        self.RFBlueLabel.hidden = NO;
+        self.RFRoyalBlueValue.text = [[params.RFD stringValue] stringByAppendingString:@"%"];
+        self.RFRoyalBlueLabel.hidden = NO;
+        self.RFWhiteValue.text = [[params.RFW stringValue] stringByAppendingString:@"%"];
+        self.RFWhiteLabel.hidden = NO;
+        self.RFRedValue.text = [[params.RFR stringValue] stringByAppendingString:@"%"];
+        self.RFRedLabel.hidden = NO;
+        self.RFGreenValue.text = [[params.RFG stringValue] stringByAppendingString:@"%"];
+        self.RFGreenLabel.hidden = NO;
+    }
+    if (params.RFM != NULL) {
+        self.RFSpeedLabel.hidden = NO;
+        self.RFSpeedValue.hidden = NO;
+        self.RFDurationLabel.hidden = NO;
+        self.RFDurationValue.hidden = NO;
+        self.RFModeLabel.hidden = NO;
+        self.RFModeValue.hidden = NO;
+        self.RFModeValue.text = [params.RFM stringValue];
+        self.RFSpeedValue.text = [params.RFS stringValue];
+        self.RFDurationValue.text = [params.RFD stringValue];
+        
+    }
+    
 /*
  EM Bits
  // 00011111
