@@ -276,6 +276,7 @@
         
     self.lastUpdatedLabel.text = [dateformat stringFromDate:localDate];
     self.lastUpdatedLabel.textColor = [UIColor greenColor];
+        
 }
     
     params.formattedTemp1 = [self formatTemp:params.T1];
@@ -473,18 +474,7 @@
         self.RFGreenValue.text = [[params.RFG stringValue] stringByAppendingString:@"%"];
         self.RFGreenLabel.hidden = NO;
     }
-    if (params.RFM != NULL) {
-        self.RFSpeedLabel.hidden = NO;
-        self.RFSpeedValue.hidden = NO;
-        self.RFDurationLabel.hidden = NO;
-        self.RFDurationValue.hidden = NO;
-        self.RFModeLabel.hidden = NO;
-        self.RFModeValue.hidden = NO;
-        self.RFModeValue.text = [params.RFM stringValue];
-        self.RFSpeedValue.text = [params.RFS stringValue];
-        self.RFDurationValue.text = [params.RFD stringValue];
-        
-    }
+
     
 /*
  EM Bits
@@ -522,8 +512,32 @@
     }
     self.binaryEM = [NSString stringWithString:str];
    // NSLog(@"Binary version: %@", self.binaryEM);
+        
+        
+        if (params.RFD == 0 && params.RFM == 0 && params.RFS == 0)
+        {
+            self.RFSpeedLabel.hidden = YES;
+            self.RFSpeedValue.hidden = YES;
+            self.RFDurationLabel.hidden = YES;
+            self.RFDurationValue.hidden = YES;
+            self.RFModeLabel.hidden = YES;
+            self.RFModeValue.hidden = YES;
+        }
+        if (params.RFB == NULL) {
+            self.RFWhiteValue.hidden = YES;
+            self.RFBlueValue.hidden = YES;
+            self.RFRoyalBlueValue.hidden = YES;
+            self.RFRedValue.hidden = YES;
+            self.RFGreenValue.hidden = YES;
+            self.RFBlueLabel.hidden = YES;
+            self.RFRoyalBlueLabel.hidden = YES;
+            self.RFWhiteLabel.hidden = YES;
+            self.RFRedLabel.hidden = YES;
+            self.RFGreenLabel.hidden = YES;
+        }
+
     }
-}
+   }
 
 -(NSString *) formatTemp : (NSNumber *)temp
 {   

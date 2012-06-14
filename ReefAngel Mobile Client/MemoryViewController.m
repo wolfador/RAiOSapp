@@ -11,7 +11,7 @@
 @implementation MemoryViewController
 @synthesize delegate = _delegate;
 @synthesize HeaterOn, HeaterOff, FeedTimer, Overheat, PWMD, PWMA, LCDTimer, wifiURL, enteredURL, fullURL, Actinic, Daylight, daylightValue, actinicValue, heaterOnValue, heaterOffValue, feedTimerValue, overheatValue, LCDTimerValue, sendUpdateMem, ForC, ForC2, ForC3, MHOnHour, MHOnMin, MHOffHour, MHOffMin, StdOnHour, StdOnMin, StdOffHour, StdOffMin, scrollView, MHOnHourValue, MHOnMinValue, MHOffHourValue, MHOffMinValue, StdOnHourValue, StdOnMinValue, StdOffHourValue, StdOffMinValue, tempScale, DP1Hr, DP1Min, DP2Hr, DP2Min, DP1Int, DP2Int;
-@synthesize DP1HrValue, DP1MinValue, DP2HrValue, DP2MinValue, DP1IntValue, DP2IntValue, custom, customLoc, rfMode, rfDuration, rfSpeed, rfModeValue, rfSpeedValue, rfDurationValue;
+@synthesize DP1HrValue, DP1MinValue, DP2HrValue, DP2MinValue, DP1IntValue, DP2IntValue, custom, customLoc, rfMode, rfDuration, rfSpeed, rfModeValue, rfSpeedValue, rfDurationValue, combined, scan;
 
 - (IBAction)done
 {
@@ -493,7 +493,7 @@
     
     self.HeaterOff.text = [self formatTemp:[memLocations objectForKey:[NSString stringWithFormat:@"%i", self.HeaterOff.tag]]];
     self.Overheat.text = [self formatTemp:[memLocations objectForKey:[NSString stringWithFormat:@"%i", self.Overheat.tag]]];
-    
+    /*
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = [paths objectAtIndex:0];
     NSString *path = [documentsDirectory stringByAppendingPathComponent:@"Memdata.plist"];
@@ -527,7 +527,7 @@
     [Dictionary setObject: self.rfDuration.text forKey:@"RFDuration"];
     
     [Dictionary writeToFile:path atomically:YES];
-
+*/
 }
 
 /*
@@ -602,7 +602,7 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {    
-    
+    unsigned int dec;
     NSString *memData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     
     NSRange range = [memData rangeOfString:@">OK</" options:NSCaseInsensitiveSearch];
@@ -616,35 +616,83 @@
     {
         
         NSString *subString = [memData substringWithRange:NSMakeRange(5,[memData length]-11)];
-        int memLocation = 800;
+        int memLocation = 200;
         memLocations = [[NSMutableDictionary alloc] init];
         
         for (int i=0; i < [subString length]; i=i+2) {
             
             NSString *key = [NSString stringWithFormat:@"%d", memLocation];
             unsigned int dec;
-            
-            if (memLocation == 808 || memLocation == 810 || memLocation == 814 || memLocation == 816 || memLocation == 822 || memLocation == 824 || memLocation == 826 || memLocation == 828 || memLocation == 831 || memLocation == 833 || memLocation == 843 || memLocation == 845 || memLocation == 847 || memLocation == 876 || memLocation == 878 || memLocation == 880 || memLocation == 882 || memLocation == 885 || memLocation == 887 || memLocation == 889 || memLocation == 891) {
-                NSString *ichar  = [subString substringWithRange:NSMakeRange(i,4)];
-                NSScanner *scan = [NSScanner scannerWithString:ichar];
-                if ([scan scanHexInt:&dec]){
-                    NSString *decString = [NSString stringWithFormat:@"%d", dec];
-                    [memLocations setObject:decString forKey:key];
-                }
-                i= i + 2;
-                memLocation = memLocation +2;
+
+
+            if (memLocation == 208 || memLocation == 209 || memLocation == 210 || memLocation == 211 || memLocation == 214 || memLocation == 215 || memLocation == 216 || memLocation == 217 || memLocation == 218 || memLocation == 219 || memLocation == 222 || memLocation == 223 ||memLocation == 224 || memLocation == 225 || memLocation == 226 || memLocation == 227 || memLocation == 228 || memLocation == 229 || memLocation == 231 || memLocation == 232 || memLocation == 233 || memLocation == 234 || memLocation == 243 || memLocation == 244 || memLocation == 245 || memLocation == 246 || memLocation == 247 || memLocation == 248 || memLocation == 276 || memLocation == 277 || memLocation == 278 || memLocation == 279 || memLocation == 280 || memLocation == 281 || memLocation == 282 || memLocation == 283 ||memLocation == 285 || memLocation == 286 || memLocation == 287 || memLocation == 288 || memLocation == 289 || memLocation == 290 || memLocation == 291 || memLocation == 292) {
+                NSString *ichar  = [subString substringWithRange:NSMakeRange(i,2)];
+                    [memLocations setObject:ichar forKey:key];
+                memLocation++;
             }
             else 
             {
                 NSString *ichar  = [subString substringWithRange:NSMakeRange(i,2)];
-                NSScanner *scan = [NSScanner scannerWithString:ichar];
-                if ([scan scanHexInt:&dec]){
+                NSScanner *scan2 = [NSScanner scannerWithString:ichar];
+                if ([scan2 scanHexInt:&dec]){
                     NSString *decString = [NSString stringWithFormat:@"%d", dec];
                     [memLocations setObject:decString forKey:key];
                     memLocation++;
                 }
                 }
+             
         }
+        
+        combined = [NSString stringWithFormat:@"0x%@%@",[memLocations objectForKey:@"217"], [memLocations objectForKey:@"216"]]; 
+        scan = [NSScanner scannerWithString:combined];
+        if ([scan scanHexInt:&dec]){
+         NSString *decString = [NSString stringWithFormat:@"%d", dec];
+                [memLocations removeObjectForKey:@"216"];
+                [memLocations setObject:decString forKey:@"216"];
+        }
+        combined = [NSString stringWithFormat:@"0x%@%@",[memLocations objectForKey:@"215"], [memLocations objectForKey:@"214"]]; 
+        scan = [NSScanner scannerWithString:combined];
+        if ([scan scanHexInt:&dec]){
+            NSString *decString = [NSString stringWithFormat:@"%d", dec];
+            [memLocations removeObjectForKey:@"214"];
+            [memLocations setObject:decString forKey:@"214"];
+        }
+        combined = [NSString stringWithFormat:@"0x%@%@",[memLocations objectForKey:@"219"], [memLocations objectForKey:@"218"]]; 
+        scan = [NSScanner scannerWithString:combined];
+        if ([scan scanHexInt:&dec]){
+           NSString *decString = [NSString stringWithFormat:@"%d", dec];
+            [memLocations removeObjectForKey:@"218"];
+            [memLocations setObject:decString forKey:@"218"];
+        }
+        combined = [NSString stringWithFormat:@"0x%@%@",[memLocations objectForKey:@"223"], [memLocations objectForKey:@"222"]]; 
+        scan = [NSScanner scannerWithString:combined];
+        if ([scan scanHexInt:&dec]){
+            NSString *decString = [NSString stringWithFormat:@"%d", dec];
+            [memLocations removeObjectForKey:@"222"];
+            [memLocations setObject:decString forKey:@"222"];
+        }
+        combined = [NSString stringWithFormat:@"0x%@%@",[memLocations objectForKey:@"225"], [memLocations objectForKey:@"224"]]; 
+        scan = [NSScanner scannerWithString:combined];
+        if ([scan scanHexInt:&dec]){
+            NSString *decString = [NSString stringWithFormat:@"%d", dec];
+            [memLocations removeObjectForKey:@"224"];
+            [memLocations setObject:decString forKey:@"224"];
+        }
+        combined = [NSString stringWithFormat:@"0x%@%@",[memLocations objectForKey:@"244"], [memLocations objectForKey:@"243"]]; 
+        scan = [NSScanner scannerWithString:combined];
+        if ([scan scanHexInt:&dec]){
+            NSString *decString = [NSString stringWithFormat:@"%d", dec];
+            [memLocations removeObjectForKey:@"243"];
+            [memLocations setObject:decString forKey:@"243"];
+        }
+        combined = [NSString stringWithFormat:@"0x%@%@",[memLocations objectForKey:@"246"], [memLocations objectForKey:@"245"]]; 
+        scan = [NSScanner scannerWithString:combined];
+        if ([scan scanHexInt:&dec]){
+            NSString *decString = [NSString stringWithFormat:@"%d", dec];
+            [memLocations removeObjectForKey:@"245"];
+            [memLocations setObject:decString forKey:@"245"];
+        }
+        
         [self UpdatingUI];
     }
     [memData release];

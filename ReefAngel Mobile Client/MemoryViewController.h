@@ -27,10 +27,14 @@
     NSMutableArray *paramArray;
     IBOutlet UIScrollView *scrollView;
     NSMutableDictionary *memLocations;
+    NSMutableString *combined;
+    NSScanner *scan;
 }
 
 @property (assign, nonatomic) IBOutlet id <MemoryViewControllerDelegate> delegate;
 @property (nonatomic, retain) NSString *wifiURL, *enteredURL, *fullURL, *daylightValue, *actinicValue, *heaterOnValue, *heaterOffValue, *feedTimerValue, *overheatValue, *LCDTimerValue, *sendUpdateMem, *MHOnHourValue, *MHOnMinValue, *MHOffHourValue, *MHOffMinValue, *StdOnHourValue, *StdOnMinValue, *StdOffHourValue, *StdOffMinValue, *tempScale, *DP1HrValue, *DP1MinValue, *DP2HrValue, *DP2MinValue, *DP1IntValue, *DP2IntValue, *rfModeValue, *rfSpeedValue, *rfDurationValue;
+@property (nonatomic, retain) NSMutableString *combined;
+@property (nonatomic, retain) NSScanner *scan;
 @property (nonatomic, retain)  IBOutlet UITextField *HeaterOn, *HeaterOff, *FeedTimer, *Overheat, *PWMD, *PWMA, *LCDTimer, *MHOnHour, *MHOnMin, *MHOffHour, *MHOffMin, *StdOnHour, *StdOnMin, *StdOffHour, *StdOffMin, *DP1Hr, *DP1Min, *DP2Hr, *DP2Min, *DP1Int, *DP2Int, *customLoc, *custom, *rfMode, *rfSpeed, *rfDuration;
 @property (nonatomic, retain)  IBOutlet UISlider *Actinic, *Daylight;
 @property (nonatomic, retain) IBOutlet UILabel *ForC, *ForC2, *ForC3;
