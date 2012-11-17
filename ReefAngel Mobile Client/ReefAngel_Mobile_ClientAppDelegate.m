@@ -52,6 +52,7 @@
     [window addSubview:tabBarController.view];
     [window makeKeyAndVisible];
     
+    window.rootViewController = tabBarController;
     
     return YES;
 }

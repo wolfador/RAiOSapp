@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
-		<int key="IBDocument.SystemTarget">1280</int>
-		<string key="IBDocument.SystemVersion">11C71</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
-		<string key="IBDocument.AppKitVersion">1138.23</string>
-		<string key="IBDocument.HIToolboxVersion">567.00</string>
+		<int key="IBDocument.SystemTarget">1536</int>
+		<string key="IBDocument.SystemVersion">12C60</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
+		<string key="IBDocument.AppKitVersion">1187.34</string>
+		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">933</string>
+			<string key="NS.object.0">1930</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<string>IBProxyObject</string>
 			<string>IBUIBarButtonItem</string>
-			<string>IBUILabel</string>
-			<string>IBUISwitch</string>
 			<string>IBUIButton</string>
-			<string>IBUITextField</string>
+			<string>IBUILabel</string>
 			<string>IBUINavigationBar</string>
 			<string>IBUINavigationItem</string>
-			<string>IBUISegmentedControl</string>
 			<string>IBUIScrollView</string>
+			<string>IBUISegmentedControl</string>
+			<string>IBUISwitch</string>
+			<string>IBUITextField</string>
 			<string>IBUIView</string>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -69,6 +69,7 @@
 								<object class="NSColor" key="IBUITextColor" id="599641306">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MCAwIDAAA</bytes>
+									<string key="IBUIColorCocoaTouchKeyPath">darkTextColor</string>
 								</object>
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
@@ -153,7 +154,7 @@
 								<string key="NSFrame">{{51, 59}, {46, 31}}</string>
 								<reference key="NSSuperview" ref="703078981"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="8958856"/>
+								<reference key="NSNextKeyView" ref="11171289"/>
 								<string key="NSReuseIdentifierKey">_NS:294</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -1346,6 +1347,7 @@
 								<string key="NSFrame">{{217, 61}, {94, 27}}</string>
 								<reference key="NSSuperview" ref="703078981"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="8958856"/>
 								<string key="NSReuseIdentifierKey">_NS:606</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -1358,6 +1360,7 @@
 								<string key="NSFrame">{{105, 64}, {120, 21}}</string>
 								<reference key="NSSuperview" ref="703078981"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="159705241"/>
 								<string key="NSReuseIdentifierKey">_NS:328</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -1394,12 +1397,6 @@
 							<object class="IBUINavigationItem" id="288082410">
 								<reference key="IBUINavigationBar" ref="101177840"/>
 								<string key="IBUITitle">Settings</string>
-								<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="647428610">
-									<string key="IBUITitle">Memory</string>
-									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-									<int key="IBUIStyle">1</int>
-									<reference key="IBUINavigationItem" ref="288082410"/>
-								</object>
 								<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="323223206">
 									<string key="IBUITitle">Save</string>
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -1998,14 +1995,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">flipMemory</string>
-						<reference key="source" ref="647428610"/>
-						<reference key="destination" ref="372490531"/>
-					</object>
-					<int key="connectionID">188</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">loadPortNames</string>
 						<reference key="source" ref="178231504"/>
 						<reference key="destination" ref="372490531"/>
@@ -2140,7 +2129,6 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="323223206"/>
-							<reference ref="647428610"/>
 						</object>
 						<reference key="parent" ref="101177840"/>
 					</object>
@@ -2335,11 +2323,6 @@
 						<reference key="parent" ref="703078981"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">187</int>
-						<reference key="object" ref="647428610"/>
-						<reference key="parent" ref="288082410"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">179</int>
 						<reference key="object" ref="271874126"/>
 						<reference key="parent" ref="703078981"/>
@@ -2462,7 +2445,6 @@
 					<string>177.IBPluginDependency</string>
 					<string>179.IBPluginDependency</string>
 					<string>180.IBPluginDependency</string>
-					<string>187.IBPluginDependency</string>
 					<string>189.IBPluginDependency</string>
 					<string>189.IUISegmentedControlInspectorSelectedSegmentMetadataKey</string>
 					<string>190.IBPluginDependency</string>
@@ -2491,12 +2473,11 @@
 					<string>98.IBPluginDependency</string>
 					<string>99.IBPluginDependency</string>
 				</object>
-				<object class="NSMutableArray" key="dict.values">
+				<object class="NSArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>SecondViewController</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>UIResponder</string>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -2591,7 +2572,7 @@
 							<string>textFieldDoneEditing:</string>
 							<string>turnOnRelayExp</string>
 						</object>
-						<object class="NSMutableArray" key="dict.values">
+						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>id</string>
 							<string>id</string>
@@ -2612,7 +2593,7 @@
 							<string>textFieldDoneEditing:</string>
 							<string>turnOnRelayExp</string>
 						</object>
-						<object class="NSMutableArray" key="dict.values">
+						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBActionInfo">
 								<string key="name">flipMemory</string>
@@ -2693,7 +2674,7 @@
 							<string>url</string>
 							<string>userName</string>
 						</object>
-						<object class="NSMutableArray" key="dict.values">
+						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UISwitch</string>
 							<string>UITextField</string>
@@ -2798,7 +2779,7 @@
 							<string>url</string>
 							<string>userName</string>
 						</object>
-						<object class="NSMutableArray" key="dict.values">
+						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
 								<string key="name">directConnect</string>
@@ -3017,6 +2998,6 @@
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<string key="IBCocoaTouchPluginVersion">933</string>
+		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>
 </archive>

@@ -222,7 +222,7 @@
         [Dictionary setObject: self.temp3.text forKey: @"Temp3"];
         [Dictionary setObject: self.userName.text forKey: @"UserName"];
         if ([self.userName.text length] > 0 && !self.directConnect.on) {
-            NSString *forumURL = [NSString stringWithString:@"http://forum.reefangel.com/status/params.aspx?id="];
+            NSString *forumURL = @"http://forum.reefangel.com/status/params.aspx?id=";
             self.raURL = [forumURL stringByAppendingString:self.userName.text];
         [Dictionary setObject: self.raURL forKey: @"RaURL"];
             [Dictionary setObject: @"OFF" forKey: @"DirectConnect"];

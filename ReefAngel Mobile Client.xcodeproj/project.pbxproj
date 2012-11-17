@@ -41,6 +41,7 @@
 		740EBAFB14525ADA00D02ADF /* Memdata.plist in Resources */ = {isa = PBXBuildFile; fileRef = 740EBAFA14525ADA00D02ADF /* Memdata.plist */; };
 		742118F41453705F007AB4BC /* dashboard.png in Resources */ = {isa = PBXBuildFile; fileRef = 742118F31453705F007AB4BC /* dashboard.png */; };
 		74525CDD1533C5FD0038FC3E /* History.xib in Resources */ = {isa = PBXBuildFile; fileRef = 74525CDC1533C5FD0038FC3E /* History.xib */; };
+		745703F416570A9200519E11 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 745703F316570A9200519E11 /* Default-568h@2x.png */; };
 		7460CC261460DE2F009CB7E2 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 7460CC251460DE2E009CB7E2 /* Default-Landscape~ipad.png */; };
 		746D0FE1145F78AF0000FAAB /* MyiPadTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 746D0FE0145F78AF0000FAAB /* MyiPadTabBarController.m */; };
 		746D0FE3145F7D1A0000FAAB /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 746D0FE2145F7D1A0000FAAB /* Default-Portrait~ipad.png */; };
@@ -161,6 +162,7 @@
 		740EBAFA14525ADA00D02ADF /* Memdata.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Memdata.plist; sourceTree = "<group>"; };
 		742118F31453705F007AB4BC /* dashboard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dashboard.png; sourceTree = "<group>"; };
 		74525CDC1533C5FD0038FC3E /* History.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = History.xib; path = "Resources-iPad/ReefAngel Mobile Client/History.xib"; sourceTree = "<group>"; };
+		745703F316570A9200519E11 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
 		7460CC251460DE2E009CB7E2 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		746D0FDF145F78AF0000FAAB /* MyiPadTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyiPadTabBarController.h; sourceTree = "<group>"; };
 		746D0FE0145F78AF0000FAAB /* MyiPadTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyiPadTabBarController.m; sourceTree = "<group>"; };
@@ -244,6 +246,7 @@
 		55C73904135A3257007AE60B /* images */ = {
 			isa = PBXGroup;
 			children = (
+				745703F316570A9200519E11 /* Default-568h@2x.png */,
 				7460CC251460DE2E009CB7E2 /* Default-Landscape~ipad.png */,
 				742118F31453705F007AB4BC /* dashboard.png */,
 				8060DE83142D756600248B60 /* icon-72.png */,
@@ -453,7 +456,7 @@
 		55DF42801359DA3900C45B47 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0450;
 			};
 			buildConfigurationList = 55DF42831359DA3900C45B47 /* Build configuration list for PBXProject "ReefAngel Mobile Client" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -502,6 +505,7 @@
 				740EBAFB14525ADA00D02ADF /* Memdata.plist in Resources */,
 				742118F41453705F007AB4BC /* dashboard.png in Resources */,
 				740A7192149AE77E00846342 /* History.xib in Resources */,
+				745703F416570A9200519E11 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -723,6 +727,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ReefAngel Mobile Client/ReefAngel Mobile Client-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					"/usr/include/libxml2/**",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = "ReefAngel Mobile Client/ReefAngel Mobile Client-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
@@ -745,6 +753,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ReefAngel Mobile Client/ReefAngel Mobile Client-Prefix.pch";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					"/usr/include/libxml2/**",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = "ReefAngel Mobile Client/ReefAngel Mobile Client-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";

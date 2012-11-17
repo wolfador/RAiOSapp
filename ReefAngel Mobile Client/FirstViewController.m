@@ -13,7 +13,7 @@
 @synthesize temp1Label, temp2Label, temp3Label, pHLabel;
 @synthesize wifiUrl, fullUrl,lastUpdatedLabel, current_version, directConnect;
 @synthesize enteredURL, response, tempScale, salinityLabel, salinityValue, temp2Value, temp3Value, temp1Value;
-@synthesize AIWvalue, AIBvalue, AIRBvalue, scrollView, AIWLabel, AIBLabel, AIRBLabel, receivedData, binaryEM,  RFWhiteValue, RFBlueValue, RFRoyalBlueValue, RFWhiteLabel, RFBlueLabel, RFRoyalBlueLabel, RFRedValue, RFRedLabel, RFGreenLabel, RFGreenValue, RFSpeedLabel, RFSpeedValue, RFModeLabel, RFModeValue, RFDurationLabel, RFDurationValue;
+@synthesize AIWvalue, AIBvalue, AIRBvalue, scrollView, AIWLabel, AIBLabel, AIRBLabel, receivedData, binaryEM,  RFWhiteValue, RFBlueValue, RFRoyalBlueValue, RFWhiteLabel, RFBlueLabel, RFRoyalBlueLabel, RFRedValue, RFRedLabel, RFGreenLabel, RFGreenValue, RFSpeedLabel, RFSpeedValue, RFModeLabel, RFModeValue, RFDurationLabel, RFDurationValue, orpLabel, orpValue;
 
 - (void)viewDidLoad
 {
@@ -304,8 +304,10 @@
     
     
     if (params.SAL == NULL || [params.SAL intValue] == 0) {
-        self.salinityLabel.hidden = YES;
-        self.salinityValue.hidden = YES;
+        //self.salinityLabel.hidden = YES;
+        //self.salinityValue.hidden = YES;
+        self.salinityLabel.hidden = NO;
+        self.salinityValue.hidden = NO;
     }
     else if([params.SAL intValue] == 60)
     {
@@ -393,7 +395,7 @@
         [self.scrollView setScrollEnabled:NO];
     }
     }
-    else if ([params.EM intValue] == 4)
+   /* else if ([params.EM intValue] == 4)
     {
         NSString *percent = @"%";
         NSRange range = [self.AIBvalue.text rangeOfString : percent];
@@ -421,7 +423,7 @@
             
             CGRect WLabelPosition = self.AIWLabel.frame;
             WLabelPosition.origin.y = WLabelPosition.origin.y - 45;
-            self.AIWLabel.frame = WLabelPosition;
+            self.AIWLabel.frame = WLabelPosition; 
         }
         self.AIBvalue.hidden = NO;
         self.AIRBvalue.hidden = NO;
@@ -456,7 +458,7 @@
         self.RFRedLabel.hidden = YES;
         self.RFWhiteLabel.hidden = YES;
         
-    }
+    }*/
     if (params.RFB != NULL) {
         self.RFWhiteValue.hidden = NO;
         self.RFBlueValue.hidden = NO;
@@ -474,8 +476,21 @@
         self.RFGreenValue.text = [[params.RFG stringValue] stringByAppendingString:@"%"];
         self.RFGreenLabel.hidden = NO;
     }
+if (params.ORP == NULL || [params.ORP intValue] == 0)
+{
+    //self.orpValue.hidden = YES;
+    //self.orpLabel.hidden = YES;
+    self.orpValue.hidden = NO;
+    self.orpLabel.hidden = NO;
+    self.orpValue.text = [params.ORP stringValue];
 
-    
+}
+else
+{
+    self.orpValue.hidden = NO;
+    self.orpLabel.hidden = NO;
+    self.orpValue.text = [params.ORP stringValue];
+}
 /*
  EM Bits
  // 00011111
