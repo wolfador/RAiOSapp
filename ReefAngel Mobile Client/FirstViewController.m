@@ -17,8 +17,19 @@
 
 - (void)viewDidLoad
 {
-    [self.scrollView setScrollEnabled:YES];
-    [self.scrollView setContentSize:CGSizeMake(320, 500)];  
+    
+    
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        
+        [self.scrollView setScrollEnabled:YES];
+        [self.scrollView setContentSize:CGSizeMake(1024, 768)];
+    }
+    else
+    {
+        [self.scrollView setScrollEnabled:YES];
+        [self.scrollView setContentSize:CGSizeMake(320, 500)];
+	}
+     
     
     self.scrollView.delegate = self;
 
@@ -91,6 +102,7 @@
         {
          [self sendUpdate:self.wifiUrl];
         }
+      
     }
     else
     {
@@ -194,6 +206,17 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    self.AIBvalue.text = @"";
+    self.AIWvalue.text = @"";
+    self.AIRBvalue.text = @"";
+    self.RFBlueValue.text = @"";
+    self.RFGreenValue.text = @"";
+    self.RFDurationValue.text = @"";
+    self.RFModeValue.text = @"";
+    self.RFRedValue.text = @"";
+    self.RFRoyalBlueValue.text = @"";
+    self.RFSpeedValue.text = @"";
+    self.RFWhiteValue.text = @"";
     [self loadData];
 }
 
@@ -322,11 +345,11 @@
         self.salinityValue.hidden = NO;
        params.formattedSal = [self formatSal:params.SAL]; 
     }
-    if ([self.directConnect isEqualToString:@"ON"]) {
-    if (params.AIB != NULL && params.SAL == NULL) {
+        if ([self.directConnect isEqualToString:@"ON"]) {
+            if (params.AIB != NULL && params.SAL == NULL) {
         
         //moves labels to compensate for Salinity not being enabled.
-        NSString *percent = @"%";
+        /*NSString *percent = @"%";
         NSRange range = [self.AIBvalue.text rangeOfString : percent];
         if (range.location == NSNotFound) {
             
@@ -353,7 +376,7 @@
         CGRect WLabelPosition = self.AIWLabel.frame;
         WLabelPosition.origin.y = WLabelPosition.origin.y - 45;
         self.AIWLabel.frame = WLabelPosition;
-        }
+                                        }*/
         
         self.AIBvalue.hidden = NO;
         self.AIRBvalue.hidden = NO;
@@ -365,11 +388,11 @@
         self.AIBvalue.text = [[params.AIB stringValue] stringByAppendingString:@"%"];
         self.AIRBvalue.text = [[params.AIRB stringValue] stringByAppendingString:@"%"];
         [self.scrollView setScrollEnabled:YES];
-        [self.scrollView setContentSize:CGSizeMake(320, 600)]; 
+        [self.scrollView setContentSize:CGSizeMake(320, 650)];
 
-    }
-    else if(params.AIB != NULL && params.SAL != NULL)
-    {
+        }
+            else if(params.AIB != NULL && params.SAL != NULL)
+            {
         self.AIBvalue.hidden = NO;
         self.AIRBvalue.hidden = NO;
         self.AIWvalue.hidden = NO;
@@ -385,7 +408,7 @@
     }
     else
     {
-        
+        /*
         self.AIBvalue.hidden = YES;
         self.AIRBvalue.hidden = YES;
         self.AIWvalue.hidden = YES;
@@ -393,6 +416,18 @@
         self.AIRBLabel.hidden = YES;
         self.AIWLabel.hidden = YES; 
         [self.scrollView setScrollEnabled:NO];
+         */
+        self.AIBvalue.hidden = NO;
+        self.AIRBvalue.hidden = NO;
+        self.AIWvalue.hidden = NO;
+        self.AIBLabel.hidden = NO;
+        self.AIRBLabel.hidden = NO;
+        self.AIWLabel.hidden = NO;
+        self.AIWvalue.text = [[params.AIW stringValue] stringByAppendingString:@"%"];
+        self.AIBvalue.text = [[params.AIB stringValue] stringByAppendingString:@"%"];
+        self.AIRBvalue.text = [[params.AIRB stringValue] stringByAppendingString:@"%"];
+        [self.scrollView setScrollEnabled:YES];
+        [self.scrollView setContentSize:CGSizeMake(320, 650)];
     }
     }
    /* else if ([params.EM intValue] == 4)
