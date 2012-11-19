@@ -300,6 +300,27 @@
     self.lastUpdatedLabel.text = [dateformat stringFromDate:localDate];
     self.lastUpdatedLabel.textColor = [UIColor greenColor];
         
+        self.AIBvalue.hidden = NO;
+        self.AIRBvalue.hidden = NO;
+        self.AIWvalue.hidden = NO;
+        self.AIBLabel.hidden = NO;
+        self.AIRBLabel.hidden = NO;
+        self.AIWLabel.hidden = NO;
+        self.AIWvalue.text = [[params.AIW stringValue] stringByAppendingString:@"%"];
+        self.AIBvalue.text = [[params.AIB stringValue] stringByAppendingString:@"%"];
+        self.AIRBvalue.text = [[params.AIRB stringValue] stringByAppendingString:@"%"];
+        self.salinityLabel.hidden = NO;
+        self.salinityValue.hidden = NO;
+        params.formattedSal = [self formatSal:params.SAL];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            
+        }
+        else
+        {
+            [self.scrollView setScrollEnabled:YES];
+            [self.scrollView setContentSize:CGSizeMake(320, 650)];
+        }
+        
 }
     
     params.formattedTemp1 = [self formatTemp:params.T1];
@@ -346,7 +367,7 @@
        params.formattedSal = [self formatSal:params.SAL]; 
     }
         if ([self.directConnect isEqualToString:@"ON"]) {
-            if (params.AIB != NULL && params.SAL == NULL) {
+            
         
         //moves labels to compensate for Salinity not being enabled.
         /*NSString *percent = @"%";
@@ -387,49 +408,20 @@
         self.AIWvalue.text = [[params.AIW stringValue] stringByAppendingString:@"%"];
         self.AIBvalue.text = [[params.AIB stringValue] stringByAppendingString:@"%"];
         self.AIRBvalue.text = [[params.AIRB stringValue] stringByAppendingString:@"%"];
-        [self.scrollView setScrollEnabled:YES];
-        [self.scrollView setContentSize:CGSizeMake(320, 650)];
+                self.salinityLabel.hidden = NO;
+                self.salinityValue.hidden = NO;
+                params.formattedSal = [self formatSal:params.SAL];
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                
+            }
+            else
+            {
+                [self.scrollView setScrollEnabled:YES];
+                [self.scrollView setContentSize:CGSizeMake(320, 650)];
+            }
+
 
         }
-            else if(params.AIB != NULL && params.SAL != NULL)
-            {
-        self.AIBvalue.hidden = NO;
-        self.AIRBvalue.hidden = NO;
-        self.AIWvalue.hidden = NO;
-        self.AIBLabel.hidden = NO;
-        self.AIRBLabel.hidden = NO;
-        self.AIWLabel.hidden = NO;
-        self.AIWvalue.text = [[params.AIW stringValue] stringByAppendingString:@"%"];
-        self.AIBvalue.text = [[params.AIB stringValue] stringByAppendingString:@"%"];
-        self.AIRBvalue.text = [[params.AIRB stringValue] stringByAppendingString:@"%"];
-        [self.scrollView setScrollEnabled:YES];
-        [self.scrollView setContentSize:CGSizeMake(320, 650)]; 
-        
-    }
-    else
-    {
-        /*
-        self.AIBvalue.hidden = YES;
-        self.AIRBvalue.hidden = YES;
-        self.AIWvalue.hidden = YES;
-        self.AIBLabel.hidden = YES;
-        self.AIRBLabel.hidden = YES;
-        self.AIWLabel.hidden = YES; 
-        [self.scrollView setScrollEnabled:NO];
-         */
-        self.AIBvalue.hidden = NO;
-        self.AIRBvalue.hidden = NO;
-        self.AIWvalue.hidden = NO;
-        self.AIBLabel.hidden = NO;
-        self.AIRBLabel.hidden = NO;
-        self.AIWLabel.hidden = NO;
-        self.AIWvalue.text = [[params.AIW stringValue] stringByAppendingString:@"%"];
-        self.AIBvalue.text = [[params.AIB stringValue] stringByAppendingString:@"%"];
-        self.AIRBvalue.text = [[params.AIRB stringValue] stringByAppendingString:@"%"];
-        [self.scrollView setScrollEnabled:YES];
-        [self.scrollView setContentSize:CGSizeMake(320, 650)];
-    }
-    }
    /* else if ([params.EM intValue] == 4)
     {
         NSString *percent = @"%";
@@ -471,46 +463,18 @@
         self.AIRBvalue.text = [[params.AIRB stringValue] stringByAppendingString:@"%"];
         [self.scrollView setScrollEnabled:YES];
          [self.scrollView setContentSize:CGSizeMake(320, 650)]; 
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+    
     }
-    else if([params.EM intValue] == 0)
+    else
     {
-        self.AIBvalue.hidden = YES;
-        self.AIRBvalue.hidden = YES;
-        self.AIWvalue.hidden = YES;
-        self.AIBLabel.hidden = YES;
-        self.AIRBLabel.hidden = YES;
-        self.AIWLabel.hidden = YES;
-        self.salinityLabel.hidden = YES;
-        self.salinityValue.hidden = YES;
-        self.RFWhiteValue.hidden = YES;
-        self.RFBlueValue.hidden = YES;
-        self.RFRoyalBlueValue.hidden = YES;
-        self.RFRedValue.hidden = YES;
-        self.RFGreenValue.hidden = YES;
-        self.RFBlueLabel.hidden = YES;
-        self.RFGreenLabel.hidden = YES;
-        self.RFRoyalBlueLabel.hidden = YES;
-        self.RFRedLabel.hidden = YES;
-        self.RFWhiteLabel.hidden = YES;
-        
-    }*/
-    if (params.RFB != NULL) {
-        self.RFWhiteValue.hidden = NO;
-        self.RFBlueValue.hidden = NO;
-        self.RFRoyalBlueValue.hidden = NO;
-        self.RFRedValue.hidden = NO;
-        self.RFGreenValue.hidden = NO;
-        self.RFBlueValue.text = [[params.RFB stringValue] stringByAppendingString:@"%"];
-        self.RFBlueLabel.hidden = NO;
-        self.RFRoyalBlueValue.text = [[params.RFD stringValue] stringByAppendingString:@"%"];
-        self.RFRoyalBlueLabel.hidden = NO;
-        self.RFWhiteValue.text = [[params.RFW stringValue] stringByAppendingString:@"%"];
-        self.RFWhiteLabel.hidden = NO;
-        self.RFRedValue.text = [[params.RFR stringValue] stringByAppendingString:@"%"];
-        self.RFRedLabel.hidden = NO;
-        self.RFGreenValue.text = [[params.RFG stringValue] stringByAppendingString:@"%"];
-        self.RFGreenLabel.hidden = NO;
+    [self.scrollView setScrollEnabled:YES];
+    [self.scrollView setContentSize:CGSizeMake(320, 650)];
     }
+
+    }
+ */
+
 if (params.ORP == NULL || [params.ORP intValue] == 0)
 {
     //self.orpValue.hidden = YES;
