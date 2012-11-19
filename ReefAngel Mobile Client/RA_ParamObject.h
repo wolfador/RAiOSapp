@@ -60,7 +60,7 @@
 @property (nonatomic, retain) NSNumber *ATOHIGH;
 
 @property (nonatomic, retain) NSNumber *PWMA, *AIW, *AIB, *AIRB, *ORP, *PWME0, *REM, *EM;
-@property (nonatomic, retain) NSNumber *PWMD, *RFM, *RFS, *RFD, *RFW, *RFB, *RFG, *RFR, *RFI;
+@property (nonatomic, retain) NSNumber *PWMD, *RFM, *RFS, *RFD, *RFW, *RFB, *RFG, *RFR, *RFI, *RFRB;
 
 @property (nonatomic, assign) NSString *formattedTemp1;
 @property (nonatomic, assign) NSString *formattedTemp2;

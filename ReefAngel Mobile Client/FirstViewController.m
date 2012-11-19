@@ -312,6 +312,14 @@
         self.salinityLabel.hidden = NO;
         self.salinityValue.hidden = NO;
         params.formattedSal = [self formatSal:params.SAL];
+        self.RFBlueValue.text = [[params.RFB stringValue] stringByAppendingString:@"%"];
+        self.RFGreenValue.text = [[params.RFG stringValue] stringByAppendingString:@"%"];
+        self.RFRedValue.text = [[params.RFR stringValue] stringByAppendingString:@"%"];
+        self.RFRoyalBlueValue.text = [[params.RFRB stringValue] stringByAppendingString:@"%"];
+        self.RFDurationValue.text = [[params.RFD stringValue] stringByAppendingString:@"%"];
+        self.RFModeValue.text = [[params.RFM stringValue] stringByAppendingString:@"%"];
+        self.RFSpeedValue.text = [[params.RFS stringValue] stringByAppendingString:@"%"];
+        self.RFWhiteValue.text = [[params.RFW stringValue] stringByAppendingString:@"%"];
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             
         }
@@ -527,7 +535,7 @@ else
     self.binaryEM = [NSString stringWithString:str];
    // NSLog(@"Binary version: %@", self.binaryEM);
         
-        
+        /*
         if (params.RFD == 0 && params.RFM == 0 && params.RFS == 0)
         {
             self.RFSpeedLabel.hidden = YES;
@@ -548,7 +556,7 @@ else
             self.RFWhiteLabel.hidden = YES;
             self.RFRedLabel.hidden = YES;
             self.RFGreenLabel.hidden = YES;
-        }
+        }*/
 
     }
    }
