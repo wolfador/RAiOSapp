@@ -11,7 +11,7 @@
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>icon.png</string>
-		<string>icon@2x.png</string>
+		<string>Icon@2x.png</string>
 		<string>Icon-72.png</string>
 		<string>Icon-72@2x.png</string>
 	</array>
@@ -43,7 +43,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1.2.1</string>
+	<string>1.4</string>
 	<key>LSRequiresIPhoneOS</key>
 	<false/>
 	<key>NSMainNibFile~ipad</key>
